@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 [project]
 name = "tech_challenge_fase_1"
 version = "0.0.1"
-description = "A short description of the project."
+description = "Análise preditiva de NPS para e-commerce — Tech Challenge Fase 1 POSTECH AI Scientist."
 authors = [
   { name = "PHRaulino", email = "phraulino@outlook.com" },
 ]

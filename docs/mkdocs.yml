@@ -1,2 +1,7 @@
 site_name: tech-challenge-fase-1
 site_author: phraulino@outlook.com
+
+nav:
+  - Home: index.md
+  - Case NPS Preditivo: case-nps-preditivo.md
+  - Getting Started: getting-started.md
