@@ -1,7 +1,47 @@
-site_name: tech-challenge-fase-1
+site_name: Tech Challenge Fase 1
 site_author: phraulino@outlook.com
+site_description: Análise preditiva de NPS para e-commerce — POSTECH AI Scientist.
+
+extra_css:
+  - assets/extra.css
+
+theme:
+  name: material
+  language: pt-BR
+  palette:
+    - scheme: default
+      primary: light blue
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    - scheme: slate
+      primary: light blue
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+plugins:
+  - search:
+      lang: pt
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+
+extra:
+  analytics: ~
 
 nav:
   - Home: index.md
   - Case NPS Preditivo: case-nps-preditivo.md
+  - EDA: eda.md
   - Getting Started: getting-started.md

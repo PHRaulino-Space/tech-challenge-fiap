@@ -18,7 +18,23 @@ Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta var
 └── tech_challenge_fase_1/            <- Código-fonte do projeto
 ```
 
-## Navegação
+## Etapas do Case
 
-- [Case NPS Preditivo](case-nps-preditivo.md) — enunciado completo do desafio
-- [Getting Started](getting-started.md) — como configurar e executar o projeto
+<nav class="case-steps">
+  <a href="case-nps-preditivo/#1-entendimento-do-negocio">
+    <span class="step-number">1</span>
+    <span class="step-label">Entendimento do Negócio</span>
+  </a>
+  <a href="case-nps-preditivo/#2-definicao-da-target">
+    <span class="step-number">2</span>
+    <span class="step-label">Definição da Target</span>
+  </a>
+  <a href="case-nps-preditivo/#3-analise-exploratoria-dos-dados-eda">
+    <span class="step-number">3</span>
+    <span class="step-label">EDA</span>
+  </a>
+  <a href="case-nps-preditivo/#4-reflexao-sobre-modelo-preditivo-opcional">
+    <span class="step-number">4</span>
+    <span class="step-label">Modelo Preditivo</span>
+  </a>
+</nav>
