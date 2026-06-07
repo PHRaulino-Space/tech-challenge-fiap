@@ -10,14 +10,14 @@ theme:
   language: pt-BR
   palette:
     - scheme: default
-      primary: light blue
-      accent: deep orange
+      primary: teal
+      accent: blue
       toggle:
         icon: material/brightness-7
         name: Modo escuro
     - scheme: slate
-      primary: light blue
-      accent: deep orange
+      primary: teal
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: Modo claro
