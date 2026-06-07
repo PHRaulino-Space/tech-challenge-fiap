@@ -9,7 +9,6 @@ description = "A short description of the project."
 authors = [
   { name = "PHRaulino", email = "phraulino@outlook.com" },
 ]
-license = { file = "LICENSE" }
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -47,5 +46,4 @@ extend-select = ["I"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["tech_challenge_fase_1"]
-force-sort-within-sections = true
 lines-between-types = 1
