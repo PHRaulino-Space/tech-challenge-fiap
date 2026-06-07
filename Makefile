@@ -91,6 +91,12 @@ create_environment:
 #################################################################################
 
 
+## Serve documentation locally at http://127.0.0.1:8000
+.PHONY: docs
+docs:
+	cd docs && poetry run mkdocs serve
+
+
 ## Make dataset
 .PHONY: data
 data: requirements

@@ -23,7 +23,6 @@ theme:
         name: Modo claro
   features:
     - navigation.sections
-    - navigation.expand
     - navigation.top
     - search.highlight
     - search.suggest
