@@ -1,40 +1,38 @@
-# NPS Preditivo — Tech Challenge Fase 1
+# Tech Challenge — POSTECH AI Scientist
 
-Projeto desenvolvido como entrega do Tech Challenge da Fase 1 do programa **POSTECH AI Scientist**. O objetivo é analisar dados operacionais de um e-commerce para entender os fatores que influenciam a satisfação dos clientes, medida pelo **Net Promoter Score (NPS)**, e propor uma abordagem preditiva capaz de antecipar esse indicador antes da aplicação da pesquisa.
+Repositório central das entregas do **Tech Challenge**, projeto integrador do programa **POSTECH AI Scientist** da FIAP. O Tech Challenge reúne, a cada fase, os conhecimentos aplicados nas disciplinas correspondentes e representa **90% da nota final** de cada fase.
 
-## Contexto
+## O Projeto
 
-Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta variabilidade no NPS entre diferentes perfis de consumidores. O NPS atualmente é coletado apenas após o encerramento da jornada de compra, o que limita ações preventivas. Este projeto transforma dados de pedidos, logística e atendimento em insights acionáveis para as áreas de negócio.
+O Tech Challenge é desenvolvido ao longo de **5 fases** do programa. Em cada fase, o grupo recebe um desafio aplicado que exige pensamento analítico, habilidades técnicas e comunicação orientada a negócio. Os desafios simulam cenários reais de atuação no mercado e evoluem em complexidade conforme o programa avança.
 
-## Estrutura do Projeto
+O foco não está apenas em construir modelos ou escrever código — está em **entender o problema, comunicar descobertas e propor soluções que façam sentido para o negócio**.
 
-```
-├── data/                             <- Base de dados do desafio
-├── docs/                             <- Esta documentação (MkDocs)
-├── models/                           <- Modelos treinados e artefatos
-├── notebooks/                        <- Jupyter Notebooks de análise
-├── references/                       <- Materiais de referência
-├── reports/figures/                  <- Visualizações geradas
-└── tech_challenge_fiap/            <- Código-fonte do projeto
-```
+## Autores
 
-## Etapas do Case
+| Nome | RM | E-mail |
+|---|---|---|
+| Paulo Henrique Almeida | RM375573 | phraulino@outlook.com |
+| Gabriela Almeida | RM375633 | gabrielacmalmeida@gmail.com |
 
-<nav class="case-steps">
-  <a href="case-nps-preditivo/#1-entendimento-do-negocio">
-    <span class="step-number">1</span>
-    <span class="step-label">Entendimento do Negócio</span>
-  </a>
-  <a href="case-nps-preditivo/#2-definicao-da-target">
-    <span class="step-number">2</span>
-    <span class="step-label">Definição da Target</span>
-  </a>
-  <a href="case-nps-preditivo/#3-analise-exploratoria-dos-dados-eda">
-    <span class="step-number">3</span>
-    <span class="step-label">EDA</span>
-  </a>
-  <a href="case-nps-preditivo/#4-reflexao-sobre-modelo-preditivo-opcional">
-    <span class="step-number">4</span>
-    <span class="step-label">Modelo Preditivo</span>
-  </a>
-</nav>
+**Programa:** POSTECH AI Scientist — FIAP
+
+## Fases do Projeto
+
+| Fase | Tema | Status |
+|---|---|---|
+| [Fase 1](fase-1/index.md) | NPS Preditivo — Análise de satisfação em e-commerce | Em andamento |
+| [Fase 2](fase-2/index.md) | — | Aguardando |
+| [Fase 3](fase-3/index.md) | — | Aguardando |
+| [Fase 4](fase-4/index.md) | — | Aguardando |
+| [Fase 5](fase-5/index.md) | — | Aguardando |
+
+## Como Navegar nesta Documentação
+
+Cada fase tem sua própria seção no menu lateral com páginas específicas do desafio. A estrutura padrão de cada fase inclui:
+
+- **Visão Geral** — contexto, objetivos e requisitos do desafio
+- **Análise / Conteúdo técnico** — documentação das análises realizadas
+- **Como Reproduzir** — instruções para configurar o ambiente e reproduzir os resultados
+
+Para começar, acesse a [Fase 1](fase-1/index.md) — único desafio disponível até o momento.

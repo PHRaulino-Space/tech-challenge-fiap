@@ -1,6 +1,6 @@
-site_name: Tech Challenge Fiap
-site_author: phraulino@outlook.com
-site_description: Análise preditiva de NPS para e-commerce — POSTECH AI Scientist.
+site_name: Tech Challenge — POSTECH AI Scientist
+site_author: Paulo Henrique Almeida, Gabriela Almeida
+site_description: Repositório das entregas do Tech Challenge do programa POSTECH AI Scientist — FIAP.
 
 extra_css:
   - assets/extra.css
@@ -42,6 +42,16 @@ extra:
 
 nav:
   - Home: index.md
-  - Case NPS Preditivo: case-nps-preditivo.md
-  - EDA: eda.md
-  - Getting Started: getting-started.md
+  - Fase 1 — NPS Preditivo:
+    - Visão Geral: fase-1/index.md
+    - Case: fase-1/case-nps-preditivo.md
+    - EDA: fase-1/eda.md
+    - Como Reproduzir: fase-1/getting-started.md
+  - Fase 2:
+    - Em Breve: fase-2/index.md
+  - Fase 3:
+    - Em Breve: fase-3/index.md
+  - Fase 4:
+    - Em Breve: fase-4/index.md
+  - Fase 5:
+    - Em Breve: fase-5/index.md
