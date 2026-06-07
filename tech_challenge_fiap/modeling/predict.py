@@ -5,7 +5,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from tech_challenge_fase_1.config import PROCESSED_DATA_DIR, RAW_DATA_DIR
+from tech_challenge_fiap.config import MODELS_DIR, PROCESSED_DATA_DIR
 
 app = typer.Typer()
 
@@ -13,16 +13,17 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    input_path: Path = RAW_DATA_DIR / "dataset.csv",
-    output_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-    # ----------------------------------------------
+    features_path: Path = PROCESSED_DATA_DIR / "test_features.csv",
+    model_path: Path = MODELS_DIR / "model.pkl",
+    predictions_path: Path = PROCESSED_DATA_DIR / "test_predictions.csv",
+    # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Processing dataset...")
+    logger.info("Performing inference for model...")
     for i in tqdm(range(10), total=10):
         if i == 5:
             logger.info("Something happened for iteration 5.")
-    logger.success("Processing dataset complete.")
+    logger.success("Inference complete.")
     # -----------------------------------------
 
 

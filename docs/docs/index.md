@@ -15,7 +15,7 @@ Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta var
 ├── notebooks/                        <- Jupyter Notebooks de análise
 ├── references/                       <- Materiais de referência
 ├── reports/figures/                  <- Visualizações geradas
-└── tech_challenge_fase_1/            <- Código-fonte do projeto
+└── tech_challenge_fiap/            <- Código-fonte do projeto
 ```
 
 ## Etapas do Case

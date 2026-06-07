@@ -28,7 +28,7 @@ Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta var
 ├── reports/                          <- Relatórios e visualizações geradas
 │   └── figures/
 │
-├── tech_challenge_fase_1/            <- Código-fonte do projeto
+├── tech_challenge_fiap/            <- Código-fonte do projeto
 │   ├── config.py
 │   ├── dataset.py
 │   ├── features.py

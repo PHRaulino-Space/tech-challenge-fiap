@@ -5,7 +5,7 @@ import typer
 from loguru import logger
 from tqdm import tqdm
 
-from tech_challenge_fase_1.config import FIGURES_DIR, PROCESSED_DATA_DIR
+from tech_challenge_fiap.config import MODELS_DIR, PROCESSED_DATA_DIR
 
 app = typer.Typer()
 
@@ -13,16 +13,17 @@ app = typer.Typer()
 @app.command()
 def main(
     # ---- REPLACE DEFAULT PATHS AS APPROPRIATE ----
-    input_path: Path = PROCESSED_DATA_DIR / "dataset.csv",
-    output_path: Path = FIGURES_DIR / "plot.png",
+    features_path: Path = PROCESSED_DATA_DIR / "features.csv",
+    labels_path: Path = PROCESSED_DATA_DIR / "labels.csv",
+    model_path: Path = MODELS_DIR / "model.pkl",
     # -----------------------------------------
 ):
     # ---- REPLACE THIS WITH YOUR OWN CODE ----
-    logger.info("Generating plot from data...")
+    logger.info("Training some model...")
     for i in tqdm(range(10), total=10):
         if i == 5:
             logger.info("Something happened for iteration 5.")
-    logger.success("Plot generation complete.")
+    logger.success("Modeling training complete.")
     # -----------------------------------------
 
 

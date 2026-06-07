@@ -2,7 +2,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_NAME = tech-challenge-fase-1
+PROJECT_NAME = tech-challenge-fiap
 PYTHON_VERSION = 3.12
 PYTHON_INTERPRETER = python
 
@@ -94,7 +94,7 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
-	$(PYTHON_INTERPRETER) tech_challenge_fase_1/dataset.py
+	$(PYTHON_INTERPRETER) tech_challenge_fiap/dataset.py
 
 
 #################################################################################
