@@ -42,6 +42,14 @@ nav:
   - Home: index.md
   - Fase 1 — NPS Preditivo:
     - Visão Geral: fase-1/index.md
+    - Planejamento: fase-1/planejamento.md
     - Case: fase-1/case-nps-preditivo.md
-    - EDA: fase-1/eda.md
+    - 1. Business Canvas: fase-1/business-canvas.md
+    - 2. Reflexões do Desafio: fase-1/reflexoes.md
+    - 3. Análise e Hipóteses: fase-1/analise-hipoteses.md
+    - 4. EDA: fase-1/eda.md
+    - 5. Preparação dos Dados: fase-1/preparacao-dados.md
+    - 6. Proposta de Solução: fase-1/proposta-solucao.md
+    - 7. Avaliação dos Resultados: fase-1/avaliacao.md
+    - 8. Apresentação Final: fase-1/apresentacao-final.md
     - Como Reproduzir: fase-1/getting-started.md
