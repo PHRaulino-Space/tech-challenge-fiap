@@ -12,6 +12,16 @@
   --md-primary-fg-color--dark: #0369a1;
 }
 
+/* header title override — different from sidebar site_name */
+.md-header__topic:first-child .md-ellipsis {
+  font-size: 0;
+}
+.md-header__topic:first-child .md-ellipsis::after {
+  content: "Tech Challenge — POSTECH AI Scientist";
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
 /* full width layout */
 .md-grid {
   max-width: 100%;
