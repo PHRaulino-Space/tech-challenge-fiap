@@ -1,34 +1,65 @@
-# Tech Challenge Fase 1 — NPS Preditivo
+# Tech Challenge — POSTECH AI Scientist
 
-Projeto desenvolvido como entrega do Tech Challenge da Fase 1 do programa **POSTECH AI Scientist**. O objetivo é analisar dados operacionais de um e-commerce para entender os fatores que influenciam a satisfação dos clientes, medida pelo **Net Promoter Score (NPS)**, e propor uma abordagem preditiva capaz de antecipar esse indicador antes da aplicação da pesquisa.
+Repositório central das entregas do **Tech Challenge**, projeto integrador do programa **POSTECH AI Scientist** da FIAP. O Tech Challenge reúne, a cada fase, os conhecimentos aplicados nas disciplinas correspondentes e representa **90% da nota final** de cada fase.
 
-## Contexto
+**Repositório:** [github.com/PHRaulino-Space/tech-challenge-fiap](https://github.com/PHRaulino-Space/tech-challenge-fiap)
 
-Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta variabilidade no NPS entre diferentes perfis de consumidores. O NPS atualmente é coletado apenas após o encerramento da jornada de compra, o que limita ações preventivas. Este projeto transforma dados de pedidos, logística e atendimento em insights acionáveis para as áreas de negócio.
+## O Projeto
 
-## Estrutura do Projeto
+O Tech Challenge é desenvolvido ao longo de **5 fases** do programa. Em cada fase, o grupo recebe um desafio aplicado que exige pensamento analítico, habilidades técnicas e comunicação orientada a negócio. Os desafios simulam cenários reais de atuação no mercado e evoluem em complexidade conforme o programa avança.
+
+O foco não está apenas em construir modelos ou escrever código — está em **entender o problema, comunicar descobertas e propor soluções que façam sentido para o negócio**.
+
+## Autores
+
+| Nome | RM | E-mail |
+|---|---|---|
+| Paulo Henrique Almeida | RM375573 | phraulino@outlook.com |
+| Gabriela Almeida | RM375633 | gabrielacmalmeida@gmail.com |
+
+**Programa:** POSTECH AI Scientist — FIAP
+
+## Fases do Projeto
+
+| Fase | Tema | Status |
+|---|---|---|
+| Fase 1 | NPS Preditivo — Análise de satisfação em e-commerce | Em andamento |
+| Fase 2 | — | Aguardando |
+| Fase 3 | — | Aguardando |
+| Fase 4 | — | Aguardando |
+| Fase 5 | — | Aguardando |
+
+## Fase 1 — NPS Preditivo
+
+Com o crescimento acelerado do e-commerce, uma empresa passou a lidar com alta variabilidade no **Net Promoter Score (NPS)** entre diferentes perfis de consumidores. O NPS é coletado apenas após o encerramento da jornada de compra, o que limita ações preventivas.
+
+**Objetivo:** analisar os fatores que influenciam a satisfação dos clientes medida pelo NPS e propor uma abordagem preditiva capaz de antecipar esse indicador antes da aplicação da pesquisa.
+
+O projeto segue a metodologia **CRISP-DM**:
+
+| Etapa | Fase CRISP-DM | Status |
+|---|---|---|
+| Business Canvas | Business Understanding | Em andamento |
+| Reflexões do Desafio | Business Understanding | Em andamento |
+| Análise e Hipóteses | Data Understanding | Em andamento |
+| EDA | Data Understanding | Em andamento |
+| Preparação dos Dados | Data Preparation | Pendente |
+| Proposta de Solução | Modeling | Pendente |
+| Avaliação dos Resultados | Evaluation | Pendente |
+| Apresentação Final | Deployment | Pendente |
+
+## Estrutura do Repositório
 
 ```
 ├── data/
-│   └── desafio_nps_fase_1.csv       <- Base de dados original do desafio
-│
-├── docs/                             <- Documentação MkDocs
-│   ├── docs/
-│   │   ├── index.md
-│   │   ├── getting-started.md
-│   │   └── case-nps-preditivo.md
-│   └── mkdocs.yml
-│
-├── models/                           <- Modelos treinados e artefatos
-│
-├── notebooks/                        <- Jupyter Notebooks de análise
-│
-├── references/                       <- Materiais de referência e dicionários
-│
-├── reports/                          <- Relatórios e visualizações geradas
+│   └── desafio_nps_fase_1.csv       # Base de dados original do desafio
+├── docs/                             # Documentação MkDocs
+├── models/                           # Modelos treinados e artefatos
+├── notebooks/                        # Jupyter Notebooks de análise
+├── references/                       # Materiais de referência
+├── reports/                          # Relatórios e visualizações geradas
 │   └── figures/
-│
-├── tech_challenge_fiap/            <- Código-fonte do projeto
+├── tech_challenge_fiap/              # Código-fonte do projeto
 │   ├── config.py
 │   ├── dataset.py
 │   ├── features.py
@@ -36,15 +67,12 @@ Com o crescimento acelerado do e-commerce, a empresa passou a lidar com alta var
 │   └── modeling/
 │       ├── train.py
 │       └── predict.py
-│
-├── pyproject.toml
-├── Makefile
-└── requirements.txt
+└── tests/                            # Testes automatizados
 ```
 
 ## Base de Dados
 
-Arquivo CSV com dados históricos de pedidos, logística e atendimento ao cliente, contendo 19 variáveis distribuídas em quatro grupos:
+Arquivo: `data/desafio_nps_fase_1.csv` — 19 variáveis em quatro grupos:
 
 | Grupo | Variáveis |
 |---|---|
@@ -56,13 +84,6 @@ Arquivo CSV com dados históricos de pedidos, logística e atendimento ao client
 
 A variável-alvo é `nps_score` (escala 0–10): detratores (0–6), neutros (7–8), promotores (9–10).
 
-## Metodologia
-
-1. **Entendimento do negócio** — análise da dor de negócio e impacto do NPS em recompra, boca a boca e market share.
-2. **Definição da target** — avaliação conceitual da variável `nps_score` como proxy de satisfação.
-3. **Análise Exploratória (EDA)** — identificação de fatores críticos, perfis de detratores e pontos de ruptura na experiência do cliente.
-4. **Modelagem preditiva** *(opcional)* — proposta de modelo de classificação ou regressão para prever o NPS antes da pesquisa.
-
 ## Como Reproduzir
 
 ### Pré-requisitos
@@ -70,26 +91,41 @@ A variável-alvo é `nps_score` (escala 0–10): detratores (0–6), neutros (7�
 - Python 3.12
 - [Poetry](https://python-poetry.org/)
 
-### Configuração do ambiente
+### Configuração
 
 ```bash
+git clone https://github.com/PHRaulino-Space/tech-challenge-fiap.git
+cd tech-challenge-fiap
 make setup
 ```
 
-Isso instala o Poetry (se necessário), cria o ambiente virtual, instala as dependências e configura os hooks de pre-commit.
-
 ### Principais comandos
 
+| Comando | Descrição |
+|---|---|
+| `make setup` | Configura o ambiente completo (primeira vez) |
+| `make requirements` | Instala/atualiza dependências |
+| `make data` | Executa o pipeline de dados |
+| `make lint` | Verifica o código com ruff |
+| `make format` | Formata o código com ruff |
+| `make test` | Executa os testes |
+| `make docs` | Serve a documentação em http://127.0.0.1:8000 |
+
+### Notebooks
+
 ```bash
-make setup       # Configura o ambiente completo
-make requirements # Instala dependências
-make data        # Executa o pipeline de dados
-make lint        # Verifica o código com ruff
-make format      # Formata o código com ruff
-make test        # Executa os testes
+poetry run jupyter lab
 ```
 
-### Documentação local
+## Documentação
+
+A documentação completa do projeto está em `docs/`, construída com MkDocs Material. Para visualizar localmente:
+
+```bash
+make docs
+```
+
+Ou, diretamente:
 
 ```bash
 cd docs && mkdocs serve
@@ -97,15 +133,8 @@ cd docs && mkdocs serve
 
 ## Tecnologias
 
-- Python 3.12
+- Python 3.12, Poetry
 - pandas, numpy, scikit-learn
-- Jupyter Lab / Notebook
-- MkDocs
-- Ruff (lint e formatação)
-- Poetry (gestão de dependências)
-- pre-commit
-
-## Curso
-
-**POSTECH AI Scientist — Fase 1**
-Instituição: FIAP / PosTech
+- Jupyter Lab
+- MkDocs Material
+- Ruff, pytest, pre-commit

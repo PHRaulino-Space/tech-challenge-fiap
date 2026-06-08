@@ -2,6 +2,8 @@
 
 Repositório central das entregas do **Tech Challenge**, projeto integrador do programa **POSTECH AI Scientist** da FIAP. O Tech Challenge reúne, a cada fase, os conhecimentos aplicados nas disciplinas correspondentes e representa **90% da nota final** de cada fase.
 
+**Repositório:** [github.com/PHRaulino-Space/tech-challenge-fiap](https://github.com/PHRaulino-Space/tech-challenge-fiap)
+
 ## O Projeto
 
 O Tech Challenge é desenvolvido ao longo de **5 fases** do programa. Em cada fase, o grupo recebe um desafio aplicado que exige pensamento analítico, habilidades técnicas e comunicação orientada a negócio. Os desafios simulam cenários reais de atuação no mercado e evoluem em complexidade conforme o programa avança.
