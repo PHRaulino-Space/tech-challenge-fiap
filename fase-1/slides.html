@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NPS Preditivo — Tech Challenge FIAP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <style>
+    :root {
+      --primary: #721515;
+      --primary-light: #c62828;
+      --accent: #ef9a9a;
+      --bg: #0f0f0f;
+      --bg-card: #1c1c1c;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --border: #2a2a2a;
+    }
+
+    html, body, .reveal-viewport { background: var(--bg); }
+
+    .reveal {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 28px;
+      color: var(--text);
+    }
+
+    .reveal .slides section { text-align: left; }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: #fff;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .reveal h2 { font-size: 1.35em; margin-bottom: 4px; }
+
+    .accent-line {
+      display: block;
+      width: 52px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin: 10px 0 18px;
+    }
+
+    /* --- Title slide --- */
+    .slide-title { text-align: center; }
+
+    .slide-title .tag {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 4px 18px;
+      border-radius: 20px;
+      font-size: 0.46em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 22px;
+    }
+
+    .slide-title h1 {
+      font-size: 2.8em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .slide-title .subtitle {
+      color: var(--text-muted);
+      font-size: 0.56em;
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .slide-title .divider {
+      display: inline-block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+
+    .slide-title .authors {
+      color: var(--accent);
+      font-size: 0.52em;
+    }
+
+    /* --- Cards grid --- */
+    .cards {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .cards.c2 { grid-template-columns: repeat(2, 1fr); }
+    .cards.c3 { grid-template-columns: repeat(3, 1fr); }
+    .cards.c4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .card .card-title {
+      color: var(--accent);
+      font-size: 0.5em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.5em;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .card .vars { margin-top: 10px; }
+
+    /* --- Flow --- */
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .flow-step {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flow-step.hl { border-color: var(--primary); background: #1a0a0a; }
+    .flow-step .icon { font-size: 1.3em; margin-bottom: 6px; }
+    .flow-step .name { font-size: 0.52em; font-weight: 700; color: #fff; }
+    .flow-step .vars { font-size: 0.38em; color: var(--text-muted); margin-top: 8px; font-family: monospace; line-height: 1.7; }
+
+    .flow-arrow { color: var(--primary); font-size: 1.1em; align-self: center; flex-shrink: 0; }
+
+    /* --- Canvas grid --- */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 0.41em;
+    }
+
+    .cb {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    .cb.hl { border-left: 3px solid var(--primary); }
+    .cb.mid { grid-row: span 2; }
+
+    .cb .t {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.88em;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+
+    .cb ul {
+      margin: 0;
+      padding-left: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* --- Table --- */
+    .reveal table {
+      font-size: 0.5em;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .reveal table thead th {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .reveal table tbody tr { border-bottom: 1px solid var(--border); }
+    .reveal table tbody tr:nth-child(even) { background: var(--bg-card); }
+
+    .reveal table tbody td {
+      padding: 10px 14px;
+      color: var(--text-muted);
+    }
+
+    .reveal table tbody td:first-child { color: #fff; font-weight: 500; }
+
+    /* --- Code chips --- */
+    code {
+      background: #1a0a0a;
+      color: var(--accent);
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-size: 0.88em;
+    }
+
+    .chip {
+      display: inline-block;
+      background: #1a0a0a;
+      border: 1px solid #4a1515;
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 0.44em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin: 3px 2px;
+    }
+
+    /* --- Steps list --- */
+    .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+
+    .step { display: flex; align-items: flex-start; gap: 14px; }
+
+    .step-num {
+      background: var(--primary);
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.52em;
+      flex-shrink: 0;
+    }
+
+    .step-body { flex: 1; }
+
+    .step-body strong {
+      color: #fff;
+      font-size: 0.54em;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .step-body p {
+      color: var(--text-muted);
+      font-size: 0.47em;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* --- Bullets --- */
+    .reveal ul { list-style: none; padding: 0; margin: 0; }
+
+    .reveal ul li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+      font-size: 0.54em;
+      color: var(--text-muted);
+    }
+
+    .reveal ul li::before {
+      content: '▸';
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+    }
+
+    /* --- Controls & progress --- */
+    .reveal .controls { color: var(--primary); }
+    .reveal .progress { color: var(--primary); }
+    .reveal .slide-number { background: transparent; color: var(--text-muted); font-size: 0.38em; }
+
+    /* --- Closing slide --- */
+    .slide-closing { text-align: center; }
+
+    /* --- Muted note --- */
+    .note { font-size: 0.48em; color: #555; font-style: italic; margin-top: 14px; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. Capa -->
+    <section class="slide-title" data-background-color="#0f0f0f">
+      <div class="tag">Tech Challenge · POSTECH AI Scientist · FIAP</div>
+      <h1>NPS Preditivo</h1>
+      <p class="subtitle">Prevendo a satisfação do cliente antes do fim da jornada de compra</p>
+      <div class="divider"></div>
+      <p class="authors">Paulo Henrique Almeida &amp; Gabriela Almeida</p>
+    </section>
+
+    <!-- 2. O Desafio -->
+    <section data-background-color="#0f0f0f">
+      <h2>O Desafio</h2>
+      <span class="accent-line"></span>
+      <div class="cards c2">
+        <div class="card">
+          <div class="card-title">Contexto</div>
+          <p>E-commerce em crescimento acelerado com alta variabilidade no NPS entre diferentes perfis de clientes.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Problema</div>
+          <p>O NPS é coletado <strong style="color:#fff">apenas ao final</strong> da jornada — sem espaço para ações preventivas.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Dados disponíveis</div>
+          <p><strong style="color:#fff">19 variáveis</strong> de pedidos, logística e atendimento. Sem dados de catálogo, marketing ou concorrência.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Objetivo</div>
+          <p>Identificar quais fatores operacionais influenciam o NPS e agir de forma <strong style="color:#fff">proativa</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Business Model Canvas -->
+    <section data-background-color="#0f0f0f">
+      <h2>Business Model Canvas</h2>
+      <span class="accent-line"></span>
+      <div class="canvas-grid">
+        <!-- col 1 -->
+        <div class="cb">
+          <div class="t">Parceiros-chave</div>
+          <ul>
+            <li>Operadores logísticos</li>
+            <li>Meios de pagamento</li>
+          </ul>
+        </div>
+        <!-- col 2 — split em 2 rows -->
+        <div class="cb">
+          <div class="t">Atividades-chave</div>
+          <ul>
+            <li>Processamento de pedidos</li>
+            <li>Operação de entregas</li>
+            <li>Atendimento ao cliente</li>
+            <li>Coleta de satisfação</li>
+          </ul>
+        </div>
+        <!-- col 3 — proposta de valor, span 2 rows -->
+        <div class="cb hl mid">
+          <div class="t">Proposta de Valor</div>
+          <ul>
+            <li>Compra com desconto</li>
+            <li>Pagamento parcelado</li>
+            <li>Entrega ao endereço</li>
+            <li>Suporte pós-compra</li>
+          </ul>
+        </div>
+        <!-- row 2, col 1 -->
+        <div class="cb">
+          <div class="t">Recursos-chave</div>
+          <ul>
+            <li>Dados de clientes e pedidos</li>
+            <li>Dados operacionais</li>
+          </ul>
+        </div>
+        <!-- row 2, col 2 -->
+        <div class="cb">
+          <div class="t">Canais</div>
+          <ul>
+            <li>Plataforma de e-commerce</li>
+            <li>Canal de atendimento</li>
+            <li>Pesquisa de satisfação</li>
+          </ul>
+        </div>
+      </div>
+      <!-- bottom row -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px; font-size:0.41em;">
+        <div class="cb">
+          <div class="t">Estrutura de custos</div>
+          <ul><li>Frete · Descontos · Atendimento</li></ul>
+        </div>
+        <div class="cb">
+          <div class="t">Fontes de receita</div>
+          <ul><li>Venda de produtos · Frete · Parcelamento · Recompra</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Jornada do Cliente -->
+    <section data-background-color="#0f0f0f">
+      <h2>A Jornada do Cliente</h2>
+      <span class="accent-line"></span>
+      <p style="font-size:0.52em; color:var(--text-muted)">Três frentes operacionais antes da coleta do NPS</p>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="icon">🛒</div>
+          <div class="name">Pedido</div>
+          <div class="vars">order_value<br>discount_value<br>payment_installments<br>items_quantity</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon">📦</div>
+          <div class="name">Logística</div>
+          <div class="vars">delivery_time_days<br>delivery_delay_days<br>delivery_attempts<br>freight_value</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="icon">📞</div>
+          <div class="name">Atendimento</div>
+          <div class="vars">customer_service_contacts<br>resolution_time_days<br>complaints_count</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step hl">
+          <div class="icon">⭐</div>
+          <div class="name">NPS</div>
+          <div class="vars">nps_score<br>csat_internal_score</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Segmentos de Clientes -->
+    <section data-background-color="#0f0f0f">
+      <h2>Segmentos de Clientes</h2>
+      <span class="accent-line"></span>
+      <p style="font-size:0.52em; color:var(--text-muted)">O case aponta variação de NPS entre perfis — 4 dimensões de análise</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Segmento</th>
+            <th>Variável</th>
+            <th>Uso analítico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Região geográfica</td>
+            <td><code>customer_region</code></td>
+            <td>Condições logísticas distintas por macro-região</td>
+          </tr>
+          <tr>
+            <td>Perfil etário</td>
+            <td><code>customer_age</code></td>
+            <td>Análise por faixa etária / geração</td>
+          </tr>
+          <tr>
+            <td>Tempo de relacionamento</td>
+            <td><code>customer_tenure_months</code></td>
+            <td>Clientes novos vs. recorrentes</td>
+          </tr>
+          <tr>
+            <td>Comportamento de recompra</td>
+            <td><code>repeat_purchase_30d</code></td>
+            <td>Retenção em até 30 dias após o pedido</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 6. Variáveis Candidatas -->
+    <section data-background-color="#0f0f0f">
+      <h2>Variáveis Candidatas ao NPS</h2>
+      <span class="accent-line"></span>
+      <p style="font-size:0.52em; color:var(--text-muted)">Hipóteses naturais a partir da jornada operacional</p>
+      <div class="cards c2">
+        <div class="card">
+          <div class="card-title">Logística</div>
+          <p>Atrasos e múltiplas tentativas de entrega são as hipóteses mais fortes de insatisfação.</p>
+          <div class="vars">
+            <span class="chip">delivery_delay_days</span>
+            <span class="chip">delivery_attempts</span>
+            <span class="chip">delivery_time_days</span>
+            <span class="chip">freight_value</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Atendimento</div>
+          <p>Reclamações e tempos de resolução longos refletem falhas na jornada pós-compra.</p>
+          <div class="vars">
+            <span class="chip">complaints_count</span>
+            <span class="chip">resolution_time_days</span>
+            <span class="chip">customer_service_contacts</span>
+          </div>
+        </div>
+      </div>
+      <p class="note">Hipóteses a validar nas etapas de Análise &amp; Hipóteses e EDA.</p>
+    </section>
+
+    <!-- 7. Limitações -->
+    <section data-background-color="#0f0f0f">
+      <h2>Limitações do Mapeamento</h2>
+      <span class="accent-line"></span>
+      <p style="font-size:0.52em; color:var(--text-muted)">O canvas representa apenas o que o dataset e o case permitem inferir</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-body">
+            <strong>Catálogo e precificação</strong>
+            <p>Sem informações sobre mix de produtos, preços competitivos ou promoções.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-body">
+            <strong>Marketing e aquisição</strong>
+            <p>Canal de aquisição do cliente e investimento em marketing não estão no dataset.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-body">
+            <strong>Custos e receitas reais</strong>
+            <p>Valores por pedido foram inferidos — não há demonstrativos financeiros.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">!</div>
+          <div class="step-body">
+            <strong>Parceiros específicos</strong>
+            <p>Transportadoras e gateways foram generalizados — sem identificação nominal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Próximos Passos -->
+    <section data-background-color="#0f0f0f">
+      <h2>Próximos Passos</h2>
+      <span class="accent-line"></span>
+      <div class="cards c4" style="margin-top:24px">
+        <div class="card">
+          <div class="card-title">01</div>
+          <p><strong style="color:#fff;display:block;margin-bottom:6px">Análise &amp; Hipóteses</strong>Formular e documentar hipóteses sobre as variáveis candidatas ao NPS.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">02</div>
+          <p><strong style="color:#fff;display:block;margin-bottom:6px">EDA</strong>Exploração e visualização para validar hipóteses e identificar padrões.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">03</div>
+          <p><strong style="color:#fff;display:block;margin-bottom:6px">Modelagem</strong>Proposta e treinamento de modelo preditivo de NPS com base nas variáveis operacionais.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">04</div>
+          <p><strong style="color:#fff;display:block;margin-bottom:6px">Avaliação</strong>Mensurar performance e traduzir em insights acionáveis para o negócio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Encerramento -->
+    <section class="slide-closing" data-background-color="#0f0f0f">
+      <p style="font-size:0.5em; color:#555; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:18px">Tech Challenge · POSTECH AI Scientist · FIAP</p>
+      <h1 style="font-size:3.2em">Obrigado</h1>
+      <div style="display:inline-block;width:60px;height:3px;background:#721515;border-radius:2px;margin:20px 0;"></div>
+      <p style="font-size:0.52em; color:var(--text-muted)">Paulo Henrique Almeida &amp; Gabriela Almeida</p>
+    </section>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: true,
+    width: 1200,
+    height: 675,
+    margin: 0.04,
+  });
+</script>
+</body>
+</html>

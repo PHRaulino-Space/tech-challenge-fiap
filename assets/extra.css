@@ -1,0 +1,116 @@
+/* sky-600 override */
+:root  > * {
+  --md-primary-fg-color:        #721515;
+  /* --md-primary-fg-color--light: #ECB7B7; */
+  /* --md-primary-fg-color--dark:  #90030C; */
+}
+
+/* header title override — different from sidebar site_name */
+.md-header__topic:first-child .md-ellipsis {
+  font-size: 0;
+}
+.md-header__topic:first-child .md-ellipsis::after {
+  content: "Tech Challenge — POSTECH AI Scientist";
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* full width layout */
+.md-grid {
+  max-width: 100%;
+}
+
+.md-content {
+  max-width: 100%;
+}
+
+.case-steps {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 2rem;
+}
+
+.case-steps a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--md-primary-fg-color);
+  text-decoration: none;
+  color: var(--md-primary-fg-color);
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.case-steps a:hover {
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.case-steps a:hover .step-number {
+  background: var(--md-primary-bg-color);
+  color: var(--md-primary-fg-color);
+}
+
+/* Presentation embed */
+.slides-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  margin: 2rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: #0f0f0f;
+}
+
+.slides-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.slides-fullscreen-btn {
+  position: absolute;
+  bottom: 56px;
+  right: 14px;
+  background: rgba(114, 21, 21, 0.88);
+  color: #fff !important;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  z-index: 20;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.slides-fullscreen-btn:hover {
+  background: #721515 !important;
+  color: #fff !important;
+}
