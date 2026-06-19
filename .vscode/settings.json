@@ -1,5 +1,8 @@
 {
     "notebook.markup.fontFamily": "JetBrains Mono, monospace",
     "notebook.markup.fontSize": 16,
-    "notebook.lineNumbers": "on"
+    "notebook.lineNumbers": "on",
+    "phrs-smart-commit.language": "pt-br",
+    "phrs-smart-commit.provider": "gemini",
+    "phrs-smart-commit.debugMode": true
 }

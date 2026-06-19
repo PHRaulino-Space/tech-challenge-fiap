@@ -138,3 +138,4 @@ cd docs && mkdocs serve
 - Jupyter Lab
 - MkDocs Material
 - Ruff, pytest, pre-commit
+- Data Science
