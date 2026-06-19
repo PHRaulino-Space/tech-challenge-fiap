@@ -3,6 +3,5 @@
     "notebook.markup.fontSize": 16,
     "notebook.lineNumbers": "on",
     "phrs-smart-commit.language": "pt-br",
-    "phrs-smart-commit.provider": "gemini",
-    "phrs-smart-commit.debugMode": true
+    "phrs-smart-commit.provider": "gemini"
 }
