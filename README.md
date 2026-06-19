@@ -15,7 +15,6 @@ O foco não está apenas em construir modelos ou escrever código — está em *
 | Nome | RM | E-mail |
 |---|---|---|
 | Paulo Henrique Almeida | RM375573 | phraulino@outlook.com |
-| Gabriela Almeida | RM375633 | gabrielacmalmeida@gmail.com |
 
 **Programa:** POSTECH AI Scientist — FIAP
 

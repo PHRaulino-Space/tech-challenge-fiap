@@ -10,9 +10,8 @@ Context file for LLM agents working in this repository. Read this before making 
 
 Academic project developed across **5 phases** of the POSTECH AI Scientist program. Each phase presents an applied data science challenge worth 90% of the phase grade. This repository centralizes all deliverables across all phases.
 
-**Authors:**
+**Author:**
 - Paulo Henrique Almeida — RM375573 — phraulino@outlook.com
-- Gabriela Almeida — RM375633 — gabrielacmalmeida@gmail.com
 
 ---
 

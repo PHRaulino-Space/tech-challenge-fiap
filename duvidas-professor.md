@@ -1,7 +1,7 @@
 # Dúvidas para o Professor — Tech Challenge FIAP
 
 > **POSTECH AI Scientist · Fase 1**
-> Paulo Henrique Almeida & Gabriela Almeida
+> Paulo Henrique Almeida
 
 ---
 
@@ -28,7 +28,7 @@ Construímos o Business Model Canvas inferindo apenas o que era possível a part
 
 **Dúvidas:**
 - Posso subir o vídeo no YouTube (como não listado ou privado com link compartilhado) e embedar na documentação?
-- O vídeo precisa mostrar os integrantes do grupo apresentando, ou pode ser uma gravação da tela do notebook com narração utilizando os próprios slides HTML?
+- O vídeo precisa mostrar o apresentador em câmera, ou pode ser uma gravação da tela do notebook com narração utilizando os próprios slides HTML?
 - Caso seja necessário mostrar a pessoa apresentando: é aceitável gravar com OBS utilizando uma webcam sobreposta em miniatura no canto inferior direito (no estilo de live/stream)?
 
 ---

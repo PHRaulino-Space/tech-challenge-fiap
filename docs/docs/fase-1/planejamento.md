@@ -1,6 +1,6 @@
 # Planejamento — Fase 1
 
-Esta página descreve a estratégia de entrega adotada pelo grupo para o Tech Challenge da Fase 1. O plano foi organizado seguindo o framework **CRISP-DM** (Cross-Industry Standard Process for Data Mining), metodologia amplamente adotada em projetos de ciência de dados por estruturar o trabalho de forma iterativa e orientada ao negócio.
+Esta página descreve a estratégia de entrega adotada para o Tech Challenge da Fase 1. O plano foi organizado seguindo o framework **CRISP-DM** (Cross-Industry Standard Process for Data Mining), metodologia amplamente adotada em projetos de ciência de dados por estruturar o trabalho de forma iterativa e orientada ao negócio.
 
 ---
 
@@ -34,7 +34,7 @@ O Business Model Canvas será utilizado para mapear o contexto do e-commerce, os
 
 **Objetivo:** Responder às perguntas de negócio propostas no desafio com raciocínio crítico e orientado a resultado.
 
-Com o Canvas como apoio, o grupo desenvolverá as reflexões sobre:
+Com o Canvas como apoio, serão desenvolvidas as reflexões sobre:
 
 - Qual problema de negócio está sendo resolvido
 - Por que o NPS é importante para o e-commerce
@@ -96,7 +96,7 @@ Esta etapa contempla:
 
 **Objetivo:** Avaliar a viabilidade de um modelo preditivo de NPS e, se aplicável, propor e implementar uma solução.
 
-A partir dos insights da EDA, o grupo avaliará se faz sentido construir um modelo preditivo (regressão ou classificação) e descreverá a estratégia adotada: definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação.
+A partir dos insights da EDA, será avaliado se faz sentido construir um modelo preditivo (regressão ou classificação) e descrita a estratégia adotada: definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação.
 
 > Esta etapa é opcional conforme o enunciado do desafio, mas será desenvolvida se os dados e o tempo permitirem.
 
@@ -126,7 +126,7 @@ Se necessário, esta fase pode indicar um retorno a etapas anteriores para refin
 
 **Objetivo:** Consolidar todos os insumos em uma apresentação executiva e no vídeo de até 5 minutos.
 
-Com os resultados validados, o grupo montará:
+Com os resultados validados, serão montados:
 
 - **Slides** com storytelling gerencial voltado para público não técnico
 - **Vídeo executivo** de até 5 minutos apresentando o problema, os insights e as recomendações

@@ -8,7 +8,6 @@ version = "0.0.1"
 description = "Tech Challenge Fiap POSTECH AI Scientist."
 authors = [
   { name = "Paulo Henrique Almeida", email = "phraulino@outlook.com" },
-  { name = "Gabriela Almeida", email = "gabrielacmalmeida@gmail.com" },
 ]
 readme = "README.md"
 classifiers = [
