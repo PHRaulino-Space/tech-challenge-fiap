@@ -1,9 +1,4 @@
 /* sky-600 override */
-:root  > * {
-  --md-primary-fg-color:        #122485;
-  /* --md-primary-fg-color--light: #ECB7B7; */
-  /* --md-primary-fg-color--dark:  #90030C; */
-}
 
 /* header title override — different from sidebar site_name */
 .md-header__topic:first-child .md-ellipsis {

@@ -14,94 +14,30 @@
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-          colors: {
-            brand: {
-              50:  '#fff5f5',
-              100: '#fce8e8',
-              200: '#f8d0d0',
-              300: '#f0a8a8',
-              400: '#e06060',
-              500: '#c43030',
-              600: '#911a1a',
-              700: '#721515',
-              800: '#521010',
-              900: '#340a0a',
-            }
-          }
         }
       }
     }
   </script>
 
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-
-    .bmc-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1.15fr 1fr 1fr;
-      grid-template-rows: auto auto auto;
-      gap: 6px;
-    }
-    .bmc-partners   { grid-column: 1;     grid-row: 1 / 3; }
-    .bmc-activities { grid-column: 2;     grid-row: 1;     }
-    .bmc-value      { grid-column: 3;     grid-row: 1 / 3; }
-    .bmc-relations  { grid-column: 4;     grid-row: 1;     }
-    .bmc-segments   { grid-column: 5;     grid-row: 1 / 3; }
-    .bmc-resources  { grid-column: 2;     grid-row: 2;     }
-    .bmc-channels   { grid-column: 4;     grid-row: 2;     }
-    .bmc-costs      { grid-column: 1 / 4; grid-row: 3;     }
-    .bmc-revenue    { grid-column: 4 / 6; grid-row: 3;     }
-
-    .bmc-costs .items-row,
-    .bmc-revenue .items-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .bmc-costs .items-row > .item,
-    .bmc-revenue .items-row > .item {
-      flex: 1 1 160px;
-    }
-
+    /* Necessário para o Lucide, que substitui <i> por <svg> via JS */
     [data-lucide] { display: inline-block; width: 13px; height: 13px; stroke-width: 2; }
-
-    .var {
-      display: inline-block;
-      font-family: 'Courier New', monospace;
-      font-size: 9px;
-      background: rgba(114,21,21,0.10);
-      color: #721515;
-      border-radius: 4px;
-      padding: 1px 5px;
-      white-space: nowrap;
-    }
-    .bmc-value .var {
-      background: rgba(255,255,255,0.15);
-      color: #fce8e8;
-    }
-    .bmc-revenue .var {
-      background: rgba(255,255,255,0.10);
-      color: #f0a8a8;
-    }
-    .vars { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; padding-top: 5px; border-top: 1px solid rgba(114,21,21,0.08); }
-    .bmc-value .vars  { border-top-color: rgba(255,255,255,0.12); }
-    .bmc-revenue .vars { border-top-color: rgba(255,255,255,0.08); }
   </style>
 </head>
 
-<body class="bg-brand-50 min-h-screen p-6 text-brand-900">
+<body class="bg-slate-100 min-h-screen p-6 text-slate-900 font-sans">
 
   <!-- Header -->
   <div class="max-w-screen-2xl mx-auto mb-5">
-    <div class="flex items-end justify-between border-b border-brand-200 pb-4">
+    <div class="flex items-end justify-between border-b border-slate-300 pb-4">
       <div>
-        <p class="text-[10px] font-bold tracking-[0.15em] uppercase text-brand-400 mb-1">
+        <p class="text-[10px] font-bold tracking-[0.15em] uppercase text-slate-400 mb-1">
           POSTECH AI Scientist · FIAP · Tech Challenge · Fase 1
         </p>
-        <h1 class="text-[22px] font-extrabold text-brand-700 leading-tight">Business Model Canvas</h1>
-        <p class="text-xs text-brand-400 mt-0.5 font-medium">CRISP-DM — Business Understanding &nbsp;·&nbsp; NPS Preditivo &nbsp;·&nbsp; E-commerce</p>
+        <h1 class="text-[22px] font-extrabold text-slate-700 leading-tight">Business Model Canvas</h1>
+        <p class="text-xs text-slate-400 mt-0.5 font-medium">CRISP-DM — Business Understanding &nbsp;·&nbsp; NPS Preditivo &nbsp;·&nbsp; E-commerce</p>
       </div>
-      <div class="hidden sm:flex items-center gap-1.5 text-xs text-brand-300 font-medium">
+      <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-400 font-medium">
         <i data-lucide="database"></i>
         <span>19 variáveis mapeadas</span>
       </div>
@@ -110,360 +46,394 @@
 
   <!-- Canvas Grid -->
   <div class="max-w-screen-2xl mx-auto overflow-x-auto">
-    <div class="bmc-grid min-w-[900px]">
+    <div class="grid min-w-[900px] gap-1.5
+                [grid-template-columns:1fr_1fr_1.15fr_1fr_1fr]
+                [grid-template-rows:auto_auto_auto]">
 
-      <!-- Parceiros-Chave -->
-      <div class="bmc-partners bg-white border border-brand-100 border-t-2 border-t-brand-700 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-700">
+      <!-- Parceiros-Chave — col 1, rows 1-2 -->
+      <div class="col-start-1 row-start-1 row-span-2
+                  bg-white border border-slate-200 border-t-2 border-t-slate-700
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-700">
           <i data-lucide="handshake"></i> Parceiros-Chave
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Operadores Logísticos</p>
-            <p class="text-brand-600 leading-relaxed">Transporte ao cliente e tentativas de entrega.</p>
-            <div class="vars">
-              <span class="var">freight_value</span>
-              <span class="var">delivery_time_days</span>
-              <span class="var">delivery_delay_days</span>
-              <span class="var">delivery_attempts</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Operadores Logísticos</p>
+            <p class="text-slate-500 leading-relaxed">Transporte ao cliente e tentativas de entrega.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_delay_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_attempts</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Meios de Pagamento</p>
-            <p class="text-brand-600 leading-relaxed">Processamento de transações e parcelamento.</p>
-            <div class="vars">
-              <span class="var">payment_installments</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Meios de Pagamento</p>
+            <p class="text-slate-500 leading-relaxed">Processamento de transações e parcelamento.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">payment_installments</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Atividades-Chave -->
-      <div class="bmc-activities bg-white border border-brand-100 border-t-2 border-t-brand-500 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-500">
+      <!-- Atividades-Chave — col 2, row 1 -->
+      <div class="col-start-2 row-start-1
+                  bg-white border border-slate-200 border-t-2 border-t-slate-500
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">
           <i data-lucide="settings-2"></i> Atividades-Chave
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Processamento de Pedidos</p>
-            <p class="text-brand-600 leading-relaxed">Registro de pedidos com descontos e parcelamento.</p>
-            <div class="vars">
-              <span class="var">order_id</span>
-              <span class="var">order_value</span>
-              <span class="var">items_quantity</span>
-              <span class="var">discount_value</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Processamento de Pedidos</p>
+            <p class="text-slate-500 leading-relaxed">Registro de pedidos com descontos e parcelamento.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">order_id</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">order_value</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">items_quantity</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">discount_value</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Operação de Entregas</p>
-            <p class="text-brand-600 leading-relaxed">Logística do despacho à entrega, com prazos e tentativas.</p>
-            <div class="vars">
-              <span class="var">delivery_time_days</span>
-              <span class="var">delivery_delay_days</span>
-              <span class="var">delivery_attempts</span>
-              <span class="var">freight_value</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Operação de Entregas</p>
+            <p class="text-slate-500 leading-relaxed">Logística do despacho à entrega, com prazos e tentativas.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_delay_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_attempts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Atendimento ao Cliente</p>
-            <p class="text-brand-600 leading-relaxed">Suporte, resolução de problemas e reclamações.</p>
-            <div class="vars">
-              <span class="var">customer_service_contacts</span>
-              <span class="var">resolution_time_days</span>
-              <span class="var">complaints_count</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Atendimento ao Cliente</p>
+            <p class="text-slate-500 leading-relaxed">Suporte, resolução de problemas e reclamações.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">resolution_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">complaints_count</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Coleta de Satisfação</p>
-            <p class="text-brand-600 leading-relaxed">Pesquisas NPS e CSAT ao fim da jornada de compra.</p>
-            <div class="vars">
-              <span class="var">nps_score</span>
-              <span class="var">csat_internal_score</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Coleta de Satisfação</p>
+            <p class="text-slate-500 leading-relaxed">Pesquisas NPS e CSAT ao fim da jornada de compra.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">nps_score</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">csat_internal_score</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Proposta de Valor -->
-      <div class="bmc-value bg-brand-700 border border-brand-600 border-t-2 border-t-brand-900 rounded-xl p-4 flex flex-col gap-3 shadow-md">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-200">
+      <!-- Proposta de Valor — col 3, rows 1-2 -->
+      <div class="col-start-3 row-start-1 row-span-2
+                  bg-slate-700 border border-slate-600 border-t-2 border-t-slate-300
+                  rounded-xl p-4 flex flex-col gap-3 shadow-md">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-200">
           <i data-lucide="gem"></i> Proposta de Valor
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-600 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Compra com Desconto</p>
-            <p class="text-brand-300 leading-relaxed">Desconto aplicado diretamente no pedido.</p>
-            <div class="vars">
-              <span class="var">discount_value</span>
+          <div class="bg-slate-600 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-100 mb-1">Compra com Desconto</p>
+            <p class="text-slate-300 leading-relaxed">Desconto aplicado diretamente no pedido.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-500">
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">discount_value</span>
             </div>
           </div>
 
-          <div class="bg-brand-600 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Pagamento Parcelado</p>
-            <p class="text-brand-300 leading-relaxed">Valor dividido em parcelas na compra.</p>
-            <div class="vars">
-              <span class="var">payment_installments</span>
+          <div class="bg-slate-600 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-100 mb-1">Pagamento Parcelado</p>
+            <p class="text-slate-300 leading-relaxed">Valor dividido em parcelas na compra.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-500">
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">payment_installments</span>
             </div>
           </div>
 
-          <div class="bg-brand-600 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Entrega ao Endereço do Cliente</p>
-            <p class="text-brand-300 leading-relaxed">Entrega no endereço com frete e prazo definidos.</p>
-            <div class="vars">
-              <span class="var">delivery_time_days</span>
-              <span class="var">freight_value</span>
+          <div class="bg-slate-600 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-100 mb-1">Entrega ao Endereço do Cliente</p>
+            <p class="text-slate-300 leading-relaxed">Entrega no endereço com frete e prazo definidos.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-500">
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">delivery_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
             </div>
           </div>
 
-          <div class="bg-brand-600 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Suporte Pós-Compra</p>
-            <p class="text-brand-300 leading-relaxed">Atendimento para problemas após o pedido.</p>
-            <div class="vars">
-              <span class="var">customer_service_contacts</span>
-              <span class="var">resolution_time_days</span>
+          <div class="bg-slate-600 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-100 mb-1">Suporte Pós-Compra</p>
+            <p class="text-slate-300 leading-relaxed">Atendimento para problemas após o pedido.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-500">
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-500 text-slate-100 rounded px-[5px] py-px whitespace-nowrap">resolution_time_days</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Relacionamento com Clientes -->
-      <div class="bmc-relations bg-white border border-brand-100 border-t-2 border-t-brand-500 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-500">
+      <!-- Relacionamento com Clientes — col 4, row 1 -->
+      <div class="col-start-4 row-start-1
+                  bg-white border border-slate-200 border-t-2 border-t-slate-500
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">
           <i data-lucide="message-circle"></i> Relacionamento
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Pesquisa de NPS pós-compra</p>
-            <p class="text-brand-600 leading-relaxed">Nota de satisfação de 0 a 10 após a compra.</p>
-            <div class="vars">
-              <span class="var">nps_score</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Pesquisa de NPS pós-compra</p>
+            <p class="text-slate-500 leading-relaxed">Nota de satisfação de 0 a 10 após a compra.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">nps_score</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Score Interno de Satisfação</p>
-            <p class="text-brand-600 leading-relaxed">Indicador interno complementar ao NPS.</p>
-            <div class="vars">
-              <span class="var">csat_internal_score</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Score Interno de Satisfação</p>
+            <p class="text-slate-500 leading-relaxed">Indicador interno complementar ao NPS.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">csat_internal_score</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Gestão de Reclamações</p>
-            <p class="text-brand-600 leading-relaxed">Registro e tratamento de reclamações.</p>
-            <div class="vars">
-              <span class="var">complaints_count</span>
-              <span class="var">customer_service_contacts</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Gestão de Reclamações</p>
+            <p class="text-slate-500 leading-relaxed">Registro e tratamento de reclamações.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">complaints_count</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Segmentos de Clientes -->
-      <div class="bmc-segments bg-white border border-brand-100 border-t-2 border-t-brand-700 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-700">
+      <!-- Segmentos de Clientes — col 5, rows 1-2 -->
+      <div class="col-start-5 row-start-1 row-span-2
+                  bg-white border border-slate-200 border-t-2 border-t-slate-700
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-700">
           <i data-lucide="users"></i> Segmentos
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Por Região Geográfica</p>
-            <p class="text-brand-600 leading-relaxed">Macro-regiões com condições logísticas distintas.</p>
-            <div class="vars">
-              <span class="var">customer_region</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Por Região Geográfica</p>
+            <p class="text-slate-500 leading-relaxed">Macro-regiões com condições logísticas distintas.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_region</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Por Perfil Etário</p>
-            <p class="text-brand-600 leading-relaxed">Faixa etária para análise por geração.</p>
-            <div class="vars">
-              <span class="var">customer_age</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Por Perfil Etário</p>
+            <p class="text-slate-500 leading-relaxed">Faixa etária para análise por geração.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_age</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Por Tempo de Relacionamento</p>
-            <p class="text-brand-600 leading-relaxed">Novos clientes vs. clientes com histórico.</p>
-            <div class="vars">
-              <span class="var">customer_tenure_months</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Por Tempo de Relacionamento</p>
+            <p class="text-slate-500 leading-relaxed">Novos clientes vs. clientes com histórico.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_tenure_months</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Por Comportamento de Recompra</p>
-            <p class="text-brand-600 leading-relaxed">Nova compra em até 30 dias após o pedido.</p>
-            <div class="vars">
-              <span class="var">repeat_purchase_30d</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Por Comportamento de Recompra</p>
+            <p class="text-slate-500 leading-relaxed">Nova compra em até 30 dias após o pedido.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">repeat_purchase_30d</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Recursos-Chave -->
-      <div class="bmc-resources bg-white border border-brand-100 border-t-2 border-t-brand-400 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-400">
+      <!-- Recursos-Chave — col 2, row 2 -->
+      <div class="col-start-2 row-start-2
+                  bg-white border border-slate-200 border-t-2 border-t-slate-400
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">
           <i data-lucide="database"></i> Recursos-Chave
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Dados de Clientes e Pedidos</p>
-            <p class="text-brand-600 leading-relaxed">Base histórica de clientes e pedidos para análise.</p>
-            <div class="vars">
-              <span class="var">customer_id</span>
-              <span class="var">order_id</span>
-              <span class="var">order_value</span>
-              <span class="var">items_quantity</span>
-              <span class="var">discount_value</span>
-              <span class="var">payment_installments</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Dados de Clientes e Pedidos</p>
+            <p class="text-slate-500 leading-relaxed">Base histórica de clientes e pedidos para análise.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_id</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">order_id</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">order_value</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">items_quantity</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">discount_value</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">payment_installments</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Dados Operacionais e de Satisfação</p>
-            <p class="text-brand-600 leading-relaxed">Logística, atendimento e indicadores de satisfação.</p>
-            <div class="vars">
-              <span class="var">delivery_time_days</span>
-              <span class="var">delivery_delay_days</span>
-              <span class="var">delivery_attempts</span>
-              <span class="var">freight_value</span>
-              <span class="var">customer_service_contacts</span>
-              <span class="var">resolution_time_days</span>
-              <span class="var">complaints_count</span>
-              <span class="var">nps_score</span>
-              <span class="var">csat_internal_score</span>
-              <span class="var">repeat_purchase_30d</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Dados Operacionais e de Satisfação</p>
+            <p class="text-slate-500 leading-relaxed">Logística, atendimento e indicadores de satisfação.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_delay_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_attempts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">resolution_time_days</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">complaints_count</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">nps_score</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">csat_internal_score</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">repeat_purchase_30d</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Canais -->
-      <div class="bmc-channels bg-white border border-brand-100 border-t-2 border-t-brand-400 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-400">
+      <!-- Canais — col 4, row 2 -->
+      <div class="col-start-4 row-start-2
+                  bg-white border border-slate-200 border-t-2 border-t-slate-400
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-400">
           <i data-lucide="send"></i> Canais
         </h3>
         <div class="flex flex-col gap-2 flex-1 text-[11.5px]">
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Plataforma de E-commerce</p>
-            <p class="text-brand-600 leading-relaxed">Pedidos, pagamento e acompanhamento de entrega.</p>
-            <div class="vars">
-              <span class="var">order_id</span>
-              <span class="var">payment_installments</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Plataforma de E-commerce</p>
+            <p class="text-slate-500 leading-relaxed">Pedidos, pagamento e acompanhamento de entrega.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">order_id</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">payment_installments</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Canal de Atendimento</p>
-            <p class="text-brand-600 leading-relaxed">Contato para problemas e reclamações.</p>
-            <div class="vars">
-              <span class="var">customer_service_contacts</span>
-              <span class="var">complaints_count</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Canal de Atendimento</p>
+            <p class="text-slate-500 leading-relaxed">Contato para problemas e reclamações.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">complaints_count</span>
             </div>
           </div>
 
-          <div class="bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Pesquisa de Satisfação</p>
-            <p class="text-brand-600 leading-relaxed">Coleta do NPS após a jornada de compra.</p>
-            <div class="vars">
-              <span class="var">nps_score</span>
+          <div class="bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Pesquisa de Satisfação</p>
+            <p class="text-slate-500 leading-relaxed">Coleta do NPS após a jornada de compra.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">nps_score</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Estrutura de Custos -->
-      <div class="bmc-costs bg-white border border-brand-100 border-t-2 border-t-brand-700 rounded-xl p-4 flex flex-col gap-3 shadow-sm">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-700">
+      <!-- Estrutura de Custos — cols 1-3, row 3 -->
+      <div class="[grid-column:1/4] row-start-3
+                  bg-white border border-slate-200 border-t-2 border-t-slate-700
+                  rounded-xl p-4 flex flex-col gap-3 shadow-sm">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-700">
           <i data-lucide="trending-down"></i> Estrutura de Custos
         </h3>
-        <div class="items-row text-[11.5px]">
+        <div class="flex flex-wrap gap-1.5 text-[11.5px]">
 
-          <div class="item bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Frete</p>
-            <p class="text-brand-600 leading-relaxed text-[11px]">Transporte por pedido, variável por região e peso.</p>
-            <div class="vars"><span class="var">freight_value</span></div>
+          <div class="flex-1 basis-40 bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Frete</p>
+            <p class="text-slate-500 leading-relaxed text-[11px]">Transporte por pedido, variável por região e peso.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Descontos Concedidos</p>
-            <p class="text-brand-600 leading-relaxed text-[11px]">Valor absorvido para estimular conversão.</p>
-            <div class="vars"><span class="var">discount_value</span></div>
+          <div class="flex-1 basis-40 bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Descontos Concedidos</p>
+            <p class="text-slate-500 leading-relaxed text-[11px]">Valor absorvido para estimular conversão.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">discount_value</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Tentativas de Entrega</p>
-            <p class="text-brand-600 leading-relaxed text-[11px]">Custo de cada tentativa extra de entrega.</p>
-            <div class="vars"><span class="var">delivery_attempts</span></div>
+          <div class="flex-1 basis-40 bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Tentativas de Entrega</p>
+            <p class="text-slate-500 leading-relaxed text-[11px]">Custo de cada tentativa extra de entrega.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">delivery_attempts</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-50 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-700 mb-1">Atendimento ao Cliente</p>
-            <p class="text-brand-600 leading-relaxed text-[11px]">Suporte e tempo de resolução de problemas.</p>
-            <div class="vars">
-              <span class="var">customer_service_contacts</span>
-              <span class="var">resolution_time_days</span>
+          <div class="flex-1 basis-40 bg-slate-100 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-700 mb-1">Atendimento ao Cliente</p>
+            <p class="text-slate-500 leading-relaxed text-[11px]">Suporte e tempo de resolução de problemas.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">customer_service_contacts</span>
+              <span class="inline-block font-mono text-[9px] bg-slate-300 text-slate-700 rounded px-[5px] py-px whitespace-nowrap">resolution_time_days</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Fontes de Receita -->
-      <div class="bmc-revenue bg-brand-900 border border-brand-800 border-t-2 border-t-brand-400 rounded-xl p-4 flex flex-col gap-3 shadow-md">
-        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-brand-300">
+      <!-- Fontes de Receita — cols 4-5, row 3 -->
+      <div class="[grid-column:4/6] row-start-3
+                  bg-slate-700 border border-slate-600 border-t-2 border-t-slate-300
+                  rounded-xl p-4 flex flex-col gap-3 shadow-md">
+        <h3 class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-100">
           <i data-lucide="trending-up"></i> Fontes de Receita
         </h3>
-        <div class="items-row text-[11.5px]">
+        <div class="flex flex-wrap gap-1.5 text-[11.5px]">
 
-          <div class="item bg-brand-800 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Venda de Produtos</p>
-            <p class="text-brand-400 leading-relaxed text-[11px]">Valor total dos pedidos na plataforma.</p>
-            <div class="vars"><span class="var">order_value</span></div>
+          <div class="flex-1 basis-40 bg-slate-200 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-900 mb-1">Venda de Produtos</p>
+            <p class="text-slate-600 leading-relaxed text-[11px]">Valor total dos pedidos na plataforma.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-400 text-slate-900 rounded px-[5px] py-px whitespace-nowrap">order_value</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-800 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Cobrança de Frete</p>
-            <p class="text-brand-400 leading-relaxed text-[11px]">Repasse do custo de entrega ao cliente.</p>
-            <div class="vars"><span class="var">freight_value</span></div>
+          <div class="flex-1 basis-40 bg-slate-200 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-900 mb-1">Cobrança de Frete</p>
+            <p class="text-slate-600 leading-relaxed text-[11px]">Repasse do custo de entrega ao cliente.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-400 text-slate-900 rounded px-[5px] py-px whitespace-nowrap">freight_value</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-800 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Parcelamento</p>
-            <p class="text-brand-400 leading-relaxed text-[11px]">Receita ligada às parcelas escolhidas.</p>
-            <div class="vars"><span class="var">payment_installments</span></div>
+          <div class="flex-1 basis-40 bg-slate-200 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-900 mb-1">Parcelamento</p>
+            <p class="text-slate-600 leading-relaxed text-[11px]">Receita ligada às parcelas escolhidas.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-400 text-slate-900 rounded px-[5px] py-px whitespace-nowrap">payment_installments</span>
+            </div>
           </div>
 
-          <div class="item bg-brand-800 rounded-lg px-3 py-2">
-            <p class="font-semibold text-brand-100 mb-1">Recompra</p>
-            <p class="text-brand-400 leading-relaxed text-[11px]">Novo pedido em até 30 dias após a compra.</p>
-            <div class="vars"><span class="var">repeat_purchase_30d</span></div>
+          <div class="flex-1 basis-40 bg-slate-200 rounded-lg px-3 py-2">
+            <p class="font-semibold text-slate-900 mb-1">Recompra</p>
+            <p class="text-slate-600 leading-relaxed text-[11px]">Novo pedido em até 30 dias após a compra.</p>
+            <div class="flex flex-wrap gap-[3px] mt-[5px] pt-[5px] border-t border-slate-300">
+              <span class="inline-block font-mono text-[9px] bg-slate-400 text-slate-900 rounded px-[5px] py-px whitespace-nowrap">repeat_purchase_30d</span>
+            </div>
           </div>
 
         </div>
       </div>
 
-    </div><!-- /.bmc-grid -->
+    </div><!-- /.grid -->
   </div>
 
-  <p class="text-center text-[10px] text-brand-300 mt-5 tracking-wide">
+  <p class="text-center text-[10px] text-slate-400 mt-5 tracking-wide">
     POSTECH AI Scientist · FIAP · Tech Challenge Fase 1 · NPS Preditivo
   </p>
 

@@ -10,13 +10,13 @@ theme:
   language: pt-BR
   palette:
     - scheme: default
-      primary: teal
+      primary: blue grey
       accent: blue
       toggle:
         icon: material/brightness-7
         name: Modo escuro
     - scheme: slate
-      primary: teal
+      primary: blue grey
       accent: blue
       toggle:
         icon: material/brightness-4
@@ -44,12 +44,13 @@ nav:
     - Visão Geral: fase-1/index.md
     - Planejamento: fase-1/planejamento.md
     - Case: fase-1/case-nps-preditivo.md
-    - 1. Business Canvas: fase-1/business-canvas.md
-    - 2. Reflexões do Desafio: fase-1/reflexoes.md
-    - 3. Análise e Hipóteses: fase-1/analise-hipoteses.md
-    - 4. EDA: fase-1/eda.md
-    - 5. Preparação dos Dados: fase-1/preparacao-dados.md
-    - 6. Proposta de Solução: fase-1/proposta-solucao.md
-    - 7. Avaliação dos Resultados: fase-1/avaliacao.md
-    - 8. Apresentação Final: fase-1/apresentacao-final.md
+    - 1. Problema de Negócio: fase-1/problema-negocio.md
+    - 2. Business Canvas: fase-1/business-canvas.md
+    - 3. Reflexões do Desafio: fase-1/reflexoes.md
+    - 4. Análise e Hipóteses: fase-1/analise-hipoteses.md
+    - 5. EDA: fase-1/eda.md
+    - 6. Preparação dos Dados: fase-1/preparacao-dados.md
+    - 7. Proposta de Solução: fase-1/proposta-solucao.md
+    - 8. Avaliação dos Resultados: fase-1/avaliacao.md
+    - 9. Apresentação Final: fase-1/apresentacao-final.md
     - Como Reproduzir: fase-1/getting-started.md

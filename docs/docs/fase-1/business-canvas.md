@@ -1,4 +1,4 @@
-# 1. Business Canvas
+# 2. Business Canvas
 
 *CRISP-DM: Business Understanding*
 

@@ -4,6 +4,8 @@ POSTECH_AI_SCIENTIST/
 # Mac OS-specific storage files
 .DS_Store
 
+tmp/*
+
 # vim
 *.swp
 *.swo

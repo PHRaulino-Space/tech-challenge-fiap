@@ -18,7 +18,7 @@ Você deverá atender os seguintes requisitos nesse desafio:
 
 ### 1. Entendimento do Negócio
 
-Nessa primeira etapa, queremos exercitar o seu **pensamento analítico**, não código. Nos traga a resposta para as seguintes perguntas de negócio:
+Ness**pensamena primeira etapa, queremos exercitar o seu to analítico**, não código. Nos traga a resposta para as seguintes perguntas de negócio:
 
 - Qual problema de negócio está sendo resolvido?
 - Por que o NPS é importante para um e-commerce?
