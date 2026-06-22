@@ -1,0 +1,28 @@
+project:
+  type: default
+  output-dir: reports/quarto
+  render:
+    - notebooks/eda_final.ipynb
+    - notebooks/dados.ipynb
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-title: "Conteúdo"
+    code-fold: true
+    code-tools: true
+    code-summary: "Ver código"
+    embed-resources: true
+    lang: pt-BR
+    fig-width: 10
+    fig-height: 6
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: false
+
+jupyter: python3

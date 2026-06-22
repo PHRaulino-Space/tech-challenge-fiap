@@ -12,6 +12,19 @@
 #     name: python3
 # ---
 
+# %% [raw]
+# ---
+# title: "EDA Final — NPS Preditivo"
+# subtitle: "O Que os Dados Revelam sobre a Satisfação do Cliente"
+# author: "Paulo Henrique Raulino"
+# date: today
+# format:
+#   html:
+#     toc: true
+#     code-fold: true
+#     embed-resources: true
+# ---
+
 # %% [markdown]
 # # EDA Final — NPS Preditivo: O Que os Dados Revelam
 #
@@ -74,7 +87,6 @@ cores_degradacao = {
 }
 
 # %% [markdown]
-# ---
 # ## 1. O Ponto de Partida: 74% dos Clientes São Detratores
 #
 # Antes de qualquer análise cruzada, o primeiro dado já comunica a urgência do problema.
@@ -105,7 +117,6 @@ fig.update_layout(showlegend=False, title_x=0.5, height=420)
 fig.show()
 
 # %% [markdown]
-# ---
 # ## 2. Onde Está o Problema? As Correlações Apontam o Caminho
 #
 # Antes de explorar grupo a grupo, o heatmap de correlações de todas as variáveis
@@ -172,7 +183,6 @@ fig.show()
 # para a satisfação.
 
 # %% [markdown]
-# ---
 # ## 3. A Análise Grupo a Grupo — Mapeando a Jornada
 #
 # A análise segue o fluxo cronológico da experiência do cliente. Para cada grupo,
@@ -250,7 +260,6 @@ fig.show()
 # depois que o pedido é confirmado.
 
 # %% [markdown]
-# ---
 # ## 4. Os Quatro Perfis de Degradação da Experiência
 #
 # Com os dois sinais mais fortes identificados (`delivery_delay_days` e
@@ -330,7 +339,6 @@ fig.update_layout(
 fig.show()
 
 # %% [markdown]
-# ---
 # ## 5. De Onde Vêm os Detratores?
 #
 # Olhando os **1.851 detratores** da base pelo ângulo do perfil de degradação,
@@ -373,7 +381,6 @@ fig.show()
 # identificável durante a jornada.
 
 # %% [markdown]
-# ---
 # ## 6. O Comportamento Confirma a Percepção
 #
 # NPS é uma declaração de intenção. A recompra em 30 dias é o comportamento real.
@@ -457,7 +464,6 @@ fig.show()
 # de satisfação, mas um preditor direto de receita futura.
 
 # %% [markdown]
-# ---
 # ## 7. O NPS Interno (CSAT) Confirma o Diagnóstico
 #
 # O indicador interno de satisfação (CSAT) acompanha o NPS em todos os perfis,
@@ -503,7 +509,6 @@ fig.show()
 # mede internamente (CSAT) — o diagnóstico é consistente.
 
 # %% [markdown]
-# ---
 # ## 8. O Problema Não É Geográfico — É Sistêmico
 #
 # A análise individual de `customer_region` mostrou variação de apenas **0,28 pontos**
@@ -563,7 +568,6 @@ fig.show()
 # precisa de uma resposta sistêmica e de processo.
 
 # %% [markdown]
-# ---
 # ## 9. A Escada de Prazo: Cumprir o Prometido Vale Mais que Entregar Rápido
 #
 # O heatmap mostrou que `delivery_delay_days` (-0,60) pesa muito mais no NPS do
@@ -607,7 +611,6 @@ fig.show()
 # no NPS — sem necessidade de investimento em velocidade logística.
 
 # %% [markdown]
-# ---
 # ## 10. Resolução Rápida Atenua o Dano — Mas Não o Apaga
 #
 # Dentro do perfil mais crítico ("Atraso + SAC"), o tempo de resolução do SAC
@@ -655,7 +658,6 @@ fig.show()
 # Ambos são detratores. **O ponto de intervenção eficaz é antes — no atraso.**
 
 # %% [markdown]
-# ---
 # ## 11. Conclusões e Recomendações
 #
 # ### O que os dados provam

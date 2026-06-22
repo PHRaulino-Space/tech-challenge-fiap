@@ -119,7 +119,7 @@ nb2html: py2nb
 		--output-dir reports/ \
 		notebooks/dados.ipynb
 
-## Convert eda_final.py → eda_final.ipynb and export to HTML
+## Convert eda_final.py → eda_final.ipynb and export to HTML (nbconvert)
 .PHONY: eda2html
 eda2html:
 	poetry run jupytext --to ipynb notebooks/eda_final.py -o notebooks/eda_final.ipynb
@@ -127,6 +127,33 @@ eda2html:
 		--ExecutePreprocessor.timeout=120 \
 		--output-dir reports/ \
 		notebooks/eda_final.ipynb
+
+## Render eda_final with Quarto (requires: brew install quarto)
+.PHONY: quarto-eda
+quarto-eda:
+	poetry run jupytext --to ipynb notebooks/eda_final.py -o notebooks/eda_final.ipynb
+	poetry run jupyter nbconvert --to notebook --execute \
+		--ExecutePreprocessor.timeout=120 \
+		--inplace notebooks/eda_final.ipynb
+	quarto render notebooks/eda_final.ipynb --no-execute
+	mv notebooks/eda_final.html reports/quarto/eda_final.html
+
+## Render dados.py with Quarto
+.PHONY: quarto-dados
+quarto-dados:
+	poetry run jupytext --to ipynb notebooks/dados.py -o notebooks/dados.ipynb
+	poetry run jupyter nbconvert --to notebook --execute \
+		--ExecutePreprocessor.timeout=120 \
+		--inplace notebooks/dados.ipynb
+	quarto render notebooks/dados.ipynb --no-execute
+	mv notebooks/dados.html reports/quarto/dados.html
+
+## Render all notebooks with Quarto (uses _quarto.yml project config)
+.PHONY: quarto-all
+quarto-all:
+	poetry run jupytext --to ipynb notebooks/eda_final.py -o notebooks/eda_final.ipynb
+	poetry run jupytext --to ipynb notebooks/dados.py -o notebooks/dados.ipynb
+	quarto render
 
 
 #################################################################################
