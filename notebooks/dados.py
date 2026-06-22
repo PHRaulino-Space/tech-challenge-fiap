@@ -265,36 +265,18 @@ fig.update_layout(
 fig.show()
 
 # %% [markdown]
-# ### Grupo Cliente — NPS médio por Região
-
-# %%
-nps_por_regiao = (
-    df.groupby("customer_region")["nps_score"].mean().reset_index().sort_values("nps_score")
-)
-
-fig = px.bar(
-    nps_por_regiao,
-    x="customer_region",
-    y="nps_score",
-    title="NPS Score Médio por Região",
-    labels={"customer_region": "Região", "nps_score": "NPS Score Médio"},
-    text=nps_por_regiao["nps_score"].round(2),
-    color="nps_score",
-    color_continuous_scale="RdBu",
-)
-fig.update_traces(textposition="outside")
-fig.update_layout(showlegend=False, title_x=0.5, coloraxis_showscale=False)
-fig.show()
-
-# %% [markdown]
 # ### Conclusão — Grupo Cliente
 #
 # O heatmap mostra correlações praticamente nulas: `customer_age` com -0.01 e
 # `customer_tenure_months` com 0.03. O sinal é ainda mais fraco do que o grupo Pedido.
 #
+# A região geográfica também foi investigada — o NPS médio por região variou apenas
+# 0.28 pontos entre a menor (Centro-Oeste: 4.21) e a maior (Sul: 4.49). Diferença
+# sem relevância prática para o negócio.
+#
 # O que isso confirma: **a insatisfação não discrimina perfil de cliente.** Não importa
-# se o cliente é novo ou antigo, jovem ou mais velho — a chance de se tornar detrator
-# é a mesma. O problema não está em quem é o cliente.
+# se o cliente é novo ou antigo, jovem ou mais velho, ou de qual região do Brasil —
+# a chance de se tornar detrator é a mesma. O problema não está em quem é o cliente.
 #
 # Assim como no grupo Pedido, essa análise não chegou ao objetivo de identificar
 # o que gera detratores — mas cumpriu um papel importante: **eliminamos com dados
@@ -453,6 +435,110 @@ fig.show()
 # ### Conclusão — Grupo Logística
 #
 # *(A preencher após análise dos gráficos)*
+
+# %% [markdown]
+# ### Grupo Atendimento — Heatmap de Correlação
+
+# %%
+cols_heatmap_atendimento = [
+    "customer_service_contacts",
+    "resolution_time_days",
+    "complaints_count",
+    "nps_score",
+]
+corr_matrix_atendimento = df[cols_heatmap_atendimento].corr()
+
+fig = px.imshow(
+    corr_matrix_atendimento,
+    title="Correlação: Variáveis de Atendimento vs NPS Score",
+    color_continuous_scale="RdBu_r",
+    text_auto=".2f",
+    zmin=-1,
+    zmax=1,
+    labels=dict(color="Correlação"),
+)
+fig.update_layout(width=600, height=500, title_x=0.5)
+fig.show()
+
+# %% [markdown]
+# ### Grupo Atendimento — Boxplot por categoria NPS
+
+# %%
+variaveis_atendimento = {
+    "customer_service_contacts": "Contatos com o SAC",
+    "resolution_time_days": "Tempo de Resolução (dias)",
+    "complaints_count": "Reclamações Formais",
+}
+
+fig = make_subplots(rows=1, cols=3, subplot_titles=list(variaveis_atendimento.values()))
+
+for i, (col, label) in enumerate(variaveis_atendimento.items()):
+    for cat in categorias:
+        fig.add_trace(
+            go.Box(
+                y=df[df["nps_categoria"] == cat][col],
+                name=cat,
+                marker_color=cores[cat],
+                showlegend=(i == 0),
+            ),
+            row=1,
+            col=i + 1,
+        )
+
+fig.update_layout(
+    title="Grupo Atendimento — Distribuição por Categoria NPS",
+    title_x=0.5,
+    height=450,
+    boxmode="group",
+)
+fig.show()
+
+# %% [markdown]
+# ### Conclusão — Grupo Atendimento
+#
+# O heatmap e os boxplots mostram que as três variáveis do grupo têm relação com o NPS,
+# cada uma com intensidade diferente:
+#
+# - `complaints_count`: -0.50 — o sinal mais forte do grupo
+# - `customer_service_contacts`: -0.35 — sinal relevante
+# - `resolution_time_days`: -0.19 — sinal mais fraco, mas presente
+#
+# Nos boxplots, as caixas dos Detratores estão consistentemente mais altas que as dos
+# Promotores nas três variáveis — comportamento diferente de tudo que vimos nos grupos
+# Cliente e Pedido.
+#
+# Uma leitura importante: `resolution_time_days` tem o menor sinal, o que sugere que
+# **quanto demora para resolver importa menos do que o fato de precisar acionar o suporte**.
+# O simples ato de contatar o SAC ou registrar uma reclamação já está associado a um
+# NPS mais baixo — independente do tempo de resolução.
+#
+# > ⚠️ **Limitação:** a base não permite afirmar a direção da causalidade. O cliente pode
+# > ter reclamado porque já era detrator, ou pode ter virado detrator porque o atendimento
+# > não resolveu. Ambos os cenários aparecem da mesma forma nos dados. Nesta análise,
+# > o NPS é tratado como o desfecho final da jornada.
+#
+# ---
+#
+# ## Encerramento da Análise Individual
+#
+# A análise univariada — cada variável cruzada individualmente com o NPS — está concluída
+# para os quatro grupos da jornada. O panorama geral:
+#
+# | Grupo | Sinal com o NPS | Principal variável |
+# | :--- | :--- | :--- |
+# | Cliente | Nenhum | — |
+# | Pedido | Nenhum | — |
+# | Logística | Forte | `delivery_delay_days` (-0.60) |
+# | Atendimento | Moderado | `complaints_count` (-0.50) |
+#
+# **O que os dados confirmam:** o problema não está em quem é o cliente nem no que ele
+# comprou. Está na execução operacional — especialmente no atraso da entrega e no volume
+# de reclamações e contatos com o SAC.
+#
+# A próxima etapa complementa essa visão com **análises multivariadas**, cruzando variáveis
+# de grupos diferentes para identificar cenários combinados — como o impacto do atraso
+# em compras de alto valor, ou se desconto e frete baixo funcionam como amortecedores
+# da insatisfação.
 
 # %% [markdown]
 # ---

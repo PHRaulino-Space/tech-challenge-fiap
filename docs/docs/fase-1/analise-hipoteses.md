@@ -92,6 +92,20 @@ Um frete mais baixo ou um desconto maior reduz a sensibilidade do cliente às va
 
 ---
 
+## Limitações e Premissas da Análise
+
+### O NPS como desfecho final da jornada
+
+O case não especifica em qual momento exato da jornada o NPS é coletado — se é após a entrega, após o atendimento, ou após algum outro ponto de contato. Essa informação não está disponível na base de dados.
+
+**Premissa adotada:** nesta análise, o `nps_score` é tratado como o **desfecho final da jornada do cliente** — a avaliação que ele faz depois de ter passado por todas as etapas: compra, entrega e atendimento. Essa é a interpretação mais conservadora e a que faz mais sentido dado o contexto do case.
+
+**Implicação para a análise:** a correlação entre variáveis de atendimento (reclamações, contatos com o SAC) e o NPS existe e é observável, mas a base não permite afirmar a direção da causalidade. O cliente pode ter reclamado porque já estava insatisfeito — ou pode ter ficado insatisfeito porque o atendimento não resolveu o problema. Ambos os cenários aparecem da mesma forma nos dados.
+
+Para a EDA, isso não altera a leitura das correlações. Para as recomendações de negócio, essa distinção importa: se o cliente chega ao SAC já como detrator, a ação necessária é diferente de um cliente que se torna detrator por falta de resolução no atendimento.
+
+---
+
 ## Próximos Passos
 
 A investigação segue para o **Grupo Atendimento** (`customer_service_contacts`, `resolution_time_days`, `complaints_count`), que junto com a Logística é onde o problema provavelmente se concentra. Em seguida, as hipóteses acima serão testadas como análises multivariadas e, posteriormente, como features do modelo preditivo.
