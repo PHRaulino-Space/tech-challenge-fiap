@@ -18,8 +18,11 @@ from collections import OrderedDict
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 
 from plotly.subplots import make_subplots
+
+pio.renderers.default = "notebook_connected"
 
 # %% [markdown]
 # ### Questão central de negócio
@@ -169,6 +172,8 @@ pd.concat(
 
 # %%
 dist_nps = df["nps_categoria"].value_counts().reindex(["Detrator", "Neutro", "Promotor"])
+dist_nps_pct = (dist_nps / dist_nps.sum() * 100).round(1)
+labels_dist = [f"{n:,}<br><sub>{p}%</sub>" for n, p in zip(dist_nps.values, dist_nps_pct.values)]
 
 fig = px.bar(
     dist_nps,
@@ -178,9 +183,9 @@ fig = px.bar(
     title="Distribuição de Clientes por Categoria NPS",
     color=dist_nps.index,
     color_discrete_map={"Detrator": "#ef4444", "Neutro": "#f97316", "Promotor": "#0284c7"},
-    text=dist_nps.values,
+    text=labels_dist,
 )
-fig.update_traces(textposition="outside")
+fig.update_traces(textposition="outside", textfont_size=13)
 fig.update_layout(showlegend=False, title_x=0.5)
 fig.show()
 
@@ -434,7 +439,28 @@ fig.show()
 # %% [markdown]
 # ### Conclusão — Grupo Logística
 #
-# *(A preencher após análise dos gráficos)*
+# O heatmap e os boxplots revelam o sinal mais forte observado em toda a análise:
+#
+# - `delivery_delay_days`: -0.60 — correlação mais alta de todo o projeto
+# - `delivery_time_days`: -0.38 — sinal relevante, mas bem abaixo do atraso
+# - `delivery_attempts`: -0.22 — sinal moderado
+# - `freight_value`: -0.04 — praticamente nulo
+#
+# Nos boxplots, a separação entre categorias é visualmente clara e diferente de tudo
+# que vimos nos grupos anteriores. Promotores quase não têm atraso — mediana próxima
+# de zero. Detratores têm atraso consistente — mediana em torno de 2 dias, com
+# outliers chegando a 7–8 dias. As caixas mal se sobrepõem.
+#
+# A distinção entre as duas variáveis de prazo é um achado importante de negócio:
+# `delivery_delay_days` (atraso em relação ao prometido) pesa muito mais no NPS do
+# que `delivery_time_days` (tempo total de entrega). Isso indica que **o cliente
+# não está avaliando quanto tempo esperou — está avaliando se a empresa cumpriu
+# o que prometeu**. Um cliente que espera 10 dias dentro do prazo prometido pode
+# ter NPS melhor do que um que esperou 5 dias e recebeu com 1 dia de atraso.
+#
+# **Conclusão principal:** o atraso na entrega é o principal fator de insatisfação
+# identificado na base. A relação é forte o suficiente para ser o candidato número
+# um a feature no modelo preditivo — e para orientar ações imediatas de logística.
 
 # %% [markdown]
 # ### Grupo Atendimento — Heatmap de Correlação
@@ -542,48 +568,889 @@ fig.show()
 
 # %% [markdown]
 # ---
-# ## Hipóteses para Análises Futuras
+# ## Análise Multivariada — Perfis de Degradação da Experiência
 #
-# A partir do que foi observado até aqui na EDA, surgem três hipóteses que merecem
-# investigação mais aprofundada — seja em análises multivariadas ou na etapa de modelagem.
+# A análise individual mostrou que `delivery_delay_days` e `customer_service_contacts`
+# são os dois sinais mais fortes da base. A próxima pergunta natural é:
+# **o que acontece quando esses dois problemas se combinam?**
 #
+# Para isso, criamos duas flags binárias:
+#
+# - `teve_atraso`: o cliente recebeu fora do prazo prometido? (`delivery_delay_days > 0`)
+# - `teve_contato_sac`: o cliente precisou acionar o SAC? (`customer_service_contacts > 0`)
+#
+# A combinação das duas gera **quatro perfis de degradação da experiência** —
+# do melhor para o pior cenário:
+#
+# | Perfil | Atraso | SAC |
+# | :--- | :---: | :---: |
+# | Sem Problemas | ✗ | ✗ |
+# | Só Atraso | ✓ | ✗ |
+# | Só SAC | ✗ | ✓ |
+# | Atraso + SAC | ✓ | ✓ |
+
+# %%
+ordem_degradacao = ["Sem Problemas", "Só Atraso", "Só SAC", "Atraso + SAC"]
+
+df["teve_atraso"] = df["delivery_delay_days"] > 0
+df["teve_contato_sac"] = df["customer_service_contacts"] > 0
+
+df["perfil_degradacao"] = df.apply(
+    lambda r: (
+        "Atraso + SAC"
+        if r["teve_atraso"] and r["teve_contato_sac"]
+        else "Só Atraso"
+        if r["teve_atraso"]
+        else "Só SAC"
+        if r["teve_contato_sac"]
+        else "Sem Problemas"
+    ),
+    axis=1,
+)
+df["perfil_degradacao"] = pd.Categorical(
+    df["perfil_degradacao"], categories=ordem_degradacao, ordered=True
+)
+
+# %%
+nps_medio = df.groupby("perfil_degradacao", observed=True)["nps_score"].mean().reset_index()
+contagem = df["perfil_degradacao"].value_counts().reindex(ordem_degradacao)
+
+cores_degradacao = {
+    "Sem Problemas": "#0284c7",
+    "Só Atraso": "#f97316",
+    "Só SAC": "#f97316",
+    "Atraso + SAC": "#ef4444",
+}
+
+fig = px.bar(
+    nps_medio,
+    x="perfil_degradacao",
+    y="nps_score",
+    color="perfil_degradacao",
+    color_discrete_map=cores_degradacao,
+    text=nps_medio["nps_score"].round(2),
+    title="NPS Médio por Perfil de Degradação da Experiência",
+    labels={"perfil_degradacao": "Perfil", "nps_score": "NPS Médio"},
+    category_orders={"perfil_degradacao": ordem_degradacao},
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, height=420, yaxis_range=[0, 10])
+fig.show()
+
+# %% [markdown]
+# ### Distribuição das categorias NPS por perfil de degradação
+
+# %%
+dist = (
+    df.groupby(["perfil_degradacao", "nps_categoria"], observed=True)
+    .size()
+    .unstack(fill_value=0)
+    .reindex(ordem_degradacao)[["Detrator", "Neutro", "Promotor"]]
+)
+dist_pct = dist.div(dist.sum(axis=1), axis=0) * 100
+
+fig = go.Figure()
+for cat in ["Promotor", "Neutro", "Detrator"]:
+    fig.add_trace(
+        go.Bar(
+            name=cat,
+            x=dist_pct.index.tolist(),
+            y=dist_pct[cat].tolist(),
+            marker_color=cores[cat],
+            text=(dist_pct[cat].round(1).astype(str) + "%").tolist(),
+            textposition="inside",
+        )
+    )
+
+fig.update_layout(
+    barmode="stack",
+    title="Distribuição de NPS por Perfil de Degradação",
+    title_x=0.5,
+    yaxis_title="% de Clientes",
+    xaxis_title="Perfil",
+    height=450,
+    legend_title="Categoria NPS",
+)
+fig.show()
+
+# %% [markdown]
+# ### Conclusão — Perfis de Degradação
+#
+# Os dois gráficos confirmam e quantificam o que a análise individual já sinalizava:
+#
+# - **Sem Problemas:** NPS médio mais alto e maior proporção de Promotores —
+#   base de referência para o que a operação entrega quando funciona bem
+# - **Só Atraso / Só SAC:** queda relevante no NPS médio, com proporção de
+#   Detratores já majoritária — cada problema isolado já degrada a experiência
+# - **Atraso + SAC:** queda mais acentuada — a combinação dos dois problemas
+#   concentra a maior proporção de Detratores da base
+#
+# O achado central é que **os dois problemas se acumulam** — não é um ou outro,
+# é uma escalada de degradação. Clientes que enfrentam atraso E precisam acionar
+# o SAC têm a pior experiência da base. Isso sugere que o SAC, na maioria dos casos,
+# é acionado como consequência do atraso — e não resolve o problema de origem.
+#
+# > **Implicação para o negócio:** reduzir o atraso na entrega provavelmente
+# > reduz também o volume de contatos no SAC. O problema não são dois — é um,
+# > com efeito em cascata.
+
+# %% [markdown]
+# ### Zoom nos Detratores — De onde vêm?
+#
+# Com os perfis criados, podemos responder uma pergunta mais cirúrgica:
+# **entre os clientes que já viraram detratores, qual foi a origem do problema?**
+#
+# Essa visão é relevante para priorização operacional — não basta saber que atraso
+# e SAC degradam a experiência; precisamos saber qual combinação concentra o maior
+# volume de detratores na base.
+
+# %%
+df_detratores = df[df["nps_categoria"] == "Detrator"]
+
+dist_det = (
+    df_detratores["perfil_degradacao"]
+    .value_counts()
+    .reindex(ordem_degradacao)
+    .fillna(0)
+    .astype(int)
+    .reset_index()
+)
+dist_det.columns = ["perfil_degradacao", "detratores"]
+dist_det["pct"] = (dist_det["detratores"] / dist_det["detratores"].sum() * 100).round(1)
+dist_det["label"] = dist_det["detratores"].astype(str) + " (" + dist_det["pct"].astype(str) + "%)"
+
+fig = px.bar(
+    dist_det,
+    x="perfil_degradacao",
+    y="detratores",
+    color="perfil_degradacao",
+    color_discrete_map=cores_degradacao,
+    text="label",
+    title="Origem dos Detratores — Quebra por Perfil de Degradação",
+    labels={"perfil_degradacao": "Perfil", "detratores": "Detratores"},
+    category_orders={"perfil_degradacao": ordem_degradacao},
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, height=420)
+fig.show()
+
+# %% [markdown]
 # ---
+# ## Interação: Perfil de Degradação × Tempo de Relacionamento
 #
-# ### Hipótese 1 — O valor do produto influencia a tolerância do cliente
+# A análise individual mostrou que `customer_tenure_months` não tem efeito direto
+# sobre o NPS. Mas isso não significa que tenure seja irrelevante — pode ser que
+# ele **modere o efeito do atraso e do SAC**.
 #
-# Clientes que compraram produtos mais caros têm mais tolerância a variáveis que degradam
-# a experiência (como atraso na entrega ou múltiplas tentativas de entrega)?
+# A pergunta é: um cliente novo que sofre atraso reage da mesma forma que um cliente
+# antigo? Se as linhas divergirem conforme a degradação aumenta, a resposta é não —
+# e esse é um insight acionável de retenção.
 #
-# A lógica: quem investiu mais numa compra pode estar mais motivado a esperar ou
-# a tolerar pequenos problemas operacionais. Ou o contrário — pode ser mais exigente
-# justamente por ter pago mais.
+# Faixas de tenure criadas:
+# - **< 6 meses** — cliente recente, ainda formando percepção da marca
+# - **6–24 meses** — cliente em consolidação
+# - **24+ meses** — cliente estabelecido, com histórico de relacionamento
+
+# %%
+bins_tenure = [-1, 6, 24, df["customer_tenure_months"].max()]
+labels_tenure = ["< 6 meses", "6–24 meses", "24+ meses"]
+cores_tenure = {"< 6 meses": "#7c3aed", "6–24 meses": "#0891b2", "24+ meses": "#059669"}
+
+df["faixa_tenure"] = pd.cut(df["customer_tenure_months"], bins=bins_tenure, labels=labels_tenure)
+
+interacao = (
+    df.groupby(["perfil_degradacao", "faixa_tenure"], observed=True)["nps_score"]
+    .mean()
+    .round(2)
+    .reset_index()
+)
+
+fig = px.line(
+    interacao,
+    x="perfil_degradacao",
+    y="nps_score",
+    color="faixa_tenure",
+    color_discrete_map=cores_tenure,
+    markers=True,
+    title="Interação: Perfil de Degradação × Tempo de Relacionamento",
+    labels={
+        "perfil_degradacao": "Perfil de Degradação",
+        "nps_score": "NPS Médio",
+        "faixa_tenure": "Tempo de Relacionamento",
+    },
+    category_orders={"perfil_degradacao": ordem_degradacao},
+)
+fig.update_traces(line_width=2.5, marker_size=9)
+fig.update_layout(title_x=0.5, height=450, yaxis_range=[0, 10])
+fig.show()
+
+# %% [markdown]
+# ### Como interpretar
 #
-# **O que analisar:** cruzar `order_value` com `delivery_delay_days` segmentado por
-# `nps_categoria` — ver se o impacto do atraso no NPS é diferente em compras de alto valor.
-#
+# - **Linhas paralelas** → tenure não modera o efeito; clientes novos e antigos reagem
+#   igual ao atraso e ao SAC
+# - **Linhas que divergem da esquerda para a direita** → a degradação penaliza mais
+#   um grupo específico; o ângulo de queda revela quem perdoa menos
+# - **Linhas que cruzam** → o efeito inverte dependendo do perfil — por exemplo,
+#   clientes antigos são mais tolerantes sem problema, mas mais críticos quando há atraso
+
+# %%
+# Tabela de suporte: NPS médio e contagem por célula
+interacao_tabela = (
+    df.groupby(["perfil_degradacao", "faixa_tenure"], observed=True)["nps_score"]
+    .agg(nps_medio="mean", n="count")
+    .round(2)
+    .reset_index()
+)
+interacao_tabela
+
+# %% [markdown]
 # ---
+# ## Hipótese 1 — Ticket alto protege contra o atraso?
 #
-# ### Hipótese 2 — Expectativa de prazo vs. realidade
+# O valor do pedido não tem correlação direta com o NPS, mas pode moderar o efeito
+# do atraso. Clientes que investiram mais numa compra perdoam mais — ou exigem mais?
 #
-# Se o cliente foi prometido 5 dias e recebeu em 8, ele provavelmente vira detrator.
-# Mas se foi prometido 8 dias e recebeu em 8, ele continuaria detrator?
-#
-# A ideia é que o `delivery_delay_days` (dias de atraso em relação ao prometido) pode
-# ser mais determinante para o NPS do que o `delivery_time_days` (tempo total de entrega).
-# Um cliente que espera mais, mas recebe dentro do prazo, pode ter uma experiência melhor
-# do que um cliente que espera menos mas foi surpreendido pelo atraso.
-#
-# **O que analisar:** comparar o peso de `delivery_delay_days` vs `delivery_time_days`
-# sobre o NPS — já temos correlações distintas entre os dois no heatmap.
-#
+# Dividimos `order_value` em tercis para comparar como o NPS cai com o atraso
+# em cada faixa de ticket.
+
+# %%
+df["faixa_ticket"] = pd.qcut(
+    df["order_value"],
+    q=3,
+    labels=["Ticket Baixo", "Ticket Médio", "Ticket Alto"],
+)
+
+h1 = (
+    df.groupby(["faixa_ticket", "teve_atraso"], observed=True)["nps_score"]
+    .mean()
+    .round(2)
+    .reset_index()
+)
+h1["teve_atraso"] = h1["teve_atraso"].map({True: "Com Atraso", False: "Sem Atraso"})
+
+fig = px.line(
+    h1,
+    x="faixa_ticket",
+    y="nps_score",
+    color="teve_atraso",
+    color_discrete_map={"Com Atraso": "#ef4444", "Sem Atraso": "#0284c7"},
+    markers=True,
+    text="nps_score",
+    title="H1 — NPS Médio por Faixa de Ticket × Atraso na Entrega",
+    labels={"faixa_ticket": "Faixa de Ticket", "nps_score": "NPS Médio", "teve_atraso": ""},
+)
+fig.update_traces(line_width=2.5, marker_size=10, textposition="top center")
+fig.update_layout(title_x=0.5, height=430, yaxis_range=[0, 10])
+fig.show()
+
+# %% [markdown]
+# **Como ler:** se as linhas convergirem em tickets mais altos — a distância entre
+# "Com Atraso" e "Sem Atraso" encolhe — clientes de alto valor são mais tolerantes.
+# Se divergirem, são mais exigentes. Se forem paralelas, o ticket não modera o efeito.
+
+# %% [markdown]
 # ---
+# ## Hipótese 2 — Quebra de prazo importa mais que tempo total de entrega?
 #
-# ### Hipótese 3 — Frete e desconto como amortecedores da insatisfação
+# O heatmap já mostrou que `delivery_delay_days` (-0.60) pesa muito mais no NPS
+# do que `delivery_time_days` (-0.38). A hipótese é que o cliente avalia se a empresa
+# cumpriu o que prometeu — não quanto tempo ele esperou.
 #
-# Um frete mais baixo ou um desconto maior na compra reduz a sensibilidade do cliente
-# às variáveis que degradam a experiência? Ou seja — se eu compensei o cliente no bolso,
-# ele tende a tolerar mais um atraso ou um problema no atendimento?
+# Para testar isso: para cada faixa de tempo de entrega, comparamos o NPS médio
+# de quem recebeu no prazo vs quem recebeu com atraso.
+# Se um cliente que esperou mais mas recebeu no prazo tem NPS melhor do que
+# um que esperou menos mas sofreu atraso, a hipótese se confirma.
+
+# %%
+df["entregou_no_prazo"] = df["delivery_delay_days"] <= 0
+
+df["faixa_tempo"] = pd.qcut(
+    df["delivery_time_days"],
+    q=4,
+    labels=["1º quartil", "2º quartil", "3º quartil", "4º quartil"],
+)
+
+h2 = (
+    df.groupby(["faixa_tempo", "entregou_no_prazo"], observed=True)["nps_score"]
+    .mean()
+    .round(2)
+    .reset_index()
+)
+h2["entregou_no_prazo"] = h2["entregou_no_prazo"].map({True: "No Prazo", False: "Atrasado"})
+
+fig = px.line(
+    h2,
+    x="faixa_tempo",
+    y="nps_score",
+    color="entregou_no_prazo",
+    color_discrete_map={"No Prazo": "#0284c7", "Atrasado": "#ef4444"},
+    markers=True,
+    text="nps_score",
+    title="H2 — NPS por Quartil de Tempo de Entrega × Cumprimento do Prazo",
+    labels={
+        "faixa_tempo": "Faixa de Tempo de Entrega",
+        "nps_score": "NPS Médio",
+        "entregou_no_prazo": "",
+    },
+)
+fig.update_traces(line_width=2.5, marker_size=10, textposition="top center")
+fig.update_layout(title_x=0.5, height=430, yaxis_range=[0, 10])
+fig.show()
+
+# %% [markdown]
+# **Como ler:** se a linha "No Prazo" se mantiver consistentemente acima da linha
+# "Atrasado" em todos os quartis — inclusive nos quartis de entrega mais lenta —
+# confirma que **cumprir o prazo prometido importa mais do que entregar rápido**.
+
+# %% [markdown]
+# ---
+# ## Hipótese 3 — Frete baixo e desconto amortecem a insatisfação?
 #
-# **O que analisar:** cruzar `freight_value` e `discount_value` com `delivery_delay_days`
-# e `nps_categoria` — ver se clientes com frete baixo ou desconto alto que sofreram
-# atraso têm NPS melhor do que clientes sem essas compensações.
+# Quando o cliente já sofreu atraso, um frete mais barato ou um desconto maior
+# ameniza o impacto no NPS? Testamos isso filtrando apenas os clientes com atraso
+# e cruzando faixa de frete × presença de desconto.
+
+# %%
+frete_mediana = df["freight_value"].median()
+desconto_mediana = df["discount_value"].median()
+df["frete_baixo"] = df["freight_value"] <= frete_mediana
+df["desconto_alto"] = df["discount_value"] > desconto_mediana
+
+ordem_h3 = [
+    "Frete Baixo\nDesconto Baixo",
+    "Frete Baixo\nDesconto Alto",
+    "Frete Alto\nDesconto Baixo",
+    "Frete Alto\nDesconto Alto",
+]
+
+df_atr = df[df["teve_atraso"]].copy()
+df_atr["perfil_financeiro"] = df_atr.apply(
+    lambda r: (
+        ("Frete Baixo" if r["frete_baixo"] else "Frete Alto")
+        + "\n"
+        + ("Desconto Alto" if r["desconto_alto"] else "Desconto Baixo")
+    ),
+    axis=1,
+)
+
+h3 = (
+    df_atr.groupby("perfil_financeiro")["nps_score"]
+    .agg(nps_medio="mean", n="count")
+    .round(2)
+    .reindex(ordem_h3)
+    .reset_index()
+)
+h3["label"] = h3["nps_medio"].astype(str) + "\n(n=" + h3["n"].astype(str) + ")"
+
+fig = px.bar(
+    h3,
+    x="perfil_financeiro",
+    y="nps_medio",
+    text="label",
+    title="H3 — NPS Médio entre Clientes com Atraso: Frete × Desconto",
+    labels={"perfil_financeiro": "", "nps_medio": "NPS Médio"},
+    color="nps_medio",
+    color_continuous_scale=["#ef4444", "#f97316", "#0284c7"],
+    color_continuous_midpoint=df_atr["nps_score"].mean(),
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(
+    title_x=0.5,
+    height=430,
+    yaxis_range=[0, 10],
+    coloraxis_showscale=False,
+)
+fig.show()
+
+# %% [markdown]
+# **Como ler:** se clientes com frete baixo ou com desconto tiverem NPS
+# consistentemente maior dentro do grupo de atrasados, frete e desconto funcionam
+# como amortecedores. Se os valores forem parecidos entre os grupos, a compensação
+# financeira não é suficiente para recuperar a satisfação perdida pelo atraso.
+
+# %% [markdown]
+# ---
+# ## Percepção vs. Comportamento — Recompra e CSAT por Perfil de Degradação
+#
+# Até aqui medimos **percepção** (NPS). Agora checamos se o **comportamento real**
+# (recompra em 30 dias) e o **indicador interno** (CSAT) contam a mesma história.
+#
+# A pergunta central: um cliente do perfil "Atraso + SAC" ainda volta a comprar?
+# Se sim, isso revela algo importante — dependência do produto, falta de alternativa,
+# ou uma operação ruim que não derruba a preferência pela marca.
+
+# %%
+recompra = (
+    df.groupby("perfil_degradacao", observed=True)["repeat_purchase_30d"]
+    .mean()
+    .mul(100)
+    .round(1)
+    .reset_index()
+)
+recompra.columns = ["perfil_degradacao", "pct_recompra"]
+recompra["label"] = recompra["pct_recompra"].astype(str) + "%"
+
+fig = px.bar(
+    recompra,
+    x="perfil_degradacao",
+    y="pct_recompra",
+    color="perfil_degradacao",
+    color_discrete_map=cores_degradacao,
+    text="label",
+    title="% de Recompra em 30 dias por Perfil de Degradação",
+    labels={"perfil_degradacao": "Perfil", "pct_recompra": "% Recompra"},
+    category_orders={"perfil_degradacao": ordem_degradacao},
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, height=420, yaxis_range=[0, 100])
+fig.show()
+
+# %%
+recompra_nps = (
+    df.groupby("nps_categoria", observed=True)["repeat_purchase_30d"]
+    .mean()
+    .mul(100)
+    .round(1)
+    .reindex(categorias)
+    .reset_index()
+)
+recompra_nps.columns = ["nps_categoria", "pct_recompra"]
+recompra_nps["label"] = recompra_nps["pct_recompra"].astype(str) + "%"
+
+fig = px.bar(
+    recompra_nps,
+    x="nps_categoria",
+    y="pct_recompra",
+    color="nps_categoria",
+    color_discrete_map=cores,
+    text="label",
+    title="% de Recompra em 30 dias por Categoria NPS",
+    labels={"nps_categoria": "Categoria NPS", "pct_recompra": "% Recompra"},
+    category_orders={"nps_categoria": categorias},
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, height=420, yaxis_range=[0, 100])
+fig.show()
+
+# %% [markdown]
+# ### NPS vs CSAT interno — os dois indicadores concordam?
+
+# %%
+comparacao = (
+    df.groupby("perfil_degradacao", observed=True)
+    .agg(nps_medio=("nps_score", "mean"), csat_medio=("csat_internal_score", "mean"))
+    .round(2)
+    .reset_index()
+)
+
+fig = make_subplots(
+    rows=1,
+    cols=2,
+    subplot_titles=["NPS Médio", "CSAT Interno Médio"],
+    shared_yaxes=False,
+)
+
+for col_idx, (col, title) in enumerate(
+    [("nps_medio", "NPS Médio"), ("csat_medio", "CSAT Interno Médio")], start=1
+):
+    for _, row in comparacao.iterrows():
+        fig.add_trace(
+            go.Bar(
+                x=[row["perfil_degradacao"]],
+                y=[row[col]],
+                marker_color=cores_degradacao[row["perfil_degradacao"]],
+                text=[str(row[col])],
+                textposition="outside",
+                showlegend=False,
+            ),
+            row=1,
+            col=col_idx,
+        )
+
+fig.update_layout(
+    title="Percepção do Cliente: NPS vs CSAT por Perfil de Degradação",
+    title_x=0.5,
+    height=450,
+    barmode="group",
+)
+fig.update_xaxes(categoryorder="array", categoryarray=ordem_degradacao)
+fig.show()
+
+# %% [markdown]
+# ### Conclusão — Percepção vs. Comportamento
+#
+# Esta análise fecha o ciclo da EDA cruzando o que o cliente **diz** (NPS e CSAT)
+# com o que ele **faz** (recompra).
+#
+# Três leituras possíveis para o perfil "Atraso + SAC":
+#
+# - **Recompra cai junto com o NPS** → experiência ruim afasta o cliente de forma
+#   consistente — percepção e comportamento estão alinhados
+# - **Recompra se mantém mesmo com NPS baixo** → o cliente está insatisfeito mas
+#   continua comprando; pode indicar dependência do produto, falta de concorrência
+#   ou que a barreira de troca ainda é alta — insight relevante para a estratégia
+#   de retenção
+# - **NPS e CSAT divergem** → o indicador interno não está capturando a insatisfação
+#   real do cliente; risco de tomada de decisão com dados enganosos
+
+# %% [markdown]
+# ---
+# ## Região vs. Perfil de Degradação — O problema logístico é regional?
+#
+# A análise individual mostrou que `customer_region` não tem efeito direto sobre o NPS
+# — variação de apenas 0.28 pontos entre regiões. Mas essa leitura pode estar escondendo
+# um mecanismo indireto: **certas regiões podem concentrar mais atrasos**, e são esses
+# atrasos que derrubam o NPS, não a região em si.
+#
+# Se Norte e Nordeste, por exemplo, tiverem proporcionalmente mais clientes no perfil
+# "Atraso + SAC" do que Sul e Sudeste, o problema é **logístico-regional** — acionável
+# para o time de operações com rotas e SLAs específicos por geografia.
+
+# %%
+dist_regional = (
+    df.groupby(["customer_region", "perfil_degradacao"], observed=True)
+    .size()
+    .unstack(fill_value=0)
+    .reindex(columns=ordem_degradacao)
+)
+dist_regional_pct = dist_regional.div(dist_regional.sum(axis=1), axis=0).mul(100).round(1)
+
+fig = go.Figure()
+cores_deg_lista = [cores_degradacao[p] for p in ordem_degradacao]
+for perfil, cor in zip(ordem_degradacao, cores_deg_lista):
+    fig.add_trace(
+        go.Bar(
+            name=perfil,
+            x=dist_regional_pct.index.tolist(),
+            y=dist_regional_pct[perfil].tolist(),
+            marker_color=cor,
+            text=(dist_regional_pct[perfil].astype(str) + "%").tolist(),
+            textposition="inside",
+        )
+    )
+
+fig.update_layout(
+    barmode="stack",
+    title="Distribuição de Perfis de Degradação por Região",
+    title_x=0.5,
+    yaxis_title="% de Clientes",
+    xaxis_title="Região",
+    height=450,
+    legend_title="Perfil",
+)
+fig.show()
+
+# %% [markdown]
+# ### Severidade do atraso por região
+
+# %%
+atraso_regional = (
+    df.groupby("customer_region")
+    .agg(
+        pct_com_atraso=("teve_atraso", lambda x: x.mean() * 100),
+        atraso_medio_dias=("delivery_delay_days", "mean"),
+        nps_medio=("nps_score", "mean"),
+    )
+    .round(2)
+    .reset_index()
+    .sort_values("pct_com_atraso", ascending=False)
+)
+
+fig = make_subplots(
+    rows=1,
+    cols=2,
+    subplot_titles=["% de Clientes com Atraso", "Atraso Médio (dias)"],
+)
+
+for col_idx, col in enumerate(["pct_com_atraso", "atraso_medio_dias"], start=1):
+    fig.add_trace(
+        go.Bar(
+            x=atraso_regional["customer_region"],
+            y=atraso_regional[col],
+            text=atraso_regional[col].astype(str),
+            textposition="outside",
+            marker_color="#ef4444",
+            showlegend=False,
+        ),
+        row=1,
+        col=col_idx,
+    )
+
+fig.update_layout(title="Severidade do Atraso por Região", title_x=0.5, height=420)
+fig.show()
+
+# %%
+atraso_regional
+
+# %% [markdown]
+# ### Conclusão — Diagnóstico Regional
+#
+# Esta análise separa dois mecanismos que a leitura direta de NPS por região mistura:
+#
+# - **Se regiões com NPS mais baixo também concentram mais perfis "Atraso + SAC":**
+#   o problema não é regional no sentido demográfico — é logístico. O time de
+#   operações pode agir com SLAs diferenciados, rotas prioritárias ou comunicação
+#   proativa de prazo para as regiões mais expostas ao atraso
+#
+# - **Se a distribuição de perfis for homogênea entre regiões:** a logística falha
+#   igualmente em todo o Brasil, e o foco deve ser sistêmico — não regionalizado
+#
+# Em ambos os casos, o achado é acionável: ou prioriza-se uma região, ou
+# confirma-se que o problema é de processo e não de geografia.
+
+# %% [markdown]
+# ---
+# ## Verificação de Mediação — Atraso causa contato com o SAC?
+#
+# A conclusão dos perfis de degradação afirmou que "o SAC, na maioria dos casos,
+# é acionado como consequência do atraso". Antes de virar narrativa final,
+# vale checar com números: clientes que sofreram atraso têm proporção
+# significativamente maior de contato com o SAC do que os que não sofreram?
+#
+# Se sim, a hipótese de cascata se confirma. Se não, a frase precisa ser suavizada.
+
+# %%
+mediacao = (
+    df.groupby("teve_atraso")
+    .agg(
+        pct_contatou_sac=("customer_service_contacts", lambda x: (x > 0).mean() * 100),
+        media_contatos=("customer_service_contacts", "mean"),
+        pct_reclamou=("complaints_count", lambda x: (x > 0).mean() * 100),
+        media_reclamacoes=("complaints_count", "mean"),
+        n=("nps_score", "count"),
+    )
+    .round(2)
+    .reset_index()
+)
+mediacao["teve_atraso"] = mediacao["teve_atraso"].map({True: "Com Atraso", False: "Sem Atraso"})
+
+fig = make_subplots(
+    rows=1,
+    cols=2,
+    subplot_titles=["% que Contatou o SAC", "% que Registrou Reclamação"],
+)
+
+for col_idx, col in enumerate(["pct_contatou_sac", "pct_reclamou"], start=1):
+    fig.add_trace(
+        go.Bar(
+            x=mediacao["teve_atraso"],
+            y=mediacao[col],
+            text=(mediacao[col].astype(str) + "%"),
+            textposition="outside",
+            marker_color=["#0284c7", "#ef4444"],
+            showlegend=False,
+        ),
+        row=1,
+        col=col_idx,
+    )
+
+fig.update_layout(
+    title="Mediação: Clientes com Atraso Acionam Mais o SAC?",
+    title_x=0.5,
+    height=420,
+    yaxis_range=[0, 100],
+    yaxis2_range=[0, 100],
+)
+fig.show()
+
+# %%
+sac_por_nps = (
+    df.groupby(["nps_categoria", "teve_atraso"], observed=True)
+    .agg(
+        pct_contatou_sac=("customer_service_contacts", lambda x: (x > 0).mean() * 100),
+        pct_reclamou=("complaints_count", lambda x: (x > 0).mean() * 100),
+    )
+    .round(1)
+    .reset_index()
+)
+sac_por_nps["teve_atraso"] = sac_por_nps["teve_atraso"].map(
+    {True: "Com Atraso", False: "Sem Atraso"}
+)
+sac_por_nps["grupo"] = (
+    sac_por_nps["nps_categoria"].astype(str) + " / " + sac_por_nps["teve_atraso"]
+)
+
+ordem_grupos_sac = [f"{cat} / {atr}" for cat in categorias for atr in ["Sem Atraso", "Com Atraso"]]
+cores_grupos_sac = {f"{cat} / Sem Atraso": cores[cat] for cat in categorias} | {
+    f"{cat} / Com Atraso": cores[cat] for cat in categorias
+}
+
+fig = make_subplots(
+    rows=1,
+    cols=2,
+    subplot_titles=["% que Contatou o SAC", "% que Registrou Reclamação"],
+)
+
+for col_idx, col in enumerate(["pct_contatou_sac", "pct_reclamou"], start=1):
+    for atraso, pattern in [("Sem Atraso", ""), ("Com Atraso", "/")]:
+        subset = sac_por_nps[sac_por_nps["teve_atraso"] == atraso]
+        fig.add_trace(
+            go.Bar(
+                name=atraso,
+                x=subset["nps_categoria"],
+                y=subset[col],
+                text=(subset[col].astype(str) + "%"),
+                textposition="outside",
+                marker_color=[cores[c] for c in subset["nps_categoria"]],
+                marker_pattern_shape=pattern,
+                showlegend=(col_idx == 1),
+            ),
+            row=1,
+            col=col_idx,
+        )
+
+fig.update_layout(
+    barmode="group",
+    title="Contato com SAC e Reclamações por Categoria NPS × Atraso",
+    title_x=0.5,
+    height=450,
+    yaxis_range=[0, 100],
+    yaxis2_range=[0, 100],
+    legend_title="",
+)
+fig.show()
+
+# %%
+mediacao
+
+# %% [markdown]
+# **Interpretação:** se a diferença entre "Com Atraso" e "Sem Atraso" for grande
+# (ex: 60% vs 20% de contato ao SAC), a afirmação de cascata está sustentada pelos
+# dados. Se a diferença for pequena, o contato ao SAC tem causas independentes do
+# atraso e a narrativa precisa ser ajustada.
+
+# %% [markdown]
+# ---
+# ## Tentativas de Entrega — Modo de Falha Independente?
+#
+# `delivery_attempts` é o único indicador logístico que não foi cruzado dentro
+# do perfil de degradação. A pergunta é: existem clientes com múltiplas tentativas
+# de entrega **mas sem atraso**? Se sim, isso é um terceiro tipo de problema
+# operacional — distinto do atraso em prazo.
+#
+# - **Atraso** → problema de transportadora, rota ou capacidade
+# - **Múltiplas tentativas sem atraso** → problema de cadastro, endereço ou
+#   comunicação com o cliente; a encomenda chega no prazo mas não encontra o destinatário
+#
+# A causa raiz e a ação corretiva são completamente diferentes.
+
+# %%
+limiar_tentativas = df["delivery_attempts"].median()
+
+df["muitas_tentativas"] = df["delivery_attempts"] > limiar_tentativas
+
+ordem_quadrantes = [
+    "Sem Atraso\nPoucas Tentativas",
+    "Sem Atraso\nMuitas Tentativas",
+    "Com Atraso\nPoucas Tentativas",
+    "Com Atraso\nMuitas Tentativas",
+]
+
+df["quadrante_entrega"] = df.apply(
+    lambda r: (
+        ("Com Atraso" if r["teve_atraso"] else "Sem Atraso")
+        + "\n"
+        + ("Muitas Tentativas" if r["muitas_tentativas"] else "Poucas Tentativas")
+    ),
+    axis=1,
+)
+
+quadrantes = (
+    df.groupby("quadrante_entrega")["nps_score"]
+    .agg(nps_medio="mean", n="count")
+    .round(2)
+    .reindex(ordem_quadrantes)
+    .reset_index()
+)
+quadrantes["label"] = (
+    quadrantes["nps_medio"].astype(str) + "\n(n=" + quadrantes["n"].astype(str) + ")"
+)
+
+cores_quadrantes = {
+    "Sem Atraso\nPoucas Tentativas": "#0284c7",
+    "Sem Atraso\nMuitas Tentativas": "#f97316",
+    "Com Atraso\nPoucas Tentativas": "#f97316",
+    "Com Atraso\nMuitas Tentativas": "#ef4444",
+}
+
+fig = px.bar(
+    quadrantes,
+    x="quadrante_entrega",
+    y="nps_medio",
+    color="quadrante_entrega",
+    color_discrete_map=cores_quadrantes,
+    text="label",
+    title="Tentativas de Entrega × Atraso — NPS por Quadrante",
+    labels={"quadrante_entrega": "", "nps_medio": "NPS Médio"},
+    category_orders={"quadrante_entrega": ordem_quadrantes},
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, height=440, yaxis_range=[0, 10])
+fig.show()
+
+# %% [markdown]
+# **Interpretação:** o quadrante crítico é "Sem Atraso + Muitas Tentativas".
+# Se esse grupo tiver NPS relevantemente baixo e n significativo, confirma-se
+# que múltiplas tentativas de entrega são um modo de falha **independente** do atraso —
+# com causa raiz diferente (cadastro/comunicação) e ação corretiva diferente
+# (melhoria no processo de confirmação de endereço e aviso ao cliente antes da entrega).
+
+# %% [markdown]
+# ---
+# ## Tempo de Resolução dentro do Perfil "Atraso + SAC"
+#
+# `resolution_time_days` foi o sinal mais fraco do grupo Atendimento (-0.19).
+# Mas a pergunta mais precisa é: **dentro do grupo que já está no pior cenário**
+# (atraso + acionou o SAC), o tempo de resolução ainda diferencia o NPS?
+#
+# Se sim → resolver rápido ainda salva parte da experiência mesmo no pior caso
+# Se não → o dano já está feito antes de qualquer resolução; a prioridade é
+# prevenir o atraso, não acelerar o SAC
+
+# %%
+df_atraso_sac = df[df["perfil_degradacao"] == "Atraso + SAC"].copy()
+
+df_atraso_sac["faixa_resolucao"] = pd.qcut(
+    df_atraso_sac["resolution_time_days"],
+    q=4,
+    labels=["Muito Rápido", "Rápido", "Lento", "Muito Lento"],
+    duplicates="drop",
+)
+
+resolucao = (
+    df_atraso_sac.groupby("faixa_resolucao", observed=True)["nps_score"]
+    .agg(nps_medio="mean", n="count")
+    .round(2)
+    .reset_index()
+)
+resolucao["label"] = (
+    resolucao["nps_medio"].astype(str) + "\n(n=" + resolucao["n"].astype(str) + ")"
+)
+
+fig = px.bar(
+    resolucao,
+    x="faixa_resolucao",
+    y="nps_medio",
+    text="label",
+    title='Tempo de Resolução vs NPS — apenas perfil "Atraso + SAC"',
+    labels={"faixa_resolucao": "Velocidade de Resolução", "nps_medio": "NPS Médio"},
+    color="nps_medio",
+    color_continuous_scale=["#ef4444", "#f97316", "#0284c7"],
+    color_continuous_midpoint=df_atraso_sac["nps_score"].mean(),
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(
+    title_x=0.5,
+    height=430,
+    yaxis_range=[0, 10],
+    coloraxis_showscale=False,
+)
+fig.show()
+
+# %% [markdown]
+# **Interpretação:** se as barras forem aproximadamente planas — sem diferença
+# relevante entre "Muito Rápido" e "Muito Lento" — o NPS já estava comprometido
+# antes do atendimento, e o tempo de resolução não recupera a experiência.
+# Isso fecha com elegância a hipótese de cascata: **o ponto de intervenção eficaz
+# é o atraso, não a velocidade do SAC**.
