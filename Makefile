@@ -94,13 +94,22 @@ create_environment:
 ## Serve documentation locally at http://127.0.0.1:8000
 .PHONY: docs
 docs:
-	cd docs && poetry run mkdocs serve
-
+	cd docs && poetry run mkdocs serve -a 0.0.0.0:8000
 
 ## Make dataset
 .PHONY: data
 data: requirements
 	$(PYTHON_INTERPRETER) tech_challenge_fiap/dataset.py
+
+## Convert notebooks/dados.ipynb → notebooks/dados.py (percent format)
+.PHONY: nb2py
+nb2py:
+	poetry run jupytext --to py:percent notebooks/dados.ipynb -o notebooks/dados.py
+
+## Convert notebooks/dados.py → notebooks/dados.ipynb
+.PHONY: py2nb
+py2nb:
+	poetry run jupytext --to ipynb notebooks/dados.py -o notebooks/dados.ipynb
 
 
 #################################################################################

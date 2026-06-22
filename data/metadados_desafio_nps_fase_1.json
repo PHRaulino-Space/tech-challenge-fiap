@@ -3,114 +3,133 @@
         "descricao": "Identificador único do cliente.",
         "grupo": "Cliente",
         "tipo": "qualitativa",
-        "natureza": "nominal"
+        "natureza": "nominal",
+        "ordem_jornada": 1
     },
     "customer_age": {
         "descricao": "Idade do cliente em anos.",
         "grupo": "Cliente",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 2
     },
     "customer_region": {
         "descricao": "Região geográfica do cliente no Brasil (Norte, Nordeste, Centro-Oeste, Sudeste, Sul).",
         "grupo": "Cliente",
         "tipo": "qualitativa",
-        "natureza": "nominal"
+        "natureza": "nominal",
+        "ordem_jornada": 3
     },
     "customer_tenure_months": {
         "descricao": "Tempo de relacionamento do cliente com a plataforma, em meses.",
         "grupo": "Cliente",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 4
     },
     "order_id": {
         "descricao": "Identificador único do pedido.",
         "grupo": "Pedido",
         "tipo": "qualitativa",
-        "natureza": "nominal"
+        "natureza": "nominal",
+        "ordem_jornada": 5
     },
     "order_value": {
         "descricao": "Valor total do pedido em reais (R$), antes de descontos.",
         "grupo": "Pedido",
         "tipo": "quantitativa",
-        "natureza": "contínua"
+        "natureza": "contínua",
+        "ordem_jornada": 6
     },
     "items_quantity": {
         "descricao": "Quantidade de itens incluídos no pedido.",
         "grupo": "Pedido",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 7
     },
     "discount_value": {
         "descricao": "Valor monetário do desconto aplicado ao pedido, em reais (R$).",
         "grupo": "Pedido",
         "tipo": "quantitativa",
-        "natureza": "contínua"
+        "natureza": "contínua",
+        "ordem_jornada": 8
     },
     "payment_installments": {
         "descricao": "Número de parcelas escolhidas pelo cliente no pagamento.",
         "grupo": "Pedido",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 9
     },
     "delivery_time_days": {
         "descricao": "Tempo total de entrega do pedido, em dias corridos.",
         "grupo": "Logística",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 10
     },
     "delivery_delay_days": {
         "descricao": "Número de dias de atraso em relação à data prometida. Zero indica entrega no prazo.",
         "grupo": "Logística",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 11
     },
     "freight_value": {
         "descricao": "Valor cobrado pelo frete, em reais (R$).",
         "grupo": "Logística",
         "tipo": "quantitativa",
-        "natureza": "contínua"
+        "natureza": "contínua",
+        "ordem_jornada": 12
     },
     "delivery_attempts": {
         "descricao": "Número de tentativas do transportador para concluir a entrega.",
         "grupo": "Logística",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 13
     },
     "customer_service_contacts": {
         "descricao": "Número de contatos do cliente com o SAC referentes ao pedido.",
         "grupo": "Atendimento",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 14
     },
     "resolution_time_days": {
         "descricao": "Tempo em dias para resolução do problema reportado pelo cliente.",
         "grupo": "Atendimento",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 15
     },
     "complaints_count": {
         "descricao": "Número de reclamações formais registradas pelo cliente.",
         "grupo": "Atendimento",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 16
     },
     "nps_score": {
         "descricao": "Net Promoter Score após a experiência de compra. Escala 0–10 (detratores: 0–6, neutros: 7–8, promotores: 9–10).",
         "grupo": "Satisfação",
         "tipo": "qualitativa",
-        "natureza": "ordinal"
+        "natureza": "ordinal",
+        "ordem_jornada": 17
     },
     "repeat_purchase_30d": {
         "descricao": "Se o cliente realizou nova compra nos 30 dias seguintes. Binário: 1=sim, 0=não.",
         "grupo": "Satisfação",
         "tipo": "quantitativa",
-        "natureza": "discreta"
+        "natureza": "discreta",
+        "ordem_jornada": 18
     },
     "csat_internal_score": {
         "descricao": "Customer Satisfaction Score interno pós-atendimento/entrega. Escala 0–10.",
         "grupo": "Satisfação",
         "tipo": "qualitativa",
-        "natureza": "ordinal"
+        "natureza": "ordinal",
+        "ordem_jornada": 19
     }
 }

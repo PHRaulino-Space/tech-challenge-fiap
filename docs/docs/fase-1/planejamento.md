@@ -18,31 +18,34 @@ Business Understanding → Data Understanding → Data Preparation
 
 ## Etapas do Projeto
 
-### 1. Business Canvas
+### 1. Problema de Negócio
 *CRISP-DM: Business Understanding*
 
-**Objetivo:** Estruturar o entendimento do negócio de forma visual e consolidada antes de qualquer análise de dados.
+**Objetivo:** Definir com clareza o problema que está sendo resolvido, a variável-alvo e o impacto esperado para o negócio — antes de qualquer análise técnica.
 
-O Business Model Canvas será utilizado para mapear o contexto do e-commerce, os problemas centrais, os stakeholders envolvidos e o valor que a análise de NPS pode gerar para cada área do negócio (logística, atendimento, produto, estratégia).
+Esta etapa responde às perguntas fundamentais do desafio:
 
-**Resultado esperado:** Canvas preenchido servindo de base para as reflexões e a narrativa da apresentação.
+- Qual problema de negócio está sendo resolvido?
+- Por que o NPS é importante para um e-commerce?
+- Quais áreas se beneficiam dos insights (logística, atendimento, produto, marketing)?
+- Como o NPS impacta recompra, boca a boca e market share?
+
+> A análise se restringe ao que o case e o dataset permitem inferir. Quando algo não estiver explícito, é tratado como hipótese ou limitação — não como fato.
+
+**Resultado esperado:** Definição do problema documentada, com variável-alvo identificada e impacto de negócio descrito.
 
 ---
 
-### 2. Reflexões do Desafio
+### 2. Business Canvas
 *CRISP-DM: Business Understanding*
 
-**Objetivo:** Responder às perguntas de negócio propostas no desafio com raciocínio crítico e orientado a resultado.
+**Objetivo:** Estruturar o entendimento do negócio de forma visual e consolidada.
 
-Com o Canvas como apoio, serão desenvolvidas as reflexões sobre:
+O Business Model Canvas mapeia o contexto do e-commerce, os problemas centrais, os stakeholders e o valor que a análise de NPS pode gerar para cada área do negócio.
 
-- Qual problema de negócio está sendo resolvido
-- Por que o NPS é importante para o e-commerce
-- Quais áreas se beneficiam dos insights
-- Como o NPS impacta recompra, boca a boca e market share
-- Qual variável representa a satisfação do cliente e por que ela foi escolhida
+> O canvas é preenchido apenas com o que o case e o dataset permitem inferir. Lacunas são registradas explicitamente como hipóteses ou limitações da análise — esse cuidado é esperado e valorizado na avaliação.
 
-**Resultado esperado:** Linha de raciocínio documentada, pronta para compor o relatório e os slides.
+**Resultado esperado:** Canvas preenchido servindo de base para as reflexões e a narrativa da apresentação.
 
 ---
 
@@ -62,16 +65,15 @@ Esta etapa inclui a leitura do dicionário de dados, inspeção inicial da base 
 
 **Objetivo:** Explorar os dados com foco em negócio, respondendo às perguntas do desafio com visualizações e estatísticas.
 
-A EDA buscará identificar:
+A EDA busca identificar fatores críticos para a satisfação do cliente, pontos de ruptura na experiência e perfis com NPS mais alto ou mais baixo. A análise é conduzida em notebooks Python e documentada de forma acessível para um público não técnico.
 
-- Fatores mais críticos para a satisfação do cliente
-- O que mais gera detratores
-- Pontos de ruptura na experiência do cliente
-- Perfis de clientes com NPS mais alto ou mais baixo
+Para cada visualização, são respondidas três perguntas:
 
-A análise será conduzida em notebooks Python e documentada de forma acessível para um público não técnico.
+- O que esse gráfico mostra?
+- Por que isso importa para o negócio?
+- Qual decisão ou investigação ele sugere?
 
-**Resultado esperado:** Notebook com análise completa e visualizações prontas para uso na apresentação.
+**Resultado esperado:** Notebook com análise completa, visualizações prontas para a apresentação e principais achados documentados.
 
 ---
 
@@ -80,12 +82,7 @@ A análise será conduzida em notebooks Python e documentada de forma acessível
 
 **Objetivo:** Preparar a base de dados para modelagem, garantindo qualidade e consistência das variáveis.
 
-Esta etapa contempla:
-
-- Tratamento de valores ausentes e outliers
-- Transformações e normalização de variáveis
-- Engenharia de features relevantes para o modelo
-- Definição e separação dos conjuntos de treino e teste
+Esta etapa contempla tratamento de valores ausentes e outliers, transformações e normalização, engenharia de features e separação dos conjuntos de treino e teste.
 
 **Resultado esperado:** Dataset limpo e pipeline de preparação documentado, pronto para alimentar o modelo.
 
@@ -94,30 +91,29 @@ Esta etapa contempla:
 ### 6. Proposta de Solução
 *CRISP-DM: Modeling*
 
-**Objetivo:** Avaliar a viabilidade de um modelo preditivo de NPS e, se aplicável, propor e implementar uma solução.
+**Objetivo:** Propor e implementar um modelo preditivo de NPS a partir dos insights da EDA.
 
-A partir dos insights da EDA, será avaliado se faz sentido construir um modelo preditivo (regressão ou classificação) e descrita a estratégia adotada: definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação.
+A estratégia inclui definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação. A abordagem pode ser regressão (prever o score) ou classificação (prever a categoria: Detrator, Neutro, Promotor).
 
-> Esta etapa é opcional conforme o enunciado do desafio, mas será desenvolvida se os dados e o tempo permitirem.
-
-**Resultado esperado:** Proposta documentada e, se implementada, pipeline de modelo em Python.
+**Resultado esperado:** Pipeline de modelo implementado em Python com resultados documentados.
 
 ---
 
 ### 7. Avaliação dos Resultados
 *CRISP-DM: Evaluation*
 
-**Objetivo:** Verificar se os resultados — analíticos e/ou do modelo — respondem ao objetivo de negócio antes de seguir para a apresentação.
+**Objetivo:** Verificar se os resultados respondem ao objetivo de negócio e documentar limitações.
 
-Esta etapa revisita o entendimento do negócio definido nas etapas 1 e 2 para responder:
+Esta etapa revisita o problema definido nas etapas 1 e 2 para responder:
 
 - Os insights da EDA respondem às perguntas do desafio?
-- O modelo (se implementado) performa de forma satisfatória e faz sentido para o negócio?
-- Há limitações ou riscos que precisam ser comunicados?
+- O modelo performa de forma satisfatória e faz sentido para o negócio?
+- Quais são as limitações da análise e os riscos a comunicar?
+- Quais recomendações concretas podem ser feitas para as áreas envolvidas (logística, atendimento, produto, pricing)?
 
-Se necessário, esta fase pode indicar um retorno a etapas anteriores para refinamento.
+Se necessário, esta fase pode indicar retorno a etapas anteriores para refinamento.
 
-**Resultado esperado:** Validação dos resultados com registro das limitações e dos riscos da análise.
+**Resultado esperado:** Validação dos resultados com registro das limitações, riscos e recomendações finais para o negócio.
 
 ---
 
@@ -126,10 +122,19 @@ Se necessário, esta fase pode indicar um retorno a etapas anteriores para refin
 
 **Objetivo:** Consolidar todos os insumos em uma apresentação executiva e no vídeo de até 5 minutos.
 
-Com os resultados validados, serão montados:
+Com os resultados validados, serão entregues:
 
-- **Slides** com storytelling gerencial voltado para público não técnico
-- **Vídeo executivo** de até 5 minutos apresentando o problema, os insights e as recomendações
+- **Slides** em HTML (Reveal.js) hospedados no GitHub Pages, com storytelling gerencial voltado para público não técnico
+- **PDF ou PPTX** da apresentação como formato alternativo de entrega
+- **Vídeo** de até 5 minutos no YouTube como **não listado** — pode ser gravação de tela com narração, sem necessidade de aparecer em câmera
+
+A entrega final é a página pública de documentação contendo, de forma acessível e sem depender da hierarquia de navegação:
+
+- Link do repositório GitHub
+- Apresentação em HTML e PDF/PPTX
+- Link do vídeo
+- Notebooks e código
+- Conclusões e recomendações principais
 
 **Resultado esperado:** Material de apresentação finalizado e vídeo gravado, prontos para entrega.
 
@@ -139,8 +144,8 @@ Com os resultados validados, serão montados:
 
 | # | Etapa | CRISP-DM | Depende de |
 |---|---|---|---|
-| 1 | Business Canvas | Business Understanding | — |
-| 2 | Reflexões do Desafio | Business Understanding | 1 |
+| 1 | Problema de Negócio | Business Understanding | — |
+| 2 | Business Canvas | Business Understanding | 1 |
 | 3 | Análise e Hipóteses | Data Understanding | 2 |
 | 4 | EDA | Data Understanding | 3 |
 | 5 | Preparação dos Dados | Data Preparation | 4 |
