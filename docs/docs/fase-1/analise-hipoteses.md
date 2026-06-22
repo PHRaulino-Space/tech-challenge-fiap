@@ -25,9 +25,13 @@ A variável-alvo é o `nps_score` (escala 0–10), segmentado em três categoria
 
 ## Primeiro Achado — Distribuição do NPS
 
-Antes de qualquer análise cruzada, a distribuição da base já revela um dado relevante: a **média do NPS é 4.38**, abaixo do ponto neutro. A base pende estruturalmente para detratores — não estamos diante de casos isolados, mas de um padrão.
+A base conta com **74,0% de detratores** — NPS médio de 4,38, abaixo do ponto neutro (7). A empresa não está lidando com casos isolados de insatisfação; está lidando com um padrão estrutural.
 
-Isso reforça a urgência do problema: a empresa não está lidando com exceções de insatisfação, está lidando com a maioria dos seus clientes insatisfeitos.
+| Categoria | Clientes | % |
+| :--- | :---: | :---: |
+| Detrator | 1.851 | 74,0% |
+| Neutro | 448 | 17,9% |
+| Promotor | 201 | 8,0% |
 
 ---
 
@@ -35,77 +39,137 @@ Isso reforça a urgência do problema: a empresa não está lidando com exceçõ
 
 A análise exploratória foi estruturada seguindo o **ciclo de vida cronológico da jornada do cliente**, com o objetivo de isolar em qual etapa a experiência começa a se degradar.
 
-Para cada grupo de variáveis, a análise combina dois tipos de visualização:
+Para cada grupo de variáveis, a análise combina:
 
-1. **Heatmap de correlação** — triagem rápida para identificar quais variáveis têm alguma relação linear com o NPS Score
-2. **Boxplots por categoria NPS** — detalhamento visual para entender como a distribuição de cada variável se comporta entre Detratores, Neutros e Promotores
-
-Para cada gráfico, são respondidas três perguntas: o que ele mostra, por que isso importa para o negócio, e qual decisão ou investigação ele sugere.
+1. **Heatmap de correlação** — triagem rápida para identificar quais variáveis têm relação linear com o NPS Score
+2. **Boxplots por categoria NPS** — detalhamento visual da distribuição entre Detratores, Neutros e Promotores
 
 ---
 
-## O que a EDA revelou até agora
+## O Que a EDA Revelou
 
-### Grupo Cliente — sem relação com o NPS
+### Grupo Cliente — Sem Relação com o NPS
 
-`customer_age` apresentou correlação de -0.01 e `customer_tenure_months` de 0.03 com o NPS Score. Os boxplots confirmam: as distribuições são praticamente idênticas entre Detratores, Neutros e Promotores.
+`customer_age`: -0,01 | `customer_tenure_months`: -0,01
 
-**Conclusão:** a insatisfação não discrimina perfil. Um cliente novo ou antigo, jovem ou mais velho, tem a mesma chance de virar detrator. O problema não está em quem é o cliente.
+As distribuições são praticamente idênticas entre as três categorias. A região geográfica também não diferencia: NPS médio varia apenas 0,28 pontos entre a melhor (Sul: 4,49) e a pior região (Centro-Oeste: 4,21).
 
-### Grupo Pedido — sem relação com o NPS
-
-Todas as variáveis do grupo — `order_value`, `items_quantity`, `discount_value` e `payment_installments` — apresentaram correlação próxima de zero com o NPS. Os boxplots mostram caixas no mesmo nível para as três categorias.
-
-**Conclusão:** o momento da compra é neutro para a satisfação. Não importa o quanto o cliente gastou, quantos itens comprou ou em quantas parcelas pagou — isso individualmente não move o NPS.
-
-### Grupo Logística — primeiro sinal relevante
-
-`delivery_delay_days` apresentou correlação de **-0.6** com o NPS Score — o sinal mais forte observado até agora. Os boxplots confirmam visualmente: promotores quase não têm atraso (mediana próxima de zero), enquanto detratores têm atraso consistente (mediana em torno de 2 dias, com outliers chegando a 7-8 dias).
-
-**Conclusão:** o atraso na entrega é o principal fator identificado até agora. Quanto maior o atraso, menor o NPS — e a relação é clara o suficiente para ser um candidato forte a feature no modelo preditivo.
+**Conclusão:** a insatisfação não discrimina perfil. O problema não está em quem é o cliente.
 
 ---
 
-## Hipóteses para Investigação Aprofundada
+### Grupo Pedido — Sem Relação com o NPS
 
-A partir dos achados da EDA, três hipóteses foram levantadas para investigação nas próximas etapas:
+`order_value`: +0,04 | `items_quantity`: +0,01 | `discount_value`: +0,03 | `payment_installments`: +0,02
 
-### Hipótese 1 — O valor do produto influencia a tolerância ao atraso
+Todas as correlações próximas de zero. Boxplots com caixas no mesmo nível para as três categorias.
 
-Clientes que compraram produtos mais caros têm mais tolerância a variáveis que degradam a experiência, como atraso na entrega? Ou são mais exigentes justamente por terem investido mais?
-
-**O que analisar:** cruzar `order_value` com `delivery_delay_days` segmentado por `nps_categoria` — ver se o impacto do atraso no NPS é diferente em compras de alto valor.
-
-### Hipótese 2 — Expectativa de prazo vs. realidade
-
-`delivery_delay_days` mede o atraso em relação ao prazo prometido. Se o cliente foi prometido 5 dias e recebeu em 8, provavelmente vira detrator. Mas se foi prometido 8 dias e recebeu em 8, ele seria detrator mesmo assim?
-
-A hipótese é que a quebra de expectativa importa mais do que o tempo total de entrega — e o heatmap já mostra que `delivery_delay_days` (-0.6) tem correlação mais forte com o NPS do que `delivery_time_days`.
-
-**O que analisar:** comparar o peso das duas variáveis sobre o NPS e verificar se clientes que receberam no prazo, mesmo que tardio, têm NPS melhor.
-
-### Hipótese 3 — Frete e desconto como amortecedores da insatisfação
-
-Um frete mais baixo ou um desconto maior reduz a sensibilidade do cliente às variáveis operacionais que degradam a experiência? Ou seja — compensar o cliente no bolso ajuda a absorver um atraso ou um problema no atendimento?
-
-**O que analisar:** cruzar `freight_value` e `discount_value` com `delivery_delay_days` e `nps_categoria` — ver se clientes com frete baixo ou desconto alto que sofreram atraso têm NPS melhor do que clientes sem essas compensações.
+**Conclusão:** o momento da compra é neutro para a satisfação. O problema está em outro ponto da jornada.
 
 ---
 
-## Limitações e Premissas da Análise
+### Grupo Logística — Sinal Mais Forte da Base
 
-### O NPS como desfecho final da jornada
+`delivery_delay_days`: **-0,60** | `delivery_time_days`: 0,00 | `freight_value`: -0,04 | `delivery_attempts`: +0,03
 
-O case não especifica em qual momento exato da jornada o NPS é coletado — se é após a entrega, após o atendimento, ou após algum outro ponto de contato. Essa informação não está disponível na base de dados.
+O sinal de `delivery_delay_days` é o mais forte de toda a análise. A distinção entre as duas variáveis de prazo é um achado crítico: o cliente avalia **se a empresa cumpriu o que prometeu**, não quanto tempo esperou.
 
-**Premissa adotada:** nesta análise, o `nps_score` é tratado como o **desfecho final da jornada do cliente** — a avaliação que ele faz depois de ter passado por todas as etapas: compra, entrega e atendimento. Essa é a interpretação mais conservadora e a que faz mais sentido dado o contexto do case.
+- Clientes que receberam no prazo: **NPS médio 6,86** (n=277)
+- Clientes que sofreram atraso: **NPS médio 4,07** (n=2.223)
 
-**Implicação para a análise:** a correlação entre variáveis de atendimento (reclamações, contatos com o SAC) e o NPS existe e é observável, mas a base não permite afirmar a direção da causalidade. O cliente pode ter reclamado porque já estava insatisfeito — ou pode ter ficado insatisfeito porque o atendimento não resolveu o problema. Ambos os cenários aparecem da mesma forma nos dados.
+Dos 2.500 clientes, apenas **11% (277) receberam dentro do prazo prometido.**
 
-Para a EDA, isso não altera a leitura das correlações. Para as recomendações de negócio, essa distinção importa: se o cliente chega ao SAC já como detrator, a ação necessária é diferente de um cliente que se torna detrator por falta de resolução no atendimento.
+**Conclusão:** o atraso na entrega é o principal fator de insatisfação da base. É também o candidato mais forte para feature do modelo preditivo.
 
 ---
 
-## Próximos Passos
+### Grupo Atendimento — Sinal Moderado
 
-A investigação segue para o **Grupo Atendimento** (`customer_service_contacts`, `resolution_time_days`, `complaints_count`), que junto com a Logística é onde o problema provavelmente se concentra. Em seguida, as hipóteses acima serão testadas como análises multivariadas e, posteriormente, como features do modelo preditivo.
+`complaints_count`: **-0,50** | `customer_service_contacts`: -0,35 | `resolution_time_days`: -0,19
+
+As três variáveis têm relação com o NPS, cada uma com intensidade diferente. `resolution_time_days` é o sinal mais fraco, sugerindo que o fato de precisar acionar o suporte pesa mais do que o tempo de resolução.
+
+**Conclusão:** o ato de contatar o SAC já está associado a NPS mais baixo — independente do tempo de resolução.
+
+---
+
+## Perfis de Degradação — Análise Combinada
+
+Cruzando as duas variáveis de maior sinal (`delivery_delay_days` e `customer_service_contacts`) como flags binárias, emergem quatro perfis:
+
+| Perfil | Clientes | % Base | NPS Médio | % Detratores | % Recompra |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Sem Problemas** | 65 | 2,6% | 8,23 | 13,8% | 66,2% |
+| **Só SAC** | 212 | 8,5% | 6,43 | 43,4% | 24,1% |
+| **Só Atraso** | 489 | 19,6% | 5,19 | 65,2% | 11,5% |
+| **Atraso + SAC** | 1.734 | 69,4% | 3,76 | 82,5% | 3,9% |
+
+**Os achados mais relevantes:**
+
+1. **Apenas 2,6% dos clientes** passaram pela jornada sem nenhum problema operacional
+2. **69,4% estão no pior perfil** — a combinação dos dois problemas domina a base
+3. **77,3% dos detratores** vêm do perfil "Atraso + SAC"
+4. **0% de detratores recompram** — comportamento confirma percepção com precisão cirúrgica
+
+---
+
+## Diagnóstico Regional
+
+O problema não é geográfico. A taxa de atraso varia de 88% a 91% em todas as regiões, com diferença de NPS de apenas 0,28 pontos entre a melhor e a pior. O problema é sistêmico — de processo, não de geografia.
+
+---
+
+## Hipóteses Testadas
+
+### H1 — Ticket Alto Protege Contra o Atraso?
+
+Clientes de alto valor do pedido toleram mais o atraso, ou são mais exigentes?
+
+**O que analisar:** NPS médio por faixa de ticket (tercis) × teve_atraso. Se as linhas convergirem nos tickets mais altos, clientes premium são mais tolerantes.
+
+---
+
+### H2 — Cumprimento do Prazo Vale Mais que Velocidade de Entrega
+
+**Resultado confirmado:** cumprir o prazo prometido (-0,60) pesa muito mais que o tempo total de entrega (≈ 0,00). Clientes no prazo têm NPS 6,86; atrasados têm NPS 4,07.
+
+A análise por quartil de tempo de entrega × prazo confirma: mesmo entregas lentas que chegaram no prazo têm NPS consistentemente superior às que chegaram mais rápido mas com atraso.
+
+---
+
+### H3 — Frete e Desconto Como Amortecedores da Insatisfação
+
+Entre clientes que sofreram atraso, frete baixo ou desconto alto (acima da mediana) atenua o impacto no NPS?
+
+**O que analisar:** NPS médio por combinação de faixa de frete × nível de desconto, filtrando apenas clientes com atraso.
+
+---
+
+## Resolução Dentro do Pior Perfil
+
+Entre clientes do perfil "Atraso + SAC", o tempo de resolução ainda diferencia o NPS:
+
+| Velocidade | NPS Médio |
+| :--- | :---: |
+| Muito Rápido | 4,47 |
+| Rápido | 3,86 |
+| Lento | 3,53 |
+| Muito Lento | 2,94 |
+
+Amplitude de **1,53 pontos**. O SAC atenua o dano mas não o reverte — todos os grupos permanecem na faixa de detratores. O ponto de intervenção eficaz é o atraso, não a velocidade do SAC.
+
+---
+
+## Limitações e Premissas
+
+### O NPS como Desfecho Final da Jornada
+
+O case não especifica em qual momento exato o NPS é coletado. **Premissa adotada:** o `nps_score` é tratado como o desfecho final — a avaliação do cliente depois de ter passado por todas as etapas.
+
+### Causalidade vs. Correlação
+
+A base não permite afirmar a direção da causalidade nas variáveis de atendimento. O cliente pode ter reclamado porque já era detrator, ou pode ter virado detrator porque o atendimento não resolveu. Para as recomendações de negócio, essa distinção importa — mas não altera a leitura das correlações.
+
+### Mediação Atraso → SAC
+
+A hipótese de cascata (atraso causa contato com SAC) foi verificada: 76,5% dos clientes sem atraso também contataram o SAC vs. 78,0% dos com atraso — diferença pequena. A reclamação formal, porém, atinge 91,7% dos sem atraso vs. 100% dos com atraso. O SAC parece ter causas parcialmente independentes do atraso; a narrativa de cascata se aplica melhor às reclamações formais.

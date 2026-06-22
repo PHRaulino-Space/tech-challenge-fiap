@@ -111,6 +111,23 @@ nb2py:
 py2nb:
 	poetry run jupytext --to ipynb notebooks/dados.py -o notebooks/dados.ipynb
 
+## Execute notebook and export to HTML in reports/
+.PHONY: nb2html
+nb2html: py2nb
+	poetry run jupyter nbconvert --to html --execute \
+		--ExecutePreprocessor.timeout=120 \
+		--output-dir reports/ \
+		notebooks/dados.ipynb
+
+## Convert eda_final.py → eda_final.ipynb and export to HTML
+.PHONY: eda2html
+eda2html:
+	poetry run jupytext --to ipynb notebooks/eda_final.py -o notebooks/eda_final.ipynb
+	poetry run jupyter nbconvert --to html --execute \
+		--ExecutePreprocessor.timeout=120 \
+		--output-dir reports/ \
+		notebooks/eda_final.ipynb
+
 
 #################################################################################
 # Self Documenting Commands                                                     #
