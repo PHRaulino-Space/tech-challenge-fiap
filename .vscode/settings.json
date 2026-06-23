@@ -1,9 +1,9 @@
 {
     "notebook.markup.fontFamily": "JetBrains Mono, monospace",
-    "notebook.markup.fontSize": 12,
+    "notebook.markup.fontSize": 14,
     "notebook.lineNumbers": "on",
     "phrs-smart-commit.language": "pt-br",
-    "phrs-smart-commit.provider": "claude",
+    "phrs-smart-commit.provider": "codex",
     "python-envs.defaultEnvManager": "ms-python.python:poetry",
     "python-envs.defaultPackageManager": "ms-python.python:poetry"
 }
