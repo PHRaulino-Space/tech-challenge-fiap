@@ -141,11 +141,9 @@ quarto-eda:
 ## Render dados.py with Quarto
 .PHONY: quarto-dados
 quarto-dados:
-	poetry run jupytext --to ipynb notebooks/dados.py -o notebooks/dados.ipynb
-	poetry run jupyter nbconvert --to notebook --execute \
-		--ExecutePreprocessor.timeout=120 \
-		--inplace notebooks/dados.ipynb
-	quarto render notebooks/dados.ipynb --no-execute
+	mkdir -p reports/quarto
+	QUARTO_PYTHON=$$(poetry env info --path)/bin/python \
+		quarto render notebooks/dados.py --execute
 	mv notebooks/dados.html reports/quarto/dados.html
 
 ## Render all notebooks with Quarto (uses _quarto.yml project config)

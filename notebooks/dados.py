@@ -402,6 +402,234 @@ fig.update_layout(width=700, height=600, title_x=0.5)
 fig.show()
 
 # %% [markdown]
+# ### Correlação do atraso na entrega com outras variáveis
+#
+# Como `delivery_delay_days` apareceu como o sinal operacional mais forte contra o NPS,
+# vale olhar também como o atraso se relaciona com as demais variáveis numéricas da base.
+# Essa visão ajuda a identificar possíveis fatores associados ao atraso, além do impacto
+# direto na satisfação.
+
+# %%
+cols_correlacao_atraso = [
+    col for col in df.select_dtypes(include="number").columns if col != "delivery_delay_days"
+]
+
+corr_atraso = (
+    df[["delivery_delay_days"] + cols_correlacao_atraso]
+    .corr()["delivery_delay_days"]
+    .drop("delivery_delay_days")
+    .reset_index()
+)
+corr_atraso.columns = ["variavel", "correlacao"]
+corr_atraso["grupo"] = corr_atraso["variavel"].map(
+    lambda col: metadados_colunas.get(col, {}).get("grupo", "Derivada")
+)
+corr_atraso = corr_atraso.sort_values("correlacao")
+
+fig = px.bar(
+    corr_atraso,
+    x="correlacao",
+    y="variavel",
+    orientation="h",
+    color="grupo",
+    text="correlacao",
+    title="Correlação de Dias de Atraso com Outras Variáveis",
+    labels={
+        "correlacao": "Correlação de Pearson com delivery_delay_days",
+        "variavel": "",
+        "grupo": "Grupo",
+    },
+)
+fig.add_vline(x=0, line_width=1, line_color="#334155")
+fig.update_traces(texttemplate="%{x:.2f}", textposition="outside", cliponaxis=False)
+fig.update_xaxes(range=[-1, 1], zeroline=True)
+fig.update_layout(height=650, title_x=0.5, margin=dict(l=180, r=80))
+fig.show()
+
+# %% [markdown]
+# ### A partir de quantos dias de atraso o cliente começa a reclamar?
+#
+# A próxima hipótese testa se existe um ponto de inflexão claro: depois de quantos
+# dias de atraso a reclamação aumenta, o SAC é acionado e o NPS começa a cair.
+# Mesmo que a análise seja inconclusiva, ela fica registrada porque ajuda a separar
+# o que os dados sustentam do que ainda exigiria novas variáveis.
+
+# %%
+df["teve_atraso"] = df["delivery_delay_days"] > 0
+df["reclamou"] = df["complaints_count"] > 0
+df["acionou_sac"] = df["customer_service_contacts"] > 0
+
+atraso_por_dia = (
+    df.groupby("delivery_delay_days")
+    .agg(
+        pedidos=("order_id", "count"),
+        nps_medio=("nps_score", "mean"),
+        pct_reclamou=("reclamou", lambda serie: serie.mean() * 100),
+        pct_acionou_sac=("acionou_sac", lambda serie: serie.mean() * 100),
+        contatos_sac_medios=("customer_service_contacts", "mean"),
+        reclamacoes_medias=("complaints_count", "mean"),
+        recompra_30d_pct=("repeat_purchase_30d", lambda serie: serie.mean() * 100),
+    )
+    .round(2)
+)
+
+atraso_por_dia
+
+# %%
+faixas_atraso = [-0.1, 0, 1, 2, 3, 5, df["delivery_delay_days"].max()]
+labels_faixas_atraso = ["0 dias", "1 dia", "2 dias", "3 dias", "4-5 dias", "6+ dias"]
+
+df["faixa_atraso"] = pd.cut(
+    df["delivery_delay_days"],
+    bins=faixas_atraso,
+    labels=labels_faixas_atraso,
+    include_lowest=True,
+)
+
+atraso_por_faixa = (
+    df.groupby("faixa_atraso", observed=True)
+    .agg(
+        pedidos=("order_id", "count"),
+        nps_medio=("nps_score", "mean"),
+        pct_reclamou=("reclamou", lambda serie: serie.mean() * 100),
+        pct_acionou_sac=("acionou_sac", lambda serie: serie.mean() * 100),
+        contatos_sac_medios=("customer_service_contacts", "mean"),
+        reclamacoes_medias=("complaints_count", "mean"),
+        recompra_30d_pct=("repeat_purchase_30d", lambda serie: serie.mean() * 100),
+    )
+    .round(2)
+)
+
+atraso_por_faixa
+
+# %%
+metricas_atraso = atraso_por_faixa.reset_index()
+
+fig = make_subplots(
+    rows=2,
+    cols=1,
+    shared_xaxes=True,
+    vertical_spacing=0.12,
+    subplot_titles=[
+        "Reclamação e acionamento do SAC por faixa de atraso",
+        "NPS médio por faixa de atraso",
+    ],
+)
+
+fig.add_trace(
+    go.Scatter(
+        x=metricas_atraso["faixa_atraso"],
+        y=metricas_atraso["pct_reclamou"],
+        mode="lines+markers+text",
+        name="% Reclamou",
+        text=metricas_atraso["pct_reclamou"].map(lambda valor: f"{valor:.1f}%"),
+        textposition="top center",
+        line=dict(color="#ef4444", width=3),
+    ),
+    row=1,
+    col=1,
+)
+fig.add_trace(
+    go.Scatter(
+        x=metricas_atraso["faixa_atraso"],
+        y=metricas_atraso["pct_acionou_sac"],
+        mode="lines+markers+text",
+        name="% Acionou SAC",
+        text=metricas_atraso["pct_acionou_sac"].map(lambda valor: f"{valor:.1f}%"),
+        textposition="bottom center",
+        line=dict(color="#f97316", width=3),
+    ),
+    row=1,
+    col=1,
+)
+fig.add_trace(
+    go.Scatter(
+        x=metricas_atraso["faixa_atraso"],
+        y=metricas_atraso["nps_medio"],
+        mode="lines+markers+text",
+        name="NPS Médio",
+        text=metricas_atraso["nps_medio"].map(lambda valor: f"{valor:.2f}"),
+        textposition="top center",
+        line=dict(color="#0284c7", width=3),
+    ),
+    row=2,
+    col=1,
+)
+
+fig.update_yaxes(title_text="% de clientes", range=[0, 105], row=1, col=1)
+fig.update_yaxes(title_text="NPS médio", range=[0, 10], row=2, col=1)
+fig.update_layout(
+    title="Efeito dos Dias de Atraso em Reclamação, SAC e NPS",
+    title_x=0.5,
+    height=700,
+    legend=dict(orientation="h", y=1.08, x=0.5, xanchor="center"),
+)
+fig.show()
+
+# %%
+fig = px.bar(
+    metricas_atraso,
+    x="faixa_atraso",
+    y="pedidos",
+    text="pedidos",
+    title="Volume de Pedidos por Faixa de Atraso",
+    labels={"faixa_atraso": "Faixa de atraso", "pedidos": "Pedidos"},
+    color="faixa_atraso",
+    color_discrete_sequence=px.colors.qualitative.Set2,
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(showlegend=False, title_x=0.5, yaxis_title="Pedidos")
+fig.show()
+
+# %%
+volume_atraso_por_dia = (
+    df["delivery_delay_days"]
+    .value_counts()
+    .sort_index()
+    .rename_axis("dias_atraso")
+    .reset_index(name="clientes")
+)
+volume_atraso_por_dia["pct_base_total"] = (
+    volume_atraso_por_dia["clientes"] / len(df) * 100
+).round(1)
+volume_atraso_por_dia["rotulo"] = volume_atraso_por_dia.apply(
+    lambda linha: f"{linha['clientes']}<br>{linha['pct_base_total']:.1f}%", axis=1
+)
+
+fig = px.bar(
+    volume_atraso_por_dia,
+    x="dias_atraso",
+    y="clientes",
+    text="rotulo",
+    title="Clientes por Dias de Atraso e Participação na Base Total",
+    labels={
+        "dias_atraso": "Dias de atraso",
+        "clientes": "Clientes",
+    },
+    color="pct_base_total",
+    color_continuous_scale="Blues",
+)
+fig.update_traces(textposition="outside")
+fig.update_xaxes(dtick=1)
+fig.update_layout(title_x=0.5, coloraxis_colorbar_title="% da base")
+fig.show()
+
+# %% [markdown]
+# ### Leitura preliminar — Reclamações por atraso
+#
+# A análise sugere que, nesta base, a reclamação não começa apenas depois de vários
+# dias de atraso. Mesmo pedidos sem atraso já apresentam alta presença de reclamações.
+# A partir de 1 dia de atraso, a taxa de clientes com `complaints_count > 0` chega ao
+# limite observado na base, enquanto o NPS médio passa a cair progressivamente conforme
+# o atraso aumenta.
+#
+# Portanto, `delivery_delay_days` parece explicar melhor a **intensidade da insatisfação**
+# do que o início da reclamação. Essa é uma ressalva importante: para prever quando o
+# cliente começa a reclamar, precisaríamos de variáveis mais próximas do evento, como
+# status de rastreio, promessa original de entrega, transportadora, data prevista,
+# data de abertura da reclamação e histórico operacional por rota/região.
+
+# %% [markdown]
 # ### Grupo Logística — Boxplot por categoria NPS
 
 # %%
@@ -543,7 +771,7 @@ fig.show()
 # > não resolveu. Ambos os cenários aparecem da mesma forma nos dados. Nesta análise,
 # > o NPS é tratado como o desfecho final da jornada.
 #
-# ---
+# <hr>
 #
 # ## Encerramento da Análise Individual
 #
@@ -567,7 +795,7 @@ fig.show()
 # da insatisfação.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Análise Multivariada — Perfis de Degradação da Experiência
 #
 # A análise individual mostrou que `delivery_delay_days` e `customer_service_contacts`
@@ -735,7 +963,7 @@ fig.update_layout(showlegend=False, title_x=0.5, height=420)
 fig.show()
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Interação: Perfil de Degradação × Tempo de Relacionamento
 #
 # A análise individual mostrou que `customer_tenure_months` não tem efeito direto
@@ -805,7 +1033,7 @@ interacao_tabela = (
 interacao_tabela
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Hipótese 1 — Ticket alto protege contra o atraso?
 #
 # O valor do pedido não tem correlação direta com o NPS, mas pode moderar o efeito
@@ -850,7 +1078,7 @@ fig.show()
 # Se divergirem, são mais exigentes. Se forem paralelas, o ticket não modera o efeito.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Hipótese 2 — Quebra de prazo importa mais que tempo total de entrega?
 #
 # O heatmap já mostrou que `delivery_delay_days` (-0.60) pesa muito mais no NPS
@@ -904,7 +1132,7 @@ fig.show()
 # confirma que **cumprir o prazo prometido importa mais do que entregar rápido**.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Hipótese 3 — Frete baixo e desconto amortecem a insatisfação?
 #
 # Quando o cliente já sofreu atraso, um frete mais barato ou um desconto maior
@@ -970,7 +1198,7 @@ fig.show()
 # financeira não é suficiente para recuperar a satisfação perdida pelo atraso.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Percepção vs. Comportamento — Recompra e CSAT por Perfil de Degradação
 #
 # Até aqui medimos **percepção** (NPS). Agora checamos se o **comportamento real**
@@ -1095,7 +1323,7 @@ fig.show()
 #   real do cliente; risco de tomada de decisão com dados enganosos
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Região vs. Perfil de Degradação — O problema logístico é regional?
 #
 # A análise individual mostrou que `customer_region` não tem efeito direto sobre o NPS
@@ -1200,7 +1428,7 @@ atraso_regional
 # confirma-se que o problema é de processo e não de geografia.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Verificação de Mediação — Atraso causa contato com o SAC?
 #
 # A conclusão dos perfis de degradação afirmou que "o SAC, na maioria dos casos,
@@ -1321,7 +1549,7 @@ mediacao
 # atraso e a narrativa precisa ser ajustada.
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Tentativas de Entrega — Modo de Falha Independente?
 #
 # `delivery_attempts` é o único indicador logístico que não foi cruzado dentro
@@ -1397,7 +1625,7 @@ fig.show()
 # (melhoria no processo de confirmação de endereço e aviso ao cliente antes da entrega).
 
 # %% [markdown]
-# ---
+# <hr>
 # ## Tempo de Resolução dentro do Perfil "Atraso + SAC"
 #
 # `resolution_time_days` foi o sinal mais fraco do grupo Atendimento (-0.19).
