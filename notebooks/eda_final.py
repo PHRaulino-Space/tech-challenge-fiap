@@ -122,8 +122,8 @@ fig.show()
 # Antes de explorar grupo a grupo, o heatmap de correlações de todas as variáveis
 # operacionais com o NPS já entrega um mapa de prioridades.
 #
-# O sinal é concentrado: **duas variáveis operacionais respondem por quase toda a
-# variação observada no NPS** — e ambas estão na execução pós-compra, não no momento
+# O sinal é concentrado: **duas variáveis operacionais apresentam os sinais mais fortes
+# de associação com o NPS** — e ambas estão na execução pós-compra, não no momento
 # da transação.
 
 # %%
@@ -179,8 +179,8 @@ fig.show()
 #
 # **O que isso significa para o negócio:** o problema não está em quem é o cliente,
 # nem no que ele comprou. Está na execução operacional — entrega e atendimento.
-# O momento da transação (valor do pedido, parcelas, desconto) é irrelevante
-# para a satisfação.
+# O momento da transação (valor do pedido, parcelas, desconto) não aparece como
+# fator relevante de satisfação nesta análise exploratória.
 
 # %% [markdown]
 # ## 3. A Análise Grupo a Grupo — Mapeando a Jornada
@@ -193,6 +193,8 @@ fig.show()
 fig = make_subplots(
     rows=2,
     cols=2,
+    horizontal_spacing=0.18,
+    vertical_spacing=0.18,
     subplot_titles=[
         "Grupo Cliente",
         "Grupo Pedido",
@@ -222,16 +224,22 @@ grupos = {
 
 for (row, col), cols in grupos.items():
     corr_m = df[cols].corr()
+    labels = [c.replace("_", "<br>") for c in corr_m.columns]
     fig.add_trace(
         go.Heatmap(
             z=corr_m.values,
-            x=corr_m.columns.tolist(),
-            y=corr_m.index.tolist(),
+            x=labels,
+            y=labels,
             colorscale="RdBu_r",
             zmin=-1,
             zmax=1,
             text=corr_m.round(2).values,
             texttemplate="%{text}",
+            customdata=[[(x_col, y_col) for x_col in corr_m.columns] for y_col in corr_m.index],
+            hovertemplate=(
+                "<b>%{customdata[1]}</b> × <b>%{customdata[0]}</b><br>"
+                "Correlação: %{z:.2f}<extra></extra>"
+            ),
             showscale=False,
         ),
         row=row,
@@ -243,6 +251,8 @@ fig.update_layout(
     title_x=0.5,
     height=700,
 )
+fig.update_xaxes(tickangle=0, automargin=True)
+fig.update_yaxes(automargin=True)
 fig.show()
 
 # %% [markdown]
@@ -604,8 +614,9 @@ fig.show()
 # %% [markdown]
 # **Implicação para o negócio:** a empresa não precisa necessariamente entregar
 # mais rápido — precisa entregar **dentro do prazo que prometeu**. Um cliente que
-# aguarda 10 dias dentro do prazo tem NPS próximo a 7. Um que aguarda 5 dias
-# com 1 de atraso tende a avaliar abaixo de 5.
+# recebe dentro do prazo prometido tem NPS médio próximo de 7. Quem recebe com
+# atraso, mesmo quando o tempo total de entrega não é alto, tende a avaliar abaixo
+# de 5.
 #
 # Isso sugere que calibrar melhor os prazos prometidos pode ter impacto imediato
 # no NPS — sem necessidade de investimento em velocidade logística.
@@ -666,7 +677,7 @@ fig.show()
 # | :--- | :--- |
 # | 74% dos clientes são detratores | Base pende estruturalmente para insatisfação |
 # | O problema está na operação, não no perfil | Idade, região, ticket: correlação ≈ 0 com NPS |
-# | Atraso na entrega é a causa raiz | `delivery_delay_days`: -0,60 — sinal mais forte |
+# | Atraso na entrega é o principal fator operacional associado ao baixo NPS | `delivery_delay_days`: -0,60 — sinal mais forte |
 # | O problema é sistêmico, não regional | 88–91% de atraso em todas as regiões |
 # | Apenas 11% das entregas chegam no prazo | 2.223 de 2.500 clientes sofreram atraso |
 # | Atraso e SAC se acumulam | 69,4% estão no pior perfil (Atraso + SAC) |
@@ -686,8 +697,8 @@ fig.show()
 # - O SAC não reverte detratores, mas pode limitar a queda para os menos engajados
 #
 # **Produto e CX:**
-# - Transparência ativa sobre o status da entrega pode reduzir o volume de contatos
-#   ao SAC — o cliente que sabe o que está acontecendo aciona menos o suporte
+# - Testar transparência ativa sobre o status da entrega como hipótese de intervenção
+#   para reduzir contatos ao SAC e ansiedade durante atrasos
 #
 # **Analytics e Modelo Preditivo:**
 # - `delivery_delay_days` e `complaints_count` são os dois features mais candidatos
