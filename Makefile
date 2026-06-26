@@ -143,8 +143,14 @@ quarto-eda:
 quarto-dados:
 	mkdir -p reports/quarto
 	QUARTO_PYTHON=$$(poetry env info --path)/bin/python \
-		quarto render notebooks/dados.py --execute
+		quarto render notebooks/dados.py --execute \
+		-M echo:false \
+		-M warning:false \
+		-M message:false \
+		-M code-tools:false
 	mv notebooks/dados.html reports/quarto/dados.html
+	rm -rf reports/quarto/dados_files
+	cp -R notebooks/dados_files reports/quarto/dados_files
 
 ## Render all notebooks with Quarto (uses _quarto.yml project config)
 .PHONY: quarto-all

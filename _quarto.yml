@@ -20,7 +20,7 @@ format:
     fig-height: 6
 
 execute:
-  echo: true
+  echo: false
   warning: false
   message: false
   freeze: false

@@ -4,6 +4,7 @@ POSTECH_AI_SCIENTIST/
 # Mac OS-specific storage files
 .DS_Store
 reports/**/*.html
+reports/**/dados_files/
 .quarto/
 
 tmp/*
