@@ -10,13 +10,13 @@ theme:
   language: pt-BR
   palette:
     - scheme: default
-      primary: blue grey
+      primary: blue
       accent: blue
       toggle:
         icon: material/brightness-7
         name: Modo escuro
     - scheme: slate
-      primary: blue grey
+      primary: blue
       accent: blue
       toggle:
         icon: material/brightness-4
