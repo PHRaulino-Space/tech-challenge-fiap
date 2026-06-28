@@ -12,289 +12,68 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css"
     />
-    <style>
-      :root {
-        --bg: #f7f4ef;
-        --ink: #17233c;
-        --muted: #667085;
-        --accent: #ef4444;
-        --accent2: #f97316;
-        --blue: #2563eb;
-        --green: #16a34a;
-        --line: #d9dee8;
-      }
-      .reveal {
-        font-family:
-          Inter,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
-        color: var(--ink);
-      }
-      .reveal .slides {
-        text-align: left;
-      }
-      .reveal h1,
-      .reveal h2,
-      .reveal h3 {
-        color: var(--ink);
-        letter-spacing: -0.035em;
-        text-transform: none;
-      }
-      .reveal h1 {
-        font-size: 2.05em;
-        line-height: 1.05;
-      }
-      .reveal h2 {
-        font-size: 1.5em;
-        line-height: 1.1;
-        margin-bottom: 0.35em;
-      }
-      .reveal p,
-      .reveal li {
-        font-size: 0.66em;
-        line-height: 1.35;
-      }
-      .reveal section {
-        box-sizing: border-box;
-        padding: 32px 56px;
-      }
-      .kicker {
-        font-size: 0.38em;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: var(--blue);
-        font-weight: 750;
-        margin-bottom: 22px;
-      }
-      .subtitle {
-        color: var(--muted);
-        font-size: 0.7em !important;
-        max-width: 860px;
-      }
-      .big-number {
-        font-size: 2.3em;
-        font-weight: 850;
-        letter-spacing: -0.05em;
-        color: var(--accent);
-      }
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 36px;
-        align-items: center;
-      }
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-      .panel {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        padding: 26px;
-        box-shadow: 0 16px 40px rgba(23, 35, 60, 0.07);
-      }
-      .small {
-        font-size: 0.47em !important;
-        color: var(--muted);
-      }
-      .pill {
-        display: inline-block;
-        border-radius: 999px;
-        padding: 8px 14px;
-        background: #eef2ff;
-        color: #1e40af;
-        font-size: 0.42em;
-        font-weight: 750;
-      }
-      .journey {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 34px;
-      }
-      .journey .step {
-        flex: 1;
-        min-height: 78px;
-        background: white;
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-size: 0.58em;
-        font-weight: 750;
-        box-shadow: 0 10px 26px rgba(23, 35, 60, 0.06);
-      }
-      .arrow {
-        color: var(--muted);
-        font-size: 0.8em;
-      }
-      .bar-chart {
-        display: grid;
-        grid-template-columns: 70px 1fr;
-        gap: 10px 16px;
-        align-items: center;
-        margin-top: 22px;
-      }
-      .bar-label {
-        font-size: 0.42em;
-        color: var(--muted);
-        text-align: right;
-      }
-      .bar {
-        height: 42px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        padding-left: 16px;
-        color: white;
-        font-size: 0.45em;
-        font-weight: 800;
-      }
-      .bar.red {
-        background: linear-gradient(90deg, #ef4444, #fb7185);
-      }
-      .bar.orange {
-        background: linear-gradient(90deg, #f97316, #fb923c);
-      }
-      .bar.blue {
-        background: linear-gradient(90deg, #2563eb, #60a5fa);
-      }
-      .slope {
-        height: 260px;
-        border-left: 2px solid var(--line);
-        border-bottom: 2px solid var(--line);
-        position: relative;
-        margin-top: 28px;
-      }
-      .slope-line {
-        position: absolute;
-        left: 55px;
-        top: 62px;
-        width: 620px;
-        height: 8px;
-        background: linear-gradient(90deg, #f97316, #ef4444);
-        transform: rotate(13deg);
-        border-radius: 99px;
-        transform-origin: left center;
-      }
-      .dot {
-        width: 18px;
-        height: 18px;
-        background: var(--accent);
-        border-radius: 999px;
-        position: absolute;
-        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.12);
-      }
-      .d1 {
-        left: 72px;
-        top: 83px;
-      }
-      .d2 {
-        left: 260px;
-        top: 124px;
-      }
-      .d3 {
-        left: 460px;
-        top: 170px;
-      }
-      .d4 {
-        left: 650px;
-        top: 214px;
-      }
-      .axis {
-        position: absolute;
-        color: var(--muted);
-        font-size: 0.38em;
-      }
-      .xaxis {
-        bottom: -42px;
-        right: 0;
-      }
-      .yaxis {
-        top: -28px;
-        left: -2px;
-      }
-      .flow {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 20px;
-        max-width: 520px;
-      }
-      .flow-item {
-        background: white;
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 18px 22px;
-        font-weight: 800;
-        font-size: 0.7em;
-        text-align: center;
-      }
-      .flow-down {
-        text-align: center;
-        color: var(--muted);
-        font-size: 0.72em;
-        line-height: 0.7;
-      }
-      .compare {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        margin-top: 24px;
-      }
-      .compare h3 {
-        font-size: 0.85em;
-        margin: 0 0 18px 0;
-      }
-      .check {
-        color: var(--green);
-        font-weight: 900;
-      }
-      .warn {
-        color: var(--accent2);
-        font-weight: 900;
-      }
-      .footer-note {
-        position: absolute;
-        bottom: 24px;
-        left: 56px;
-        right: 56px;
-        font-size: 0.38em;
-        color: var(--muted);
-      }
-      .quote {
-        font-size: 1em !important;
-        line-height: 1.25 !important;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-      }
-      .muted {
-        color: var(--muted);
-      }
-    </style>
+    <script>
+      window.tailwind = {
+        config: {
+          important: true,
+          corePlugins: {
+            preflight: false,
+          },
+          theme: {
+            extend: {
+              colors: {
+                canvas: "#f7f4ef",
+                ink: "#17233c",
+                muted: "#667085",
+                line: "#d9dee8",
+                danger: "#ef4444",
+                signal: "#f97316",
+                action: "#2563eb",
+                success: "#16a34a",
+              },
+              fontFamily: {
+                sans: [
+                  "Inter",
+                  "ui-sans-serif",
+                  "system-ui",
+                  "-apple-system",
+                  "BlinkMacSystemFont",
+                  "Segoe UI",
+                  "sans-serif",
+                ],
+              },
+              boxShadow: {
+                panel: "0 16px 40px rgba(23, 35, 60, 0.07)",
+                soft: "0 10px 26px rgba(23, 35, 60, 0.06)",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="reveal">
-      <div class="slides">
-        <section data-background-color="#f7f4ef">
-          <div class="kicker">Tech Challenge · Data Analytics</div>
-          <h1>
+    <div class="reveal font-sans text-ink">
+      <div class="slides text-left">
+        <section class="box-border px-14 py-8" data-background-color="#f7f4ef">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            Tech Challenge · Data Analytics
+          </div>
+          <h1
+            class="max-w-[1080px] text-[1.55em] font-bold leading-[1.12] tracking-normal text-ink normal-case"
+          >
             Como os atrasos na entrega impactam a satisfação dos clientes?
           </h1>
-          <p class="subtitle">
+          <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-muted">
             Uma investigação exploratória para identificar os principais fatores
             associados à redução do NPS em uma jornada de e-commerce.
           </p>
-          <div class="footer-note">
+          <div
+            class="absolute bottom-6 left-14 right-14 text-[0.38em] text-muted"
+          >
             Tempo sugerido: 5 minutos · Foco: problema → descoberta →
             recomendação
           </div>
@@ -304,24 +83,52 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">1 · Contexto</div>
-          <h2>A análise seguiu a jornada do cliente</h2>
-          <p class="subtitle">
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            1 · Contexto
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            A análise seguiu a jornada do cliente
+          </h2>
+          <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-muted">
             A base reúne variáveis de cliente, pedido, logística, atendimento e
             satisfação. A pergunta principal foi:
             <strong>o que está mais associado à queda do NPS?</strong>
           </p>
-          <div class="journey">
-            <div class="step">Cliente</div>
-            <div class="arrow">→</div>
-            <div class="step">Pedido</div>
-            <div class="arrow">→</div>
-            <div class="step">Logística</div>
-            <div class="arrow">→</div>
-            <div class="step">Atendimento</div>
-            <div class="arrow">→</div>
-            <div class="step">Satisfação<br />NPS</div>
+          <div class="mt-[34px] flex items-center justify-between gap-3">
+            <div
+              class="flex min-h-[78px] flex-1 items-center justify-center rounded-[22px] border border-line bg-white text-center text-[0.58em] font-bold shadow-soft"
+            >
+              Cliente
+            </div>
+            <div class="text-[0.8em] text-muted">→</div>
+            <div
+              class="flex min-h-[78px] flex-1 items-center justify-center rounded-[22px] border border-line bg-white text-center text-[0.58em] font-bold shadow-soft"
+            >
+              Pedido
+            </div>
+            <div class="text-[0.8em] text-muted">→</div>
+            <div
+              class="flex min-h-[78px] flex-1 items-center justify-center rounded-[22px] border border-line bg-white text-center text-[0.58em] font-bold shadow-soft"
+            >
+              Logística
+            </div>
+            <div class="text-[0.8em] text-muted">→</div>
+            <div
+              class="flex min-h-[78px] flex-1 items-center justify-center rounded-[22px] border border-line bg-white text-center text-[0.58em] font-bold shadow-soft"
+            >
+              Atendimento
+            </div>
+            <div class="text-[0.8em] text-muted">→</div>
+            <div
+              class="flex min-h-[78px] flex-1 items-center justify-center rounded-[22px] border border-line bg-white text-center text-[0.58em] font-bold shadow-soft"
+            >
+              Satisfação<br />NPS
+            </div>
           </div>
           <aside class="notes">
             Explicar rapidamente que as variáveis foram organizadas conforme a
@@ -329,39 +136,73 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">2 · Investigação</div>
-          <h2>A EDA apontou três sinais de insatisfação</h2>
-          <div class="grid-3" style="margin-top: 28px">
-            <div class="panel">
-              <div class="pill">Logística</div>
-              <h3 style="font-size: 0.9em; margin-top: 22px">
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            2 · Investigação
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            A EDA apontou três sinais de insatisfação
+          </h2>
+          <div class="mt-7 grid grid-cols-3 gap-5">
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div
+                class="inline-block rounded-full bg-indigo-50 px-3.5 py-2 text-[0.42em] font-bold text-blue-800"
+              >
+                Logística
+              </div>
+              <h3
+                class="mt-[22px] text-[0.68em] font-bold tracking-normal text-ink normal-case"
+              >
                 Atraso na entrega
               </h3>
-              <p class="small">
+              <p class="text-[0.47em] leading-[1.35] text-muted">
                 Variável objetiva: dias de atraso em relação ao prazo prometido.
               </p>
             </div>
-            <div class="panel">
-              <div class="pill">Atendimento</div>
-              <h3 style="font-size: 0.9em; margin-top: 22px">Reclamações</h3>
-              <p class="small">
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div
+                class="inline-block rounded-full bg-indigo-50 px-3.5 py-2 text-[0.42em] font-bold text-blue-800"
+              >
+                Atendimento
+              </div>
+              <h3
+                class="mt-[22px] text-[0.68em] font-bold tracking-normal text-ink normal-case"
+              >
+                Reclamações
+              </h3>
+              <p class="text-[0.47em] leading-[1.35] text-muted">
                 Clientes com reclamações formais apresentam maior risco de notas
                 baixas.
               </p>
             </div>
-            <div class="panel">
-              <div class="pill">Atendimento</div>
-              <h3 style="font-size: 0.9em; margin-top: 22px">
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div
+                class="inline-block rounded-full bg-indigo-50 px-3.5 py-2 text-[0.42em] font-bold text-blue-800"
+              >
+                Atendimento
+              </div>
+              <h3
+                class="mt-[22px] text-[0.68em] font-bold tracking-normal text-ink normal-case"
+              >
                 Contatos no SAC
               </h3>
-              <p class="small">
+              <p class="text-[0.47em] leading-[1.35] text-muted">
                 Associação com NPS menor, mas sem evidência de crescimento
                 proporcional aos dias de atraso.
               </p>
             </div>
           </div>
-          <p class="footer-note ">
+          <p class="absolute bottom-6 left-14 right-14 text-[0.38em] text-muted">
             Decisão analítica: aprofundar o atraso, pois ele é mensurável,
             objetivo e sustentado pela base.
           </p>
@@ -372,35 +213,63 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">3 · Principal descoberta</div>
-          <h2>O atraso foi o principal fator associado à queda do NPS</h2>
-          <div class="grid-2">
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            3 · Principal descoberta
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            O atraso foi o principal fator associado à queda do NPS
+          </h2>
+          <div class="grid grid-cols-2 items-center gap-9">
             <div>
-              <p class="quote">
+              <p
+                class="text-[0.8em] font-extrabold leading-[1.28] tracking-normal text-ink"
+              >
                 Conforme o atraso aumenta, a satisfação tende a diminuir.
               </p>
-              <p class="subtitle">
+              <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-muted">
                 A análise indica uma relação consistente entre dias de atraso e
                 redução da nota de NPS.
               </p>
-              <p class="small">
+              <p class="text-[0.47em] leading-[1.35] text-muted">
                 <strong>Observação:</strong> a análise é observacional.
                 Portanto, o correto é falar em associação, não em causalidade
                 comprovada.
               </p>
             </div>
-            <div class="panel">
-              <div class="slope">
-                <div class="axis yaxis">NPS</div>
-                <div class="axis xaxis">Dias de atraso</div>
-                <div class="slope-line"></div>
-                <div class="dot d1"></div>
-                <div class="dot d2"></div>
-                <div class="dot d3"></div>
-                <div class="dot d4"></div>
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div
+                class="relative mt-7 h-[260px] border-b-2 border-l-2 border-line"
+              >
+                <div class="absolute -top-7 left-0 text-[0.38em] text-muted">
+                  NPS
+                </div>
+                <div class="absolute -bottom-[42px] right-0 text-[0.38em] text-muted">
+                  Dias de atraso
+                </div>
+                <div
+                  class="absolute left-[55px] top-[62px] h-2 w-[620px] origin-left rotate-[13deg] rounded-full bg-gradient-to-r from-signal to-danger"
+                ></div>
+                <div
+                  class="absolute left-[72px] top-[83px] h-[18px] w-[18px] rounded-full bg-danger shadow-[0_0_0_8px_rgba(239,68,68,0.12)]"
+                ></div>
+                <div
+                  class="absolute left-[260px] top-[124px] h-[18px] w-[18px] rounded-full bg-danger shadow-[0_0_0_8px_rgba(239,68,68,0.12)]"
+                ></div>
+                <div
+                  class="absolute left-[460px] top-[170px] h-[18px] w-[18px] rounded-full bg-danger shadow-[0_0_0_8px_rgba(239,68,68,0.12)]"
+                ></div>
+                <div
+                  class="absolute left-[650px] top-[214px] h-[18px] w-[18px] rounded-full bg-danger shadow-[0_0_0_8px_rgba(239,68,68,0.12)]"
+                ></div>
               </div>
-              <p class="small" style="text-align: center; margin-top: 52px">
+              <p class="mt-[52px] text-center text-[0.47em] leading-[1.35] text-muted">
                 Visual: substituir pelo seu gráfico final de NPS por dias/faixas
                 de atraso.
               </p>
@@ -413,28 +282,54 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">4 · Relação com reclamações</div>
-          <h2>Todo atraso veio acompanhado de reclamação formal</h2>
-          <div class="grid-2">
-            <div class="panel">
-              <div class="big-number">100%</div>
-              <p class="quote" style="font-size: 0.78em !important">
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            4 · Relação com reclamações
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            Todo atraso veio acompanhado de reclamação formal
+          </h2>
+          <div class="grid grid-cols-2 items-center gap-9">
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div
+                class="text-[1.95em] font-black leading-none tracking-normal text-danger"
+              >
+                100%
+              </div>
+              <p
+                class="text-[0.66em] font-extrabold leading-[1.28] tracking-normal text-ink"
+              >
                 dos clientes com atraso registraram reclamação.
               </p>
-              <p class="small">
+              <p class="text-[0.47em] leading-[1.35] text-muted">
                 Além disso, cerca de <strong>89,7%</strong> das reclamações
                 ocorreram em pedidos com atraso.
               </p>
             </div>
-            <div class="panel">
-              <div class="bar-chart">
-                <div class="bar-label">Com atraso</div>
-                <div class="bar red" style="width: 92%">2.223</div>
-                <div class="bar-label">Sem atraso</div>
-                <div class="bar orange" style="width: 25%">254</div>
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <div class="mt-[22px] grid grid-cols-[70px_1fr] items-center gap-x-4 gap-y-2.5">
+                <div class="text-right text-[0.42em] text-muted">Com atraso</div>
+                <div
+                  class="flex h-[42px] w-[92%] items-center rounded-xl bg-gradient-to-r from-danger to-rose-400 pl-4 text-[0.45em] font-extrabold text-white"
+                >
+                  2.223
+                </div>
+                <div class="text-right text-[0.42em] text-muted">Sem atraso</div>
+                <div
+                  class="flex h-[42px] w-1/4 items-center rounded-xl bg-gradient-to-r from-signal to-orange-400 pl-4 text-[0.45em] font-extrabold text-white"
+                >
+                  254
+                </div>
               </div>
-              <p class="small" style="margin-top: 22px">
+              <p class="mt-[22px] text-[0.47em] leading-[1.35] text-muted">
                 Leitura: atraso e reclamação estão fortemente conectados, mas
                 ainda existem reclamações por outros motivos.
               </p>
@@ -447,32 +342,44 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">5 · Rigor analítico</div>
-          <h2>O SAC foi tratado como achado secundário</h2>
-          <div class="grid-2">
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            5 · Rigor analítico
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            O SAC foi tratado como achado secundário
+          </h2>
+          <div class="grid grid-cols-2 items-center gap-9">
             <div>
-              <p class="quote">
+              <p
+                class="text-[0.8em] font-extrabold leading-[1.28] tracking-normal text-ink"
+              >
                 A quantidade de contatos no SAC não aumentou proporcionalmente
                 aos dias de atraso.
               </p>
-              <p class="subtitle">
+              <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-muted">
                 Por isso, o SAC não foi colocado como consequência direta do
                 atraso na narrativa principal.
               </p>
             </div>
-            <div class="panel">
-              <p style="font-size: 0.62em">
-                <span class="check">✓</span> Existe associação entre SAC e NPS
-                menor.
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <p class="text-[0.62em] leading-[1.35] text-ink">
+                <span class="font-black text-success">✓</span> Existe associação
+                entre SAC e NPS menor.
               </p>
-              <p style="font-size: 0.62em">
-                <span class="warn">!</span> Mas os dados não mostram que mais
-                atraso gera mais contatos.
+              <p class="text-[0.62em] leading-[1.35] text-ink">
+                <span class="font-black text-signal">!</span> Mas os dados não
+                mostram que mais atraso gera mais contatos.
               </p>
-              <p style="font-size: 0.62em">
-                <span class="check">✓</span> A recomendação permanece focada no
-                atraso e nas reclamações.
+              <p class="text-[0.62em] leading-[1.35] text-ink">
+                <span class="font-black text-success">✓</span> A recomendação
+                permanece focada no atraso e nas reclamações.
               </p>
             </div>
           </div>
@@ -483,22 +390,48 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">6 · Insight de negócio</div>
-          <h2>Atacar a origem, não apenas os sintomas</h2>
-          <div class="grid-2">
-            <div class="flow">
-              <div class="flow-item">Atraso na entrega</div>
-              <div class="flow-down">↓</div>
-              <div class="flow-item">Reclamação formal</div>
-              <div class="flow-down">↓</div>
-              <div class="flow-item">NPS menor</div>
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            6 · Insight de negócio
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            Atacar a origem, não apenas os sintomas
+          </h2>
+          <div class="grid grid-cols-2 items-center gap-9">
+            <div class="mt-5 grid max-w-[520px] grid-cols-1 gap-4">
+              <div
+                class="rounded-[22px] border border-line bg-white px-[22px] py-[18px] text-center text-[0.7em] font-extrabold"
+              >
+                Atraso na entrega
+              </div>
+              <div class="text-center text-[0.72em] leading-[0.7] text-muted">
+                ↓
+              </div>
+              <div
+                class="rounded-[22px] border border-line bg-white px-[22px] py-[18px] text-center text-[0.7em] font-extrabold"
+              >
+                Reclamação formal
+              </div>
+              <div class="text-center text-[0.72em] leading-[0.7] text-muted">
+                ↓
+              </div>
+              <div
+                class="rounded-[22px] border border-line bg-white px-[22px] py-[18px] text-center text-[0.7em] font-extrabold"
+              >
+                NPS menor
+              </div>
             </div>
             <div>
-              <p class="quote">
+              <p
+                class="text-[0.8em] font-extrabold leading-[1.28] tracking-normal text-ink"
+              >
                 A recomendação deve atuar antes da insatisfação acontecer.
               </p>
-              <p class="subtitle">
+              <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-muted">
                 A análise sugere que melhorar a precisão da promessa de entrega
                 é mais estratégico do que apenas reagir às reclamações depois do
                 atraso.
@@ -511,32 +444,62 @@
           </aside>
         </section>
 
-        <section>
-          <div class="kicker">7 · Recomendação</div>
-          <h2>Recalibrar a estimativa de entrega</h2>
-          <div class="compare">
-            <div class="panel">
-              <h3>Situação atual</h3>
-              <p>Prazo prometido</p>
-              <p class="muted">↓</p>
-              <p>Entrega atrasada</p>
-              <p class="muted">↓</p>
-              <p>Reclamação</p>
-              <p class="muted">↓</p>
-              <p><strong>NPS menor</strong></p>
+        <section class="box-border px-14 py-8">
+          <div
+            class="mb-[22px] text-[0.38em] font-bold uppercase tracking-[0.16em] text-action"
+          >
+            7 · Recomendação
+          </div>
+          <h2
+            class="mb-[0.35em] text-[1.08em] font-bold leading-[1.16] tracking-normal text-ink normal-case"
+          >
+            Recalibrar a estimativa de entrega
+          </h2>
+          <div class="mt-6 grid grid-cols-2 gap-6">
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <h3
+                class="m-0 mb-[18px] text-[0.66em] font-bold tracking-normal text-ink normal-case"
+              >
+                Situação atual
+              </h3>
+              <p class="text-[0.66em] leading-[1.35] text-ink">Prazo prometido</p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">Entrega atrasada</p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">Reclamação</p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">
+                <strong>NPS menor</strong>
+              </p>
             </div>
-            <div class="panel">
-              <h3>Proposta</h3>
-              <p>Estimativa recalibrada</p>
-              <p class="muted">↓</p>
-              <p>Prazo mais aderente à operação</p>
-              <p class="muted">↓</p>
-              <p>Menos atrasos percebidos</p>
-              <p class="muted">↓</p>
-              <p><strong>Maior satisfação</strong></p>
+            <div
+              class="rounded-[24px] border border-line bg-white p-[26px] shadow-panel"
+            >
+              <h3
+                class="m-0 mb-[18px] text-[0.66em] font-bold tracking-normal text-ink normal-case"
+              >
+                Proposta
+              </h3>
+              <p class="text-[0.66em] leading-[1.35] text-ink">
+                Estimativa recalibrada
+              </p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">
+                Prazo mais aderente à operação
+              </p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">
+                Menos atrasos percebidos
+              </p>
+              <p class="text-[0.66em] leading-[1.35] text-muted">↓</p>
+              <p class="text-[0.66em] leading-[1.35] text-ink">
+                <strong>Maior satisfação</strong>
+              </p>
             </div>
           </div>
-          <p class="footer-note">
+          <p class="absolute bottom-6 left-14 right-14 text-[0.38em] text-muted">
             Evolução futura: modelo preditivo de ETA com distância,
             transportadora, centro de distribuição, sazonalidade e histórico
             operacional.
@@ -548,14 +511,23 @@
           </aside>
         </section>
 
-        <section data-background-color="#17233c">
-          <h2 style="color: white; max-width: 980px">Conclusão</h2>
-          <p class="quote" style="color: white; max-width: 1000px">
+        <section
+          class="box-border px-14 py-8"
+          data-background-color="#17233c"
+        >
+          <h2
+            class="mb-[0.35em] max-w-[980px] text-[1.08em] font-bold leading-[1.16] tracking-normal text-white normal-case"
+          >
+            Conclusão
+          </h2>
+          <p
+            class="max-w-[1000px] text-[0.8em] font-extrabold leading-[1.28] tracking-normal text-white"
+          >
             A análise exploratória identificou que o atraso é o principal fator
             associado à redução do NPS e está fortemente conectado às
             reclamações formais.
           </p>
-          <p class="subtitle" style="color: #cbd5e1">
+          <p class="max-w-[860px] text-[0.7em] leading-[1.35] text-slate-300">
             Atuar na precisão das estimativas de entrega representa uma
             oportunidade prática para reduzir reclamações e melhorar a
             experiência do cliente.
