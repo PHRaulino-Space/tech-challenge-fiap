@@ -19,6 +19,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
     />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/print/pdf.css"
+      media="print"
+    /> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -51,12 +56,35 @@
       .reveal li {
         line-height: 1.35;
       }
+      .reveal h1.text-\[68px\] {
+        font-size: 75px !important;
+      }
+      .reveal h2.text-3xl {
+        font-size: 2.05rem !important;
+      }
+      .reveal h2.text-4xl {
+        font-size: 2.48rem !important;
+      }
+      .reveal h2.text-\[42px\] {
+        font-size: 46px !important;
+      }
+      .reveal h2.text-\[44px\] {
+        font-size: 48px !important;
+      }
+      .reveal h2.text-\[56px\] {
+        font-size: 62px !important;
+      }
+      .reveal h3.text-lg {
+        font-size: 1.24rem !important;
+      }
+      .reveal h3.text-xl {
+        font-size: 1.38rem !important;
+      }
       .reveal .progress {
-        color: #2563eb;
-        height: 4px;
+        display: none !important;
       }
       .reveal .controls {
-        color: #2563eb;
+        display: none !important;
       }
       .slide-wrap {
         width: 100%;
@@ -88,16 +116,15 @@
         fill: transparent;
       }
       .fragment.fade-up {
-        transform: translateY(18px);
-      }
-      .no-animations .reveal .fragment {
         opacity: 1 !important;
         visibility: visible !important;
         transform: none !important;
         transition: none !important;
       }
-      .no-animations .reveal .slides section {
-        transition: none !important;
+      .reveal .fragment {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
       }
       .kicker {
         font-size: 14px;
@@ -138,88 +165,32 @@
         border: 1px solid #dbeafe;
         box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
       }
+      .flow-card p,
+      .benefit-card p {
+        font-size: 0.98rem !important;
+      }
+      .insight-card p,
+      .insight-card li {
+        font-size: 1.18rem !important;
+      }
+      .reveal .rounded-3xl.border p,
+      .reveal .rounded-2xl.bg-slate-50 p {
+        font-size: 1.04rem !important;
+      }
       .benefit-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
       }
       @media print {
-        @page {
-          margin: 0;
+        .reveal .slides section .fragment {
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: none !important;
         }
-        html,
-        body,
-        * {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-        }
-        * {
-          box-shadow: none !important;
-          text-shadow: none !important;
-        }
-        .shadow-sm,
-        .chart-card,
-        .insight-card,
-        .flow-card,
-        .benefit-card {
-          box-shadow: none !important;
-        }
-        .solution-slide .slide-wrap {
-          padding: 34px 48px !important;
-          justify-content: flex-start !important;
-        }
-        .solution-slide h2 {
-          font-size: 34px !important;
-          margin-bottom: 20px !important;
-        }
-        .solution-slide .grid {
-          gap: 14px !important;
-        }
-        .solution-slide .flow-card {
-          min-height: 136px !important;
-          padding: 14px !important;
-        }
-        .solution-slide .flow-card svg {
-          width: 30px !important;
-          height: 30px !important;
-          margin-bottom: 10px !important;
-        }
-        .solution-slide .flow-card h3 {
-          font-size: 15px !important;
-          margin-bottom: 6px !important;
-        }
-        .solution-slide .flow-card p {
-          font-size: 12px !important;
-          line-height: 1.25 !important;
-        }
-        .solution-slide .insight-card {
-          margin-top: 16px !important;
-          padding: 18px !important;
-        }
-        .solution-slide .insight-card p {
-          font-size: 16px !important;
-        }
-        .solution-slide .bg-slate-950 {
-          padding: 22px !important;
-        }
-        .solution-slide .bg-slate-950 .mb-10 {
-          margin-bottom: 18px !important;
-        }
-        .solution-slide .bg-slate-950 .space-y-5 > :not([hidden]) ~ :not([hidden]) {
-          margin-top: 12px !important;
-        }
-        .conclusion-slide,
-        .conclusion-slide .slide-wrap {
-          background: #2563eb !important;
-        }
-        .conclusion-slide .slide-wrap {
-          width: calc(100% + 4px) !important;
-          height: calc(100% + 4px) !important;
-          min-height: calc(720px + 4px) !important;
-          margin: -2px !important;
-          padding: 60px 74px !important;
-        }
-        .conclusion-slide .blur-3xl {
+        .reveal .controls,
+        .reveal .progress,
+        .reveal .slide-number {
           display: none !important;
         }
       }
@@ -275,7 +246,7 @@
               </p>
               <div class="grid grid-cols-5 gap-4 items-stretch">
                 <div
-                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i data-lucide="user" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Cliente</h3>
@@ -284,7 +255,7 @@
                   </p>
                 </div>
                 <div
-                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i
                     data-lucide="shopping-bag"
@@ -296,7 +267,7 @@
                   </p>
                 </div>
                 <div
-                  class="fragment fade-up rounded-3xl border border-blue-200 p-6 bg-blue-50 shadow-sm"
+                  class="rounded-3xl border border-blue-200 p-6 bg-blue-50 shadow-sm"
                 >
                   <i data-lucide="truck" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Logística</h3>
@@ -305,7 +276,7 @@
                   </p>
                 </div>
                 <div
-                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i
                     data-lucide="headphones"
@@ -317,7 +288,7 @@
                   </p>
                 </div>
                 <div
-                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i data-lucide="star" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Satisfação</h3>
@@ -353,7 +324,7 @@
               >
                 <div class="grid gap-4">
                   <div
-                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -368,7 +339,7 @@
                     </div>
                   </div>
                   <div
-                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -383,7 +354,7 @@
                     </div>
                   </div>
                   <div
-                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -413,17 +384,16 @@
                 dos clientes.
               </h2>
 
-              <div class="fragment fade-up chart-card rounded-[32px] h-[330px] p-5">
-                  <div id="nps-por-atraso-chart" class="w-full h-full"></div>
-
+              <div class="chart-card rounded-[32px] h-[410px] p-6">
+                <div id="nps-por-atraso-chart" class="w-full h-full"></div>
               </div>
 
-              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
+              <div class="mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
-                <p class="text-base leading-snug text-slate-800">
+                <p class="text-xl leading-snug text-slate-800">
                   A distribuição das notas se desloca para baixo conforme o
                   atraso aumenta. Isso indica que o impacto não está concentrado
                   apenas em casos extremos.
@@ -442,29 +412,29 @@
                 A insatisfação também se reflete nas reclamações formais.
               </h2>
 
-              <div
-                class="fragment fade-up chart-card rounded-[32px] h-[330px] p-5"
-              >
+              <div class="chart-card rounded-[32px] h-[390px] p-6">
                 <div
                   id="reclamacoes-por-atraso-chart"
                   class="w-full h-full"
                 ></div>
               </div>
 
-              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
+              <div class="mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
                 <ul
-                  class="list-disc pl-6 text-base leading-snug text-slate-800 space-y-2"
+                  class="list-disc pl-6 text-lg leading-snug text-slate-800 space-y-2"
                 >
                   <li>
                     A quantidade média de reclamações aumenta conforme os dias
                     de atraso crescem.
                   </li>
                   <li>
-                    Todos os pedidos com atraso apresentaram pelo menos uma reclamação formal na base analisada, reforçando uma forte associação entre atraso e insatisfação. Entretanto, os dados não permitem afirmar que todas as reclamações foram causadas exclusivamente pelo atraso.
+                    Todos os clientes com atraso registraram ao menos uma
+                    reclamação formal, reforçando a forte associação entre
+                    atraso e insatisfação.
                   </li>
                 </ul>
               </div>
@@ -478,87 +448,145 @@
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Reflexos para o negócio</div>
               <h2 class="text-3xl font-extrabold mb-8">
-                Clientes com atraso apresentaram menor taxa de recompra em até 30 dias.
+                Clientes com atraso apresentaram menor taxa de recompra em até
+                30 dias.
               </h2>
 
-              <div
-                class="fragment fade-up chart-card rounded-[32px] h-[330px] p-5"
-              >
+              <div class="chart-card rounded-[32px] h-[390px] p-6">
                 <div id="recompra-por-atraso-chart" class="w-full h-full"></div>
               </div>
 
-              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
+              <div class="mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
-                <p class="text-base leading-snug text-slate-800">
-                  Clientes que receberam seus pedidos sem atraso apresentaram uma taxa de recompra significativamente maior. Embora a análise não permita afirmar causalidade, os resultados indicam que atrasos podem comprometer a retenção de clientes.
+                <p class="text-lg leading-snug text-slate-800">
+                  Clientes que receberam seus pedidos sem atraso apresentaram
+                  uma taxa de recompra significativamente maior. Embora a
+                  análise não permita afirmar causalidade, os resultados indicam
+                  que atrasos podem comprometer a retenção de clientes.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-
         <!-- 7. Solução proposta -->
-        <section class="solution-slide">
+        <section>
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Solução proposta</div>
               <h2 class="text-[42px] leading-tight font-extrabold mb-8">
-                Recalibrar continuamente a estimativa de entrega utilizando dados históricos e operacionais.
+                Recalibrar continuamente a estimativa de entrega utilizando
+                dados históricos e operacionais.
               </h2>
 
               <div class="grid grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
-                <div class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-7">
+                <div
+                  class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-7"
+                >
                   <div class="grid grid-cols-4 gap-4 items-stretch">
-                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
-                      <i data-lucide="database" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
-                      <h3 class="text-lg font-extrabold mb-2">Dados históricos</h3>
-                      <p class="text-sm text-slate-500">Pedidos, atraso, região e comportamento.</p>
+                    <div
+                      class="flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]"
+                    >
+                      <i
+                        data-lucide="database"
+                        class="w-10 h-10 text-blue-600 mx-auto mb-4"
+                      ></i>
+                      <h3 class="text-lg font-extrabold mb-2">
+                        Dados históricos
+                      </h3>
+                      <p class="text-sm text-slate-500">
+                        Pedidos, atraso, região e comportamento.
+                      </p>
                     </div>
-                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
-                      <i data-lucide="brain-circuit" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
-                      <h3 class="text-lg font-extrabold mb-2">Modelo preditivo</h3>
-                      <p class="text-sm text-slate-500">Estimativa de Tempo de Entrega.</p>
+                    <div
+                      class="flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]"
+                    >
+                      <i
+                        data-lucide="brain-circuit"
+                        class="w-10 h-10 text-blue-600 mx-auto mb-4"
+                      ></i>
+                      <h3 class="text-lg font-extrabold mb-2">
+                        Modelo preditivo
+                      </h3>
+                      <p class="text-sm text-slate-500">
+                        Estimativa de Tempo de Entrega.
+                      </p>
                     </div>
-                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
-                      <i data-lucide="route" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
-                      <h3 class="text-lg font-extrabold mb-2">Prazo aderente</h3>
-                      <p class="text-sm text-slate-500">Previsão mais próxima da realidade logística.</p>
+                    <div
+                      class="flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]"
+                    >
+                      <i
+                        data-lucide="route"
+                        class="w-10 h-10 text-blue-600 mx-auto mb-4"
+                      ></i>
+                      <h3 class="text-lg font-extrabold mb-2">
+                        Prazo aderente
+                      </h3>
+                      <p class="text-sm text-slate-500">
+                        Previsão mais próxima da realidade logística.
+                      </p>
                     </div>
-                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
-                      <i data-lucide="smile" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
-                      <h3 class="text-lg font-extrabold mb-2">Expectativa alinhada</h3>
-                      <p class="text-sm text-slate-500">Menos frustração e maior confiança.</p>
+                    <div
+                      class="flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]"
+                    >
+                      <i
+                        data-lucide="smile"
+                        class="w-10 h-10 text-blue-600 mx-auto mb-4"
+                      ></i>
+                      <h3 class="text-lg font-extrabold mb-2">
+                        Expectativa alinhada
+                      </h3>
+                      <p class="text-sm text-slate-500">
+                        Menos frustração e maior confiança.
+                      </p>
                     </div>
                   </div>
 
-                  <div class="fragment fade-up mt-7 rounded-3xl insight-card p-6">
+                  <div class="mt-7 rounded-3xl insight-card p-6">
                     <div class="insight-label text-xl mb-2">
                       <i data-lucide="target" class="w-6 h-6"></i>
                       Objetivo
                     </div>
-                    <p class="text-base leading-snug text-slate-800">
-                      Não é apenas reduzir o tempo médio de entrega. É reduzir a diferença entre o prazo prometido e o prazo real, tornando a experiência mais previsível para o cliente.
+                    <p class="text-lg leading-snug text-slate-800">
+                      Não é apenas reduzir o tempo médio de entrega. É reduzir a
+                      diferença entre o prazo prometido e o prazo real, tornando
+                      a experiência mais previsível para o cliente.
                     </p>
                   </div>
                 </div>
 
-                <div class="fragment fade-up rounded-[32px] bg-slate-950 text-white p-8 flex flex-col justify-space-between">
-                  <div class="text-blue-300 font-bold text-xl mb-10">Mudança de foco</div>
+                <div
+                  class="rounded-[32px] bg-slate-950 text-white p-8 flex flex-col justify-space-between"
+                >
+                  <div class="text-blue-300 font-bold text-xl mb-10">
+                    Mudança de foco
+                  </div>
                   <div class="space-y-5">
-                    <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
-                      <p class="text-slate-300 text-base mb-1">Evitar uma solução cara baseada apenas em</p>
-                      <p class="text-xl font-extrabold text-white">entregar mais rápido</p>
+                    <div
+                      class="rounded-2xl bg-white/10 border border-white/15 p-5"
+                    >
+                      <p class="text-slate-300 text-base mb-1">
+                        Evitar uma solução cara baseada apenas em
+                      </p>
+                      <p class="text-xl font-extrabold text-white">
+                        entregar mais rápido
+                      </p>
                     </div>
                     <div class="flex justify-center text-blue-300">
                       <i data-lucide="arrow-down" class="w-8 h-8"></i>
                     </div>
-                    <div class="rounded-2xl bg-blue-500/20 border border-blue-300/30 p-5">
-                      <p class="text-blue-100 text-base mb-1">Atuar na origem identificada pelos dados</p>
-                      <p class="text-xl font-extrabold text-white">prometer melhor</p>
+                    <div
+                      class="rounded-2xl bg-blue-500/20 border border-blue-300/30 p-5"
+                    >
+                      <p class="text-blue-100 text-base mb-1">
+                        Atuar na origem identificada pelos dados
+                      </p>
+                      <p class="text-xl font-extrabold text-white">
+                        prometer melhor
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -577,54 +605,75 @@
               </h2>
 
               <div class="grid grid-cols-4 gap-5">
-                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
-                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                <div class="benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5"
+                  >
                     <i data-lucide="heart" class="w-7 h-7 text-blue-600"></i>
                   </div>
                   <h3 class="text-xl font-extrabold mb-3">Maior satisfação</h3>
                   <p class="text-sm text-slate-600">
-                    Estimativas mais confiáveis reduzem a quebra de expectativa do cliente.
+                    Estimativas mais confiáveis reduzem a quebra de expectativa
+                    do cliente.
                   </p>
                 </div>
 
-                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
-                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
-                    <i data-lucide="message-square-warning" class="w-7 h-7 text-blue-600"></i>
+                <div class="benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5"
+                  >
+                    <i
+                      data-lucide="message-square-warning"
+                      class="w-7 h-7 text-blue-600"
+                    ></i>
                   </div>
                   <h3 class="text-xl font-extrabold mb-3">Menos reclamações</h3>
                   <p class="text-sm text-slate-600">
-                    Uma expectativa alinhada tende a reduzir reclamações relacionadas à entrega.
+                    Uma expectativa alinhada tende a reduzir reclamações
+                    relacionadas à entrega.
                   </p>
                 </div>
 
-                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
-                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                <div class="benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5"
+                  >
                     <i data-lucide="repeat-2" class="w-7 h-7 text-blue-600"></i>
                   </div>
                   <h3 class="text-xl font-extrabold mb-3">Maior recompra</h3>
                   <p class="text-sm text-slate-600">
-                    Os dados mostraram associação entre atraso e menor taxa de recompra.
+                    Os dados mostraram associação entre atraso e menor taxa de
+                    recompra.
                   </p>
                 </div>
 
-                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
-                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
-                    <i data-lucide="line-chart" class="w-7 h-7 text-blue-600"></i>
+                <div class="benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5"
+                  >
+                    <i
+                      data-lucide="line-chart"
+                      class="w-7 h-7 text-blue-600"
+                    ></i>
                   </div>
                   <h3 class="text-xl font-extrabold mb-3">Decisão eficiente</h3>
                   <p class="text-sm text-slate-600">
-                    Prometer prazos mais aderentes sem depender, necessariamente, de investimentos estruturais.
+                    Prometer prazos mais aderentes sem depender,
+                    necessariamente, de investimentos estruturais.
                   </p>
                 </div>
               </div>
 
-              <div class="fragment fade-up mt-7 rounded-3xl insight-card p-6">
+              <div class="mt-7 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
-                <p class="text-base leading-snug text-slate-800">
-                  Os resultados sugerem que alinhar a expectativa do cliente por meio de estimativas mais precisas pode representar uma alternativa mais eficiente do que buscar apenas reduzir o tempo médio de entrega.
+                <p class="text-lg leading-snug text-slate-800">
+                  Os resultados sugerem que alinhar a expectativa do cliente por
+                  meio de estimativas mais precisas pode representar uma
+                  alternativa mais eficiente do que buscar apenas reduzir o
+                  tempo médio de entrega.
                 </p>
               </div>
             </div>
@@ -640,46 +689,74 @@
               <div>
                 <div class="kicker mb-4">Próximos passos</div>
                 <h2 class="text-[44px] leading-tight font-extrabold mb-6">
-                  Evoluir para um modelo preditivo de Estimativa de Tempo de Entrega.
+                  Evoluir para um modelo preditivo de Estimativa de Tempo de
+                  Entrega.
                 </h2>
-                <p class="text-lg text-slate-600">
-                  A análise exploratória permitiu identificar o principal problema e direcionar uma solução. Para implantação em produção, o modelo deve incorporar variáveis operacionais adicionais que aumentem a precisão das previsões.
+                <p class="text-2xl text-slate-600">
+                  A análise exploratória permitiu identificar o principal
+                  problema e direcionar uma solução. Para implantação em
+                  produção, o modelo deve incorporar variáveis operacionais
+                  adicionais que aumentem a precisão das previsões.
                 </p>
               </div>
               <div
                 class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-8"
               >
                 <div class="grid grid-cols-2 gap-4">
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="map-pin" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="map-pin"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Distância e região</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="warehouse" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="warehouse"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Centro de distribuição</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="truck" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="truck"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Transportadora</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="calendar-days" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="calendar-days"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Sazonalidade</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="package" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="package"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Peso e categoria</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="history" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="history"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Histórico da rota</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="cloud-sun" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="cloud-sun"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Clima</h3>
                   </div>
-                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i data-lucide="traffic-cone" class="w-8 h-8 text-blue-600 mb-3"></i>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="traffic-cone"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
                     <h3 class="text-xl font-bold">Trânsito</h3>
                   </div>
                 </div>
@@ -689,7 +766,7 @@
         </section>
 
         <!-- 10. Conclusão -->
-        <section class="conclusion-slide">
+        <section>
           <div
             class="slide-wrap bg-blue-600 text-white relative overflow-hidden"
           >
@@ -701,35 +778,68 @@
             ></div>
             <div class="max-w-6xl mx-auto relative z-10">
               <div class="text-blue-100 text-lg font-bold mb-6">Conclusão</div>
-              <h2 class="text-[56px] font-extrabold leading-tight text-white mb-10 max-w-5xl">
-                Prometer melhor pode gerar mais valor do que apenas entregar mais rápido.
+              <h2
+                class="text-[56px] font-extrabold leading-tight text-white mb-10 max-w-5xl"
+              >
+                Prometer melhor pode gerar mais valor do que apenas entregar
+                mais rápido.
               </h2>
 
               <div class="grid grid-cols-5 gap-4 mb-10">
-                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
-                  <i data-lucide="database" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                <div
+                  class="rounded-3xl bg-white/10 border border-white/15 p-5 text-center"
+                >
+                  <i
+                    data-lucide="database"
+                    class="w-10 h-10 text-blue-100 mx-auto mb-3"
+                  ></i>
                   <h3 class="text-xl font-extrabold text-white">Dados</h3>
                 </div>
-                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
-                  <i data-lucide="scan-line" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                <div
+                  class="rounded-3xl bg-white/10 border border-white/15 p-5 text-center"
+                >
+                  <i
+                    data-lucide="scan-line"
+                    class="w-10 h-10 text-blue-100 mx-auto mb-3"
+                  ></i>
                   <h3 class="text-xl font-extrabold text-white">Previsão</h3>
                 </div>
-                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
-                  <i data-lucide="badge-check" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                <div
+                  class="rounded-3xl bg-white/10 border border-white/15 p-5 text-center"
+                >
+                  <i
+                    data-lucide="badge-check"
+                    class="w-10 h-10 text-blue-100 mx-auto mb-3"
+                  ></i>
                   <h3 class="text-xl font-extrabold text-white">Expectativa</h3>
                 </div>
-                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
-                  <i data-lucide="smile-plus" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                <div
+                  class="rounded-3xl bg-white/10 border border-white/15 p-5 text-center"
+                >
+                  <i
+                    data-lucide="smile-plus"
+                    class="w-10 h-10 text-blue-100 mx-auto mb-3"
+                  ></i>
                   <h3 class="text-xl font-extrabold text-white">Satisfação</h3>
                 </div>
-                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
-                  <i data-lucide="repeat-2" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                <div
+                  class="rounded-3xl bg-white/10 border border-white/15 p-5 text-center"
+                >
+                  <i
+                    data-lucide="repeat-2"
+                    class="w-10 h-10 text-blue-100 mx-auto mb-3"
+                  ></i>
                   <h3 class="text-xl font-extrabold text-white">Retenção</h3>
                 </div>
               </div>
 
               <p class="text-2xl text-blue-50 max-w-5xl">
-                A análise indica que o atraso é o principal fator associado à redução da satisfação dos clientes. Utilizar dados para prever e comunicar prazos mais realistas pode melhorar a experiência do cliente e gerar valor para o negócio.
+                A análise mostrou que o atraso está associado à redução da
+                satisfação, ao aumento das reclamações formais e à diminuição da
+                recompra. A recomendação é utilizar dados para tornar a
+                estimativa de entrega mais aderente à realidade operacional,
+                reduzindo a frustração do cliente e fortalecendo o
+                relacionamento com o negócio.
               </p>
             </div>
           </div>
@@ -802,11 +912,11 @@
 
           const options = await response.json();
 
-          Highcharts.chart(container, {
+          return Highcharts.chart(container, {
             ...options,
             chart: {
               ...options.chart,
-              height: 320,
+              height: 360,
               style: {
                 fontFamily: '"Inter", system-ui, sans-serif',
               },
@@ -872,19 +982,20 @@
           container.innerHTML =
             '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de NPS por atraso.</div>';
           console.error("Erro ao carregar nps_por_atraso.json:", error);
+          return null;
         }
       }
 
       async function renderReclamacoesPorAtrasoChart() {
         const container = document.getElementById(
-          "reclamacoes-por-atraso-chart"
+          "reclamacoes-por-atraso-chart",
         );
 
         try {
           await loadHighcharts();
 
           const response = await fetch(
-            "data_highcharts/reclamacoes_por_atraso.json"
+            "data_highcharts/reclamacoes_por_atraso.json",
           );
 
           if (!response.ok) {
@@ -893,11 +1004,11 @@
 
           const options = await response.json();
 
-          Highcharts.chart(container, {
+          return Highcharts.chart(container, {
             ...options,
             chart: {
               ...options.chart,
-              height: 320,
+              height: 340,
               style: {
                 fontFamily: '"Inter", system-ui, sans-serif',
               },
@@ -963,6 +1074,7 @@
           container.innerHTML =
             '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de reclamações por atraso.</div>';
           console.error("Erro ao carregar reclamacoes_por_atraso.json:", error);
+          return null;
         }
       }
 
@@ -973,7 +1085,7 @@
           await loadHighcharts();
 
           const response = await fetch(
-            "data_highcharts/recompra_por_atraso.json"
+            "data_highcharts/recompra_por_atraso.json",
           );
 
           if (!response.ok) {
@@ -983,11 +1095,11 @@
           const options = await response.json();
           const recompraColors = ["#2563eb", "#3b82f6", "#64748b", "#334155"];
 
-          Highcharts.chart(container, {
+          return Highcharts.chart(container, {
             ...options,
             chart: {
               ...options.chart,
-              height: 320,
+              height: 340,
               style: {
                 fontFamily: '"Inter", system-ui, sans-serif',
               },
@@ -1057,39 +1169,66 @@
           container.innerHTML =
             '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de recompra por atraso.</div>';
           console.error("Erro ao carregar recompra_por_atraso.json:", error);
+          return null;
         }
       }
 
-      const ANIMATIONS_ENABLED = false;
+      async function renderAllCharts() {
+        if (document.fonts) {
+          await document.fonts.ready;
+        }
 
-      document.documentElement.classList.toggle(
-        "no-animations",
-        !ANIMATIONS_ENABLED
-      );
+        const charts = await Promise.all([
+          renderNpsPorAtrasoChart(),
+          renderReclamacoesPorAtrasoChart(),
+          renderRecompraPorAtrasoChart(),
+        ]);
 
-      if (!ANIMATIONS_ENABLED) {
-        document.querySelectorAll(".fragment").forEach((element) => {
-          element.classList.remove("fragment", "fade-up");
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+
+        charts.filter(Boolean).forEach((chart) => {
+          chart.reflow();
+          chart.redraw(false);
         });
+
+        document.documentElement.classList.add("charts-ready");
+        return charts;
       }
+
+      const nativePrint = window.print.bind(window);
+      let chartsReadyPromise;
+
+      function ensureChartsReady() {
+        if (!chartsReadyPromise) {
+          chartsReadyPromise = renderAllCharts();
+        }
+
+        return chartsReadyPromise;
+      }
+
+      window.print = async function printAfterCharts() {
+        await ensureChartsReady();
+        nativePrint();
+      };
+
+      window.addEventListener("beforeprint", () => {
+        ensureChartsReady();
+      });
 
       Reveal.initialize({
         hash: true,
-        controls: true,
-        progress: true,
-        fragments: ANIMATIONS_ENABLED,
-        pdfSeparateFragments: false,
+        controls: false,
+        progress: false,
+        fragments: false,
         center: false,
         width: 1280,
         height: 720,
         margin: 0.02,
-        transition: ANIMATIONS_ENABLED ? "slide" : "none",
-        backgroundTransition: ANIMATIONS_ENABLED ? "fade" : "none",
+        transition: "none",
+        backgroundTransition: "none",
       });
       lucide.createIcons();
-      renderNpsPorAtrasoChart();
-      renderReclamacoesPorAtrasoChart();
-      renderRecompraPorAtrasoChart();
+      ensureChartsReady();
     </script>
   </body>
 </html>
