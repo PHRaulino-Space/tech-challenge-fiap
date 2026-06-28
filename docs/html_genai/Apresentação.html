@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech Challenge — NPS e Atraso na Entrega</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css"
+    />
+    <style>
+      :root {
+        --bg: #f7f4ef;
+        --ink: #17233c;
+        --muted: #667085;
+        --accent: #ef4444;
+        --accent2: #f97316;
+        --blue: #2563eb;
+        --green: #16a34a;
+        --line: #d9dee8;
+      }
+      .reveal {
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+      }
+      .reveal .slides {
+        text-align: left;
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: var(--ink);
+        letter-spacing: -0.035em;
+        text-transform: none;
+      }
+      .reveal h1 {
+        font-size: 2.05em;
+        line-height: 1.05;
+      }
+      .reveal h2 {
+        font-size: 1.5em;
+        line-height: 1.1;
+        margin-bottom: 0.35em;
+      }
+      .reveal p,
+      .reveal li {
+        font-size: 0.66em;
+        line-height: 1.35;
+      }
+      .reveal section {
+        box-sizing: border-box;
+        padding: 32px 56px;
+      }
+      .kicker {
+        font-size: 0.38em;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--blue);
+        font-weight: 750;
+        margin-bottom: 22px;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 0.7em !important;
+        max-width: 860px;
+      }
+      .big-number {
+        font-size: 2.3em;
+        font-weight: 850;
+        letter-spacing: -0.05em;
+        color: var(--accent);
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        align-items: center;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .panel {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 26px;
+        box-shadow: 0 16px 40px rgba(23, 35, 60, 0.07);
+      }
+      .small {
+        font-size: 0.47em !important;
+        color: var(--muted);
+      }
+      .pill {
+        display: inline-block;
+        border-radius: 999px;
+        padding: 8px 14px;
+        background: #eef2ff;
+        color: #1e40af;
+        font-size: 0.42em;
+        font-weight: 750;
+      }
+      .journey {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 34px;
+      }
+      .journey .step {
+        flex: 1;
+        min-height: 78px;
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.58em;
+        font-weight: 750;
+        box-shadow: 0 10px 26px rgba(23, 35, 60, 0.06);
+      }
+      .arrow {
+        color: var(--muted);
+        font-size: 0.8em;
+      }
+      .bar-chart {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 10px 16px;
+        align-items: center;
+        margin-top: 22px;
+      }
+      .bar-label {
+        font-size: 0.42em;
+        color: var(--muted);
+        text-align: right;
+      }
+      .bar {
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        padding-left: 16px;
+        color: white;
+        font-size: 0.45em;
+        font-weight: 800;
+      }
+      .bar.red {
+        background: linear-gradient(90deg, #ef4444, #fb7185);
+      }
+      .bar.orange {
+        background: linear-gradient(90deg, #f97316, #fb923c);
+      }
+      .bar.blue {
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+      }
+      .slope {
+        height: 260px;
+        border-left: 2px solid var(--line);
+        border-bottom: 2px solid var(--line);
+        position: relative;
+        margin-top: 28px;
+      }
+      .slope-line {
+        position: absolute;
+        left: 55px;
+        top: 62px;
+        width: 620px;
+        height: 8px;
+        background: linear-gradient(90deg, #f97316, #ef4444);
+        transform: rotate(13deg);
+        border-radius: 99px;
+        transform-origin: left center;
+      }
+      .dot {
+        width: 18px;
+        height: 18px;
+        background: var(--accent);
+        border-radius: 999px;
+        position: absolute;
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0.12);
+      }
+      .d1 {
+        left: 72px;
+        top: 83px;
+      }
+      .d2 {
+        left: 260px;
+        top: 124px;
+      }
+      .d3 {
+        left: 460px;
+        top: 170px;
+      }
+      .d4 {
+        left: 650px;
+        top: 214px;
+      }
+      .axis {
+        position: absolute;
+        color: var(--muted);
+        font-size: 0.38em;
+      }
+      .xaxis {
+        bottom: -42px;
+        right: 0;
+      }
+      .yaxis {
+        top: -28px;
+        left: -2px;
+      }
+      .flow {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 20px;
+        max-width: 520px;
+      }
+      .flow-item {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 18px 22px;
+        font-weight: 800;
+        font-size: 0.7em;
+        text-align: center;
+      }
+      .flow-down {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.72em;
+        line-height: 0.7;
+      }
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+      .compare h3 {
+        font-size: 0.85em;
+        margin: 0 0 18px 0;
+      }
+      .check {
+        color: var(--green);
+        font-weight: 900;
+      }
+      .warn {
+        color: var(--accent2);
+        font-weight: 900;
+      }
+      .footer-note {
+        position: absolute;
+        bottom: 24px;
+        left: 56px;
+        right: 56px;
+        font-size: 0.38em;
+        color: var(--muted);
+      }
+      .quote {
+        font-size: 1em !important;
+        line-height: 1.25 !important;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+      .muted {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-background-color="#f7f4ef">
+          <div class="kicker">Tech Challenge · Data Analytics</div>
+          <h1>
+            Como os atrasos na entrega impactam a satisfação dos clientes?
+          </h1>
+          <p class="subtitle">
+            Uma investigação exploratória para identificar os principais fatores
+            associados à redução do NPS em uma jornada de e-commerce.
+          </p>
+          <div class="footer-note">
+            Tempo sugerido: 5 minutos · Foco: problema → descoberta →
+            recomendação
+          </div>
+          <aside class="notes">
+            Abrir dizendo que o objetivo não foi apenas montar gráficos, mas
+            investigar quais fatores da jornada mais se associam à queda do NPS.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">1 · Contexto</div>
+          <h2>A análise seguiu a jornada do cliente</h2>
+          <p class="subtitle">
+            A base reúne variáveis de cliente, pedido, logística, atendimento e
+            satisfação. A pergunta principal foi:
+            <strong>o que está mais associado à queda do NPS?</strong>
+          </p>
+          <div class="journey">
+            <div class="step">Cliente</div>
+            <div class="arrow">→</div>
+            <div class="step">Pedido</div>
+            <div class="arrow">→</div>
+            <div class="step">Logística</div>
+            <div class="arrow">→</div>
+            <div class="step">Atendimento</div>
+            <div class="arrow">→</div>
+            <div class="step">Satisfação<br />NPS</div>
+          </div>
+          <aside class="notes">
+            Explicar rapidamente que as variáveis foram organizadas conforme a
+            jornada. Isso ajuda a mostrar método e não apenas uma análise solta.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">2 · Investigação</div>
+          <h2>A EDA apontou três sinais de insatisfação</h2>
+          <div class="grid-3" style="margin-top: 28px">
+            <div class="panel">
+              <div class="pill">Logística</div>
+              <h3 style="font-size: 0.9em; margin-top: 22px">
+                Atraso na entrega
+              </h3>
+              <p class="small">
+                Variável objetiva: dias de atraso em relação ao prazo prometido.
+              </p>
+            </div>
+            <div class="panel">
+              <div class="pill">Atendimento</div>
+              <h3 style="font-size: 0.9em; margin-top: 22px">Reclamações</h3>
+              <p class="small">
+                Clientes com reclamações formais apresentam maior risco de notas
+                baixas.
+              </p>
+            </div>
+            <div class="panel">
+              <div class="pill">Atendimento</div>
+              <h3 style="font-size: 0.9em; margin-top: 22px">
+                Contatos no SAC
+              </h3>
+              <p class="small">
+                Associação com NPS menor, mas sem evidência de crescimento
+                proporcional aos dias de atraso.
+              </p>
+            </div>
+          </div>
+          <p class="footer-note ">
+            Decisão analítica: aprofundar o atraso, pois ele é mensurável,
+            objetivo e sustentado pela base.
+          </p>
+          <aside class="notes">
+            Dizer que atraso, reclamação e SAC apareceram como sinais
+            importantes, mas a análise aprofundou o atraso porque ele permite
+            uma recomendação mais direta.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">3 · Principal descoberta</div>
+          <h2>O atraso foi o principal fator associado à queda do NPS</h2>
+          <div class="grid-2">
+            <div>
+              <p class="quote">
+                Conforme o atraso aumenta, a satisfação tende a diminuir.
+              </p>
+              <p class="subtitle">
+                A análise indica uma relação consistente entre dias de atraso e
+                redução da nota de NPS.
+              </p>
+              <p class="small">
+                <strong>Observação:</strong> a análise é observacional.
+                Portanto, o correto é falar em associação, não em causalidade
+                comprovada.
+              </p>
+            </div>
+            <div class="panel">
+              <div class="slope">
+                <div class="axis yaxis">NPS</div>
+                <div class="axis xaxis">Dias de atraso</div>
+                <div class="slope-line"></div>
+                <div class="dot d1"></div>
+                <div class="dot d2"></div>
+                <div class="dot d3"></div>
+                <div class="dot d4"></div>
+              </div>
+              <p class="small" style="text-align: center; margin-top: 52px">
+                Visual: substituir pelo seu gráfico final de NPS por dias/faixas
+                de atraso.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            Este é o slide mais importante. Não dizer que atraso causa queda do
+            NPS; dizer que está fortemente associado e que é a variável mais
+            defensável para aprofundamento.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">4 · Relação com reclamações</div>
+          <h2>Todo atraso veio acompanhado de reclamação formal</h2>
+          <div class="grid-2">
+            <div class="panel">
+              <div class="big-number">100%</div>
+              <p class="quote" style="font-size: 0.78em !important">
+                dos clientes com atraso registraram reclamação.
+              </p>
+              <p class="small">
+                Além disso, cerca de <strong>89,7%</strong> das reclamações
+                ocorreram em pedidos com atraso.
+              </p>
+            </div>
+            <div class="panel">
+              <div class="bar-chart">
+                <div class="bar-label">Com atraso</div>
+                <div class="bar red" style="width: 92%">2.223</div>
+                <div class="bar-label">Sem atraso</div>
+                <div class="bar orange" style="width: 25%">254</div>
+              </div>
+              <p class="small" style="margin-top: 22px">
+                Leitura: atraso e reclamação estão fortemente conectados, mas
+                ainda existem reclamações por outros motivos.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            Explicar que esse é o elo mais forte da narrativa: o atraso não é
+            apenas um número operacional, ele aparece junto da reclamação
+            formal.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">5 · Rigor analítico</div>
+          <h2>O SAC foi tratado como achado secundário</h2>
+          <div class="grid-2">
+            <div>
+              <p class="quote">
+                A quantidade de contatos no SAC não aumentou proporcionalmente
+                aos dias de atraso.
+              </p>
+              <p class="subtitle">
+                Por isso, o SAC não foi colocado como consequência direta do
+                atraso na narrativa principal.
+              </p>
+            </div>
+            <div class="panel">
+              <p style="font-size: 0.62em">
+                <span class="check">✓</span> Existe associação entre SAC e NPS
+                menor.
+              </p>
+              <p style="font-size: 0.62em">
+                <span class="warn">!</span> Mas os dados não mostram que mais
+                atraso gera mais contatos.
+              </p>
+              <p style="font-size: 0.62em">
+                <span class="check">✓</span> A recomendação permanece focada no
+                atraso e nas reclamações.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            Esse slide mostra maturidade: a hipótese foi testada e não
+            sustentada. O SAC pode depender de atendimento, comunicação,
+            resolução ou perfil do cliente.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">6 · Insight de negócio</div>
+          <h2>Atacar a origem, não apenas os sintomas</h2>
+          <div class="grid-2">
+            <div class="flow">
+              <div class="flow-item">Atraso na entrega</div>
+              <div class="flow-down">↓</div>
+              <div class="flow-item">Reclamação formal</div>
+              <div class="flow-down">↓</div>
+              <div class="flow-item">NPS menor</div>
+            </div>
+            <div>
+              <p class="quote">
+                A recomendação deve atuar antes da insatisfação acontecer.
+              </p>
+              <p class="subtitle">
+                A análise sugere que melhorar a precisão da promessa de entrega
+                é mais estratégico do que apenas reagir às reclamações depois do
+                atraso.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            Aqui é a tradução do dado para negócio: a empresa deve agir na
+            promessa e no planejamento de entrega, não apenas no SAC.
+          </aside>
+        </section>
+
+        <section>
+          <div class="kicker">7 · Recomendação</div>
+          <h2>Recalibrar a estimativa de entrega</h2>
+          <div class="compare">
+            <div class="panel">
+              <h3>Situação atual</h3>
+              <p>Prazo prometido</p>
+              <p class="muted">↓</p>
+              <p>Entrega atrasada</p>
+              <p class="muted">↓</p>
+              <p>Reclamação</p>
+              <p class="muted">↓</p>
+              <p><strong>NPS menor</strong></p>
+            </div>
+            <div class="panel">
+              <h3>Proposta</h3>
+              <p>Estimativa recalibrada</p>
+              <p class="muted">↓</p>
+              <p>Prazo mais aderente à operação</p>
+              <p class="muted">↓</p>
+              <p>Menos atrasos percebidos</p>
+              <p class="muted">↓</p>
+              <p><strong>Maior satisfação</strong></p>
+            </div>
+          </div>
+          <p class="footer-note">
+            Evolução futura: modelo preditivo de ETA com distância,
+            transportadora, centro de distribuição, sazonalidade e histórico
+            operacional.
+          </p>
+          <aside class="notes">
+            Fechar dizendo que o modelo preditivo não é a entrega principal
+            agora porque a base não contém todas as variáveis operacionais
+            necessárias. Propor como evolução.
+          </aside>
+        </section>
+
+        <section data-background-color="#17233c">
+          <h2 style="color: white; max-width: 980px">Conclusão</h2>
+          <p class="quote" style="color: white; max-width: 1000px">
+            A análise exploratória identificou que o atraso é o principal fator
+            associado à redução do NPS e está fortemente conectado às
+            reclamações formais.
+          </p>
+          <p class="subtitle" style="color: #cbd5e1">
+            Atuar na precisão das estimativas de entrega representa uma
+            oportunidade prática para reduzir reclamações e melhorar a
+            experiência do cliente.
+          </p>
+          <aside class="notes">
+            Encerrar em uma frase. Reforçar que a análise virou uma recomendação
+            acionável.
+          </aside>
+        </section>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealNotes],
+        width: 1280,
+        height: 720,
+        margin: 0.04,
+      });
+    </script>
+  </body>
+</html>

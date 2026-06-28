@@ -1855,3 +1855,234 @@ fig.show()
 # a nota de NPS no final, mas antecipar o risco e a severidade do atraso. Pedidos com
 # risco de atraso devem acionar intervenção logística e comunicação proativa antes que
 # a experiência vire detratora.
+
+# %% [markdown]
+# <hr>
+# ## Distribuições condicionadas — atraso e reclamações
+#
+# Como fechamento da análise, vale olhar os dois recortes de forma direta:
+#
+# - entre clientes que tiveram atraso, quantas reclamações foram registradas?
+# - entre clientes que reclamaram, quantos dias de atraso ocorreram?
+#
+# Essa leitura ajuda a separar volume de ocorrência de severidade operacional.
+
+# %%
+clientes_com_atraso = df[df["teve_atraso"]].copy()
+
+reclamacoes_clientes_atrasados = (
+    clientes_com_atraso["complaints_count"]
+    .value_counts()
+    .sort_index()
+    .rename_axis("reclamacoes")
+    .reset_index(name="clientes")
+)
+reclamacoes_clientes_atrasados["pct_clientes_atrasados"] = (
+    reclamacoes_clientes_atrasados["clientes"] / len(clientes_com_atraso) * 100
+).round(1)
+reclamacoes_clientes_atrasados["rotulo"] = reclamacoes_clientes_atrasados.apply(
+    lambda row: f"{row['clientes']:,}<br><sub>{row['pct_clientes_atrasados']}%</sub>",
+    axis=1,
+)
+
+fig = px.bar(
+    reclamacoes_clientes_atrasados,
+    x="reclamacoes",
+    y="clientes",
+    text="rotulo",
+    title="Reclamações entre Clientes que Tiveram Atraso",
+    labels={
+        "reclamacoes": "Quantidade de reclamações",
+        "clientes": "Clientes com atraso",
+    },
+    color="pct_clientes_atrasados",
+    color_continuous_scale=["#0284c7", "#f97316", "#ef4444"],
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(title_x=0.5, height=430, coloraxis_showscale=False)
+fig.show()
+
+# %%
+cruzamento_atraso_reclamacao = (
+    df.assign(
+        status_atraso=df["teve_atraso"].map({True: "Com atraso", False: "Sem atraso"}),
+        status_reclamacao=df["reclamou"].map({True: "Com reclamação", False: "Sem reclamação"}),
+    )
+    .groupby(["status_atraso", "status_reclamacao"])
+    .size()
+    .reset_index(name="clientes")
+)
+cruzamento_atraso_reclamacao["pct_base"] = (
+    cruzamento_atraso_reclamacao["clientes"] / len(df) * 100
+).round(1)
+cruzamento_atraso_reclamacao["rotulo"] = cruzamento_atraso_reclamacao.apply(
+    lambda row: f"{row['clientes']:,}<br><sub>{row['pct_base']}% da base</sub>",
+    axis=1,
+)
+
+fig = px.bar(
+    cruzamento_atraso_reclamacao,
+    x="status_atraso",
+    y="clientes",
+    color="status_reclamacao",
+    text="rotulo",
+    title="Cruzamento entre Atraso e Reclamação",
+    labels={
+        "status_atraso": "",
+        "clientes": "Clientes",
+        "status_reclamacao": "",
+    },
+    category_orders={
+        "status_atraso": ["Sem atraso", "Com atraso"],
+        "status_reclamacao": ["Sem reclamação", "Com reclamação"],
+    },
+    color_discrete_map={
+        "Sem reclamação": "#0284c7",
+        "Com reclamação": "#ef4444",
+    },
+)
+fig.update_traces(textposition="inside")
+fig.update_layout(
+    barmode="stack",
+    title_x=0.5,
+    height=430,
+    legend_title="",
+)
+fig.show()
+
+# %%
+resumo_atraso_reclamacao = pd.DataFrame(
+    {
+        "pergunta": [
+            "Clientes com atraso que abriram reclamação",
+            "Clientes com reclamação que também tiveram atraso",
+        ],
+        "percentual": [
+            df.loc[df["teve_atraso"], "reclamou"].mean() * 100,
+            df.loc[df["reclamou"], "teve_atraso"].mean() * 100,
+        ],
+        "clientes": [
+            df[df["teve_atraso"] & df["reclamou"]].shape[0],
+            df[df["reclamou"] & df["teve_atraso"]].shape[0],
+        ],
+        "base_comparacao": [
+            df["teve_atraso"].sum(),
+            df["reclamou"].sum(),
+        ],
+    }
+).round({"percentual": 1})
+
+fig = px.bar(
+    resumo_atraso_reclamacao,
+    x="pergunta",
+    y="percentual",
+    text=resumo_atraso_reclamacao.apply(
+        lambda row: (
+            f"{row['percentual']}%<br><sub>{row['clientes']:,}/{row['base_comparacao']:,}</sub>"
+        ),
+        axis=1,
+    ),
+    title="Atraso e Reclamação: Relações Condicionais",
+    labels={"pergunta": "", "percentual": "% dos clientes"},
+    color="pergunta",
+    color_discrete_sequence=["#f97316", "#ef4444"],
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(title_x=0.5, height=430, showlegend=False, yaxis_range=[0, 100])
+fig.show()
+
+# %%
+clientes_com_reclamacao = df[df["reclamou"]].copy()
+
+atrasos_clientes_reclamaram = (
+    clientes_com_reclamacao["delivery_delay_days"]
+    .value_counts()
+    .sort_index()
+    .rename_axis("dias_atraso")
+    .reset_index(name="clientes")
+)
+atrasos_clientes_reclamaram["pct_clientes_com_reclamacao"] = (
+    atrasos_clientes_reclamaram["clientes"] / len(clientes_com_reclamacao) * 100
+).round(1)
+atrasos_clientes_reclamaram["rotulo"] = atrasos_clientes_reclamaram.apply(
+    lambda row: f"{row['clientes']:,}<br><sub>{row['pct_clientes_com_reclamacao']}%</sub>",
+    axis=1,
+)
+
+fig = px.bar(
+    atrasos_clientes_reclamaram,
+    x="dias_atraso",
+    y="clientes",
+    text="rotulo",
+    title="Atrasos entre Clientes que Registraram Reclamações",
+    labels={
+        "dias_atraso": "Dias de atraso",
+        "clientes": "Clientes com reclamação",
+    },
+    color="pct_clientes_com_reclamacao",
+    color_continuous_scale=["#0284c7", "#f97316", "#ef4444"],
+)
+fig.update_traces(textposition="outside")
+fig.update_layout(title_x=0.5, height=430, coloraxis_showscale=False)
+fig.show()
+
+# %%
+df["faixa_contatos_sac"] = (
+    df["customer_service_contacts"]
+    .clip(upper=4)
+    .map(
+        {
+            0: "0 contatos",
+            1: "1 contato",
+            2: "2 contatos",
+            3: "3 contatos",
+            4: "4+",
+        }
+    )
+)
+
+ordem_contatos_sac = ["0 contatos", "1 contato", "2 contatos", "3 contatos", "4+"]
+
+fig = px.box(
+    df,
+    x="faixa_contatos_sac",
+    y="delivery_delay_days",
+    color="faixa_contatos_sac",
+    category_orders={"faixa_contatos_sac": ordem_contatos_sac},
+    title="Dias de Atraso por Quantidade de Contatos no SAC",
+    labels={
+        "faixa_contatos_sac": "Quantidade de contatos no SAC",
+        "delivery_delay_days": "Dias de atraso",
+    },
+    color_discrete_sequence=["#0284c7", "#38bdf8", "#f97316", "#fb7185", "#ef4444"],
+    points="outliers",
+)
+fig.update_layout(title_x=0.5, height=460, showlegend=False)
+fig.show()
+
+# %%
+heatmap_atraso_sac = (
+    df.groupby(["delivery_delay_days", "faixa_contatos_sac"], observed=True)
+    .size()
+    .reset_index(name="clientes")
+    .pivot(index="delivery_delay_days", columns="faixa_contatos_sac", values="clientes")
+    .reindex(columns=ordem_contatos_sac)
+    .fillna(0)
+    .astype(int)
+)
+
+fig = px.imshow(
+    heatmap_atraso_sac,
+    text_auto=True,
+    aspect="auto",
+    title="Clientes por Dias de Atraso e Quantidade de Contatos no SAC",
+    labels={
+        "x": "Quantidade de contatos no SAC",
+        "y": "Dias de atraso",
+        "color": "Clientes",
+    },
+    color_continuous_scale=["#f8fafc", "#38bdf8", "#f97316", "#ef4444"],
+)
+fig.update_layout(title_x=0.5, height=520)
+fig.update_xaxes(side="top")
+fig.show()
