@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Tech Challenge | NPS e atraso na entrega</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --r-main-font: "Inter", system-ui, sans-serif;
+        --r-heading-font: "Inter", system-ui, sans-serif;
+      }
+      .reveal {
+        font-family: "Inter", system-ui, sans-serif;
+        color: #111827;
+        background: #f8fafc;
+      }
+      .reveal .slides {
+        text-align: left;
+      }
+      .reveal section {
+        box-sizing: border-box;
+        height: 100%;
+        padding: 0;
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        text-transform: none;
+        letter-spacing: -0.04em;
+        color: #0f172a;
+      }
+      .reveal p,
+      .reveal li {
+        line-height: 1.35;
+      }
+      .reveal .progress {
+        color: #2563eb;
+        height: 4px;
+      }
+      .reveal .controls {
+        color: #2563eb;
+      }
+      .slide-wrap {
+        width: 100%;
+        height: 100%;
+        min-height: 720px;
+        padding: 58px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .soft-grid {
+        background-image: radial-gradient(#dbeafe 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+      .chart-placeholder {
+        border: 1.5px dashed #93c5fd;
+        background: linear-gradient(
+          180deg,
+          rgba(239, 246, 255, 0.75),
+          rgba(255, 255, 255, 0.95)
+        );
+      }
+      .fragment.fade-up {
+        transform: translateY(18px);
+      }
+      .kicker {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: #2563eb;
+      }
+      .reveal h1.text-white,
+      .reveal h2.text-white,
+      .reveal h3.text-white {
+        color: #fff !important;
+      }
+      .reveal h1.text-blue-50,
+      .reveal h2.text-blue-50,
+      .reveal h3.text-blue-50 {
+        color: #eff6ff !important;
+      }
+      .reveal h1.text-slate-100,
+      .reveal h2.text-slate-100,
+      .reveal h3.text-slate-100 {
+        color: #f1f5f9 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- 1. Abertura -->
+        <section>
+          <div class="slide-wrap soft-grid relative overflow-hidden">
+            <div
+              class="absolute right-[-120px] top-[-120px] w-[420px] h-[420px] bg-blue-100 rounded-full blur-3xl opacity-70"
+            ></div>
+            <div
+              class="absolute left-[-160px] bottom-[-180px] w-[460px] h-[460px] bg-slate-200 rounded-full blur-3xl opacity-60"
+            ></div>
+            <div class="relative z-10 max-w-5xl">
+              <div class="kicker mb-6">Tech Challenge • Data Analytics</div>
+              <h1 class="text-[68px] leading-[0.98] font-extrabold mb-8">
+                Como os atrasos na entrega impactam a satisfação dos clientes?
+              </h1>
+              <p class="text-2xl text-slate-600 max-w-3xl">
+                Uma investigação exploratória sobre a jornada do cliente em um
+                e-commerce, conectando logística, reclamações e NPS.
+              </p>
+              <div class="mt-12 flex items-center gap-4 text-lg text-slate-500">
+                <div
+                  class="w-11 h-11 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center"
+                >
+                  <i
+                    data-lucide="bar-chart-3"
+                    class="w-6 h-6 text-blue-600"
+                  ></i>
+                </div>
+                <span>PH Raulino</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Pergunta de negócio -->
+        <section>
+          <div class="slide-wrap bg-white">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Pergunta de negócio</div>
+              <h2 class="text-5xl font-extrabold mb-10">
+                O que está reduzindo o NPS?
+              </h2>
+              <div class="grid grid-cols-5 gap-4 items-stretch">
+                <div
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                >
+                  <i data-lucide="user" class="w-8 h-8 text-blue-600 mb-5"></i>
+                  <h3 class="text-xl font-bold mb-2">Cliente</h3>
+                  <p class="text-base text-slate-500">
+                    Perfil, região e tempo de relacionamento.
+                  </p>
+                </div>
+                <div
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                >
+                  <i
+                    data-lucide="shopping-bag"
+                    class="w-8 h-8 text-blue-600 mb-5"
+                  ></i>
+                  <h3 class="text-xl font-bold mb-2">Pedido</h3>
+                  <p class="text-base text-slate-500">
+                    Valor, itens, desconto e pagamento.
+                  </p>
+                </div>
+                <div
+                  class="rounded-3xl border border-blue-200 p-6 bg-blue-50 shadow-sm"
+                >
+                  <i data-lucide="truck" class="w-8 h-8 text-blue-600 mb-5"></i>
+                  <h3 class="text-xl font-bold mb-2">Logística</h3>
+                  <p class="text-base text-slate-600">
+                    Tempo de entrega, atraso, frete e tentativas.
+                  </p>
+                </div>
+                <div
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                >
+                  <i
+                    data-lucide="headphones"
+                    class="w-8 h-8 text-blue-600 mb-5"
+                  ></i>
+                  <h3 class="text-xl font-bold mb-2">Atendimento</h3>
+                  <p class="text-base text-slate-500">
+                    SAC, tempo de resolução e reclamações.
+                  </p>
+                </div>
+                <div
+                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                >
+                  <i data-lucide="star" class="w-8 h-8 text-blue-600 mb-5"></i>
+                  <h3 class="text-xl font-bold mb-2">Satisfação</h3>
+                  <p class="text-base text-slate-500">
+                    NPS, recompra e CSAT interno.
+                  </p>
+                </div>
+              </div>
+              <p class="mt-10 text-2xl text-slate-700 max-w-4xl">
+                A análise foi estruturada como uma jornada: da compra até a
+                percepção final do cliente.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Método -->
+        <section>
+          <div class="slide-wrap bg-slate-50">
+            <div
+              class="max-w-6xl mx-auto w-full grid grid-cols-[0.9fr_1.1fr] gap-10 items-center"
+            >
+              <div>
+                <div class="kicker mb-4">Como investigamos</div>
+                <h2 class="text-[44px] leading-tight font-extrabold mb-6">
+                  A Análise Exploratória de Dados buscou sinais consistentes,
+                  não apenas correlações isoladas.
+                </h2>
+                <p class="text-2xl text-slate-600">
+                  O foco foi identificar variáveis associadas à queda do NPS e
+                  entender se elas representavam causas prováveis, sintomas ou
+                  pontos que exigem investigação futura.
+                </p>
+              </div>
+              <div
+                class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-8"
+              >
+                <div class="grid gap-4 auto-rows-fr">
+                  <div
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                  >
+                    <span
+                      class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
+                      >1</span
+                    >
+                    <div>
+                      <h3 class="text-xl font-bold">Mapear a jornada</h3>
+                      <p class="text-slate-500">
+                        Separação das variáveis por cliente, pedido, logística,
+                        atendimento e satisfação.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                  >
+                    <span
+                      class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
+                      >2</span
+                    >
+                    <div>
+                      <h3 class="text-xl font-bold">Comparar grupos</h3>
+                      <p class="text-slate-500">
+                        Avaliação do NPS por atraso, reclamação e contatos ao
+                        SAC.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                  >
+                    <span
+                      class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
+                      >3</span
+                    >
+                    <div>
+                      <h3 class="text-xl font-bold">Testar hipóteses</h3>
+                      <p class="text-slate-500">
+                        Verificação se SAC acompanha o agravamento dos dias de
+                        atraso.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Principal descoberta -->
+        <section>
+          <div class="slide-wrap bg-transparent">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Principal descoberta</div>
+              <h2 class="text-5xl font-extrabold mb-8">
+                O atraso foi o principal fator associado à queda do NPS.
+              </h2>
+              <div
+                class="chart-placeholder rounded-[32px] h-[430px] flex flex-col items-center justify-center text-center p-10"
+              >
+                <i
+                  data-lucide="line-chart"
+                  class="w-16 h-16 text-blue-600 mb-5"
+                ></i>
+                <h3 class="text-3xl font-extrabold mb-3">
+                  Inserir gráfico: NPS por dias/faixas de atraso
+                </h3>
+                <p class="text-xl text-slate-500 max-w-3xl">
+                  Sugestão: boxplot ou linha com média/mediana de NPS por faixas
+                  de atraso.
+                </p>
+              </div>
+              <div
+                class="mt-8 rounded-3xl bg-blue-50 border border-blue-100 p-6"
+              >
+                <p class="text-2xl text-slate-800">
+                  <strong>Mensagem-chave:</strong> conforme o atraso aumenta,
+                  observa-se uma redução consistente na satisfação dos clientes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Reclamações -->
+        <section>
+          <div class="slide-wrap bg-slate-50">
+            <div
+              class="max-w-6xl mx-auto w-full grid grid-cols-[1.05fr_0.95fr] gap-8 items-center"
+            >
+              <div>
+                <div class="kicker mb-4">Aprofundamento</div>
+                <h2 class="text-5xl font-extrabold mb-6">
+                  O atraso também se conecta às reclamações formais.
+                </h2>
+                <p class="text-2xl text-slate-600 mb-8">
+                  Na base analisada, todos os pedidos com atraso apresentaram
+                  reclamação formal. Isso indica que o atraso é um ponto crítico
+                  da jornada de insatisfação.
+                </p>
+                <div
+                  class="rounded-3xl bg-white border border-slate-200 p-6 shadow-sm"
+                >
+                  <p class="text-xl text-slate-700">
+                    <strong>Cuidado metodológico:</strong> a análise mostra
+                    associação forte, mas não permite afirmar causalidade
+                    operacional completa.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="chart-placeholder rounded-[32px] h-[440px] flex flex-col items-center justify-center text-center p-8"
+              >
+                <i
+                  data-lucide="alert-circle"
+                  class="w-16 h-16 text-blue-600 mb-5"
+                ></i>
+                <h3 class="text-3xl font-extrabold mb-3">
+                  Inserir gráfico: Atraso x Reclamação
+                </h3>
+                <p class="text-xl text-slate-500">
+                  Sugestão: barras condicionais mostrando % de reclamação entre
+                  pedidos com atraso.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. SAC -->
+        <section>
+          <div class="slide-wrap bg-transparent">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Hipótese testada</div>
+              <h2 class="text-5xl font-extrabold mb-8">
+                O SAC aparece associado ao NPS, mas não acompanha o aumento dos
+                dias de atraso.
+              </h2>
+              <div class="grid grid-cols-[1fr_0.95fr] gap-8 items-stretch">
+                <div
+                  class="chart-placeholder rounded-[32px] flex flex-col items-center justify-center text-center p-8 min-h-[380px]"
+                >
+                  <i
+                    data-lucide="activity"
+                    class="w-14 h-14 text-blue-600 mb-5"
+                  ></i>
+                  <h3 class="text-3xl font-extrabold mb-3">
+                    Inserir gráfico: Dias de atraso por contatos SAC
+                  </h3>
+                  <p class="text-xl text-slate-500">
+                    Sugestão: boxplot ou heatmap usado para testar se mais
+                    atraso gera mais contatos.
+                  </p>
+                </div>
+                <div
+                  class="rounded-[32px] bg-slate-50 border border-slate-200 p-8 flex flex-col justify-center"
+                >
+                  <div class="flex items-start gap-4 mb-6">
+                    <div
+                      class="p-2 rounded-full bg-blue-600 text-white flex items-center justify-center"
+                    >
+                      <i data-lucide="check" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-2xl font-extrabold mb-2">Conclusão</h3>
+                      <p class="text-xl text-slate-600">
+                        Não há evidência visual de que a quantidade de contatos
+                        ao SAC aumente conforme os dias de atraso.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="p-2 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center"
+                    >
+                      <i data-lucide="search" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-2xl font-extrabold mb-2">
+                        Interpretação
+                      </h3>
+                      <p class="text-xl text-slate-600">
+                        O SAC pode depender de outros fatores: qualidade do
+                        atendimento, comunicação, canal ou perfil do cliente.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Insight -->
+        <section>
+          <div class="slide-wrap bg-slate-950 text-white">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4 text-blue-300">Insight de negócio</div>
+              <h2 class="text-5xl font-extrabold mb-12 text-white">
+                A recomendação deve atacar a origem mais sustentada pelos dados.
+              </h2>
+              <div class="flex items-center justify-center gap-6">
+                <div
+                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
+                >
+                  <i
+                    data-lucide="truck"
+                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
+                  ></i>
+                  <h3 class="text-3xl font-extrabold text-white">Atraso</h3>
+                </div>
+                <i
+                  data-lucide="arrow-right"
+                  class="fragment fade-up w-12 h-12 text-blue-300"
+                ></i>
+                <div
+                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
+                >
+                  <i
+                    data-lucide="message-square-warning"
+                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
+                  ></i>
+                  <h3 class="text-3xl font-extrabold text-white">Reclamação</h3>
+                </div>
+                <i
+                  data-lucide="arrow-right"
+                  class="fragment fade-up w-12 h-12 text-blue-300"
+                ></i>
+                <div
+                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
+                >
+                  <i
+                    data-lucide="trending-down"
+                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
+                  ></i>
+                  <h3 class="text-3xl font-extrabold text-white">NPS menor</h3>
+                </div>
+              </div>
+              <p
+                class="mt-12 text-2xl text-slate-300 max-w-4xl mx-auto text-center"
+              >
+                O SAC permanece como achado secundário e ponto para estudos
+                futuros, mas não como elo principal da narrativa.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Recomendação -->
+        <section>
+          <div class="slide-wrap bg-transparent">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Recomendação</div>
+              <h2 class="text-5xl font-extrabold mb-10">
+                Recalibrar a estimativa de entrega.
+              </h2>
+              <div class="grid grid-cols-2 gap-8">
+                <div
+                  class="rounded-[32px] bg-slate-50 border border-slate-200 p-8"
+                >
+                  <div class="text-lg font-bold text-slate-500 mb-6">
+                    Situação atual
+                  </div>
+                  <div class="space-y-5">
+                    <div
+                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
+                    >
+                      Prazo prometido
+                    </div>
+                    <div class="pl-6 text-blue-600">
+                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                    </div>
+                    <div
+                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
+                    >
+                      Entrega atrasada
+                    </div>
+                    <div class="pl-6 text-blue-600">
+                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                    </div>
+                    <div
+                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
+                    >
+                      Reclamação e NPS menor
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="rounded-[32px] bg-blue-50 border border-blue-200 p-8 shadow-sm"
+                >
+                  <div class="text-lg font-bold text-blue-700 mb-6">
+                    Proposta
+                  </div>
+                  <div class="space-y-5">
+                    <div
+                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
+                    >
+                      Estimativa recalibrada
+                    </div>
+                    <div class="pl-6 text-blue-600">
+                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                    </div>
+                    <div
+                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
+                    >
+                      Prazo mais aderente à operação
+                    </div>
+                    <div class="pl-6 text-blue-600">
+                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                    </div>
+                    <div
+                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
+                    >
+                      Menos atrasos percebidos
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Evolução futura -->
+        <section>
+          <div class="slide-wrap bg-slate-50">
+            <div
+              class="max-w-6xl mx-auto w-full grid grid-cols-[0.9fr_1.1fr] gap-10 items-center"
+            >
+              <div>
+                <div class="kicker mb-4">Evolução futura</div>
+                <h2 class="text-[44px] leading-tight font-extrabold mb-6">
+                  Um modelo preditivo de Estimativa de Tempo de Entrega exige
+                  mais dados operacionais.
+                </h2>
+                <p class="text-2xl text-slate-600">
+                  A base atual permite identificar o problema, mas não contém
+                  todas as variáveis necessárias para prever atrasos com
+                  robustez em produção.
+                </p>
+              </div>
+              <div
+                class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-8"
+              >
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="map-pin"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Distância e região</h3>
+                  </div>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="warehouse"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Centro de distribuição</h3>
+                  </div>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="truck"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Transportadora</h3>
+                  </div>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="calendar-days"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Sazonalidade</h3>
+                  </div>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="package"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Peso e categoria</h3>
+                  </div>
+                  <div class="rounded-2xl bg-slate-50 p-5">
+                    <i
+                      data-lucide="history"
+                      class="w-8 h-8 text-blue-600 mb-3"
+                    ></i>
+                    <h3 class="text-xl font-bold">Histórico da rota</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. Conclusão -->
+        <section>
+          <div
+            class="slide-wrap bg-blue-600 text-white relative overflow-hidden"
+          >
+            <div
+              class="absolute right-[-140px] top-[-140px] w-[500px] h-[500px] rounded-full bg-white/10 blur-3xl"
+            ></div>
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+              <div class="text-blue-100 text-lg font-bold mb-6">Conclusão</div>
+              <h2 class="text-6xl font-extrabold leading-tight text-white mb-8">
+                Atuar no prazo prometido é a oportunidade mais clara para
+                melhorar a experiência do cliente.
+              </h2>
+              <p class="text-2xl text-blue-50">
+                A análise exploratória mostrou que o atraso está fortemente
+                associado à queda do NPS e às reclamações formais. A
+                recomendação é recalibrar as estimativas de entrega e evoluir
+                para um modelo de Estimativa de Tempo de Entrega com dados
+                operacionais mais completos.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        center: false,
+        width: 1280,
+        height: 720,
+        margin: 0.02,
+        transition: "slide",
+        backgroundTransition: "fade",
+      });
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
