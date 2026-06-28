@@ -79,6 +79,14 @@
           rgba(255, 255, 255, 0.95)
         );
       }
+      .chart-card {
+        border: 1px solid #dbeafe;
+        background: #fff;
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      }
+      .highcharts-background {
+        fill: transparent;
+      }
       .fragment.fade-up {
         transform: translateY(18px);
       }
@@ -122,7 +130,7 @@
               <h1 class="text-[68px] leading-[0.98] font-extrabold mb-8">
                 Como os atrasos na entrega impactam a satisfação dos clientes?
               </h1>
-              <p class="text-2xl text-slate-600 max-w-3xl">
+              <p class="text-xl text-slate-600 max-w-3xl">
                 Uma investigação exploratória sobre a jornada do cliente em um
                 e-commerce, conectando logística, reclamações e NPS.
               </p>
@@ -146,7 +154,7 @@
           <div class="slide-wrap bg-white">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Pergunta de negócio</div>
-              <h2 class="text-5xl font-extrabold mb-10">
+              <h2 class="text-3xl font-extrabold mb-10">
                 O que está reduzindo o NPS?
               </h2>
               <div class="grid grid-cols-5 gap-4 items-stretch">
@@ -202,7 +210,7 @@
                   </p>
                 </div>
               </div>
-              <p class="mt-10 text-2xl text-slate-700 max-w-4xl">
+              <p class="mt-10 text-xl text-slate-700 max-w-4xl">
                 A análise foi estruturada como uma jornada: da compra até a
                 percepção final do cliente.
               </p>
@@ -218,11 +226,11 @@
             >
               <div>
                 <div class="kicker mb-4">Como investigamos</div>
-                <h2 class="text-[44px] leading-tight font-extrabold mb-6">
+                <h2 class="text-3xl leading-tight font-extrabold mb-6">
                   A Análise Exploratória de Dados buscou sinais consistentes,
                   não apenas correlações isoladas.
                 </h2>
-                <p class="text-2xl text-slate-600">
+                <p class="text-xl text-slate-600">
                   O foco foi identificar variáveis associadas à queda do NPS e
                   entender se elas representavam causas prováveis, sintomas ou
                   pontos que exigem investigação futura.
@@ -231,9 +239,9 @@
               <div
                 class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-8"
               >
-                <div class="grid gap-4 auto-rows-fr">
+                <div class="grid gap-4">
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -248,7 +256,7 @@
                     </div>
                   </div>
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -263,7 +271,7 @@
                     </div>
                   </div>
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 min-h-[132px]"
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 "
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -283,35 +291,22 @@
           </div>
         </section>
 
-        <!-- 4. Principal descoberta -->
+        <!-- 4. Principal insight -->
         <section>
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
-              <div class="kicker mb-4">Principal descoberta</div>
-              <h2 class="text-5xl font-extrabold mb-8">
-                O atraso foi o principal fator associado à queda do NPS.
+              <div class="kicker mb-4">Principal insight</div>
+              <h2 class="text-2xl font-extrabold mb-8">
+                O atraso foi o principal fator associado à redução da satisfação dos clientes.
               </h2>
-              <div
-                class="chart-placeholder rounded-[32px] h-[430px] flex flex-col items-center justify-center text-center p-10"
-              >
-                <i
-                  data-lucide="line-chart"
-                  class="w-16 h-16 text-blue-600 mb-5"
-                ></i>
-                <h3 class="text-3xl font-extrabold mb-3">
-                  Inserir gráfico: NPS por dias/faixas de atraso
-                </h3>
-                <p class="text-xl text-slate-500 max-w-3xl">
-                  Sugestão: boxplot ou linha com média/mediana de NPS por faixas
-                  de atraso.
-                </p>
+              <div class="chart-card rounded-[32px] h-[430px] p-6">
+                <div id="nps-por-atraso-chart" class="w-full h-full"></div>
               </div>
               <div
                 class="mt-8 rounded-3xl bg-blue-50 border border-blue-100 p-6"
               >
-                <p class="text-2xl text-slate-800">
-                  <strong>Mensagem-chave:</strong> conforme o atraso aumenta,
-                  observa-se uma redução consistente na satisfação dos clientes.
+                <p class="text-xl text-slate-800">
+                  <strong>Mensagem-chave:</strong> Quanto maior o atraso na entrega, menor tende a ser a satisfação do cliente.
                 </p>
               </div>
             </div>
@@ -326,10 +321,10 @@
             >
               <div>
                 <div class="kicker mb-4">Aprofundamento</div>
-                <h2 class="text-5xl font-extrabold mb-6">
+                <h2 class="text-3xl font-extrabold mb-6">
                   O atraso também se conecta às reclamações formais.
                 </h2>
-                <p class="text-2xl text-slate-600 mb-8">
+                <p class="text-xl text-slate-600 mb-8">
                   Na base analisada, todos os pedidos com atraso apresentaram
                   reclamação formal. Isso indica que o atraso é um ponto crítico
                   da jornada de insatisfação.
@@ -337,7 +332,7 @@
                 <div
                   class="rounded-3xl bg-white border border-slate-200 p-6 shadow-sm"
                 >
-                  <p class="text-xl text-slate-700">
+                  <p class=" text-slate-700">
                     <strong>Cuidado metodológico:</strong> a análise mostra
                     associação forte, mas não permite afirmar causalidade
                     operacional completa.
@@ -655,6 +650,132 @@
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script>
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error(`Falha ao carregar ${src}`));
+          document.head.appendChild(script);
+        });
+      }
+
+      async function loadHighcharts() {
+        if (window.Highcharts) {
+          return;
+        }
+
+        const cdns = [
+          "https://code.highcharts.com",
+          "https://cdn.jsdelivr.net/npm/highcharts",
+          "https://unpkg.com/highcharts",
+        ];
+
+        let lastError;
+
+        for (const cdn of cdns) {
+          try {
+            await loadScript(`${cdn}/highcharts.js`);
+            await loadScript(`${cdn}/highcharts-more.js`);
+
+            if (window.Highcharts) {
+              return;
+            }
+          } catch (error) {
+            lastError = error;
+          }
+        }
+
+        throw lastError || new Error("Highcharts indisponível");
+      }
+
+      async function renderNpsPorAtrasoChart() {
+        const container = document.getElementById("nps-por-atraso-chart");
+
+        try {
+          await loadHighcharts();
+
+          const response = await fetch("data_highcharts/nps_por_atraso.json");
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const options = await response.json();
+
+          Highcharts.chart(container, {
+            ...options,
+            chart: {
+              ...options.chart,
+              height: 380,
+              style: {
+                fontFamily: '"Inter", system-ui, sans-serif',
+              },
+            },
+            colors: ["#2563eb"],
+            credits: {
+              enabled: false,
+            },
+            legend: {
+              enabled: false,
+            },
+            plotOptions: {
+              boxplot: {
+                fillColor: "#eff6ff",
+                lineWidth: 2,
+                medianColor: "#0f172a",
+                medianWidth: 3,
+                stemColor: "#2563eb",
+                stemWidth: 2,
+                whiskerColor: "#2563eb",
+                whiskerLength: "35%",
+                whiskerWidth: 2,
+              },
+              ...options.plotOptions,
+            },
+            title: {
+              ...options.title,
+              style: {
+                color: "#0f172a",
+                fontSize: "20px",
+                fontWeight: "800",
+              },
+            },
+            xAxis: {
+              ...options.xAxis,
+              labels: {
+                style: {
+                  color: "#334155",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                },
+              },
+            },
+            yAxis: {
+              ...options.yAxis,
+              min: 0,
+              max: 10,
+              gridLineColor: "#e2e8f0",
+              labels: {
+                style: {
+                  color: "#475569",
+                  fontSize: "13px",
+                },
+              },
+            },
+            tooltip: {
+              pointFormat:
+                "Máximo: <b>{point.high}</b><br/>Q3: <b>{point.q3}</b><br/>Mediana: <b>{point.median}</b><br/>Q1: <b>{point.q1}</b><br/>Mínimo: <b>{point.low}</b>",
+              valueDecimals: 1,
+            },
+          });
+        } catch (error) {
+          container.innerHTML =
+            '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de NPS por atraso.</div>';
+          console.error("Erro ao carregar nps_por_atraso.json:", error);
+        }
+      }
+
       Reveal.initialize({
         hash: true,
         controls: true,
@@ -667,6 +788,7 @@
         backgroundTransition: "fade",
       });
       lucide.createIcons();
+      renderNpsPorAtrasoChart();
     </script>
   </body>
 </html>

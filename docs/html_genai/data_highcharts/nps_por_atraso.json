@@ -3,7 +3,7 @@
     "type": "boxplot"
   },
   "title": {
-    "text": "Distribuição do score NPS por faixas de atraso na entrega"
+    "text": "Nota do cliente por faixa de atraso"
   },
   "xAxis": {
     "categories": [
