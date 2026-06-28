@@ -124,6 +124,16 @@
         font-weight: 800;
         letter-spacing: -0.02em;
       }
+      .flow-card {
+        background: #ffffff;
+        border: 1px solid #dbeafe;
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      }
+      .benefit-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.06);
+      }
     </style>
   </head>
   <body>
@@ -402,127 +412,65 @@
           </div>
         </section>
 
-        <!-- 7. Insight -->
-        <section>
-          <div class="slide-wrap bg-slate-950 text-white">
-            <div class="max-w-6xl mx-auto w-full">
-              <div class="kicker mb-4 text-blue-300">Insight de negócio</div>
-              <h2 class="text-5xl font-extrabold mb-12 text-white">
-                A recomendação deve atacar a origem mais sustentada pelos dados.
-              </h2>
-              <div class="flex items-center justify-center gap-6">
-                <div
-                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
-                >
-                  <i
-                    data-lucide="truck"
-                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
-                  ></i>
-                  <h3 class="text-3xl font-extrabold text-white">Atraso</h3>
-                </div>
-                <i
-                  data-lucide="arrow-right"
-                  class="fragment fade-up w-12 h-12 text-blue-300"
-                ></i>
-                <div
-                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
-                >
-                  <i
-                    data-lucide="message-square-warning"
-                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
-                  ></i>
-                  <h3 class="text-3xl font-extrabold text-white">Reclamação</h3>
-                </div>
-                <i
-                  data-lucide="arrow-right"
-                  class="fragment fade-up w-12 h-12 text-blue-300"
-                ></i>
-                <div
-                  class="fragment fade-up rounded-[28px] bg-white/10 border border-white/15 p-8 w-64 text-center"
-                >
-                  <i
-                    data-lucide="trending-down"
-                    class="w-12 h-12 text-blue-300 mx-auto mb-5"
-                  ></i>
-                  <h3 class="text-3xl font-extrabold text-white">NPS menor</h3>
-                </div>
-              </div>
-              <p
-                class="fragment fade-up mt-12 text-2xl text-slate-300 max-w-4xl mx-auto text-center"
-              >
-                A queda na recompra reforça que o atraso impacta satisfação e
-                continuidade do relacionamento com o cliente.
-              </p>
-            </div>
-          </div>
-        </section>
 
-        <!-- 8. Recomendação -->
+        <!-- 7. Solução proposta -->
         <section>
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
-              <div class="kicker mb-4">Recomendação</div>
-              <h2 class="text-5xl font-extrabold mb-10">
-                Recalibrar a estimativa de entrega.
+              <div class="kicker mb-4">Solução proposta</div>
+              <h2 class="text-[42px] leading-tight font-extrabold mb-8">
+                Recalibrar continuamente a estimativa de entrega utilizando dados históricos e operacionais.
               </h2>
-              <div class="grid grid-cols-2 gap-8">
-                <div
-                  class="fragment fade-up rounded-[32px] bg-slate-50 border border-slate-200 p-8"
-                >
-                  <div class="text-lg font-bold text-slate-500 mb-6">
-                    Situação atual
+
+              <div class="grid grid-cols-[1.2fr_0.8fr] gap-8 items-stretch">
+                <div class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-7">
+                  <div class="grid grid-cols-4 gap-4 items-stretch">
+                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
+                      <i data-lucide="database" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                      <h3 class="text-lg font-extrabold mb-2">Dados históricos</h3>
+                      <p class="text-sm text-slate-500">Pedidos, atraso, região e comportamento.</p>
+                    </div>
+                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
+                      <i data-lucide="brain-circuit" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                      <h3 class="text-lg font-extrabold mb-2">Modelo preditivo</h3>
+                      <p class="text-sm text-slate-500">Estimativa de Tempo de Entrega.</p>
+                    </div>
+                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
+                      <i data-lucide="route" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                      <h3 class="text-lg font-extrabold mb-2">Prazo aderente</h3>
+                      <p class="text-sm text-slate-500">Previsão mais próxima da realidade logística.</p>
+                    </div>
+                    <div class="fragment fade-up flow-card rounded-3xl p-5 text-center flex flex-col justify-center min-h-[170px]">
+                      <i data-lucide="smile" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                      <h3 class="text-lg font-extrabold mb-2">Expectativa alinhada</h3>
+                      <p class="text-sm text-slate-500">Menos frustração e maior confiança.</p>
+                    </div>
                   </div>
-                  <div class="space-y-5">
-                    <div
-                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
-                    >
-                      Prazo prometido
+
+                  <div class="fragment fade-up mt-7 rounded-3xl insight-card p-6">
+                    <div class="insight-label text-xl mb-2">
+                      <i data-lucide="target" class="w-6 h-6"></i>
+                      Objetivo
                     </div>
-                    <div class="pl-6 text-blue-600">
-                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
-                    </div>
-                    <div
-                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
-                    >
-                      Entrega atrasada
-                    </div>
-                    <div class="pl-6 text-blue-600">
-                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
-                    </div>
-                    <div
-                      class="rounded-2xl bg-white border border-slate-200 p-5 text-2xl font-bold"
-                    >
-                      Reclamação e NPS menor
-                    </div>
+                    <p class="text-lg leading-snug text-slate-800">
+                      Não é apenas reduzir o tempo médio de entrega. É reduzir a diferença entre o prazo prometido e o prazo real, tornando a experiência mais previsível para o cliente.
+                    </p>
                   </div>
                 </div>
-                <div
-                  class="fragment fade-up rounded-[32px] bg-blue-50 border border-blue-200 p-8 shadow-sm"
-                >
-                  <div class="text-lg font-bold text-blue-700 mb-6">
-                    Proposta
-                  </div>
+
+                <div class="fragment fade-up rounded-[32px] bg-slate-950 text-white p-8 flex flex-col justify-space-between">
+                  <div class="text-blue-300 font-bold text-xl mb-10">Mudança de foco</div>
                   <div class="space-y-5">
-                    <div
-                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
-                    >
-                      Estimativa recalibrada
+                    <div class="rounded-2xl bg-white/10 border border-white/15 p-5">
+                      <p class="text-slate-300 text-base mb-1">Evitar uma solução cara baseada apenas em</p>
+                      <p class="text-xl font-extrabold text-white">entregar mais rápido</p>
                     </div>
-                    <div class="pl-6 text-blue-600">
+                    <div class="flex justify-center text-blue-300">
                       <i data-lucide="arrow-down" class="w-8 h-8"></i>
                     </div>
-                    <div
-                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
-                    >
-                      Prazo mais aderente à operação
-                    </div>
-                    <div class="pl-6 text-blue-600">
-                      <i data-lucide="arrow-down" class="w-8 h-8"></i>
-                    </div>
-                    <div
-                      class="rounded-2xl bg-white border border-blue-100 p-5 text-2xl font-bold"
-                    >
-                      Menos atrasos percebidos
+                    <div class="rounded-2xl bg-blue-500/20 border border-blue-300/30 p-5">
+                      <p class="text-blue-100 text-base mb-1">Atuar na origem identificada pelos dados</p>
+                      <p class="text-xl font-extrabold text-white">prometer melhor</p>
                     </div>
                   </div>
                 </div>
@@ -531,22 +479,83 @@
           </div>
         </section>
 
-        <!-- 9. Evolução futura -->
+        <!-- 8. Benefícios esperados -->
+        <section>
+          <div class="slide-wrap bg-transparent">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Benefícios esperados</div>
+              <h2 class="text-4xl leading-tight font-extrabold mb-8">
+                Como a solução gera valor para o negócio.
+              </h2>
+
+              <div class="grid grid-cols-4 gap-5">
+                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                    <i data-lucide="heart" class="w-7 h-7 text-blue-600"></i>
+                  </div>
+                  <h3 class="text-xl font-extrabold mb-3">Maior satisfação</h3>
+                  <p class="text-sm text-slate-600">
+                    Estimativas mais confiáveis reduzem a quebra de expectativa do cliente.
+                  </p>
+                </div>
+
+                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                    <i data-lucide="message-square-warning" class="w-7 h-7 text-blue-600"></i>
+                  </div>
+                  <h3 class="text-xl font-extrabold mb-3">Menos reclamações</h3>
+                  <p class="text-sm text-slate-600">
+                    Uma expectativa alinhada tende a reduzir reclamações relacionadas à entrega.
+                  </p>
+                </div>
+
+                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                    <i data-lucide="repeat-2" class="w-7 h-7 text-blue-600"></i>
+                  </div>
+                  <h3 class="text-xl font-extrabold mb-3">Maior recompra</h3>
+                  <p class="text-sm text-slate-600">
+                    Os dados mostraram associação entre atraso e menor taxa de recompra.
+                  </p>
+                </div>
+
+                <div class="fragment fade-up benefit-card rounded-[28px] p-6 min-h-[245px]">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
+                    <i data-lucide="line-chart" class="w-7 h-7 text-blue-600"></i>
+                  </div>
+                  <h3 class="text-xl font-extrabold mb-3">Decisão eficiente</h3>
+                  <p class="text-sm text-slate-600">
+                    Prometer prazos mais aderentes sem depender, necessariamente, de investimentos estruturais.
+                  </p>
+                </div>
+              </div>
+
+              <div class="fragment fade-up mt-7 rounded-3xl insight-card p-6">
+                <div class="insight-label text-xl mb-2">
+                  <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                  Insight
+                </div>
+                <p class="text-lg leading-snug text-slate-800">
+                  Os resultados sugerem que alinhar a expectativa do cliente por meio de estimativas mais precisas pode representar uma alternativa mais eficiente do que buscar apenas reduzir o tempo médio de entrega.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Próximos passos -->
         <section>
           <div class="slide-wrap bg-transparent">
             <div
               class="max-w-6xl mx-auto w-full grid grid-cols-[0.9fr_1.1fr] gap-10 items-center"
             >
               <div>
-                <div class="kicker mb-4">Evolução futura</div>
+                <div class="kicker mb-4">Próximos passos</div>
                 <h2 class="text-[44px] leading-tight font-extrabold mb-6">
-                  Um modelo preditivo de Estimativa de Tempo de Entrega exige
-                  mais dados operacionais.
+                  Evoluir para um modelo preditivo de Estimativa de Tempo de Entrega.
                 </h2>
                 <p class="text-2xl text-slate-600">
-                  A base atual permite identificar o problema, mas não contém
-                  todas as variáveis necessárias para prever atrasos com
-                  robustez em produção.
+                  A análise exploratória permitiu identificar o principal problema e direcionar uma solução. Para implantação em produção, o modelo deve incorporar variáveis operacionais adicionais que aumentem a precisão das previsões.
                 </p>
               </div>
               <div
@@ -554,46 +563,36 @@
               >
                 <div class="grid grid-cols-2 gap-4">
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="map-pin"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="map-pin" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Distância e região</h3>
                   </div>
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="warehouse"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="warehouse" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Centro de distribuição</h3>
                   </div>
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="truck"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="truck" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Transportadora</h3>
                   </div>
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="calendar-days"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="calendar-days" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Sazonalidade</h3>
                   </div>
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="package"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="package" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Peso e categoria</h3>
                   </div>
                   <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
-                    <i
-                      data-lucide="history"
-                      class="w-8 h-8 text-blue-600 mb-3"
-                    ></i>
+                    <i data-lucide="history" class="w-8 h-8 text-blue-600 mb-3"></i>
                     <h3 class="text-xl font-bold">Histórico da rota</h3>
+                  </div>
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
+                    <i data-lucide="cloud-sun" class="w-8 h-8 text-blue-600 mb-3"></i>
+                    <h3 class="text-xl font-bold">Clima</h3>
+                  </div>
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
+                    <i data-lucide="traffic-cone" class="w-8 h-8 text-blue-600 mb-3"></i>
+                    <h3 class="text-xl font-bold">Trânsito</h3>
                   </div>
                 </div>
               </div>
@@ -609,18 +608,40 @@
             <div
               class="absolute right-[-140px] top-[-140px] w-[500px] h-[500px] rounded-full bg-white/10 blur-3xl"
             ></div>
-            <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div
+              class="absolute left-[-180px] bottom-[-180px] w-[520px] h-[520px] rounded-full bg-white/10 blur-3xl"
+            ></div>
+            <div class="max-w-6xl mx-auto relative z-10">
               <div class="text-blue-100 text-lg font-bold mb-6">Conclusão</div>
-              <h2 class="text-6xl font-extrabold leading-tight text-white mb-8">
-                Atuar no prazo prometido é a oportunidade mais clara para
-                melhorar a experiência do cliente.
+              <h2 class="text-[56px] font-extrabold leading-tight text-white mb-10 max-w-5xl">
+                Prometer melhor pode gerar mais valor do que apenas entregar mais rápido.
               </h2>
-              <p class="text-2xl text-blue-50">
-                A análise exploratória mostrou que o atraso está fortemente
-                associado à queda do NPS e às reclamações formais. A
-                recomendação é recalibrar as estimativas de entrega e evoluir
-                para um modelo de Estimativa de Tempo de Entrega com dados
-                operacionais mais completos.
+
+              <div class="grid grid-cols-5 gap-4 mb-10">
+                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
+                  <i data-lucide="database" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                  <h3 class="text-xl font-extrabold text-white">Dados</h3>
+                </div>
+                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
+                  <i data-lucide="scan-line" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                  <h3 class="text-xl font-extrabold text-white">Previsão</h3>
+                </div>
+                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
+                  <i data-lucide="badge-check" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                  <h3 class="text-xl font-extrabold text-white">Expectativa</h3>
+                </div>
+                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
+                  <i data-lucide="smile-plus" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                  <h3 class="text-xl font-extrabold text-white">Satisfação</h3>
+                </div>
+                <div class="fragment fade-up rounded-3xl bg-white/10 border border-white/15 p-5 text-center">
+                  <i data-lucide="repeat-2" class="w-10 h-10 text-blue-100 mx-auto mb-3"></i>
+                  <h3 class="text-xl font-extrabold text-white">Retenção</h3>
+                </div>
+              </div>
+
+              <p class="text-2xl text-blue-50 max-w-5xl">
+                A análise mostrou que o atraso está associado à redução da satisfação, ao aumento das reclamações formais e à diminuição da recompra. A recomendação é utilizar dados para tornar a estimativa de entrega mais aderente à realidade operacional, reduzindo a frustração do cliente e fortalecendo o relacionamento com o negócio.
               </p>
             </div>
           </div>
