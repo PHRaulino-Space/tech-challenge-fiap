@@ -111,6 +111,19 @@
       .reveal h3.text-slate-100 {
         color: #f1f5f9 !important;
       }
+      .insight-card {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        box-shadow: 0 14px 34px rgba(37, 99, 235, 0.08);
+      }
+      .insight-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: #2563eb;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
     </style>
   </head>
   <body>
@@ -151,7 +164,7 @@
 
         <!-- 2. Pergunta de negócio -->
         <section>
-          <div class="slide-wrap bg-white">
+          <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Pergunta de negócio</div>
               <h2 class="text-3xl font-extrabold mb-10">
@@ -220,7 +233,7 @@
 
         <!-- 3. Método -->
         <section>
-          <div class="slide-wrap bg-slate-50">
+          <div class="slide-wrap bg-transparent">
             <div
               class="max-w-6xl mx-auto w-full grid grid-cols-[0.9fr_1.1fr] gap-10 items-center"
             >
@@ -271,7 +284,7 @@
                     </div>
                   </div>
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 "
+                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -296,17 +309,24 @@
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Principal insight</div>
-              <h2 class="text-2xl font-extrabold mb-8">
-                O atraso foi o principal fator associado à redução da satisfação dos clientes.
+              <h2 class="text-3xl font-extrabold mb-7">
+                O atraso foi o principal fator associado à redução da satisfação
+                dos clientes.
               </h2>
-              <div class="chart-card rounded-[32px] h-[430px] p-6">
+
+              <div class="chart-card rounded-[32px] h-[410px] p-6">
                 <div id="nps-por-atraso-chart" class="w-full h-full"></div>
               </div>
-              <div
-                class="mt-8 rounded-3xl bg-blue-50 border border-blue-100 p-6"
-              >
-                <p class="text-xl text-slate-800">
-                  <strong>Mensagem-chave:</strong> Quanto maior o atraso na entrega, menor tende a ser a satisfação do cliente.
+
+              <div class="mt-6 rounded-3xl insight-card p-6">
+                <div class="insight-label text-xl mb-2">
+                  <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                  Insight
+                </div>
+                <p class="text-xl leading-snug text-slate-800">
+                  A distribuição das notas se desloca para baixo conforme o
+                  atraso aumenta. Isso indica que o impacto não está concentrado
+                  apenas em casos extremos.
                 </p>
               </div>
             </div>
@@ -315,43 +335,38 @@
 
         <!-- 5. Reclamações -->
         <section>
-          <div class="slide-wrap bg-slate-50">
-            <div
-              class="max-w-6xl mx-auto w-full grid grid-cols-[1.05fr_0.95fr] gap-8 items-center"
-            >
-              <div>
-                <div class="kicker mb-4">Aprofundamento</div>
+          <div class="slide-wrap bg-transparent">
+            <div class="max-w-6xl mx-auto w-full">
+              <div class="kicker mb-4">Aprofundamento</div>
                 <h2 class="text-3xl font-extrabold mb-6">
-                  O atraso também se conecta às reclamações formais.
-                </h2>
-                <p class="text-xl text-slate-600 mb-8">
-                  Na base analisada, todos os pedidos com atraso apresentaram
-                  reclamação formal. Isso indica que o atraso é um ponto crítico
-                  da jornada de insatisfação.
-                </p>
-                <div
-                  class="rounded-3xl bg-white border border-slate-200 p-6 shadow-sm"
-                >
-                  <p class=" text-slate-700">
-                    <strong>Cuidado metodológico:</strong> a análise mostra
-                    associação forte, mas não permite afirmar causalidade
-                    operacional completa.
-                  </p>
-                </div>
-              </div>
+                O atraso também se conecta às reclamações formais.
+              </h2>
+
               <div
-                class="chart-placeholder rounded-[32px] h-[440px] flex flex-col items-center justify-center text-center p-8"
+                class="chart-placeholder rounded-[32px] h-[390px] flex flex-col items-center justify-center text-center p-8"
               >
                 <i
                   data-lucide="alert-circle"
                   class="w-16 h-16 text-blue-600 mb-5"
                 ></i>
                 <h3 class="text-3xl font-extrabold mb-3">
-                  Inserir gráfico: Atraso x Reclamação
+                  Inserir gráfico: Atraso x reclamação
                 </h3>
-                <p class="text-xl text-slate-500">
-                  Sugestão: barras condicionais mostrando % de reclamação entre
-                  pedidos com atraso.
+                <p class="text-xl text-slate-500 max-w-3xl">
+                  Sugestão: barras condicionais mostrando o percentual de
+                  reclamações entre pedidos com e sem atraso.
+                </p>
+              </div>
+
+              <div class="mt-6 rounded-3xl insight-card p-6">
+                <div class="insight-label text-xl mb-2">
+                  <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                  Insight
+                </div>
+                <p class="text-xl leading-snug text-slate-800">
+                  Na base analisada, todos os pedidos com atraso apresentaram
+                  reclamação formal. A análise mostra associação forte, mas não
+                  permite afirmar causalidade operacional completa.
                 </p>
               </div>
             </div>
@@ -363,60 +378,37 @@
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Hipótese testada</div>
-              <h2 class="text-5xl font-extrabold mb-8">
+              <h2 class="text-3xl font-extrabold mb-8">
                 O SAC aparece associado ao NPS, mas não acompanha o aumento dos
                 dias de atraso.
               </h2>
-              <div class="grid grid-cols-[1fr_0.95fr] gap-8 items-stretch">
-                <div
-                  class="chart-placeholder rounded-[32px] flex flex-col items-center justify-center text-center p-8 min-h-[380px]"
-                >
-                  <i
-                    data-lucide="activity"
-                    class="w-14 h-14 text-blue-600 mb-5"
-                  ></i>
-                  <h3 class="text-3xl font-extrabold mb-3">
-                    Inserir gráfico: Dias de atraso por contatos SAC
-                  </h3>
-                  <p class="text-xl text-slate-500">
-                    Sugestão: boxplot ou heatmap usado para testar se mais
-                    atraso gera mais contatos.
-                  </p>
+
+              <div
+                class="chart-placeholder rounded-[32px] h-[390px] flex flex-col items-center justify-center text-center p-8"
+              >
+                <i
+                  data-lucide="activity"
+                  class="w-14 h-14 text-blue-600 mb-5"
+                ></i>
+                <h3 class="text-3xl font-extrabold mb-3">
+                  Inserir gráfico: Dias de atraso por contatos no SAC
+                </h3>
+                <p class="text-xl text-slate-500 max-w-3xl">
+                  Sugestão: boxplot ou heatmap usado para testar se mais atraso
+                  gera mais contatos.
+                </p>
+              </div>
+
+              <div class="mt-6 rounded-3xl insight-card p-6">
+                <div class="insight-label text-xl mb-2">
+                  <i data-lucide="lightbulb" class="w-6 h-6"></i>
+                  Insight
                 </div>
-                <div
-                  class="rounded-[32px] bg-slate-50 border border-slate-200 p-8 flex flex-col justify-center"
-                >
-                  <div class="flex items-start gap-4 mb-6">
-                    <div
-                      class="p-2 rounded-full bg-blue-600 text-white flex items-center justify-center"
-                    >
-                      <i data-lucide="check" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-extrabold mb-2">Conclusão</h3>
-                      <p class="text-xl text-slate-600">
-                        Não há evidência visual de que a quantidade de contatos
-                        ao SAC aumente conforme os dias de atraso.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-4">
-                    <div
-                      class="p-2 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center"
-                    >
-                      <i data-lucide="search" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                      <h3 class="text-2xl font-extrabold mb-2">
-                        Interpretação
-                      </h3>
-                      <p class="text-xl text-slate-600">
-                        O SAC pode depender de outros fatores: qualidade do
-                        atendimento, comunicação, canal ou perfil do cliente.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <p class="text-xl leading-snug text-slate-800">
+                  Não há evidência visual de que os contatos ao SAC aumentem
+                  junto com os dias de atraso. Esse comportamento pode depender
+                  de atendimento, comunicação, canal ou perfil do cliente.
+                </p>
               </div>
             </div>
           </div>
@@ -553,7 +545,7 @@
 
         <!-- 9. Evolução futura -->
         <section>
-          <div class="slide-wrap bg-slate-50">
+          <div class="slide-wrap bg-transparent">
             <div
               class="max-w-6xl mx-auto w-full grid grid-cols-[0.9fr_1.1fr] gap-10 items-center"
             >
@@ -707,7 +699,7 @@
             ...options,
             chart: {
               ...options.chart,
-              height: 380,
+              height: 360,
               style: {
                 fontFamily: '"Inter", system-ui, sans-serif',
               },
