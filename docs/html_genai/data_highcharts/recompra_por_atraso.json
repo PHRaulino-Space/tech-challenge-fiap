@@ -1,0 +1,71 @@
+{
+  "chart": {
+    "type": "column"
+  },
+  "title": {
+    "text": "Taxa de recompra por faixa de atraso"
+  },
+  "xAxis": {
+    "categories": ["Sem atraso", "1-2 dias", "3-5 dias", "6+ dias"],
+    "title": {
+      "text": "Faixa de atraso"
+    }
+  },
+  "yAxis": {
+    "min": 0,
+    "max": 100,
+    "title": {
+      "text": "% de pedidos com recompra em 30 dias"
+    },
+    "labels": {
+      "format": "{value}%"
+    }
+  },
+  "tooltip": {
+    "pointFormat": "Pedidos com recompra: <b>{point.com_recompra}</b><br>Total de pedidos: <b>{point.total}</b><br>% com recompra: <b>{point.y:.1f}%</b>"
+  },
+  "plotOptions": {
+    "column": {
+      "dataLabels": {
+        "enabled": true,
+        "format": "{point.y:.1f}%"
+      }
+    }
+  },
+  "series": [
+    {
+      "name": "% com recompra em 30 dias",
+      "colorByPoint": true,
+      "data": [
+        {
+          "name": "Sem atraso",
+          "y": 33.94,
+          "color": "#0284c7",
+          "com_recompra": 94,
+          "total": 277
+        },
+        {
+          "name": "1-2 dias",
+          "y": 9.28,
+          "color": "#f97316",
+          "com_recompra": 117,
+          "total": 1261
+        },
+        {
+          "name": "3-5 dias",
+          "y": 0.77,
+          "color": "#ef4444",
+          "com_recompra": 7,
+          "total": 911
+        },
+        {
+          "name": "6+ dias",
+          "y": 0.0,
+          "color": "#7f1d1d",
+          "com_recompra": 0,
+          "total": 51
+        }
+      ]
+    }
+  ]
+}

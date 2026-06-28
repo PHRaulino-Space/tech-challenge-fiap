@@ -364,3 +364,344 @@ json_highcharts_nps_media_mediana_por_faixa_atraso = gerar_json_highcharts(
 )
 
 json_highcharts_nps_media_mediana_por_faixa_atraso
+
+# %% [markdown]
+# ## Barras — atraso x reclamação
+#
+# Este gráfico compara o percentual de pedidos com reclamação formal entre pedidos
+# entregues com e sem atraso.
+
+# %%
+df_atraso_reclamacao = df.copy()
+df_atraso_reclamacao["status_atraso"] = (
+    df_atraso_reclamacao["delivery_delay_days"]
+    .gt(0)
+    .map(
+        {
+            False: "Sem atraso",
+            True: "Com atraso",
+        }
+    )
+)
+df_atraso_reclamacao["teve_reclamacao"] = df_atraso_reclamacao["complaints_count"].gt(0)
+
+rotulos_status_atraso = ["Sem atraso", "Com atraso"]
+
+atraso_reclamacao_resumo = (
+    df_atraso_reclamacao.groupby("status_atraso", observed=False)
+    .agg(
+        pedidos=("order_id", "count"),
+        pedidos_com_reclamacao=("teve_reclamacao", "sum"),
+        percentual_reclamacao=("teve_reclamacao", "mean"),
+    )
+    .reindex(rotulos_status_atraso)
+    .reset_index()
+)
+atraso_reclamacao_resumo["percentual_reclamacao"] *= 100
+atraso_reclamacao_resumo["texto_percentual"] = atraso_reclamacao_resumo[
+    "percentual_reclamacao"
+].map(lambda valor: f"{valor:.1f}%")
+
+fig_atraso_reclamacao = px.bar(
+    atraso_reclamacao_resumo,
+    x="status_atraso",
+    y="percentual_reclamacao",
+    color="status_atraso",
+    text="texto_percentual",
+    category_orders={"status_atraso": rotulos_status_atraso},
+    color_discrete_map={
+        "Sem atraso": "#0284c7",
+        "Com atraso": "#ef4444",
+    },
+    labels={
+        "status_atraso": "Status de atraso",
+        "percentual_reclamacao": "% de pedidos com reclamação",
+    },
+    title="Percentual de reclamações entre pedidos com e sem atraso",
+)
+
+fig_atraso_reclamacao.update_layout(
+    showlegend=False,
+    title_x=0.5,
+    xaxis_title="Status de atraso",
+    yaxis_title="% de pedidos com reclamação",
+    yaxis_ticksuffix="%",
+    yaxis_range=[0, 105],
+)
+fig_atraso_reclamacao.update_traces(
+    textposition="outside",
+    hovertemplate=(
+        "<b>%{x}</b><br>"
+        "Pedidos com reclamação: %{customdata[0]}<br>"
+        "Total de pedidos: %{customdata[1]}<br>"
+        "% com reclamação: %{y:.1f}%<extra></extra>"
+    ),
+    customdata=atraso_reclamacao_resumo[["pedidos_com_reclamacao", "pedidos"]].to_numpy(),
+)
+
+fig_atraso_reclamacao.show()
+
+# %% [markdown]
+# ### Dados das barras em JSON para Highcharts
+
+# %%
+highcharts_atraso_reclamacao = {
+    "chart": {"type": "column"},
+    "title": {"text": "Percentual de reclamações entre pedidos com e sem atraso"},
+    "xAxis": {
+        "categories": rotulos_status_atraso,
+        "title": {"text": "Status de atraso"},
+    },
+    "yAxis": {
+        "min": 0,
+        "max": 100,
+        "title": {"text": "% de pedidos com reclamação"},
+        "labels": {"format": "{value}%"},
+    },
+    "tooltip": {
+        "pointFormat": (
+            "Pedidos com reclamação: <b>{point.com_reclamacao}</b><br>"
+            "Total de pedidos: <b>{point.total}</b><br>"
+            "% com reclamação: <b>{point.y:.1f}%</b>"
+        )
+    },
+    "plotOptions": {
+        "column": {
+            "dataLabels": {
+                "enabled": True,
+                "format": "{point.y:.1f}%",
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "% com reclamação",
+            "colorByPoint": True,
+            "data": [
+                {
+                    "name": linha["status_atraso"],
+                    "y": round(linha["percentual_reclamacao"], 2),
+                    "color": "#0284c7" if linha["status_atraso"] == "Sem atraso" else "#ef4444",
+                    "com_reclamacao": int(linha["pedidos_com_reclamacao"]),
+                    "total": int(linha["pedidos"]),
+                }
+                for _, linha in atraso_reclamacao_resumo.iterrows()
+            ],
+        }
+    ],
+}
+
+json_highcharts_atraso_reclamacao = gerar_json_highcharts(highcharts_atraso_reclamacao)
+
+print(json_highcharts_atraso_reclamacao)
+
+# %% [markdown]
+# ## Barras — reclamações formais por faixas de atraso
+#
+# Este gráfico compara a média de reclamações formais (`complaints_count`) entre
+# faixas de atraso.
+
+# %%
+reclamacoes_nps_faixa_atraso = (
+    df_nps_atraso.groupby("faixa_atraso", observed=False)
+    .agg(
+        media_reclamacoes=("complaints_count", "mean"),
+    )
+    .reset_index()
+)
+
+fig_reclamacoes_nps_por_faixa_atraso = px.bar(
+    reclamacoes_nps_faixa_atraso,
+    x="faixa_atraso",
+    y="media_reclamacoes",
+    color="faixa_atraso",
+    text=reclamacoes_nps_faixa_atraso["media_reclamacoes"].map(lambda valor: f"{valor:.2f}"),
+    category_orders={"faixa_atraso": rotulos_faixas_atraso},
+    color_discrete_map={
+        "Sem atraso": "#0284c7",
+        "1-2 dias": "#f97316",
+        "3-5 dias": "#ef4444",
+        "6+ dias": "#7f1d1d",
+    },
+    labels={
+        "faixa_atraso": "Faixa de atraso",
+        "media_reclamacoes": "Média de reclamações formais",
+    },
+    title="Média de reclamações formais por faixas de atraso na entrega",
+)
+
+fig_reclamacoes_nps_por_faixa_atraso.update_layout(
+    showlegend=False,
+    title_x=0.5,
+    xaxis_title="Dias de atraso na entrega",
+    yaxis_title="Média de reclamações formais",
+)
+fig_reclamacoes_nps_por_faixa_atraso.update_traces(
+    textposition="outside",
+    selector={"type": "bar"},
+)
+
+fig_reclamacoes_nps_por_faixa_atraso.show()
+
+# %% [markdown]
+# ### Dados das barras em JSON para Highcharts
+
+# %%
+highcharts_reclamacoes_nps_por_faixa_atraso = {
+    "chart": {"type": "column"},
+    "title": {"text": "Média de reclamações formais por faixas de atraso na entrega"},
+    "xAxis": {
+        "categories": rotulos_faixas_atraso,
+        "title": {"text": "Faixa de atraso"},
+    },
+    "yAxis": {
+        "title": {"text": "Média de reclamações formais"},
+        "min": 0,
+    },
+    "tooltip": {"pointFormat": "Média de reclamações: <b>{point.y:.2f}</b>"},
+    "plotOptions": {
+        "column": {
+            "dataLabels": {
+                "enabled": True,
+                "format": "{point.y:.2f}",
+            }
+        },
+    },
+    "series": [
+        {
+            "name": "Média de reclamações formais",
+            "data": reclamacoes_nps_faixa_atraso["media_reclamacoes"].round(2).tolist(),
+            "color": "#ef4444",
+        }
+    ],
+}
+
+json_highcharts_reclamacoes_nps_por_faixa_atraso = gerar_json_highcharts(
+    highcharts_reclamacoes_nps_por_faixa_atraso
+)
+
+print(json_highcharts_reclamacoes_nps_por_faixa_atraso)
+
+# %% [markdown]
+# ## Barras — recompra em 30 dias por faixas de atraso
+#
+# Este gráfico compara o percentual de pedidos com recompra em até 30 dias
+# (`repeat_purchase_30d`) entre pedidos entregues no prazo e pedidos com diferentes
+# níveis de atraso.
+
+# %%
+recompra_faixa_atraso = (
+    df_nps_atraso.groupby("faixa_atraso", observed=False)
+    .agg(
+        pedidos=("order_id", "count"),
+        pedidos_com_recompra=("repeat_purchase_30d", "sum"),
+        percentual_recompra=("repeat_purchase_30d", "mean"),
+    )
+    .reset_index()
+)
+recompra_faixa_atraso["percentual_recompra"] *= 100
+recompra_faixa_atraso["texto_percentual"] = recompra_faixa_atraso["percentual_recompra"].map(
+    lambda valor: f"{valor:.1f}%"
+)
+
+fig_recompra_por_faixa_atraso = px.bar(
+    recompra_faixa_atraso,
+    x="faixa_atraso",
+    y="percentual_recompra",
+    color="faixa_atraso",
+    text="texto_percentual",
+    category_orders={"faixa_atraso": rotulos_faixas_atraso},
+    color_discrete_map={
+        "Sem atraso": "#0284c7",
+        "1-2 dias": "#f97316",
+        "3-5 dias": "#ef4444",
+        "6+ dias": "#7f1d1d",
+    },
+    labels={
+        "faixa_atraso": "Faixa de atraso",
+        "percentual_recompra": "% de pedidos com recompra em 30 dias",
+    },
+    title="Percentual de recompra em 30 dias por faixas de atraso na entrega",
+)
+
+fig_recompra_por_faixa_atraso.update_layout(
+    showlegend=False,
+    title_x=0.5,
+    xaxis_title="Dias de atraso na entrega",
+    yaxis_title="% de pedidos com recompra em 30 dias",
+    yaxis_ticksuffix="%",
+    yaxis_range=[0, 100],
+)
+fig_recompra_por_faixa_atraso.update_traces(
+    textposition="outside",
+    hovertemplate=(
+        "<b>%{x}</b><br>"
+        "Pedidos com recompra: %{customdata[0]}<br>"
+        "Total de pedidos: %{customdata[1]}<br>"
+        "% com recompra: %{y:.1f}%<extra></extra>"
+    ),
+    customdata=recompra_faixa_atraso[["pedidos_com_recompra", "pedidos"]].to_numpy(),
+)
+
+fig_recompra_por_faixa_atraso.show()
+
+# %% [markdown]
+# ### Dados das barras em JSON para Highcharts
+
+# %%
+highcharts_recompra_por_faixa_atraso = {
+    "chart": {"type": "column"},
+    "title": {"text": "Percentual de recompra em 30 dias por faixas de atraso na entrega"},
+    "xAxis": {
+        "categories": rotulos_faixas_atraso,
+        "title": {"text": "Faixa de atraso"},
+    },
+    "yAxis": {
+        "min": 0,
+        "max": 100,
+        "title": {"text": "% de pedidos com recompra em 30 dias"},
+        "labels": {"format": "{value}%"},
+    },
+    "tooltip": {
+        "pointFormat": (
+            "Pedidos com recompra: <b>{point.com_recompra}</b><br>"
+            "Total de pedidos: <b>{point.total}</b><br>"
+            "% com recompra: <b>{point.y:.1f}%</b>"
+        )
+    },
+    "plotOptions": {
+        "column": {
+            "dataLabels": {
+                "enabled": True,
+                "format": "{point.y:.1f}%",
+            }
+        }
+    },
+    "series": [
+        {
+            "name": "% com recompra em 30 dias",
+            "colorByPoint": True,
+            "data": [
+                {
+                    "name": linha["faixa_atraso"],
+                    "y": round(linha["percentual_recompra"], 2),
+                    "color": {
+                        "Sem atraso": "#0284c7",
+                        "1-2 dias": "#f97316",
+                        "3-5 dias": "#ef4444",
+                        "6+ dias": "#7f1d1d",
+                    }[linha["faixa_atraso"]],
+                    "com_recompra": int(linha["pedidos_com_recompra"]),
+                    "total": int(linha["pedidos"]),
+                }
+                for _, linha in recompra_faixa_atraso.iterrows()
+            ],
+        }
+    ],
+}
+
+json_highcharts_recompra_por_faixa_atraso = gerar_json_highcharts(
+    highcharts_recompra_por_faixa_atraso
+)
+
+print(json_highcharts_recompra_por_faixa_atraso)

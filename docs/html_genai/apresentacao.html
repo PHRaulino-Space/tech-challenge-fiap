@@ -167,12 +167,16 @@
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Pergunta de negócio</div>
-              <h2 class="text-3xl font-extrabold mb-10">
+              <h2 class="text-3xl font-extrabold mb-4">
                 O que está reduzindo o NPS?
               </h2>
+              <p class="mb-10 text-xl text-slate-700 max-w-4xl">
+                A análise foi estruturada como uma jornada: da compra até a
+                percepção final do cliente.
+              </p>
               <div class="grid grid-cols-5 gap-4 items-stretch">
                 <div
-                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i data-lucide="user" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Cliente</h3>
@@ -181,7 +185,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i
                     data-lucide="shopping-bag"
@@ -193,7 +197,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-3xl border border-blue-200 p-6 bg-blue-50 shadow-sm"
+                  class="fragment fade-up rounded-3xl border border-blue-200 p-6 bg-blue-50 shadow-sm"
                 >
                   <i data-lucide="truck" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Logística</h3>
@@ -202,7 +206,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i
                     data-lucide="headphones"
@@ -214,7 +218,7 @@
                   </p>
                 </div>
                 <div
-                  class="rounded-3xl border border-slate-200 p-6 bg-slate-50"
+                  class="fragment fade-up rounded-3xl border border-slate-200 p-6 bg-slate-50"
                 >
                   <i data-lucide="star" class="w-8 h-8 text-blue-600 mb-5"></i>
                   <h3 class="text-xl font-bold mb-2">Satisfação</h3>
@@ -223,10 +227,6 @@
                   </p>
                 </div>
               </div>
-              <p class="mt-10 text-xl text-slate-700 max-w-4xl">
-                A análise foi estruturada como uma jornada: da compra até a
-                percepção final do cliente.
-              </p>
             </div>
           </div>
         </section>
@@ -254,7 +254,7 @@
               >
                 <div class="grid gap-4">
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -269,7 +269,7 @@
                     </div>
                   </div>
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -278,13 +278,13 @@
                     <div>
                       <h3 class="text-xl font-bold">Comparar grupos</h3>
                       <p class="text-slate-500">
-                        Avaliação do NPS por atraso, reclamação e contatos ao
-                        SAC.
+                        Avaliação do NPS, reclamações e recompra por faixas de
+                        atraso.
                       </p>
                     </div>
                   </div>
                   <div
-                    class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
+                    class="fragment fade-up flex items-start gap-4 p-5 rounded-2xl bg-slate-50"
                   >
                     <span
                       class="w-10 h-10 shrink-0 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"
@@ -293,8 +293,8 @@
                     <div>
                       <h3 class="text-xl font-bold">Testar hipóteses</h3>
                       <p class="text-slate-500">
-                        Verificação se SAC acompanha o agravamento dos dias de
-                        atraso.
+                        Verificação se o atraso acompanha piora na satisfação e
+                        queda na recorrência.
                       </p>
                     </div>
                   </div>
@@ -314,11 +314,11 @@
                 dos clientes.
               </h2>
 
-              <div class="chart-card rounded-[32px] h-[410px] p-6">
+              <div class="fragment fade-up chart-card rounded-[32px] h-[410px] p-6">
                 <div id="nps-por-atraso-chart" class="w-full h-full"></div>
               </div>
 
-              <div class="mt-6 rounded-3xl insight-card p-6">
+              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
@@ -338,76 +338,64 @@
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
               <div class="kicker mb-4">Aprofundamento</div>
-                <h2 class="text-3xl font-extrabold mb-6">
-                O atraso também se conecta às reclamações formais.
+              <h2 class="text-3xl font-extrabold mb-6">
+                A insatisfação também se reflete nas reclamações formais.
               </h2>
 
               <div
-                class="chart-placeholder rounded-[32px] h-[390px] flex flex-col items-center justify-center text-center p-8"
+                class="fragment fade-up chart-card rounded-[32px] h-[390px] p-6"
               >
-                <i
-                  data-lucide="alert-circle"
-                  class="w-16 h-16 text-blue-600 mb-5"
-                ></i>
-                <h3 class="text-3xl font-extrabold mb-3">
-                  Inserir gráfico: Atraso x reclamação
-                </h3>
-                <p class="text-xl text-slate-500 max-w-3xl">
-                  Sugestão: barras condicionais mostrando o percentual de
-                  reclamações entre pedidos com e sem atraso.
-                </p>
+                <div
+                  id="reclamacoes-por-atraso-chart"
+                  class="w-full h-full"
+                ></div>
               </div>
 
-              <div class="mt-6 rounded-3xl insight-card p-6">
+              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
-                <p class="text-xl leading-snug text-slate-800">
-                  Na base analisada, todos os pedidos com atraso apresentaram
-                  reclamação formal. A análise mostra associação forte, mas não
-                  permite afirmar causalidade operacional completa.
-                </p>
+                <ul
+                  class="list-disc pl-6 text-lg leading-snug text-slate-800 space-y-2"
+                >
+                  <li>
+                    A quantidade média de reclamações aumenta conforme os dias
+                    de atraso crescem.
+                  </li>
+                  <li>
+                    Todos os clientes com atraso registraram ao menos uma
+                    reclamação formal, reforçando a forte associação entre
+                    atraso e insatisfação.
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- 6. SAC -->
+        <!-- 6. Recompra -->
         <section>
           <div class="slide-wrap bg-transparent">
             <div class="max-w-6xl mx-auto w-full">
-              <div class="kicker mb-4">Hipótese testada</div>
+              <div class="kicker mb-4">Reflexos para o negócio</div>
               <h2 class="text-3xl font-extrabold mb-8">
-                O SAC aparece associado ao NPS, mas não acompanha o aumento dos
-                dias de atraso.
+                Clientes com atraso apresentaram menor taxa de recompra em até 30 dias.
               </h2>
 
               <div
-                class="chart-placeholder rounded-[32px] h-[390px] flex flex-col items-center justify-center text-center p-8"
+                class="fragment fade-up chart-card rounded-[32px] h-[390px] p-6"
               >
-                <i
-                  data-lucide="activity"
-                  class="w-14 h-14 text-blue-600 mb-5"
-                ></i>
-                <h3 class="text-3xl font-extrabold mb-3">
-                  Inserir gráfico: Dias de atraso por contatos no SAC
-                </h3>
-                <p class="text-xl text-slate-500 max-w-3xl">
-                  Sugestão: boxplot ou heatmap usado para testar se mais atraso
-                  gera mais contatos.
-                </p>
+                <div id="recompra-por-atraso-chart" class="w-full h-full"></div>
               </div>
 
-              <div class="mt-6 rounded-3xl insight-card p-6">
+              <div class="fragment fade-up mt-6 rounded-3xl insight-card p-6">
                 <div class="insight-label text-xl mb-2">
                   <i data-lucide="lightbulb" class="w-6 h-6"></i>
                   Insight
                 </div>
-                <p class="text-xl leading-snug text-slate-800">
-                  Não há evidência visual de que os contatos ao SAC aumentem
-                  junto com os dias de atraso. Esse comportamento pode depender
-                  de atendimento, comunicação, canal ou perfil do cliente.
+                <p class="text-lg leading-snug text-slate-800">
+                  Clientes que receberam seus pedidos sem atraso apresentaram uma taxa de recompra significativamente maior. Embora a análise não permita afirmar causalidade, os resultados indicam que atrasos podem comprometer a retenção de clientes.
                 </p>
               </div>
             </div>
@@ -460,10 +448,10 @@
                 </div>
               </div>
               <p
-                class="mt-12 text-2xl text-slate-300 max-w-4xl mx-auto text-center"
+                class="fragment fade-up mt-12 text-2xl text-slate-300 max-w-4xl mx-auto text-center"
               >
-                O SAC permanece como achado secundário e ponto para estudos
-                futuros, mas não como elo principal da narrativa.
+                A queda na recompra reforça que o atraso impacta satisfação e
+                continuidade do relacionamento com o cliente.
               </p>
             </div>
           </div>
@@ -479,7 +467,7 @@
               </h2>
               <div class="grid grid-cols-2 gap-8">
                 <div
-                  class="rounded-[32px] bg-slate-50 border border-slate-200 p-8"
+                  class="fragment fade-up rounded-[32px] bg-slate-50 border border-slate-200 p-8"
                 >
                   <div class="text-lg font-bold text-slate-500 mb-6">
                     Situação atual
@@ -509,7 +497,7 @@
                   </div>
                 </div>
                 <div
-                  class="rounded-[32px] bg-blue-50 border border-blue-200 p-8 shadow-sm"
+                  class="fragment fade-up rounded-[32px] bg-blue-50 border border-blue-200 p-8 shadow-sm"
                 >
                   <div class="text-lg font-bold text-blue-700 mb-6">
                     Proposta
@@ -565,42 +553,42 @@
                 class="rounded-[32px] bg-white border border-slate-200 shadow-sm p-8"
               >
                 <div class="grid grid-cols-2 gap-4">
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="map-pin"
                       class="w-8 h-8 text-blue-600 mb-3"
                     ></i>
                     <h3 class="text-xl font-bold">Distância e região</h3>
                   </div>
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="warehouse"
                       class="w-8 h-8 text-blue-600 mb-3"
                     ></i>
                     <h3 class="text-xl font-bold">Centro de distribuição</h3>
                   </div>
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="truck"
                       class="w-8 h-8 text-blue-600 mb-3"
                     ></i>
                     <h3 class="text-xl font-bold">Transportadora</h3>
                   </div>
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="calendar-days"
                       class="w-8 h-8 text-blue-600 mb-3"
                     ></i>
                     <h3 class="text-xl font-bold">Sazonalidade</h3>
                   </div>
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="package"
                       class="w-8 h-8 text-blue-600 mb-3"
                     ></i>
                     <h3 class="text-xl font-bold">Peso e categoria</h3>
                   </div>
-                  <div class="rounded-2xl bg-slate-50 p-5">
+                  <div class="fragment fade-up rounded-2xl bg-slate-50 p-5">
                     <i
                       data-lucide="history"
                       class="w-8 h-8 text-blue-600 mb-3"
@@ -652,9 +640,15 @@
         });
       }
 
+      let highchartsLoadPromise;
+
       async function loadHighcharts() {
         if (window.Highcharts) {
           return;
+        }
+
+        if (highchartsLoadPromise) {
+          return highchartsLoadPromise;
         }
 
         const cdns = [
@@ -663,22 +657,26 @@
           "https://unpkg.com/highcharts",
         ];
 
-        let lastError;
+        highchartsLoadPromise = (async () => {
+          let lastError;
 
-        for (const cdn of cdns) {
-          try {
-            await loadScript(`${cdn}/highcharts.js`);
-            await loadScript(`${cdn}/highcharts-more.js`);
+          for (const cdn of cdns) {
+            try {
+              await loadScript(`${cdn}/highcharts.js`);
+              await loadScript(`${cdn}/highcharts-more.js`);
 
-            if (window.Highcharts) {
-              return;
+              if (window.Highcharts) {
+                return;
+              }
+            } catch (error) {
+              lastError = error;
             }
-          } catch (error) {
-            lastError = error;
           }
-        }
 
-        throw lastError || new Error("Highcharts indisponível");
+          throw lastError || new Error("Highcharts indisponível");
+        })();
+
+        return highchartsLoadPromise;
       }
 
       async function renderNpsPorAtrasoChart() {
@@ -768,6 +766,191 @@
         }
       }
 
+      async function renderReclamacoesPorAtrasoChart() {
+        const container = document.getElementById(
+          "reclamacoes-por-atraso-chart"
+        );
+
+        try {
+          await loadHighcharts();
+
+          const response = await fetch(
+            "data_highcharts/reclamacoes_por_atraso.json"
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const options = await response.json();
+
+          Highcharts.chart(container, {
+            ...options,
+            chart: {
+              ...options.chart,
+              height: 340,
+              style: {
+                fontFamily: '"Inter", system-ui, sans-serif',
+              },
+            },
+            credits: {
+              enabled: false,
+            },
+            legend: {
+              enabled: false,
+            },
+            plotOptions: {
+              column: {
+                borderRadius: 8,
+                pointPadding: 0.12,
+                groupPadding: 0.08,
+                dataLabels: {
+                  enabled: true,
+                  format: "{point.y:.2f}",
+                  style: {
+                    color: "#0f172a",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    textOutline: "none",
+                  },
+                },
+              },
+              ...options.plotOptions,
+            },
+            title: {
+              ...options.title,
+              style: {
+                color: "#0f172a",
+                fontSize: "20px",
+                fontWeight: "800",
+              },
+            },
+            xAxis: {
+              ...options.xAxis,
+              labels: {
+                style: {
+                  color: "#334155",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                },
+              },
+            },
+            yAxis: {
+              ...options.yAxis,
+              gridLineColor: "#e2e8f0",
+              labels: {
+                style: {
+                  color: "#475569",
+                  fontSize: "13px",
+                },
+              },
+            },
+            series: options.series.map((serie) => ({
+              ...serie,
+              color: "#2563eb",
+            })),
+          });
+        } catch (error) {
+          container.innerHTML =
+            '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de reclamações por atraso.</div>';
+          console.error("Erro ao carregar reclamacoes_por_atraso.json:", error);
+        }
+      }
+
+      async function renderRecompraPorAtrasoChart() {
+        const container = document.getElementById("recompra-por-atraso-chart");
+
+        try {
+          await loadHighcharts();
+
+          const response = await fetch(
+            "data_highcharts/recompra_por_atraso.json"
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const options = await response.json();
+          const recompraColors = ["#2563eb", "#3b82f6", "#64748b", "#334155"];
+
+          Highcharts.chart(container, {
+            ...options,
+            chart: {
+              ...options.chart,
+              height: 340,
+              style: {
+                fontFamily: '"Inter", system-ui, sans-serif',
+              },
+            },
+            credits: {
+              enabled: false,
+            },
+            legend: {
+              enabled: false,
+            },
+            plotOptions: {
+              column: {
+                borderRadius: 8,
+                pointPadding: 0.12,
+                groupPadding: 0.08,
+                dataLabels: {
+                  enabled: true,
+                  format: "{point.y:.1f}%",
+                  style: {
+                    color: "#0f172a",
+                    fontSize: "13px",
+                    fontWeight: "800",
+                    textOutline: "none",
+                  },
+                },
+              },
+              ...options.plotOptions,
+            },
+            title: {
+              ...options.title,
+              style: {
+                color: "#0f172a",
+                fontSize: "20px",
+                fontWeight: "800",
+              },
+            },
+            xAxis: {
+              ...options.xAxis,
+              labels: {
+                style: {
+                  color: "#334155",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                },
+              },
+            },
+            yAxis: {
+              ...options.yAxis,
+              gridLineColor: "#e2e8f0",
+              labels: {
+                ...options.yAxis.labels,
+                style: {
+                  color: "#475569",
+                  fontSize: "13px",
+                },
+              },
+            },
+            series: options.series.map((serie) => ({
+              ...serie,
+              data: serie.data.map((point, index) => ({
+                ...point,
+                color: recompraColors[index] || "#2563eb",
+              })),
+            })),
+          });
+        } catch (error) {
+          container.innerHTML =
+            '<div class="h-full flex items-center justify-center text-center text-slate-500 text-xl px-8">Não foi possível carregar o gráfico de recompra por atraso.</div>';
+          console.error("Erro ao carregar recompra_por_atraso.json:", error);
+        }
+      }
+
       Reveal.initialize({
         hash: true,
         controls: true,
@@ -781,6 +964,8 @@
       });
       lucide.createIcons();
       renderNpsPorAtrasoChart();
+      renderReclamacoesPorAtrasoChart();
+      renderRecompraPorAtrasoChart();
     </script>
   </body>
 </html>
