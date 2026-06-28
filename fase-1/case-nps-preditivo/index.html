@@ -1,0 +1,1348 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório das entregas do Tech Challenge do programa POSTECH AI Scientist — FIAP.">
+      
+      
+        <meta name="author" content="Paulo Henrique Almeida, Gabriela Almeida">
+      
+      
+      
+        <link rel="prev" href="../planejamento/">
+      
+      
+        <link rel="next" href="../problema-negocio/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Case - Tech Challenge — FIAP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tech-challenge-fase-1-case-nps-preditivo" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-header__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Challenge — FIAP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Case
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-nav__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tech Challenge — FIAP
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fase 1 — NPS Preditivo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fase 1 — NPS Preditivo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../planejamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-entendimento-do-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Entendimento do Negócio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-definicao-da-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Definição da Target
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analise-exploratoria-dos-dados-eda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Análise Exploratória dos Dados (EDA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reflexao-sobre-modelo-preditivo-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Reflexão sobre Modelo Preditivo (opcional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dicionario-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dicionário de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-da-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formato da Entrega
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formato da Entrega">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-no-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositório no GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#material-de-apresentacao-do-storytelling-gerencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material de Apresentação do Storytelling Gerencial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-executivo-ate-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vídeo Executivo (até 5 minutos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problema-negocio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Problema de Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-canvas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Business Canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reflexoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Reflexões do Desafio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analise-hipoteses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Análise e Hipóteses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. EDA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparacao-dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Preparação dos Dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposta-solucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Proposta de Solução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Avaliação dos Resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apresentacao-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Apresentação Final
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Como Reproduzir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-entendimento-do-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Entendimento do Negócio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-definicao-da-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Definição da Target
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analise-exploratoria-dos-dados-eda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Análise Exploratória dos Dados (EDA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-reflexao-sobre-modelo-preditivo-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Reflexão sobre Modelo Preditivo (opcional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#base-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base de Dados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dicionario-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dicionário de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-da-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formato da Entrega
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formato da Entrega">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repositorio-no-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repositório no GitHub
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#material-de-apresentacao-do-storytelling-gerencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Material de Apresentação do Storytelling Gerencial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-executivo-ate-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vídeo Executivo (até 5 minutos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tech-challenge-fase-1-case-nps-preditivo">Tech Challenge Fase 1 — Case NPS Preditivo</h1>
+<p>Tech Challenge é o projeto que englobará os conhecimentos obtidos em todas as disciplinas da fase. Esta é uma atividade que, em princípio, deve ser desenvolvida em grupo. É importante atentar-se ao prazo de entrega, pois trata-se de uma atividade obrigatória, uma vez que sua pontuação se refere a 90% da nota final.</p>
+<p>Com o crescimento acelerado do e-commerce nacional, temos o cenário de uma empresa que passou a lidar com um volume cada vez maior de pedidos, entregas e interações com clientes. Esse crescimento trouxe ganhos importantes de escala, mas também revelou desafios relevantes na experiência do cliente, especialmente refletidos na alta variabilidade do Net Promoter Score (NPS) entre diferentes perfis de consumidores. A área de Experiência do Cliente percebeu que, mesmo com indicadores operacionais aparentemente semelhantes, alguns clientes se tornam promotores da marca, enquanto outros se tornam detratores.</p>
+<p>Essa diferença levanta uma questão central para o negócio: <strong>quais fatores operacionais realmente influenciam a satisfação do cliente e como a empresa pode agir de forma proativa para melhorar a experiência antes mesmo da aplicação da pesquisa de NPS?</strong></p>
+<p>Atualmente, o NPS é coletado apenas após o encerramento da jornada de compra, o que limita a capacidade da empresa de antecipar problemas, priorizar ações corretivas e atuar de forma preventiva. Nesse contexto, surge a necessidade de transformar dados operacionais, como informações de pedidos, logística e atendimento, em insights acionáveis, capazes de orientar decisões estratégicas e operacionais.</p>
+<p>É nesse cenário que você, como cientista de dados, é acionado(a). Seu papel não é apenas analisar dados ou construir modelos, mas traduzir informações técnicas em recomendações claras para o negócio, apoiando áreas como logística, atendimento, produto e estratégia na melhoria contínua da experiência do cliente.</p>
+<p>Ao longo deste desafio, você deverá explorar os dados disponíveis, compreender o comportamento dos clientes, identificar padrões relevantes e comunicar suas conclusões de forma estruturada e acessível. Mais do que buscar a "melhor métrica" ou o "modelo mais complexo", o foco está em entendimento do problema, pensamento analítico e storytelling com dados, simulando um cenário real de atuação no mercado.</p>
+<p>Você deverá atender os seguintes requisitos nesse desafio:</p>
+<h2 id="requisitos">Requisitos</h2>
+<h3 id="1-entendimento-do-negocio">1. Entendimento do Negócio</h3>
+<p>Ness<strong>pensamena primeira etapa, queremos exercitar o seu to analítico</strong>, não código. Nos traga a resposta para as seguintes perguntas de negócio:</p>
+<ul>
+<li>Qual problema de negócio está sendo resolvido?</li>
+<li>Por que o NPS é importante para um e-commerce?</li>
+<li>Quais áreas poderiam se beneficiar desses insights? Exemplos: logística, atendimento, pricing, produto etc.</li>
+</ul>
+<p>Além do entendimento do negócio, inclua uma reflexão (não precisa de dados externos obrigatórios):</p>
+<p>Como o NPS impacta:</p>
+<ul>
+<li>Recompra;</li>
+<li>Boca a boca;</li>
+<li>Market share em e-commerce.</li>
+</ul>
+<p>Quais indicadores de mercado poderiam complementar essa análise? Exemplos: benchmarks de NPS, SLA logístico, concorrência.</p>
+<h3 id="2-definicao-da-target">2. Definição da Target</h3>
+<p>Qual é o alvo desse problema de negócio? Nessa segunda etapa queremos uma avaliação de <strong>entendimento conceitual</strong>, não técnico.</p>
+<ul>
+<li>Qual variável representa a satisfação do cliente?</li>
+<li>Por que ela foi escolhida?</li>
+<li>Em que momento da jornada essa informação é coletada?</li>
+<li>Existe algum risco de usar essa variável de forma inadequada?</li>
+</ul>
+<h3 id="3-analise-exploratoria-dos-dados-eda">3. Análise Exploratória dos Dados (EDA)</h3>
+<p>Realize uma análise exploratória com foco em <strong>negócio</strong>, não só estatística. Responda:</p>
+<ul>
+<li>Quais fatores parecem mais críticos para a satisfação?</li>
+<li>O que mais gera detratores?</li>
+<li>Existe algum "ponto de ruptura" na experiência do cliente?</li>
+<li>Que tipo de cliente tende a ter NPS mais alto ou mais baixo?</li>
+</ul>
+<p>Imagine que você está explicando isso para <strong>um(a) gerente de operações que não entende estatística.</strong></p>
+<h3 id="4-reflexao-sobre-modelo-preditivo-opcional">4. Reflexão sobre Modelo Preditivo <em>(opcional)</em></h3>
+<p>Como forma de preparação para as próximas fases do curso, este desafio propõe uma reflexão prática sobre <strong>como a Ciência de Dados pode ser utilizada para antecipar a satisfação do cliente</strong>.</p>
+<p>A partir da dor de negócio apresentada neste case, reflita sobre como um <strong>modelo preditivo</strong> poderia apoiar a empresa a prever o NPS antes da aplicação da pesquisa. Considere diferentes abordagens possíveis, como:</p>
+<ul>
+<li>Um <strong>modelo de regressão</strong>, para estimar a nota de NPS em uma escala contínua;</li>
+<li>Um <strong>modelo de classificação</strong>, para categorizar clientes, por exemplo, em satisfeitos e insatisfeitos.</li>
+</ul>
+<p>Descreva qual estratégia você adotaria para resolver esse problema utilizando dados e Inteligência Artificial, justificando suas escolhas do ponto de vista técnico e <strong>de negócio</strong>.</p>
+<p>Caso opte por implementar a solução, apresente uma proposta de modelo aplicada em <strong>Python</strong>, explicando de forma clara:</p>
+<ul>
+<li>A definição da variável alvo;</li>
+<li>A seleção e preparação das variáveis de entrada;</li>
+<li>A lógica de separação dos dados (quando aplicável);</li>
+<li>A escolha do modelo;</li>
+<li>A forma de avaliação dos resultados;</li>
+<li>E como essa solução poderia ser utilizada na prática pela empresa.</li>
+</ul>
+<blockquote>
+<p><strong>Este desafio (4) é opcional e tem como objetivo ampliar a maturidade analítica e técnica, sem impacto negativo para quem optar por não realizá-lo.</strong></p>
+</blockquote>
+<h2 id="base-de-dados">Base de Dados</h2>
+<p>Acesse o arquivo CSV com dados históricos de pedidos, entregas e interações com o atendimento ao cliente.</p>
+<p>Exemplos de informações disponíveis:</p>
+<ul>
+<li>Dados do pedido (valor, quantidade de itens, forma de pagamento);</li>
+<li>Dados logísticos (tempo de entrega, atraso, tentativas);</li>
+<li>Dados de atendimento (contatos, tempo de resolução);</li>
+<li>Indicadores internos de negócio.</li>
+</ul>
+<h3 id="dicionario-de-dados">Dicionário de Dados</h3>
+<table>
+<thead>
+<tr>
+<th>Variável</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customer_id</code></td>
+<td>Identificador único do cliente</td>
+</tr>
+<tr>
+<td><code>order_id</code></td>
+<td>Identificador único do pedido</td>
+</tr>
+<tr>
+<td><code>customer_age</code></td>
+<td>Idade do cliente</td>
+</tr>
+<tr>
+<td><code>customer_region</code></td>
+<td>Região geográfica do cliente</td>
+</tr>
+<tr>
+<td><code>customer_tenure_months</code></td>
+<td>Tempo de relacionamento do cliente com a empresa (em meses)</td>
+</tr>
+<tr>
+<td><code>order_value</code></td>
+<td>Valor total do pedido</td>
+</tr>
+<tr>
+<td><code>items_quantity</code></td>
+<td>Quantidade de itens no pedido</td>
+</tr>
+<tr>
+<td><code>discount_value</code></td>
+<td>Valor de desconto aplicado ao pedido</td>
+</tr>
+<tr>
+<td><code>payment_installments</code></td>
+<td>Número de parcelas do pagamento</td>
+</tr>
+<tr>
+<td><code>delivery_time_days</code></td>
+<td>Tempo total de entrega (em dias)</td>
+</tr>
+<tr>
+<td><code>delivery_delay_days</code></td>
+<td>Quantidade de dias de atraso na entrega</td>
+</tr>
+<tr>
+<td><code>freight_value</code></td>
+<td>Valor do frete</td>
+</tr>
+<tr>
+<td><code>delivery_attempts</code></td>
+<td>Número de tentativas de entrega</td>
+</tr>
+<tr>
+<td><code>customer_service_contacts</code></td>
+<td>Número de contatos do cliente com o atendimento</td>
+</tr>
+<tr>
+<td><code>resolution_time_days</code></td>
+<td>Tempo para resolução de problemas (em dias)</td>
+</tr>
+<tr>
+<td><code>complaints_count</code></td>
+<td>Número de reclamações registradas pelo cliente</td>
+</tr>
+<tr>
+<td><code>repeat_purchase_30d</code></td>
+<td>Indica se houve recompra em até 30 dias após o pedido (0 = não, 1 = sim)</td>
+</tr>
+<tr>
+<td><code>csat_internal_score</code></td>
+<td>Score interno de satisfação do cliente</td>
+</tr>
+<tr>
+<td><code>nps_score</code></td>
+<td>Nota de satisfação do cliente (NPS), variando de 0 a 10, coletada após a experiência de compra</td>
+</tr>
+</tbody>
+</table>
+<h2 id="formato-da-entrega">Formato da Entrega</h2>
+<h3 id="repositorio-no-github">Repositório no GitHub</h3>
+<p>Enviar o link de um repositório público contendo:</p>
+<ul>
+<li>Todo o tratamento e preparação da base de dados;</li>
+<li>Análise exploratória (EDA);</li>
+<li>Modelo preditivo e toda a pipeline da construção, caso opte em fazer o desafio.</li>
+</ul>
+<p><strong>Boas práticas obrigatórias:</strong></p>
+<ul>
+<li>Código organizado em notebooks e/ou scripts;</li>
+<li>Uso de nomes de variáveis claros e padronizados;</li>
+<li>Comentários explicando trechos relevantes do código;</li>
+<li>Estrutura de pastas clara (ex.: <code>data/</code>, <code>notebooks/</code>, <code>models/</code>, <code>reports/</code>);</li>
+<li>README explicando:<ul>
+<li>Objetivo do projeto;</li>
+<li>Descrição da base de dados;</li>
+<li>Metodologia utilizada;</li>
+<li>Como reproduzir os resultados.</li>
+</ul>
+</li>
+</ul>
+<p>O repositório deve permitir que qualquer pessoa consiga entender e reproduzir a análise.</p>
+<h3 id="material-de-apresentacao-do-storytelling-gerencial">Material de Apresentação do Storytelling Gerencial</h3>
+<p>Elabore um material de apresentação em formato de <strong>slides</strong>, direcionado a um <strong>público não técnico</strong> (gestores, líderes de negócio ou stakeholders). O objetivo não é explicar códigos ou modelos matemáticos, mas <strong>contar a história dos dados</strong> e apoiar a tomada de decisão.</p>
+<p>A apresentação deve responder, de forma clara e visual, aos seguintes pontos:</p>
+<ul>
+<li><strong>Contexto do problema de negócio</strong> — Explique brevemente o cenário do e-commerce, o desafio relacionado à satisfação dos clientes e por que esse problema é relevante para a empresa.</li>
+<li><strong>Pergunta que a análise busca responder</strong> — Descreva qual foi a principal pergunta orientadora do trabalho. (Caso tenha optado pelo desafio do modelo preditivo, apresente também a pergunta que o modelo busca responder.)</li>
+<li><strong>Principais insights da análise exploratória (EDA)</strong> — Destaque os achados mais relevantes obtidos a partir da análise dos dados, priorizando aqueles que ajudam a explicar variações no NPS.</li>
+<li><strong>Fatores que mais impactam a satisfação do cliente</strong> — Apresente quais variáveis ou aspectos da operação (entrega, atendimento, pedido etc.) se mostraram mais importantes para a satisfação do cliente, utilizando uma linguagem simples e exemplos quando possível.</li>
+<li><strong>Recomendações práticas para o negócio</strong> — A partir dos insights obtidos, proponha ações concretas que a empresa poderia priorizar para melhorar a experiência do cliente.</li>
+<li><strong>Limitações e riscos da estratégia</strong> — Aponte, de forma honesta e objetiva, as principais limitações da análise e os cuidados que a empresa deve ter ao utilizar esses resultados para tomada de decisão.</li>
+</ul>
+<p><strong>O foco deve ser em storytelling com dados, e não em detalhes técnicos.</strong></p>
+<h3 id="video-executivo-ate-5-minutos">Vídeo Executivo (até 5 minutos)</h3>
+<p>Gravar um vídeo de no máximo 5 minutos, no qual:</p>
+<ul>
+<li>Pelo menos um integrante do grupo apresente o projeto;</li>
+<li>A apresentação seja feita em linguagem executiva;</li>
+<li>Sejam destacados:<ul>
+<li>O problema de negócio;</li>
+<li>A solução proposta;</li>
+<li>Os principais insights;</li>
+<li>Como o modelo pode apoiar decisões reais.</li>
+</ul>
+</li>
+</ul>
+<p><strong>O vídeo deve simular uma apresentação para liderança ou stakeholders.</strong></p>
+<hr />
+<p>Boa sorte e não deixe de chamar os professores da Fase 1 para discutir sobre seu trabalho!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
