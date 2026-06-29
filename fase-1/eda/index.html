@@ -1,0 +1,1753 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório das entregas do Tech Challenge do programa POSTECH AI Scientist — FIAP.">
+      
+      
+        <meta name="author" content="Paulo Henrique Almeida, Gabriela Almeida">
+      
+      
+      
+        <link rel="prev" href="../analise-hipoteses/">
+      
+      
+        <link rel="next" href="../preparacao-dados/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>5. EDA - Tech Challenge — FIAP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-eda-final-nps-preditivo" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-header__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Challenge — FIAP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. EDA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-nav__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tech Challenge — FIAP
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fase 1 — NPS Preditivo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fase 1 — NPS Preditivo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resumo-entrega/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo da Entrega
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../planejamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-nps-preditivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problema-negocio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Problema de Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-canvas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Business Canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reflexoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Reflexões do Desafio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analise-hipoteses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Análise e Hipóteses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. EDA
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. EDA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ponto-de-partida-74-dos-clientes-sao-detratores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ponto de Partida: 74% dos Clientes São Detratores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-onde-esta-o-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Onde Está o Problema?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-jornada-do-cliente-o-que-cada-grupo-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Jornada do Cliente: O Que Cada Grupo Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Jornada do Cliente: O Que Cada Grupo Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-por-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação por etapa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-perfis-de-degradacao-da-experiencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Perfis de Degradação da Experiência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-de-onde-vem-os-detratores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. De Onde Vêm os Detratores?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-percepcao-e-comportamento-recompra-em-30-dias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Percepção e Comportamento: Recompra em 30 Dias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-diagnostico-regional-o-problema-e-sistemico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Diagnóstico Regional: O Problema É Sistêmico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-prazo-prometido-vs-velocidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Prazo Prometido vs. Velocidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tempo-de-resolucao-atenua-mas-nao-reverte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tempo de Resolução: Atenua, Mas Não Reverte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-recomendacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Recomendações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Recomendações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logistica-prioridade-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logística — Prioridade 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atendimento-ao-cliente-prioridade-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atendimento ao Cliente — Prioridade 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#produto-e-cx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Produto e CX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analytics-e-modelo-preditivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analytics e Modelo Preditivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-executivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo Executivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparacao-dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Preparação dos Dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposta-solucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Proposta de Solução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Avaliação dos Resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apresentacao-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Apresentação Final
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Como Reproduzir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-ponto-de-partida-74-dos-clientes-sao-detratores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Ponto de Partida: 74% dos Clientes São Detratores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-onde-esta-o-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Onde Está o Problema?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-jornada-do-cliente-o-que-cada-grupo-explica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Jornada do Cliente: O Que Cada Grupo Explica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Jornada do Cliente: O Que Cada Grupo Explica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-por-etapa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação por etapa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-perfis-de-degradacao-da-experiencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Perfis de Degradação da Experiência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-de-onde-vem-os-detratores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. De Onde Vêm os Detratores?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-percepcao-e-comportamento-recompra-em-30-dias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Percepção e Comportamento: Recompra em 30 Dias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-diagnostico-regional-o-problema-e-sistemico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Diagnóstico Regional: O Problema É Sistêmico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-prazo-prometido-vs-velocidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Prazo Prometido vs. Velocidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tempo-de-resolucao-atenua-mas-nao-reverte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tempo de Resolução: Atenua, Mas Não Reverte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-recomendacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Recomendações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Recomendações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logistica-prioridade-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logística — Prioridade 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atendimento-ao-cliente-prioridade-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atendimento ao Cliente — Prioridade 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#produto-e-cx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Produto e CX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analytics-e-modelo-preditivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analytics e Modelo Preditivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-executivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo Executivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="5-eda-final-nps-preditivo">5. EDA Final — NPS Preditivo</h1>
+<p><em>CRISP-DM: Data Understanding</em></p>
+<p>Esta análise exploratória percorre a jornada do cliente no e-commerce — compra, entrega e atendimento — para identificar onde a experiência se rompe e quais fatores operacionais estão mais associados ao baixo NPS.</p>
+<p>O ponto mais importante da EDA é a <strong>mudança de foco da solução</strong>. O projeto começou com a hipótese natural de prever o NPS antes da pesquisa. A exploração mostrou que a ação de maior impacto não é apenas prever a nota final, mas prever e calibrar melhor a entrega, porque o atraso é o principal sinal associado à queda do NPS.</p>
+<section class="eda-hero">
+  <div>
+    <span class="eda-kicker">Tech Challenge · Fase 1</span>
+    <h2>O problema de satisfação é operacional, sistêmico e aparece depois da compra.</h2>
+    <p>
+      A base mostra uma concentração extrema de detratores, atraso generalizado na entrega
+      e forte associação entre falhas operacionais, acionamento do SAC e queda de recompra.
+    </p>
+  </div>
+  <div class="eda-hero-metric">
+    <strong>4,38</strong>
+    <span>Nota média do score de NPS da Base</span>
+  </div>
+</section>
+
+<div class="eda-metrics">
+  <div><strong>2.500</strong><span>clientes analisados</span></div>
+  <div><strong>74,0%</strong><span>detratores</span></div>
+  <div><strong>89%</strong><span>com atraso</span></div>
+  <div><strong>69,4%</strong><span>em Atraso + SAC</span></div>
+</div>
+
+<hr />
+<h2 id="1-ponto-de-partida-74-dos-clientes-sao-detratores">1. Ponto de Partida: 74% dos Clientes São Detratores</h2>
+<p>Antes de qualquer cruzamento, a distribuição do NPS já comunica a urgência. A empresa não está lidando com casos isolados de insatisfação: <strong>3 em cada 4 clientes estão na faixa de detratores</strong>.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-01-distribuicao-nps.html" title="Distribuição de clientes por categoria NPS"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Categoria</th>
+<th style="text-align: center;">Clientes</th>
+<th style="text-align: center;">% da Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Detrator</strong> (0–6)</td>
+<td style="text-align: center;">1.851</td>
+<td style="text-align: center;"><strong>74,0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Neutro (7–8)</td>
+<td style="text-align: center;">448</td>
+<td style="text-align: center;">17,9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Promotor (9–10)</td>
+<td style="text-align: center;">201</td>
+<td style="text-align: center;">8,0%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Leitura de negócio:</strong> com nota média do score de NPS de <strong>4,38</strong>, abaixo do ponto neutro, a satisfação negativa é o padrão dominante da operação.</p>
+<hr />
+<h2 id="2-onde-esta-o-problema">2. Onde Está o Problema?</h2>
+<p>As correlações mostram que os sinais mais fortes não estão no perfil do cliente nem no momento da compra. Eles aparecem na <strong>execução pós-compra</strong>: atraso, reclamações, contatos com o SAC e tempo de resolução.</p>
+<div class="eda-chart-frame tall">
+  <iframe src="/assets/figures/eda-02-correlacoes.html" title="Correlação das variáveis operacionais com NPS"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Variável</th>
+<th style="text-align: center;">Correlação com NPS</th>
+<th style="text-align: left;">Grupo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>delivery_delay_days</code></td>
+<td style="text-align: center;"><strong>-0,60</strong></td>
+<td style="text-align: left;">Logística</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>complaints_count</code></td>
+<td style="text-align: center;"><strong>-0,50</strong></td>
+<td style="text-align: left;">Atendimento</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>customer_service_contacts</code></td>
+<td style="text-align: center;">-0,35</td>
+<td style="text-align: left;">Atendimento</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resolution_time_days</code></td>
+<td style="text-align: center;">-0,19</td>
+<td style="text-align: left;">Atendimento</td>
+</tr>
+<tr>
+<td style="text-align: left;">Demais variáveis</td>
+<td style="text-align: center;">≈ 0</td>
+<td style="text-align: left;">Pedido / Cliente</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão:</strong> idade, região, ticket, desconto, parcelas e quantidade de itens não aparecem como fatores relevantes nesta EDA. O problema está concentrado na experiência operacional depois que o pedido é confirmado.</p>
+<p>Essa conclusão reduz o espaço de solução. Um modelo genérico de NPS baseado em perfil de cliente ou pedido teria pouca tração; a solução precisa olhar para a promessa logística.</p>
+<hr />
+<h2 id="3-jornada-do-cliente-o-que-cada-grupo-explica">3. Jornada do Cliente: O Que Cada Grupo Explica</h2>
+<p>A análise por grupo confirma o diagnóstico inicial. Cliente e pedido praticamente não se movem com o NPS. Logística e atendimento concentram os sinais de degradação.</p>
+<div class="eda-chart-frame xlarge">
+  <iframe src="/assets/figures/eda-03-heatmaps-grupos.html" title="Heatmaps de correlação por grupo da jornada" scrolling="no"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Grupo</th>
+<th style="text-align: left;">Sinal com o NPS</th>
+<th style="text-align: left;">Principal variável</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Cliente</strong></td>
+<td style="text-align: left;">Nenhum</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pedido</strong></td>
+<td style="text-align: left;">Nenhum</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Logística</strong></td>
+<td style="text-align: left;"><strong>Forte</strong></td>
+<td style="text-align: left;"><code>delivery_delay_days</code> (-0,60)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Atendimento</strong></td>
+<td style="text-align: left;">Moderado</td>
+<td style="text-align: left;"><code>complaints_count</code> (-0,50)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interpretacao-por-etapa">Interpretação por etapa</h3>
+<p><strong>Cliente:</strong> <code>customer_age</code> e <code>customer_tenure_months</code> têm correlação praticamente nula. A região varia apenas <strong>0,28 pontos</strong> de NPS entre a melhor e a pior média regional.</p>
+<p><strong>Pedido:</strong> <code>order_value</code>, <code>items_quantity</code>, <code>discount_value</code> e <code>payment_installments</code> ficam próximos de zero. O momento da compra, isoladamente, não explica a insatisfação.</p>
+<p><strong>Logística:</strong> <code>delivery_delay_days</code> é o maior sinal da análise. A distinção é importante: <code>delivery_time_days</code> é praticamente zero, então o cliente parece reagir mais ao <strong>descumprimento do prazo prometido</strong> do que ao tempo total de entrega.</p>
+<p><strong>Atendimento:</strong> reclamações e contatos com o SAC estão associados a menor NPS. A base não permite afirmar causalidade, mas mostra que a necessidade de suporte acompanha experiências piores.</p>
+<hr />
+<h2 id="4-perfis-de-degradacao-da-experiencia">4. Perfis de Degradação da Experiência</h2>
+<p>Para transformar variáveis em leitura de negócio, foram criados quatro perfis a partir de duas flags:</p>
+<ul>
+<li><code>teve_atraso</code>: cliente recebeu fora do prazo prometido.</li>
+<li><code>teve_contato_sac</code>: cliente precisou acionar o atendimento.</li>
+</ul>
+<div class="eda-chart-grid">
+  <div class="eda-chart-frame">
+    <iframe src="/assets/figures/eda-04-perfis-degradacao.html" title="Nota média do score de NPS por perfil de degradação"></iframe>
+  </div>
+  <div class="eda-chart-frame">
+    <iframe src="/assets/figures/eda-05-nps-por-perfil.html" title="Distribuição de NPS por perfil de degradação"></iframe>
+  </div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Perfil</th>
+<th style="text-align: center;">Clientes</th>
+<th style="text-align: center;">% da Base</th>
+<th style="text-align: center;">Nota Média do Score NPS</th>
+<th style="text-align: center;">% Detratores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Sem Problemas</strong></td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">2,6%</td>
+<td style="text-align: center;"><strong>8,23</strong></td>
+<td style="text-align: center;">13,8%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Só Atraso</strong></td>
+<td style="text-align: center;">489</td>
+<td style="text-align: center;">19,6%</td>
+<td style="text-align: center;">5,19</td>
+<td style="text-align: center;">65,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Só SAC</strong></td>
+<td style="text-align: center;">212</td>
+<td style="text-align: center;">8,5%</td>
+<td style="text-align: center;">6,43</td>
+<td style="text-align: center;">43,4%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Atraso + SAC</strong></td>
+<td style="text-align: center;">1.734</td>
+<td style="text-align: center;"><strong>69,4%</strong></td>
+<td style="text-align: center;"><strong>3,76</strong></td>
+<td style="text-align: center;">82,5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dois achados críticos:</strong></p>
+<ol>
+<li>Apenas <strong>65 clientes (2,6%)</strong> tiveram uma jornada sem atraso e sem SAC.</li>
+<li><strong>69,4%</strong> da base está no pior perfil: atraso combinado com contato ao SAC.</li>
+</ol>
+<hr />
+<h2 id="5-de-onde-vem-os-detratores">5. De Onde Vêm os Detratores?</h2>
+<p>Quando olhamos apenas os <strong>1.851 detratores</strong>, a concentração no pior perfil fica ainda mais clara.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-06-origem-detratores.html" title="Origem dos detratores por perfil operacional"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Perfil</th>
+<th style="text-align: center;">Detratores</th>
+<th style="text-align: center;">% dos Detratores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Atraso + SAC</strong></td>
+<td style="text-align: center;">1.431</td>
+<td style="text-align: center;"><strong>77,3%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Só Atraso</td>
+<td style="text-align: center;">319</td>
+<td style="text-align: center;">17,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Só SAC</td>
+<td style="text-align: center;">92</td>
+<td style="text-align: center;">5,0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sem Problemas</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">0,5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Leitura:</strong> 99,5% dos detratores tiveram ao menos um problema operacional identificável. O baixo NPS está fortemente associado a falhas concretas da jornada.</p>
+<hr />
+<h2 id="6-percepcao-e-comportamento-recompra-em-30-dias">6. Percepção e Comportamento: Recompra em 30 Dias</h2>
+<p>O NPS deixa de ser apenas percepção quando comparado com recompra. Nesta base, a relação é extrema: <strong>nenhum detrator recompra em 30 dias</strong> e <strong>todos os promotores recompram</strong>.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-07-recompra.html" title="Recompra em 30 dias por NPS e perfil de degradação"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Segmento</th>
+<th style="text-align: center;">% Recompra em 30 dias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Detratores</td>
+<td style="text-align: center;"><strong>0,0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Neutros</td>
+<td style="text-align: center;">3,8%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Promotores</td>
+<td style="text-align: center;"><strong>100,0%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Sem Problemas</td>
+<td style="text-align: center;">66,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Só SAC</td>
+<td style="text-align: center;">24,1%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Só Atraso</td>
+<td style="text-align: center;">11,5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">Atraso + SAC</td>
+<td style="text-align: center;">3,9%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão:</strong> a insatisfação medida pelo NPS se traduz em comportamento real. Para esta base, NPS é um indicador diretamente conectado à retenção de curto prazo.</p>
+<hr />
+<h2 id="7-diagnostico-regional-o-problema-e-sistemico">7. Diagnóstico Regional: O Problema É Sistêmico</h2>
+<p>A região não explica o problema. A taxa de atraso é alta e parecida em todo o Brasil, e a diferença de NPS entre a melhor e a pior região é pequena.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-08-regional.html" title="Diagnóstico regional de atraso e NPS"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Região</th>
+<th style="text-align: center;">% com Atraso</th>
+<th style="text-align: center;">Atraso Médio (dias)</th>
+<th style="text-align: center;">Nota Média do Score NPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Sudeste</td>
+<td style="text-align: center;">91,0%</td>
+<td style="text-align: center;">2,22</td>
+<td style="text-align: center;">4,37</td>
+</tr>
+<tr>
+<td style="text-align: left;">Nordeste</td>
+<td style="text-align: center;">90,0%</td>
+<td style="text-align: center;">2,19</td>
+<td style="text-align: center;">4,42</td>
+</tr>
+<tr>
+<td style="text-align: left;">Centro-Oeste</td>
+<td style="text-align: center;">88,0%</td>
+<td style="text-align: center;">2,22</td>
+<td style="text-align: center;">4,21</td>
+</tr>
+<tr>
+<td style="text-align: left;">Norte</td>
+<td style="text-align: center;">88,0%</td>
+<td style="text-align: center;">2,14</td>
+<td style="text-align: center;">4,38</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sul</td>
+<td style="text-align: center;">88,0%</td>
+<td style="text-align: center;">2,17</td>
+<td style="text-align: center;">4,49</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão:</strong> não há uma região-problema. A operação falha de forma uniforme; portanto, a resposta precisa ser sistêmica e de processo.</p>
+<hr />
+<h2 id="8-prazo-prometido-vs-velocidade">8. Prazo Prometido vs. Velocidade</h2>
+<p>O tempo total de entrega quase não se associa ao NPS. O que pesa é receber fora do prazo prometido.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-09-prazo.html" title="Nota média do score de NPS por cumprimento do prazo prometido"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Status da Entrega</th>
+<th style="text-align: center;">Clientes</th>
+<th style="text-align: center;">Nota Média do Score NPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>No prazo</strong></td>
+<td style="text-align: center;">277</td>
+<td style="text-align: center;"><strong>6,86</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Atrasado</strong></td>
+<td style="text-align: center;">2.223</td>
+<td style="text-align: center;"><strong>4,07</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implicação:</strong> a empresa não precisa necessariamente prometer entregas mais rápidas; precisa cumprir o prazo prometido. Calibrar SLAs e comunicação de prazo pode ter impacto direto na satisfação.</p>
+<p>Esse é o ponto de virada do projeto: o alvo operacional mais útil passa a ser a previsão de prazo/atraso. O NPS permanece como métrica de resultado para medir se a promessa logística mais assertiva reduz detratores.</p>
+<hr />
+<h2 id="9-tempo-de-resolucao-atenua-mas-nao-reverte">9. Tempo de Resolução: Atenua, Mas Não Reverte</h2>
+<p>Dentro do pior perfil, "Atraso + SAC", resolver rápido ainda melhora o NPS. Mas todos os grupos continuam dentro da faixa de detratores.</p>
+<div class="eda-chart-frame large">
+  <iframe src="/assets/figures/eda-10-resolucao.html" title="Tempo de resolução no perfil Atraso mais SAC"></iframe>
+</div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Velocidade de Resolução</th>
+<th style="text-align: center;">Clientes</th>
+<th style="text-align: center;">Nota Média do Score NPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Muito Rápido</td>
+<td style="text-align: center;">448</td>
+<td style="text-align: center;">4,47</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rápido</td>
+<td style="text-align: center;">431</td>
+<td style="text-align: center;">3,86</td>
+</tr>
+<tr>
+<td style="text-align: left;">Lento</td>
+<td style="text-align: center;">564</td>
+<td style="text-align: center;">3,53</td>
+</tr>
+<tr>
+<td style="text-align: left;">Muito Lento</td>
+<td style="text-align: center;">291</td>
+<td style="text-align: center;">2,94</td>
+</tr>
+</tbody>
+</table>
+<p>A amplitude de <strong>1,53 pontos</strong> mostra que o SAC atenua o dano, mas não recupera completamente a experiência. O ponto de intervenção mais eficaz continua sendo <strong>prevenir o atraso</strong>.</p>
+<hr />
+<h2 id="10-recomendacoes">10. Recomendações</h2>
+<h3 id="logistica-prioridade-1">Logística — Prioridade 1</h3>
+<ul>
+<li>Reduzir a taxa de atraso é a ação com maior potencial de impacto no NPS.</li>
+<li>Calibrar prazos prometidos: cumprir o prazo vale mais que simplesmente entregar rápido.</li>
+<li>Atuar como problema nacional e de processo, não como correção regional pontual.</li>
+</ul>
+<h3 id="atendimento-ao-cliente-prioridade-2">Atendimento ao Cliente — Prioridade 2</h3>
+<ul>
+<li>Acelerar resolução no primeiro contato para limitar a queda do NPS.</li>
+<li>Tratar clientes no perfil "Atraso + SAC" como risco alto de detração.</li>
+<li>Criar rotina de priorização para casos com atraso já identificado.</li>
+</ul>
+<h3 id="produto-e-cx">Produto e CX</h3>
+<ul>
+<li>Testar transparência ativa sobre status de entrega como hipótese de intervenção.</li>
+<li>Comunicar risco de atraso antes do cliente precisar acionar o SAC.</li>
+</ul>
+<h3 id="analytics-e-modelo-preditivo">Analytics e Modelo Preditivo</h3>
+<ul>
+<li>Priorizar um modelo operacional de previsão de prazo/risco de atraso.</li>
+<li>Usar o NPS como variável de validação do impacto, não apenas como nota a ser prevista.</li>
+<li>Monitorar se a melhoria no cumprimento do prazo reduz detratores, contatos no SAC e perda de recompra.</li>
+</ul>
+<hr />
+<h2 id="resumo-executivo">Resumo Executivo</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Achado</th>
+<th style="text-align: left;">Evidência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">74% dos clientes são detratores</td>
+<td style="text-align: left;">Nota média do score de NPS: 4,38</td>
+</tr>
+<tr>
+<td style="text-align: left;">O problema está na operação, não no perfil</td>
+<td style="text-align: left;">Idade, região e ticket com correlação ≈ 0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Atraso é o principal fator operacional associado ao baixo NPS</td>
+<td style="text-align: left;"><code>delivery_delay_days</code>: -0,60</td>
+</tr>
+<tr>
+<td style="text-align: left;">O problema é sistêmico, não regional</td>
+<td style="text-align: left;">88–91% de atraso em todas as regiões</td>
+</tr>
+<tr>
+<td style="text-align: left;">Apenas 11% receberam no prazo</td>
+<td style="text-align: left;">277 de 2.500 clientes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Atraso e SAC se acumulam</td>
+<td style="text-align: left;">69,4% no perfil "Atraso + SAC"</td>
+</tr>
+<tr>
+<td style="text-align: left;">Detratores não recompram</td>
+<td style="text-align: left;">0% de recompra em 30 dias</td>
+</tr>
+<tr>
+<td style="text-align: left;">Resolução rápida ajuda, mas não reverte</td>
+<td style="text-align: left;">Amplitude de 1,53 ponto no pior perfil</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Síntese:</strong> a empresa não tem um problema de público, preço ou região. Tem um problema operacional de promessa não cumprida. O caminho mais direto para elevar o NPS é reduzir atrasos, comunicar melhor o risco de entrega e tratar rapidamente clientes que já entraram no fluxo de SAC.</p>
+<p><strong>Troca de chave:</strong> prever NPS ajuda a identificar risco, mas prever melhor o prazo de entrega ajuda a evitar que o risco aconteça.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

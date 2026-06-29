@@ -1,0 +1,1458 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Repositório das entregas do Tech Challenge do programa POSTECH AI Scientist — FIAP.">
+      
+      
+        <meta name="author" content="Paulo Henrique Almeida, Gabriela Almeida">
+      
+      
+      
+        <link rel="prev" href="../eda/">
+      
+      
+        <link rel="next" href="../proposta-solucao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>6. Preparação dos Dados - Tech Challenge — FIAP</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-preparacao-dos-dados" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-header__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Challenge — FIAP
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. Preparação dos Dados
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Tech Challenge — FIAP" class="md-nav__button md-logo" aria-label="Tech Challenge — FIAP" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tech Challenge — FIAP
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fase 1 — NPS Preditivo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fase 1 — NPS Preditivo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resumo-entrega/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumo da Entrega
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../planejamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planejamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case-nps-preditivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Case
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problema-negocio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Problema de Negócio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../business-canvas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Business Canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reflexoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Reflexões do Desafio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analise-hipoteses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Análise e Hipóteses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. EDA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Preparação dos Dados
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Preparação dos Dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-utilizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Utilizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacoes-de-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validações de Qualidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variavel-alvo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variável-Alvo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features-derivadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features Derivadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecao-inicial-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seleção Inicial de Variáveis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seleção Inicial de Variáveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-candidatas-para-previsao-no-momento-do-pedido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis candidatas para previsão no momento do pedido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-candidatas-para-monitoramento-durante-a-jornada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis candidatas para monitoramento durante a jornada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-que-nao-devem-entrar-como-preditoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis que não devem entrar como preditoras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-para-modelagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento para Modelagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riscos-de-vazamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riscos de Vazamento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-da-preparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado da Preparação
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposta-solucao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Proposta de Solução
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../avaliacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Avaliação dos Resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apresentacao-final/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Apresentação Final
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Como Reproduzir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-utilizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Utilizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacoes-de-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validações de Qualidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variavel-alvo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variável-Alvo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features-derivadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features Derivadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecao-inicial-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seleção Inicial de Variáveis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seleção Inicial de Variáveis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-candidatas-para-previsao-no-momento-do-pedido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis candidatas para previsão no momento do pedido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-candidatas-para-monitoramento-durante-a-jornada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis candidatas para monitoramento durante a jornada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-que-nao-devem-entrar-como-preditoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis que não devem entrar como preditoras
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-para-modelagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento para Modelagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riscos-de-vazamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riscos de Vazamento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-da-preparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado da Preparação
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-preparacao-dos-dados">6. Preparação dos Dados</h1>
+<p><em>CRISP-DM: Data Preparation</em></p>
+<p>Esta etapa transforma a base original do desafio em uma visão analítica pronta para EDA e para uma futura solução preditiva de prazo/risco de atraso. A preparação foi mantida simples e auditável, porque o dataset já chega estruturado, sem valores nulos e com variáveis operacionais diretamente interpretáveis.</p>
+<p>A preparação também registra a troca de chave do projeto: o <code>nps_score</code> continua sendo o desfecho de satisfação, mas a solução mais acionável passa a mirar a <strong>previsão do prazo de entrega e do risco de atraso</strong>.</p>
+<hr />
+<h2 id="base-utilizada">Base Utilizada</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquivo original</td>
+<td><code>data/desafio_nps_fase_1.csv</code></td>
+</tr>
+<tr>
+<td>Registros</td>
+<td>2.500 clientes/pedidos</td>
+</tr>
+<tr>
+<td>Variáveis originais</td>
+<td>19</td>
+</tr>
+<tr>
+<td>Metadados</td>
+<td><code>data/metadados_desafio_nps_fase_1.json</code></td>
+</tr>
+<tr>
+<td>Notebook final</td>
+<td><code>notebooks/eda_final.ipynb</code></td>
+</tr>
+</tbody>
+</table>
+<p>A base original não foi modificada. Todas as transformações foram feitas em memória nos notebooks, preservando o arquivo entregue no desafio.</p>
+<hr />
+<h2 id="validacoes-de-qualidade">Validações de Qualidade</h2>
+<p>Antes das análises, foram verificadas as condições mínimas para uso da base:</p>
+<ul>
+<li><strong>Integridade:</strong> não foram identificados valores nulos nas variáveis do dataset.</li>
+<li><strong>Tipagem:</strong> variáveis numéricas, categóricas e binárias foram interpretadas conforme o dicionário de metadados.</li>
+<li><strong>Ordenação da jornada:</strong> as colunas foram reorganizadas pela ordem da experiência do cliente, facilitando a leitura por etapa: cliente, pedido, logística, atendimento e satisfação.</li>
+<li><strong>Escala do alvo:</strong> <code>nps_score</code> foi mantido na escala original de 0 a 10.</li>
+</ul>
+<p>Como a EDA tem objetivo explicativo e acadêmico, não foram aplicadas remoções de outliers nem imputações artificiais. Alterar esses pontos poderia mascarar justamente os eventos operacionais críticos que explicam a insatisfação.</p>
+<hr />
+<h2 id="variavel-alvo">Variável-Alvo</h2>
+<p>Na leitura inicial do desafio, a variável-alvo principal era <code>nps_score</code>, usada de duas formas:</p>
+<table>
+<thead>
+<tr>
+<th>Uso</th>
+<th>Tratamento</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contínuo</td>
+<td>Nota de 0 a 10</td>
+<td>Correlações, médias e comparação entre grupos</td>
+</tr>
+<tr>
+<td>Categórico</td>
+<td>Detrator, Neutro, Promotor</td>
+<td>Leitura de negócio e proposta de classificação</td>
+</tr>
+</tbody>
+</table>
+<p>Critério de categorização:</p>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th style="text-align: right;">Faixa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Detrator</td>
+<td style="text-align: right;">0 a 6</td>
+</tr>
+<tr>
+<td>Neutro</td>
+<td style="text-align: right;">7 a 8</td>
+</tr>
+<tr>
+<td>Promotor</td>
+<td style="text-align: right;">9 a 10</td>
+</tr>
+</tbody>
+</table>
+<p>Essa categorização revelou forte desbalanceamento: <strong>74,0% da base é composta por detratores</strong>.</p>
+<p>Após a EDA, a preparação passa a separar dois tipos de alvo:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de alvo</th>
+<th>Variável</th>
+<th>Papel no projeto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alvo analítico</td>
+<td><code>nps_score</code> / <code>nps_categoria</code></td>
+<td>Medir o desfecho da experiência e validar impacto</td>
+</tr>
+<tr>
+<td>Alvo operacional</td>
+<td><code>delivery_delay_days</code>, <code>entregou_no_prazo</code> ou prazo estimado de entrega</td>
+<td>Antecipar a quebra da promessa logística</td>
+</tr>
+</tbody>
+</table>
+<p>Essa separação evita uma interpretação fraca da solução. Prever NPS é útil para diagnóstico; prever entrega é mais útil para intervenção.</p>
+<hr />
+<h2 id="features-derivadas">Features Derivadas</h2>
+<p>Para conectar os dados operacionais à narrativa de negócio, foram criadas variáveis auxiliares simples e interpretáveis.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Regra</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nps_categoria</code></td>
+<td>Classe derivada de <code>nps_score</code></td>
+<td>Segmentação de satisfação</td>
+</tr>
+<tr>
+<td><code>teve_atraso</code></td>
+<td><code>delivery_delay_days &gt; 0</code></td>
+<td>Identificar quebra do prazo prometido</td>
+</tr>
+<tr>
+<td><code>entregou_no_prazo</code></td>
+<td><code>delivery_delay_days &lt;= 0</code></td>
+<td>Comparar cumprimento de SLA</td>
+</tr>
+<tr>
+<td><code>teve_contato_sac</code></td>
+<td><code>customer_service_contacts &gt; 0</code></td>
+<td>Identificar acionamento de suporte</td>
+</tr>
+<tr>
+<td><code>perfil_degradacao</code></td>
+<td>Combinação de atraso e SAC</td>
+<td>Medir acúmulo de falhas na jornada</td>
+</tr>
+<tr>
+<td><code>faixa_resolucao</code></td>
+<td>Quartis de <code>resolution_time_days</code> dentro do pior perfil</td>
+<td>Avaliar se velocidade de resolução atenua o dano</td>
+</tr>
+</tbody>
+</table>
+<p>Os quatro perfis de degradação foram:</p>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Definição</th>
+<th style="text-align: right;">Clientes</th>
+<th style="text-align: right;">NPS médio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem Problemas</td>
+<td>Sem atraso e sem SAC</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">8,23</td>
+</tr>
+<tr>
+<td>Só Atraso</td>
+<td>Atraso sem contato com SAC</td>
+<td style="text-align: right;">489</td>
+<td style="text-align: right;">5,19</td>
+</tr>
+<tr>
+<td>Só SAC</td>
+<td>SAC sem atraso</td>
+<td style="text-align: right;">212</td>
+<td style="text-align: right;">6,43</td>
+</tr>
+<tr>
+<td>Atraso + SAC</td>
+<td>Atraso com contato ao SAC</td>
+<td style="text-align: right;">1.734</td>
+<td style="text-align: right;">3,76</td>
+</tr>
+</tbody>
+</table>
+<p>Essa engenharia de features foi decisiva para transformar correlações isoladas em leitura de jornada.</p>
+<hr />
+<h2 id="selecao-inicial-de-variaveis">Seleção Inicial de Variáveis</h2>
+<p>Para uma proposta preditiva, as variáveis candidatas devem estar disponíveis antes ou durante a jornada, sem depender do resultado final de satisfação. Como a solução final se desloca para prazo/atraso, as variáveis precisam ser separadas por momento de disponibilidade.</p>
+<h3 id="variaveis-candidatas-para-previsao-no-momento-do-pedido">Variáveis candidatas para previsão no momento do pedido</h3>
+<ul>
+<li><code>customer_age</code></li>
+<li><code>customer_region</code></li>
+<li><code>customer_tenure_months</code></li>
+<li><code>order_value</code></li>
+<li><code>items_quantity</code></li>
+<li><code>discount_value</code></li>
+<li><code>payment_installments</code></li>
+<li><code>freight_value</code></li>
+</ul>
+<p>Essas variáveis são candidatas a estimar um prazo mais realista antes da entrega acontecer.</p>
+<h3 id="variaveis-candidatas-para-monitoramento-durante-a-jornada">Variáveis candidatas para monitoramento durante a jornada</h3>
+<ul>
+<li><code>delivery_time_days</code></li>
+<li><code>delivery_delay_days</code></li>
+<li><code>delivery_attempts</code></li>
+<li><code>customer_service_contacts</code></li>
+<li><code>resolution_time_days</code></li>
+<li><code>complaints_count</code></li>
+</ul>
+<p>Essas variáveis ajudam a monitorar risco de degradação depois que a jornada já começou. Para prever o prazo no checkout, elas não devem ser usadas se ainda não estiverem disponíveis.</p>
+<h3 id="variaveis-que-nao-devem-entrar-como-preditoras">Variáveis que não devem entrar como preditoras</h3>
+<ul>
+<li><code>nps_score</code>: é o alvo analítico e não deve ser usado como preditor.</li>
+<li><code>nps_categoria</code>: é derivada do alvo analítico.</li>
+<li><code>csat_internal_score</code>: mede satisfação e pode vazar informação equivalente ao alvo.</li>
+<li><code>repeat_purchase_30d</code>: é comportamento posterior à experiência, útil para validação de negócio, mas não para prever prazo ou NPS antes da jornada terminar.</li>
+</ul>
+<hr />
+<h2 id="tratamento-para-modelagem">Tratamento para Modelagem</h2>
+<p>Para um pipeline de modelagem de prazo/atraso, a preparação recomendada é:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de variável</th>
+<th>Tratamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Numéricas</td>
+<td>Padronização apenas para modelos sensíveis à escala</td>
+</tr>
+<tr>
+<td>Categóricas</td>
+<td>One-hot encoding para <code>customer_region</code></td>
+</tr>
+<tr>
+<td>Binárias derivadas</td>
+<td>Manter como 0/1</td>
+</tr>
+<tr>
+<td>Alvo de prazo</td>
+<td>Regressão para estimar dias de entrega ou dias de atraso</td>
+</tr>
+<tr>
+<td>Alvo de atraso</td>
+<td>Classificação binária: no prazo vs. atrasado</td>
+</tr>
+</tbody>
+</table>
+<p>Como a base tem alta incidência de atraso, a separação treino/teste deve preservar a proporção de entregas no prazo e atrasadas. Métricas como acurácia isolada não são suficientes: o modelo precisa ser avaliado pela capacidade de identificar atrasos relevantes e pela redução do erro de previsão de prazo.</p>
+<hr />
+<h2 id="riscos-de-vazamento">Riscos de Vazamento</h2>
+<p>O principal cuidado é temporal: a solução proposta deve prever prazo/risco antes que a promessa logística seja quebrada. Portanto, variáveis disponíveis apenas depois da entrega ou depois do contato com SAC não podem ser usadas em um modelo de promessa inicial.</p>
+<table>
+<thead>
+<tr>
+<th>Variável</th>
+<th>Risco</th>
+<th>Decisão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>csat_internal_score</code></td>
+<td>Pode ser outro indicador de satisfação final</td>
+<td>Não usar como feature principal</td>
+</tr>
+<tr>
+<td><code>repeat_purchase_30d</code></td>
+<td>Ocorre depois do NPS</td>
+<td>Usar apenas como evidência de impacto</td>
+</tr>
+<tr>
+<td><code>delivery_delay_days</code></td>
+<td>Só é conhecido depois da comparação com o prazo prometido</td>
+<td>Usar como alvo ou monitoramento, não como feature inicial</td>
+</tr>
+<tr>
+<td><code>complaints_count</code></td>
+<td>Pode ocorrer durante ou após a jornada</td>
+<td>Usar somente para monitoramento, não para promessa inicial</td>
+</tr>
+<tr>
+<td><code>resolution_time_days</code></td>
+<td>Só existe quando houve atendimento</td>
+<td>Usar somente na camada de recuperação da experiência</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resultado-da-preparacao">Resultado da Preparação</h2>
+<p>A base preparada permite sustentar três entregas:</p>
+<ol>
+<li><strong>EDA final:</strong> análise da jornada, gráficos e tabelas usados na apresentação.</li>
+<li><strong>Recomendação operacional:</strong> priorização de atraso, calibração de prazo e comunicação proativa.</li>
+<li><strong>Proposta de modelo:</strong> previsão de prazo/risco de atraso, usando NPS e recompra como métricas de impacto.</li>
+</ol>
+<p>O notebook final consolidado é <a href="https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.ipynb">notebooks/eda_final.ipynb</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
