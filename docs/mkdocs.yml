@@ -42,6 +42,7 @@ nav:
   - Home: index.md
   - Fase 1 — NPS Preditivo:
     - Visão Geral: fase-1/index.md
+    - Resumo da Entrega: fase-1/resumo-entrega.md
     - Planejamento: fase-1/planejamento.md
     - Case: fase-1/case-nps-preditivo.md
     - 1. Problema de Negócio: fase-1/problema-negocio.md

@@ -14,6 +14,19 @@ Ao longo da EDA houve uma **mudança importante de foco**: a pergunta inicial pa
 
 Em outras palavras: o `nps_score` continua sendo o desfecho analisado, mas o alvo operacional da solução passa a ser **prever melhor a entrega para evitar a formação de detratores**.
 
+## Links Úteis da Fase 1
+
+| Material | Link |
+|---|---|
+| EDA final | [Abrir EDA](eda.md) |
+| Apresentação HTML | [Abrir slides](slides.html) |
+| Apresentação PDF | [Baixar PDF](<Tech Challenge _ NPS e atraso na entrega.pdf>){ download } |
+| Vídeo executivo | [Assistir no YouTube](https://youtu.be/eodKtPdOVdg) |
+| Página da apresentação | [Abrir apresentação final](apresentacao-final.md) |
+| Notebook final | [Abrir no GitHub](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.ipynb) |
+| Como reproduzir | [Ver instruções](getting-started.md) |
+| Avaliação da entrega | [Ver checklist](avaliacao-entrega.md) |
+
 ## Requisitos do Desafio
 
 | # | Entrega | Obrigatório |

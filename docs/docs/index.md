@@ -28,6 +28,21 @@ O foco não está apenas em construir modelos ou escrever código — está em *
 | [Fase 4](fase-4/index.md) | — | Aguardando |
 | [Fase 5](fase-5/index.md) | — | Aguardando |
 
+## Fase 1 — Links Úteis
+
+Acesso rápido aos principais materiais da entrega:
+
+| Material | Link |
+|---|---|
+| Visão geral da Fase 1 | [Abrir página](fase-1/index.md) |
+| EDA final | [Abrir EDA](fase-1/eda.md) |
+| Apresentação HTML | [Abrir slides](fase-1/slides.html) |
+| Apresentação PDF | [Baixar PDF](<fase-1/Tech Challenge _ NPS e atraso na entrega.pdf>){ download } |
+| Vídeo executivo | [Assistir no YouTube](https://youtu.be/eodKtPdOVdg) |
+| Página da apresentação | [Abrir apresentação final](fase-1/apresentacao-final.md) |
+| Como reproduzir | [Ver instruções](fase-1/getting-started.md) |
+| Avaliação da entrega | [Ver checklist](fase-1/avaliacao-entrega.md) |
+
 ## Como Navegar nesta Documentação
 
 Cada fase tem sua própria seção no menu lateral com páginas específicas do desafio. A estrutura padrão de cada fase inclui:

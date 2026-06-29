@@ -11,6 +11,8 @@ Esta página também explicita a evolução da solução: a apresentação está
 | Material | Link |
 |---|---|
 | Apresentação executiva | [Abrir em tela cheia](slides.html) |
+| Apresentação em PDF | [Baixar PDF](<Tech Challenge _ NPS e atraso na entrega.pdf>){ download } |
+| Vídeo executivo | [Assistir no YouTube](https://youtu.be/eodKtPdOVdg) |
 | EDA final | [Notebook consolidado](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.ipynb) |
 | Script pareado do notebook | [eda_final.py](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.py) |
 | Página de EDA na documentação | [EDA Final](eda.md) |
