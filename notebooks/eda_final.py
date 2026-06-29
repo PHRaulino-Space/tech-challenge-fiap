@@ -671,6 +671,17 @@ fig.show()
 # %% [markdown]
 # ## 11. Conclusões e Recomendações
 #
+# ### A troca de chave da solução
+#
+# O projeto começou com a pergunta natural do desafio: como prever o NPS antes
+# da pesquisa? A EDA mostrou que a resposta mais útil para o negócio está um
+# passo antes: prever melhor a entrega.
+#
+# O `nps_score` continua sendo o desfecho que mede a experiência do cliente.
+# Mas a alavanca operacional mais clara é `delivery_delay_days`. Portanto, a
+# solução recomendada não é apenas estimar a nota final; é prever prazo/risco
+# de atraso e usar o NPS para validar se essa intervenção melhora a experiência.
+#
 # ### O que os dados provam
 #
 # | Achado | Evidência |
@@ -701,10 +712,9 @@ fig.show()
 #   para reduzir contatos ao SAC e ansiedade durante atrasos
 #
 # **Analytics e Modelo Preditivo:**
-# - `delivery_delay_days` e `complaints_count` são os dois features mais candidatos
-#   a um modelo de classificação de risco de detração
-# - Com 69,4% da base no pior perfil, o modelo precisa ser calibrado para não
-#   ser trivialmente majoritário (prever "Detrator" para todos daria 74% de acurácia)
+# - Priorizar um modelo operacional de previsão de prazo/risco de atraso
+# - Usar o NPS como métrica de validação do impacto, não apenas como nota a prever
+# - Medir sucesso por redução de atraso, redução de detratores e aumento de recompra
 
 # %%
 resumo_final = pd.DataFrame(

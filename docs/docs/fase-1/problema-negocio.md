@@ -20,6 +20,20 @@ Hoje a empresa só enxerga o NPS depois que a jornada do cliente terminou. Isso 
 
 O objetivo é identificar preventivamente quais clientes têm mais chance de se tornar detratores, a partir dos dados operacionais gerados durante a própria jornada de compra, antes que a pesquisa de NPS seja aplicada. Com isso, a empresa pode agir de forma proativa para mudar o desfecho antes que ele aconteça.
 
+### A troca de chave revelada pela EDA
+
+No início do projeto, a leitura natural do desafio era tratar o `nps_score` como a variável-alvo principal de um modelo preditivo: estimar a nota ou a categoria do cliente antes da pesquisa. A análise exploratória mostrou um caminho mais acionável.
+
+O NPS baixo não se distribui aleatoriamente entre perfis de cliente, regiões ou tipos de pedido. Ele aparece fortemente associado ao **atraso na entrega** e ao **descumprimento do prazo prometido**. Portanto, a pergunta de negócio evoluiu:
+
+| Antes da EDA | Depois da EDA |
+|---|---|
+| Como prever o NPS antes da pesquisa? | Como prever e calibrar melhor o prazo de entrega para evitar a queda do NPS? |
+| Alvo analítico: `nps_score` | Alvo operacional: risco de atraso / prazo realista de entrega |
+| Ação depois do risco de detração | Ação antes da quebra da promessa logística |
+
+Essa mudança não abandona o NPS. O NPS passa a ser o **indicador de validação do impacto**: se a empresa melhora a previsão de prazo, reduz atrasos e comunica melhor o risco, a expectativa é observar menos detratores e maior recompra.
+
 ---
 
 ## Por que o NPS é importante para um e-commerce?

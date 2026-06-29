@@ -8,7 +8,11 @@ Este desafio propõe transformar dados operacionais — pedidos, logística e at
 
 ## Objetivo
 
-Analisar os fatores que influenciam a satisfação dos clientes medida pelo NPS e propor uma abordagem preditiva capaz de antecipar esse indicador antes da aplicação da pesquisa.
+Analisar os fatores que influenciam a satisfação dos clientes medida pelo NPS e propor uma abordagem preditiva capaz de agir antes da pesquisa.
+
+Ao longo da EDA houve uma **mudança importante de foco**: a pergunta inicial parecia ser "como prever a nota de NPS antes do cliente responder?". Os dados mostraram que prever a nota, isoladamente, seria menos útil do que atacar a causa operacional mais forte: **o descumprimento do prazo prometido**. Por isso, a solução final passa a priorizar a previsão/calibração do prazo de entrega e do risco de atraso, usando o NPS como métrica de impacto na experiência.
+
+Em outras palavras: o `nps_score` continua sendo o desfecho analisado, mas o alvo operacional da solução passa a ser **prever melhor a entrega para evitar a formação de detratores**.
 
 ## Requisitos do Desafio
 

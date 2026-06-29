@@ -4,6 +4,8 @@
 
 Visão consolidada do case NPS Preditivo, conectando Business Canvas, hipóteses, EDA, preparação dos dados, proposta de solução e avaliação final.
 
+Esta página também explicita a evolução da solução: a apresentação está centrada em atraso porque a EDA mostrou que o melhor caminho para melhorar NPS não é apenas prever a nota final, mas prever e calibrar melhor o prazo de entrega.
+
 ## Materiais da Entrega
 
 | Material | Link |
@@ -17,6 +19,8 @@ Visão consolidada do case NPS Preditivo, conectando Business Canvas, hipóteses
 
 A análise demonstra que o baixo NPS da base não é explicado por perfil de cliente, região, ticket, desconto ou forma de pagamento. O problema aparece na execução operacional pós-compra, principalmente no descumprimento do prazo prometido e no acúmulo de atendimento.
 
+Essa descoberta muda o foco da solução. O projeto parte de "NPS preditivo", mas chega a uma recomendação mais acionável: **previsão de prazo e risco de atraso**, com NPS como métrica de validação da experiência.
+
 Principais evidências usadas na apresentação:
 
 | Achado | Evidência |
@@ -27,6 +31,12 @@ Principais evidências usadas na apresentação:
 | Problema é sistêmico | 88% a 91% de atraso em todas as regiões |
 | Pior perfil domina a base | 69,4% em "Atraso + SAC" |
 | Detratores não retornam | 0,0% de recompra em 30 dias |
+
+| Troca de chave | Implicação |
+|---|---|
+| NPS é o termômetro | Mede o efeito final da experiência |
+| Atraso é a alavanca | Explica a maior parte da queda de satisfação |
+| Prazo previsto é a solução | Permite agir antes da reclamação e antes da nota |
 
 ## Slides
 

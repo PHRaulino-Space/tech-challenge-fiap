@@ -19,7 +19,7 @@ Academic project developed across **5 phases** of the POSTECH AI Scientist progr
 
 Only **Phase 1** is active and documented. Phases 2–5 are placeholders.
 
-**Phase 1 — NPS Preditivo:** Analyze operational data from an e-commerce company to understand factors influencing customer satisfaction (NPS) and propose a predictive approach to anticipate NPS before the survey is applied.
+**Phase 1 — NPS Preditivo:** Analyze operational data from an e-commerce company to understand factors influencing customer satisfaction (NPS). The documented conclusion makes an explicit pivot: NPS remains the analytical outcome, but the recommended operational solution is to predict/calibrate delivery time and delay risk, because delay is the strongest actionable driver found in the EDA.
 
 The project follows the **CRISP-DM** methodology:
 

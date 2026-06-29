@@ -32,7 +32,9 @@ O foco não está apenas em construir modelos ou escrever código — está em *
 
 Com o crescimento acelerado do e-commerce, uma empresa passou a lidar com alta variabilidade no **Net Promoter Score (NPS)** entre diferentes perfis de consumidores. O NPS é coletado apenas após o encerramento da jornada de compra, o que limita ações preventivas.
 
-**Objetivo:** analisar os fatores que influenciam a satisfação dos clientes medida pelo NPS e propor uma abordagem preditiva capaz de antecipar esse indicador antes da aplicação da pesquisa.
+**Objetivo:** analisar os fatores que influenciam a satisfação dos clientes medida pelo NPS e propor uma abordagem preditiva capaz de agir antes da aplicação da pesquisa.
+
+A EDA provocou uma mudança importante na formulação da solução: o `nps_score` permanece como desfecho de satisfação, mas o alvo operacional recomendado passa a ser a previsão/calibração do prazo de entrega e do risco de atraso. A razão é direta: atraso foi o fator mais associado ao baixo NPS, enquanto perfil do cliente e variáveis do pedido tiveram pouca relação com a nota.
 
 O projeto segue a metodologia **CRISP-DM**:
 
@@ -82,7 +84,7 @@ Arquivo: `data/desafio_nps_fase_1.csv` — 19 variáveis em quatro grupos:
 | Atendimento | `customer_service_contacts`, `resolution_time_days`, `complaints_count` |
 | Satisfação | `nps_score`, `csat_internal_score`, `repeat_purchase_30d` |
 
-A variável-alvo é `nps_score` (escala 0–10): detratores (0–6), neutros (7–8), promotores (9–10).
+A variável-alvo analítica é `nps_score` (escala 0–10): detratores (0–6), neutros (7–8), promotores (9–10). Para a proposta final, o alvo operacional passa a ser previsão de prazo/risco de atraso, usando NPS e recompra como métricas de impacto.
 
 ## Como Reproduzir
 

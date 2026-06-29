@@ -21,6 +21,8 @@ A variável-alvo é o `nps_score` (escala 0–10), segmentado em três categoria
 - **Neutro:** 7 a 8
 - **Promotor:** 9 a 10
 
+Nesta etapa, o `nps_score` é tratado como **alvo analítico**: ele mostra onde a experiência terminou. A EDA, porém, também busca descobrir qual variável deve virar **alvo operacional** de uma solução preditiva. Essa distinção se tornou central no projeto, porque os dados apontaram que a melhor intervenção não é prever a nota por curiosidade, mas prever melhor o prazo/risco de atraso para evitar a nota ruim.
+
 ---
 
 ## Primeiro Achado — Distribuição do NPS
@@ -81,6 +83,8 @@ Dos 2.500 clientes, apenas **11% (277) receberam dentro do prazo prometido.**
 
 **Conclusão:** o atraso na entrega é o principal fator de insatisfação da base. É também o candidato mais forte para feature do modelo preditivo.
 
+Mais do que uma feature, esse achado reposiciona o problema. Se o cliente reage principalmente ao descumprimento do prazo prometido, a modelagem mais acionável deve prever **risco de atraso** ou **prazo de entrega mais realista**. O NPS passa a validar se essa intervenção logística melhora a experiência.
+
 ---
 
 ### Grupo Atendimento — Sinal Moderado
@@ -117,6 +121,8 @@ Cruzando as duas variáveis de maior sinal (`delivery_delay_days` e `customer_se
 
 O problema não é geográfico. A taxa de atraso varia de 88% a 91% em todas as regiões, com diferença de NPS de apenas 0,28 pontos entre a melhor e a pior. O problema é sistêmico — de processo, não de geografia.
 
+Esse diagnóstico reforça a troca de chave: a solução não deve ser uma segmentação regional de clientes com NPS baixo, mas uma melhoria transversal de previsão e gestão de prazo.
+
 ---
 
 ## Hipóteses Testadas
@@ -134,6 +140,8 @@ Clientes de alto valor do pedido toleram mais o atraso, ou são mais exigentes?
 **Resultado confirmado:** cumprir o prazo prometido (-0,60) pesa muito mais que o tempo total de entrega (≈ 0,00). Clientes no prazo têm NPS 6,86; atrasados têm NPS 4,07.
 
 A análise por quartil de tempo de entrega × prazo confirma: mesmo entregas lentas que chegaram no prazo têm NPS consistentemente superior às que chegaram mais rápido mas com atraso.
+
+Essa hipótese é a virada central da análise. O problema não é simplesmente reduzir o número absoluto de dias de entrega, mas **prometer um prazo mais assertivo e cumprir essa promessa**.
 
 ---
 
@@ -165,6 +173,8 @@ Amplitude de **1,53 pontos**. O SAC atenua o dano mas não o reverte — todos o
 ### O NPS como Desfecho Final da Jornada
 
 O case não especifica em qual momento exato o NPS é coletado. **Premissa adotada:** o `nps_score` é tratado como o desfecho final — a avaliação do cliente depois de ter passado por todas as etapas.
+
+Essa premissa justifica a separação entre desfecho e ação. O NPS mostra o resultado da jornada, mas a solução deve atuar antes dele, no ponto operacional em que a jornada degrada: previsão de prazo, risco de atraso e comunicação proativa.
 
 ### Causalidade vs. Correlação
 

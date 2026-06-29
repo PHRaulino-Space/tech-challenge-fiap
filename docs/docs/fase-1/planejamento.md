@@ -20,10 +20,12 @@ Business Understanding → Data Understanding → Data Preparation
 
 Todas as etapas da Fase 1 estão concluídas na documentação. A modelagem foi tratada como proposta de solução preditiva orientada pela EDA, conforme permitido pelo enunciado do desafio.
 
+Durante o processo, houve uma mudança deliberada de foco: o projeto começou investigando como antecipar o NPS, mas a EDA mostrou que a melhor alavanca de prevenção é prever e calibrar melhor o prazo de entrega. Por isso, o NPS permanece como desfecho e métrica de impacto, enquanto a solução operacional passa a mirar prazo/risco de atraso.
+
 ### 1. Problema de Negócio
 *CRISP-DM: Business Understanding*
 
-**Objetivo:** Definir com clareza o problema que está sendo resolvido, a variável-alvo e o impacto esperado para o negócio — antes de qualquer análise técnica.
+**Objetivo:** Definir com clareza o problema que está sendo resolvido, a variável-alvo inicial e o impacto esperado para o negócio — antes de qualquer análise técnica.
 
 Esta etapa responde às perguntas fundamentais do desafio:
 
@@ -35,6 +37,8 @@ Esta etapa responde às perguntas fundamentais do desafio:
 > A análise se restringe ao que o case e o dataset permitem inferir. Quando algo não estiver explícito, é tratado como hipótese ou limitação — não como fato.
 
 **Resultado esperado:** Definição do problema documentada, com variável-alvo identificada e impacto de negócio descrito.
+
+**Evolução registrada:** o `nps_score` foi definido como desfecho analítico, mas a solução final passou a tratar atraso/prazo como alvo operacional.
 
 **Status:** concluído.
 
@@ -103,11 +107,11 @@ Para cada visualização, são respondidas três perguntas:
 ### 6. Preparação dos Dados
 *CRISP-DM: Data Preparation*
 
-**Objetivo:** Preparar a base de dados para modelagem, garantindo qualidade e consistência das variáveis.
+**Objetivo:** Preparar a base de dados para EDA e para uma solução preditiva de prazo/risco de atraso, garantindo qualidade e consistência das variáveis.
 
-Esta etapa contempla tratamento de valores ausentes e outliers, transformações e normalização, engenharia de features e separação dos conjuntos de treino e teste.
+Esta etapa contempla validações de qualidade, engenharia de features, separação entre alvo analítico e alvo operacional, e cuidados contra vazamento temporal.
 
-**Resultado esperado:** Dataset limpo e pipeline de preparação documentado, pronto para alimentar o modelo.
+**Resultado esperado:** Dataset documentado e pronto para sustentar a EDA, a proposta de previsão de prazo e a validação pelo NPS.
 
 **Status:** concluído.
 
@@ -116,11 +120,11 @@ Esta etapa contempla tratamento de valores ausentes e outliers, transformações
 ### 7. Proposta de Solução
 *CRISP-DM: Modeling*
 
-**Objetivo:** Propor e implementar um modelo preditivo de NPS a partir dos insights da EDA.
+**Objetivo:** Propor uma solução preditiva a partir dos insights da EDA.
 
-A estratégia inclui definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação. A abordagem pode ser regressão (prever o score) ou classificação (prever a categoria: Detrator, Neutro, Promotor).
+A estratégia evoluiu de um modelo direto de NPS para uma solução de previsão/calibração de prazo de entrega. A abordagem recomendada combina regressão de prazo, classificação de risco de atraso e validação do impacto em NPS, detratores e recompra.
 
-**Resultado esperado:** Estratégia preditiva documentada, com variável-alvo, features candidatas, modelo inicial recomendado, métricas e régua de ação.
+**Resultado esperado:** Estratégia preditiva documentada, com alvo operacional, features candidatas, modelo inicial recomendado, métricas e régua de ação.
 
 **Status:** concluído.
 
@@ -134,7 +138,7 @@ A estratégia inclui definição da variável-alvo, seleção de features, escol
 Esta etapa revisita o problema definido nas etapas 1 e 2 para responder:
 
 - Os insights da EDA respondem às perguntas do desafio?
-- O modelo performa de forma satisfatória e faz sentido para o negócio?
+- A mudança de foco para previsão de prazo faz sentido para o negócio?
 - Quais são as limitações da análise e os riscos a comunicar?
 - Quais recomendações concretas podem ser feitas para as áreas envolvidas (logística, atendimento, produto, pricing)?
 
@@ -163,6 +167,7 @@ A entrega final é a página pública de documentação contendo, de forma acess
 - Apresentação em HTML
 - Notebooks e código
 - Conclusões e recomendações principais
+- Explicação da troca de chave entre prever NPS e prever melhor a entrega
 
 **Resultado esperado:** Material de apresentação, notebook final e documentação prontos para entrega.
 

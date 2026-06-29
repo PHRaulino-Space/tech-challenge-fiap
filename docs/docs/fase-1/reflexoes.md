@@ -12,6 +12,8 @@ O problema que estamos resolvendo é exatamente esse: **identificar preventivame
 
 Com isso, a empresa passa de uma postura reativa — "o cliente avaliou mal, agora o que fazemos?" — para uma postura proativa: "esse cliente está no caminho de virar detrator, o que podemos fazer agora?"
 
+Após a análise exploratória, essa pergunta ficou mais específica. O caminho mais útil não é apenas prever a nota de NPS como um número final, mas antecipar o principal evento que empurra o cliente para uma nota ruim: **a entrega fora do prazo prometido**. Assim, a solução deixa de ser somente "prever satisfação" e passa a ser "prever melhor a entrega para proteger a satisfação".
+
 ---
 
 ## Por que o NPS é importante para um e-commerce?
@@ -53,3 +55,14 @@ A análise exploratória, conduzida seguindo o fluxo cronológico da jornada do 
 - **Logística** é onde o sinal começa a aparecer — `delivery_delay_days` apresenta correlação de -0.6 com o NPS, a mais forte observada até agora. Clientes promotores quase não têm atraso; detratores têm atraso consistente.
 
 Isso direciona a investigação para as etapas operacionais da jornada — logística e atendimento — como os principais fatores que influenciam a satisfação.
+
+## Implicação para a solução
+
+A principal conclusão de negócio é que a previsão de NPS, sozinha, seria uma camada tardia se a empresa não corrigir o evento que gera a insatisfação. A solução mais concreta é criar uma capacidade analítica para:
+
+- estimar um prazo de entrega mais realista no momento do pedido;
+- prever risco de atraso antes que o cliente precise reclamar;
+- comunicar proativamente mudanças de prazo;
+- usar o NPS e a recompra como métricas de validação da melhoria operacional.
+
+Essa é a troca de chave do projeto: **o NPS é o termômetro; o prazo de entrega é a alavanca de ação**.

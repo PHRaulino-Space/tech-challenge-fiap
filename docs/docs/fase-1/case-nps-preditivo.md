@@ -2,6 +2,8 @@
 
 Tech Challenge é o projeto que englobará os conhecimentos obtidos em todas as disciplinas da fase. Esta é uma atividade que, em princípio, deve ser desenvolvida em grupo. É importante atentar-se ao prazo de entrega, pois trata-se de uma atividade obrigatória, uma vez que sua pontuação se refere a 90% da nota final.
 
+> **Nota sobre a solução adotada:** o enunciado original propõe refletir sobre um modelo capaz de prever o NPS antes da pesquisa. A EDA desenvolvida neste projeto mostrou que a ação mais útil para o negócio é anterior à nota: prever melhor o prazo de entrega e o risco de atraso. Por isso, a documentação mantém o NPS como desfecho de satisfação, mas apresenta a previsão de entrega como solução operacional principal.
+
 Com o crescimento acelerado do e-commerce nacional, temos o cenário de uma empresa que passou a lidar com um volume cada vez maior de pedidos, entregas e interações com clientes. Esse crescimento trouxe ganhos importantes de escala, mas também revelou desafios relevantes na experiência do cliente, especialmente refletidos na alta variabilidade do Net Promoter Score (NPS) entre diferentes perfis de consumidores. A área de Experiência do Cliente percebeu que, mesmo com indicadores operacionais aparentemente semelhantes, alguns clientes se tornam promotores da marca, enquanto outros se tornam detratores.
 
 Essa diferença levanta uma questão central para o negócio: **quais fatores operacionais realmente influenciam a satisfação do cliente e como a empresa pode agir de forma proativa para melhorar a experiência antes mesmo da aplicação da pesquisa de NPS?**

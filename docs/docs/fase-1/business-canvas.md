@@ -113,6 +113,21 @@ O canvas evidencia que a jornada do cliente cruza **três frentes operacionais**
 
 As variáveis de logística (`delivery_delay_days`, `delivery_attempts`) e atendimento (`complaints_count`, `resolution_time_days`) são candidatas naturais a explicar variações no NPS — hipótese que será testada na [Análise e Hipóteses](analise-hipoteses.md) e na [EDA](eda.md).
 
+## Da previsão de NPS para a previsão de entrega
+
+O canvas também ajuda a explicar a mudança de foco da solução. A pesquisa de NPS aparece no fim da jornada, depois que a promessa de entrega já foi cumprida ou quebrada. Logo, prever a nota de NPS apenas no fim do processo teria pouco valor operacional se a empresa não conseguir agir antes.
+
+A EDA mostrou que a principal alavanca está na atividade-chave de **operação de entregas**. Por isso, a proposta final desloca a modelagem para um ponto anterior da jornada:
+
+| Ponto da jornada | Leitura inicial | Leitura após a EDA |
+|---|---|---|
+| Coleta de satisfação | Prever `nps_score` | Medir impacto final da experiência |
+| Operação logística | Variável explicativa | Alvo operacional da solução |
+| Prazo prometido | Contexto de entrega | Promessa que precisa ser calibrada |
+| Atendimento | Reação ao problema | Sinal de que a degradação já aconteceu |
+
+Com essa leitura, o NPS continua essencial, mas como indicador de resultado. A solução prática é melhorar a previsão de prazo e o gerenciamento de atrasos para impedir que o cliente chegue ao ponto de virar detrator.
+
 ---
 
 ## Limitações do mapeamento

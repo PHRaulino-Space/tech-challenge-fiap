@@ -37,3 +37,5 @@ Cada fase tem sua própria seção no menu lateral com páginas específicas do 
 - **Como Reproduzir** — instruções para configurar o ambiente e reproduzir os resultados
 
 Para começar, acesse a [Fase 1](fase-1/index.md) — único desafio concluído até o momento.
+
+Na Fase 1, a análise parte do tema "NPS Preditivo", mas a EDA mostra uma mudança de foco importante: a solução final prioriza previsão/calibração de prazo de entrega, usando o NPS como métrica de impacto da experiência.

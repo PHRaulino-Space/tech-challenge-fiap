@@ -4,6 +4,8 @@
 
 Esta análise exploratória percorre a jornada do cliente no e-commerce — compra, entrega e atendimento — para identificar onde a experiência se rompe e quais fatores operacionais estão mais associados ao baixo NPS.
 
+O ponto mais importante da EDA é a **mudança de foco da solução**. O projeto começou com a hipótese natural de prever o NPS antes da pesquisa. A exploração mostrou que a ação de maior impacto não é apenas prever a nota final, mas prever e calibrar melhor a entrega, porque o atraso é o principal sinal associado à queda do NPS.
+
 <section class="eda-hero">
   <div>
     <span class="eda-kicker">Tech Challenge · Fase 1</span>
@@ -15,7 +17,7 @@ Esta análise exploratória percorre a jornada do cliente no e-commerce — comp
   </div>
   <div class="eda-hero-metric">
     <strong>4,38</strong>
-    <span>NPS médio da base</span>
+    <span>Nota média do score de NPS da Base</span>
   </div>
 </section>
 
@@ -42,7 +44,7 @@ Antes de qualquer cruzamento, a distribuição do NPS já comunica a urgência. 
 | Neutro (7–8) | 448 | 17,9% |
 | Promotor (9–10) | 201 | 8,0% |
 
-**Leitura de negócio:** com NPS médio de **4,38**, abaixo do ponto neutro, a satisfação negativa é o padrão dominante da operação.
+**Leitura de negócio:** com nota média do score de NPS de **4,38**, abaixo do ponto neutro, a satisfação negativa é o padrão dominante da operação.
 
 ---
 
@@ -63,6 +65,8 @@ As correlações mostram que os sinais mais fortes não estão no perfil do clie
 | Demais variáveis | ≈ 0 | Pedido / Cliente |
 
 **Conclusão:** idade, região, ticket, desconto, parcelas e quantidade de itens não aparecem como fatores relevantes nesta EDA. O problema está concentrado na experiência operacional depois que o pedido é confirmado.
+
+Essa conclusão reduz o espaço de solução. Um modelo genérico de NPS baseado em perfil de cliente ou pedido teria pouca tração; a solução precisa olhar para a promessa logística.
 
 ---
 
@@ -102,14 +106,14 @@ Para transformar variáveis em leitura de negócio, foram criados quatro perfis 
 
 <div class="eda-chart-grid">
   <div class="eda-chart-frame">
-    <iframe src="/assets/figures/eda-04-perfis-degradacao.html" title="NPS médio por perfil de degradação"></iframe>
+    <iframe src="/assets/figures/eda-04-perfis-degradacao.html" title="Nota média do score de NPS por perfil de degradação"></iframe>
   </div>
   <div class="eda-chart-frame">
     <iframe src="/assets/figures/eda-05-nps-por-perfil.html" title="Distribuição de NPS por perfil de degradação"></iframe>
   </div>
 </div>
 
-| Perfil | Clientes | % da Base | NPS Médio | % Detratores |
+| Perfil | Clientes | % da Base | Nota Média do Score NPS | % Detratores |
 | :--- | :---: | :---: | :---: | :---: |
 | **Sem Problemas** | 65 | 2,6% | **8,23** | 13,8% |
 | **Só Atraso** | 489 | 19,6% | 5,19 | 65,2% |
@@ -172,7 +176,7 @@ A região não explica o problema. A taxa de atraso é alta e parecida em todo o
   <iframe src="/assets/figures/eda-08-regional.html" title="Diagnóstico regional de atraso e NPS"></iframe>
 </div>
 
-| Região | % com Atraso | Atraso Médio (dias) | NPS Médio |
+| Região | % com Atraso | Atraso Médio (dias) | Nota Média do Score NPS |
 | :--- | :---: | :---: | :---: |
 | Sudeste | 91,0% | 2,22 | 4,37 |
 | Nordeste | 90,0% | 2,19 | 4,42 |
@@ -189,15 +193,17 @@ A região não explica o problema. A taxa de atraso é alta e parecida em todo o
 O tempo total de entrega quase não se associa ao NPS. O que pesa é receber fora do prazo prometido.
 
 <div class="eda-chart-frame large">
-  <iframe src="/assets/figures/eda-09-prazo.html" title="NPS médio por cumprimento do prazo prometido"></iframe>
+  <iframe src="/assets/figures/eda-09-prazo.html" title="Nota média do score de NPS por cumprimento do prazo prometido"></iframe>
 </div>
 
-| Status da Entrega | Clientes | NPS Médio |
+| Status da Entrega | Clientes | Nota Média do Score NPS |
 | :--- | :---: | :---: |
 | **No prazo** | 277 | **6,86** |
 | **Atrasado** | 2.223 | **4,07** |
 
 **Implicação:** a empresa não precisa necessariamente prometer entregas mais rápidas; precisa cumprir o prazo prometido. Calibrar SLAs e comunicação de prazo pode ter impacto direto na satisfação.
+
+Esse é o ponto de virada do projeto: o alvo operacional mais útil passa a ser a previsão de prazo/atraso. O NPS permanece como métrica de resultado para medir se a promessa logística mais assertiva reduz detratores.
 
 ---
 
@@ -209,7 +215,7 @@ Dentro do pior perfil, "Atraso + SAC", resolver rápido ainda melhora o NPS. Mas
   <iframe src="/assets/figures/eda-10-resolucao.html" title="Tempo de resolução no perfil Atraso mais SAC"></iframe>
 </div>
 
-| Velocidade de Resolução | Clientes | NPS Médio |
+| Velocidade de Resolução | Clientes | Nota Média do Score NPS |
 | :--- | :---: | :---: |
 | Muito Rápido | 448 | 4,47 |
 | Rápido | 431 | 3,86 |
@@ -241,9 +247,9 @@ A amplitude de **1,53 pontos** mostra que o SAC atenua o dano, mas não recupera
 
 ### Analytics e Modelo Preditivo
 
-- Usar `delivery_delay_days` e `complaints_count` como fortes candidatas a features iniciais.
-- Avaliar modelos considerando o desbalanceamento: prever "Detrator" para todos já teria 74% de acurácia.
-- Priorizar métricas como recall de detratores, F1-score por classe e matriz de confusão.
+- Priorizar um modelo operacional de previsão de prazo/risco de atraso.
+- Usar o NPS como variável de validação do impacto, não apenas como nota a ser prevista.
+- Monitorar se a melhoria no cumprimento do prazo reduz detratores, contatos no SAC e perda de recompra.
 
 ---
 
@@ -251,7 +257,7 @@ A amplitude de **1,53 pontos** mostra que o SAC atenua o dano, mas não recupera
 
 | Achado | Evidência |
 | :--- | :--- |
-| 74% dos clientes são detratores | NPS médio 4,38 |
+| 74% dos clientes são detratores | Nota média do score de NPS: 4,38 |
 | O problema está na operação, não no perfil | Idade, região e ticket com correlação ≈ 0 |
 | Atraso é o principal fator operacional associado ao baixo NPS | `delivery_delay_days`: -0,60 |
 | O problema é sistêmico, não regional | 88–91% de atraso em todas as regiões |
@@ -261,3 +267,5 @@ A amplitude de **1,53 pontos** mostra que o SAC atenua o dano, mas não recupera
 | Resolução rápida ajuda, mas não reverte | Amplitude de 1,53 ponto no pior perfil |
 
 > **Síntese:** a empresa não tem um problema de público, preço ou região. Tem um problema operacional de promessa não cumprida. O caminho mais direto para elevar o NPS é reduzir atrasos, comunicar melhor o risco de entrega e tratar rapidamente clientes que já entraram no fluxo de SAC.
+
+> **Troca de chave:** prever NPS ajuda a identificar risco, mas prever melhor o prazo de entrega ajuda a evitar que o risco aconteça.

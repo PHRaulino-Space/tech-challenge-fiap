@@ -2,7 +2,9 @@
 
 *CRISP-DM: Data Preparation*
 
-Esta etapa transforma a base original do desafio em uma visão analítica pronta para EDA e para uma futura modelagem preditiva de risco de detração. A preparação foi mantida simples e auditável, porque o dataset já chega estruturado, sem valores nulos e com variáveis operacionais diretamente interpretáveis.
+Esta etapa transforma a base original do desafio em uma visão analítica pronta para EDA e para uma futura solução preditiva de prazo/risco de atraso. A preparação foi mantida simples e auditável, porque o dataset já chega estruturado, sem valores nulos e com variáveis operacionais diretamente interpretáveis.
+
+A preparação também registra a troca de chave do projeto: o `nps_score` continua sendo o desfecho de satisfação, mas a solução mais acionável passa a mirar a **previsão do prazo de entrega e do risco de atraso**.
 
 ---
 
@@ -35,7 +37,7 @@ Como a EDA tem objetivo explicativo e acadêmico, não foram aplicadas remoçõe
 
 ## Variável-Alvo
 
-A variável-alvo principal é `nps_score`, usada de duas formas:
+Na leitura inicial do desafio, a variável-alvo principal era `nps_score`, usada de duas formas:
 
 | Uso | Tratamento | Finalidade |
 |---|---|---|
@@ -51,6 +53,15 @@ Critério de categorização:
 | Promotor | 9 a 10 |
 
 Essa categorização revelou forte desbalanceamento: **74,0% da base é composta por detratores**.
+
+Após a EDA, a preparação passa a separar dois tipos de alvo:
+
+| Tipo de alvo | Variável | Papel no projeto |
+|---|---|---|
+| Alvo analítico | `nps_score` / `nps_categoria` | Medir o desfecho da experiência e validar impacto |
+| Alvo operacional | `delivery_delay_days`, `entregou_no_prazo` ou prazo estimado de entrega | Antecipar a quebra da promessa logística |
+
+Essa separação evita uma interpretação fraca da solução. Prever NPS é útil para diagnóstico; prever entrega é mais útil para intervenção.
 
 ---
 
@@ -82,9 +93,9 @@ Essa engenharia de features foi decisiva para transformar correlações isoladas
 
 ## Seleção Inicial de Variáveis
 
-Para uma proposta preditiva, as variáveis candidatas devem estar disponíveis antes ou durante a jornada, sem depender do resultado final de satisfação.
+Para uma proposta preditiva, as variáveis candidatas devem estar disponíveis antes ou durante a jornada, sem depender do resultado final de satisfação. Como a solução final se desloca para prazo/atraso, as variáveis precisam ser separadas por momento de disponibilidade.
 
-### Variáveis candidatas
+### Variáveis candidatas para previsão no momento do pedido
 
 - `customer_age`
 - `customer_region`
@@ -93,48 +104,57 @@ Para uma proposta preditiva, as variáveis candidatas devem estar disponíveis a
 - `items_quantity`
 - `discount_value`
 - `payment_installments`
+- `freight_value`
+
+Essas variáveis são candidatas a estimar um prazo mais realista antes da entrega acontecer.
+
+### Variáveis candidatas para monitoramento durante a jornada
+
 - `delivery_time_days`
 - `delivery_delay_days`
-- `freight_value`
 - `delivery_attempts`
 - `customer_service_contacts`
 - `resolution_time_days`
 - `complaints_count`
 
+Essas variáveis ajudam a monitorar risco de degradação depois que a jornada já começou. Para prever o prazo no checkout, elas não devem ser usadas se ainda não estiverem disponíveis.
+
 ### Variáveis que não devem entrar como preditoras
 
-- `nps_score`: é o alvo.
-- `nps_categoria`: é derivada do alvo.
+- `nps_score`: é o alvo analítico e não deve ser usado como preditor.
+- `nps_categoria`: é derivada do alvo analítico.
 - `csat_internal_score`: mede satisfação e pode vazar informação equivalente ao alvo.
-- `repeat_purchase_30d`: é comportamento posterior à experiência, útil para validação de negócio, mas não para prever NPS antes da pesquisa.
+- `repeat_purchase_30d`: é comportamento posterior à experiência, útil para validação de negócio, mas não para prever prazo ou NPS antes da jornada terminar.
 
 ---
 
 ## Tratamento para Modelagem
 
-Para um pipeline de modelagem, a preparação recomendada é:
+Para um pipeline de modelagem de prazo/atraso, a preparação recomendada é:
 
 | Tipo de variável | Tratamento |
 |---|---|
 | Numéricas | Padronização apenas para modelos sensíveis à escala |
 | Categóricas | One-hot encoding para `customer_region` |
 | Binárias derivadas | Manter como 0/1 |
-| Alvo categórico | Classificação em Detrator, Neutro e Promotor ou classificação binária Detrator vs. Não Detrator |
+| Alvo de prazo | Regressão para estimar dias de entrega ou dias de atraso |
+| Alvo de atraso | Classificação binária: no prazo vs. atrasado |
 
-Como a classe detratora domina a base, a separação treino/teste deve ser **estratificada**. Métricas como acurácia isolada não são suficientes: prever todos os clientes como detratores já atingiria 74,0% de acerto aparente.
+Como a base tem alta incidência de atraso, a separação treino/teste deve preservar a proporção de entregas no prazo e atrasadas. Métricas como acurácia isolada não são suficientes: o modelo precisa ser avaliado pela capacidade de identificar atrasos relevantes e pela redução do erro de previsão de prazo.
 
 ---
 
 ## Riscos de Vazamento
 
-O principal cuidado é temporal: a solução proposta deve prever o risco antes da aplicação da pesquisa de NPS. Portanto, variáveis disponíveis apenas depois do encerramento da jornada precisam ser tratadas com cautela.
+O principal cuidado é temporal: a solução proposta deve prever prazo/risco antes que a promessa logística seja quebrada. Portanto, variáveis disponíveis apenas depois da entrega ou depois do contato com SAC não podem ser usadas em um modelo de promessa inicial.
 
 | Variável | Risco | Decisão |
 |---|---|---|
 | `csat_internal_score` | Pode ser outro indicador de satisfação final | Não usar como feature principal |
 | `repeat_purchase_30d` | Ocorre depois do NPS | Usar apenas como evidência de impacto |
-| `complaints_count` | Pode ocorrer durante ou após a jornada | Usar somente se operacionalmente disponível antes da pesquisa |
-| `resolution_time_days` | Só existe quando houve atendimento | Pode exigir imputação ou indicador de ausência de SAC |
+| `delivery_delay_days` | Só é conhecido depois da comparação com o prazo prometido | Usar como alvo ou monitoramento, não como feature inicial |
+| `complaints_count` | Pode ocorrer durante ou após a jornada | Usar somente para monitoramento, não para promessa inicial |
+| `resolution_time_days` | Só existe quando houve atendimento | Usar somente na camada de recuperação da experiência |
 
 ---
 
@@ -143,7 +163,7 @@ O principal cuidado é temporal: a solução proposta deve prever o risco antes 
 A base preparada permite sustentar três entregas:
 
 1. **EDA final:** análise da jornada, gráficos e tabelas usados na apresentação.
-2. **Recomendação operacional:** priorização de atraso, SAC e comunicação proativa.
-3. **Proposta de modelo:** classificação de risco de detração com foco em recall de detratores.
+2. **Recomendação operacional:** priorização de atraso, calibração de prazo e comunicação proativa.
+3. **Proposta de modelo:** previsão de prazo/risco de atraso, usando NPS e recompra como métricas de impacto.
 
 O notebook final consolidado é [notebooks/eda_final.ipynb](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.ipynb).

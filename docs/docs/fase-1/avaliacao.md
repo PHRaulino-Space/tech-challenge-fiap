@@ -2,7 +2,9 @@
 
 *CRISP-DM: Evaluation*
 
-A avaliação final verifica se a análise respondeu ao problema de negócio: entender quais fatores operacionais influenciam o NPS e propor uma forma de antecipar clientes em risco de detração.
+A avaliação final verifica se a análise respondeu ao problema de negócio: entender quais fatores operacionais influenciam o NPS e propor uma forma de agir antes que o cliente vire detrator.
+
+O principal resultado da avaliação é a mudança explícita de foco: a previsão direta do NPS é útil como diagnóstico, mas a solução mais acionável é prever/calibrar o prazo de entrega, porque o atraso é o fator operacional mais associado à insatisfação.
 
 ---
 
@@ -18,6 +20,7 @@ O problema inicial era que a empresa só conhecia o NPS depois do encerramento d
 | Qual variável tem maior sinal? | `delivery_delay_days`, com correlação -0,60. |
 | O problema é regional? | Não. Atrasos variam de 88% a 91% em todas as regiões. |
 | O NPS se conecta a comportamento real? | Sim. Detratores tiveram 0,0% de recompra em 30 dias. |
+| Qual deve ser o alvo operacional da solução? | Previsão de prazo/risco de atraso, com NPS como métrica de impacto. |
 
 ---
 
@@ -49,6 +52,20 @@ O problema inicial era que a empresa só conhecia o NPS depois do encerramento d
 
 ---
 
+## Avaliação da Troca de Chave
+
+| Dimensão | Antes da EDA | Depois da EDA |
+|---|---|---|
+| Pergunta principal | Como prever a nota de NPS? | Como prever melhor a entrega para evitar baixo NPS? |
+| Variável de referência | `nps_score` | `delivery_delay_days`, `entregou_no_prazo`, prazo estimado |
+| Papel do NPS | Alvo direto do modelo | Métrica final de experiência |
+| Ponto de ação | Cliente já em risco de detração | Promessa logística antes da frustração |
+| Área prioritária | CX/Analytics | Logística, CX e Atendimento |
+
+A mudança é justificável porque a EDA mostrou que perfil, região e pedido quase não explicam NPS. O que explica é a quebra da promessa operacional. Portanto, a solução deve mirar a promessa, não apenas a nota.
+
+---
+
 ## Limitações
 
 ### Correlação não é causalidade
@@ -61,7 +78,7 @@ O dataset não informa a data de cada evento. Para um modelo produtivo, seria ne
 
 ### Desbalanceamento da base
 
-Com 74,0% de detratores, métricas ingênuas podem enganar. A avaliação de qualquer modelo deve priorizar recall, precision e F1-score para detratores.
+Com 74,0% de detratores, métricas ingênuas podem enganar em um modelo direto de NPS. No modelo operacional de atraso, o mesmo cuidado vale para a classe "atrasado": a avaliação deve priorizar recall de atrasos relevantes, erro médio de prazo e calibragem da probabilidade de atraso.
 
 ### Recorte da base
 
@@ -69,7 +86,7 @@ A base pode representar um período ou contexto com alta concentração de probl
 
 ### Variáveis ausentes
 
-O dataset não traz produto, categoria, transportadora, prazo prometido original, canal de atendimento, custo de intervenção ou histórico completo do cliente. Essas variáveis poderiam refinar a explicação e a modelagem.
+O dataset não traz produto, categoria, transportadora, CEP, distância, centro de distribuição, prazo prometido original, canal de atendimento, custo de intervenção ou histórico completo do cliente. Essas variáveis são especialmente importantes para transformar a proposta de previsão de prazo em um modelo produtivo.
 
 ---
 
@@ -77,7 +94,7 @@ O dataset não traz produto, categoria, transportadora, prazo prometido original
 
 ### Prioridade 1 — Logística
 
-Reduzir atrasos e calibrar prazos prometidos. A análise mostra que a frustração vem mais do descumprimento do prazo do que do tempo total de entrega.
+Construir previsão de prazo mais realista e calibrar prazos prometidos. A análise mostra que a frustração vem mais do descumprimento do prazo do que do tempo total de entrega.
 
 ### Prioridade 2 — Atendimento
 
@@ -89,10 +106,12 @@ Avisar sobre risco de atraso antes do cliente acionar o SAC. Essa intervenção 
 
 ### Prioridade 4 — Analytics
 
-Implementar um modelo de risco de detração com foco em recall de detratores e monitorar impacto em recompra de 30 dias.
+Implementar um modelo de previsão de prazo/risco de atraso e usar NPS, detratores e recompra como métricas de validação do impacto.
 
 ---
 
 ## Conclusão
 
-A análise confirma que o baixo NPS não é um problema demográfico nem comercial. É um problema operacional, concentrado em atraso de entrega e atendimento. A solução deve combinar melhoria de processo, comunicação proativa e modelo preditivo para priorizar clientes em risco antes da pesquisa de NPS.
+A análise confirma que o baixo NPS não é um problema demográfico nem comercial. É um problema operacional, concentrado em promessa de entrega não cumprida e atendimento. A solução deve combinar previsão de prazo, comunicação proativa e recuperação rápida quando o atraso já aconteceu.
+
+Assim, o projeto parte de NPS preditivo, mas chega a uma recomendação mais prática: **prever melhor a entrega para prevenir a queda do NPS**.
