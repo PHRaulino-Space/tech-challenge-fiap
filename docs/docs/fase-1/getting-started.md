@@ -49,6 +49,26 @@ Os notebooks de análise estão em `notebooks/`. Para iniciar o Jupyter Lab:
 poetry run jupyter lab
 ```
 
+Notebook principal da entrega:
+
+| Arquivo | Descrição |
+|---|---|
+| `notebooks/eda_final.ipynb` | EDA final consolidada com os gráficos e evidências usados na apresentação |
+| `notebooks/eda_final.py` | Versão Jupytext pareada do notebook final |
+| `notebooks/dados.ipynb` | Notebook de exploração inicial |
+
+Para regenerar o notebook final a partir do script pareado:
+
+```bash
+poetry run jupytext --to ipynb notebooks/eda_final.py -o notebooks/eda_final.ipynb
+```
+
+Para exportar a EDA final em HTML:
+
+```bash
+make eda2html
+```
+
 ## Documentação local
 
 Para servir esta documentação localmente:

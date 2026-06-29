@@ -18,6 +18,8 @@ Business Understanding → Data Understanding → Data Preparation
 
 ## Etapas do Projeto
 
+Todas as etapas da Fase 1 estão concluídas na documentação. A modelagem foi tratada como proposta de solução preditiva orientada pela EDA, conforme permitido pelo enunciado do desafio.
+
 ### 1. Problema de Negócio
 *CRISP-DM: Business Understanding*
 
@@ -34,6 +36,8 @@ Esta etapa responde às perguntas fundamentais do desafio:
 
 **Resultado esperado:** Definição do problema documentada, com variável-alvo identificada e impacto de negócio descrito.
 
+**Status:** concluído.
+
 ---
 
 ### 2. Business Canvas
@@ -47,9 +51,24 @@ O Business Model Canvas mapeia o contexto do e-commerce, os problemas centrais, 
 
 **Resultado esperado:** Canvas preenchido servindo de base para as reflexões e a narrativa da apresentação.
 
+**Status:** concluído.
+
 ---
 
-### 3. Análise dos Dados e Hipóteses
+### 3. Reflexões do Desafio
+*CRISP-DM: Business Understanding*
+
+**Objetivo:** Conectar o problema de negócio aos impactos esperados em recompra, boca a boca, market share e áreas beneficiadas.
+
+Esta etapa traduz o desafio em perguntas de decisão para logística, atendimento, marketing, produto e experiência do cliente.
+
+**Resultado esperado:** Reflexões documentadas sobre por que o NPS importa e como os dados operacionais podem apoiar uma atuação preventiva.
+
+**Status:** concluído.
+
+---
+
+### 4. Análise dos Dados e Hipóteses
 *CRISP-DM: Data Understanding*
 
 **Objetivo:** Compreender a base de dados disponível, levantar hipóteses e identificar relações relevantes antes da EDA formal.
@@ -58,9 +77,11 @@ Esta etapa inclui a leitura do dicionário de dados, inspeção inicial da base 
 
 **Resultado esperado:** Lista de hipóteses documentadas para guiar a análise exploratória.
 
+**Status:** concluído.
+
 ---
 
-### 4. EDA — Análise Exploratória dos Dados
+### 5. EDA — Análise Exploratória dos Dados
 *CRISP-DM: Data Understanding*
 
 **Objetivo:** Explorar os dados com foco em negócio, respondendo às perguntas do desafio com visualizações e estatísticas.
@@ -75,9 +96,11 @@ Para cada visualização, são respondidas três perguntas:
 
 **Resultado esperado:** Notebook com análise completa, visualizações prontas para a apresentação e principais achados documentados.
 
+**Status:** concluído.
+
 ---
 
-### 5. Preparação dos Dados
+### 6. Preparação dos Dados
 *CRISP-DM: Data Preparation*
 
 **Objetivo:** Preparar a base de dados para modelagem, garantindo qualidade e consistência das variáveis.
@@ -86,20 +109,24 @@ Esta etapa contempla tratamento de valores ausentes e outliers, transformações
 
 **Resultado esperado:** Dataset limpo e pipeline de preparação documentado, pronto para alimentar o modelo.
 
+**Status:** concluído.
+
 ---
 
-### 6. Proposta de Solução
+### 7. Proposta de Solução
 *CRISP-DM: Modeling*
 
 **Objetivo:** Propor e implementar um modelo preditivo de NPS a partir dos insights da EDA.
 
 A estratégia inclui definição da variável-alvo, seleção de features, escolha do modelo e métricas de avaliação. A abordagem pode ser regressão (prever o score) ou classificação (prever a categoria: Detrator, Neutro, Promotor).
 
-**Resultado esperado:** Pipeline de modelo implementado em Python com resultados documentados.
+**Resultado esperado:** Estratégia preditiva documentada, com variável-alvo, features candidatas, modelo inicial recomendado, métricas e régua de ação.
+
+**Status:** concluído.
 
 ---
 
-### 7. Avaliação dos Resultados
+### 8. Avaliação dos Resultados
 *CRISP-DM: Evaluation*
 
 **Objetivo:** Verificar se os resultados respondem ao objetivo de negócio e documentar limitações.
@@ -115,28 +142,31 @@ Se necessário, esta fase pode indicar retorno a etapas anteriores para refiname
 
 **Resultado esperado:** Validação dos resultados com registro das limitações, riscos e recomendações finais para o negócio.
 
+**Status:** concluído.
+
 ---
 
-### 8. Apresentação Final
+### 9. Apresentação Final
 *CRISP-DM: Deployment*
 
 **Objetivo:** Consolidar todos os insumos em uma apresentação executiva e no vídeo de até 5 minutos.
 
-Com os resultados validados, serão entregues:
+Com os resultados validados, foram entregues:
 
 - **Slides** em HTML (Reveal.js) hospedados no GitHub Pages, com storytelling gerencial voltado para público não técnico
-- **PDF ou PPTX** da apresentação como formato alternativo de entrega
-- **Vídeo** de até 5 minutos no YouTube como **não listado** — pode ser gravação de tela com narração, sem necessidade de aparecer em câmera
+- **Notebook final de EDA** com os gráficos e evidências que sustentam a conclusão
+- **Documentação MkDocs** com todas as etapas do CRISP-DM
 
-A entrega final é a página pública de documentação contendo, de forma acessível e sem depender da hierarquia de navegação:
+A entrega final é a página pública de documentação contendo, de forma acessível:
 
 - Link do repositório GitHub
-- Apresentação em HTML e PDF/PPTX
-- Link do vídeo
+- Apresentação em HTML
 - Notebooks e código
 - Conclusões e recomendações principais
 
-**Resultado esperado:** Material de apresentação finalizado e vídeo gravado, prontos para entrega.
+**Resultado esperado:** Material de apresentação, notebook final e documentação prontos para entrega.
+
+**Status:** concluído.
 
 ---
 
@@ -146,9 +176,10 @@ A entrega final é a página pública de documentação contendo, de forma acess
 |---|---|---|---|
 | 1 | Problema de Negócio | Business Understanding | — |
 | 2 | Business Canvas | Business Understanding | 1 |
-| 3 | Análise e Hipóteses | Data Understanding | 2 |
-| 4 | EDA | Data Understanding | 3 |
-| 5 | Preparação dos Dados | Data Preparation | 4 |
-| 6 | Proposta de Solução | Modeling | 5 |
-| 7 | Avaliação dos Resultados | Evaluation | 6 |
-| 8 | Apresentação Final | Deployment | 7 |
+| 3 | Reflexões do Desafio | Business Understanding | 1, 2 |
+| 4 | Análise e Hipóteses | Data Understanding | 3 |
+| 5 | EDA | Data Understanding | 4 |
+| 6 | Preparação dos Dados | Data Preparation | 5 |
+| 7 | Proposta de Solução | Modeling | 6 |
+| 8 | Avaliação dos Resultados | Evaluation | 7 |
+| 9 | Apresentação Final | Deployment | 8 |

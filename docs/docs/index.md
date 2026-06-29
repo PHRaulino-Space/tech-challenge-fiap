@@ -22,7 +22,7 @@ O foco não está apenas em construir modelos ou escrever código — está em *
 
 | Fase | Tema | Status |
 |---|---|---|
-| [Fase 1](fase-1/index.md) | NPS Preditivo — Análise de satisfação em e-commerce | Em andamento |
+| [Fase 1](fase-1/index.md) | NPS Preditivo — Análise de satisfação em e-commerce | Concluída |
 | [Fase 2](fase-2/index.md) | — | Aguardando |
 | [Fase 3](fase-3/index.md) | — | Aguardando |
 | [Fase 4](fase-4/index.md) | — | Aguardando |
@@ -36,4 +36,4 @@ Cada fase tem sua própria seção no menu lateral com páginas específicas do 
 - **Análise / Conteúdo técnico** — documentação das análises realizadas
 - **Como Reproduzir** — instruções para configurar o ambiente e reproduzir os resultados
 
-Para começar, acesse a [Fase 1](fase-1/index.md) — único desafio disponível até o momento.
+Para começar, acesse a [Fase 1](fase-1/index.md) — único desafio concluído até o momento.

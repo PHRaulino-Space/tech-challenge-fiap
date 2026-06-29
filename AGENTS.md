@@ -17,7 +17,7 @@ Academic project developed across **5 phases** of the POSTECH AI Scientist progr
 
 ## Current State
 
-Only **Phase 1** is active. Phases 2–5 are placeholders.
+Only **Phase 1** is active and documented. Phases 2–5 are placeholders.
 
 **Phase 1 — NPS Preditivo:** Analyze operational data from an e-commerce company to understand factors influencing customer satisfaction (NPS) and propose a predictive approach to anticipate NPS before the survey is applied.
 
@@ -25,14 +25,15 @@ The project follows the **CRISP-DM** methodology:
 
 | Step | CRISP-DM Phase | Status |
 |---|---|---|
-| 1. Business Canvas | Business Understanding | In progress |
-| 2. Reflexões do Desafio | Business Understanding | In progress |
-| 3. Análise e Hipóteses | Data Understanding | In progress |
-| 4. EDA | Data Understanding | In progress |
-| 5. Preparação dos Dados | Data Preparation | Pending |
-| 6. Proposta de Solução | Modeling | Pending |
-| 7. Avaliação dos Resultados | Evaluation | Pending |
-| 8. Apresentação Final | Deployment | Pending |
+| 1. Problema de Negócio | Business Understanding | Complete |
+| 2. Business Canvas | Business Understanding | Complete |
+| 3. Reflexões do Desafio | Business Understanding | Complete |
+| 4. Análise e Hipóteses | Data Understanding | Complete |
+| 5. EDA | Data Understanding | Complete |
+| 6. Preparação dos Dados | Data Preparation | Complete |
+| 7. Proposta de Solução | Modeling | Complete |
+| 8. Avaliação dos Resultados | Evaluation | Complete |
+| 9. Apresentação Final | Deployment | Complete |
 
 ---
 

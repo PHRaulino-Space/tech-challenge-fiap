@@ -1,10 +1,10 @@
 
 ## Add Infos
-- [ ] Problema de negócio
-- [ ] Variável target
-- [ ] Hipóteses principais
-- [ ] Limitações dos dados
-- [ ] Principais achados da EDA e recomendações finais.
+- [x] Problema de negócio
+- [x] Variável target
+- [x] Hipóteses principais
+- [x] Limitações dos dados
+- [x] Principais achados da EDA e recomendações finais.
 
 
 

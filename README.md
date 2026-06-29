@@ -22,7 +22,7 @@ O foco não está apenas em construir modelos ou escrever código — está em *
 
 | Fase | Tema | Status |
 |---|---|---|
-| Fase 1 | NPS Preditivo — Análise de satisfação em e-commerce | Em andamento |
+| Fase 1 | NPS Preditivo — Análise de satisfação em e-commerce | Concluída |
 | Fase 2 | — | Aguardando |
 | Fase 3 | — | Aguardando |
 | Fase 4 | — | Aguardando |
@@ -38,14 +38,15 @@ O projeto segue a metodologia **CRISP-DM**:
 
 | Etapa | Fase CRISP-DM | Status |
 |---|---|---|
-| Business Canvas | Business Understanding | Em andamento |
-| Reflexões do Desafio | Business Understanding | Em andamento |
-| Análise e Hipóteses | Data Understanding | Em andamento |
-| EDA | Data Understanding | Em andamento |
-| Preparação dos Dados | Data Preparation | Pendente |
-| Proposta de Solução | Modeling | Pendente |
-| Avaliação dos Resultados | Evaluation | Pendente |
-| Apresentação Final | Deployment | Pendente |
+| Problema de Negócio | Business Understanding | Concluído |
+| Business Canvas | Business Understanding | Concluído |
+| Reflexões do Desafio | Business Understanding | Concluído |
+| Análise e Hipóteses | Data Understanding | Concluído |
+| EDA | Data Understanding | Concluído |
+| Preparação dos Dados | Data Preparation | Concluído |
+| Proposta de Solução | Modeling | Concluído |
+| Avaliação dos Resultados | Evaluation | Concluído |
+| Apresentação Final | Deployment | Concluído |
 
 ## Estrutura do Repositório
 
