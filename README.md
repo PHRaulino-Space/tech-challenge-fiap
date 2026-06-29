@@ -4,6 +4,8 @@ Repositório central das entregas do **Tech Challenge**, projeto integrador do p
 
 **Repositório:** [github.com/PHRaulino-Space/tech-challenge-fiap](https://github.com/PHRaulino-Space/tech-challenge-fiap)
 
+**Documentação publicada:** [phraulino-space.github.io/tech-challenge-fiap](https://phraulino-space.github.io/tech-challenge-fiap/)
+
 ## O Projeto
 
 O Tech Challenge é desenvolvido ao longo de **5 fases** do programa. Em cada fase, o grupo recebe um desafio aplicado que exige pensamento analítico, habilidades técnicas e comunicação orientada a negócio. Os desafios simulam cenários reais de atuação no mercado e evoluem em complexidade conforme o programa avança.
@@ -36,6 +38,34 @@ Com o crescimento acelerado do e-commerce, uma empresa passou a lidar com alta v
 
 A EDA provocou uma mudança importante na formulação da solução: o `nps_score` permanece como desfecho de satisfação, mas o alvo operacional recomendado passa a ser a previsão/calibração do prazo de entrega e do risco de atraso. A razão é direta: atraso foi o fator mais associado ao baixo NPS, enquanto perfil do cliente e variáveis do pedido tiveram pouca relação com a nota.
 
+### Links rápidos da entrega
+
+| Material | Link |
+|---|---|
+| Documentação pública | [Abrir documentação](https://phraulino-space.github.io/tech-challenge-fiap/) |
+| Resumo da entrega | [Abrir resumo](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/resumo-entrega/) |
+| Visão geral da Fase 1 | [Abrir visão geral](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/) |
+| EDA final | [Abrir EDA](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/eda/) |
+| Apresentação HTML | [Abrir slides](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/slides.html) |
+| Apresentação PDF | [Baixar PDF](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/Tech%20Challenge%20_%20NPS%20e%20atraso%20na%20entrega.pdf) |
+| Vídeo executivo | [Assistir no YouTube](https://youtu.be/eodKtPdOVdg) |
+| Apresentação final | [Abrir página](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/apresentacao-final/) |
+| Notebook final | [Abrir notebook](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.ipynb) |
+| Script pareado do notebook | [Abrir eda_final.py](https://github.com/PHRaulino-Space/tech-challenge-fiap/blob/main/notebooks/eda_final.py) |
+| Como reproduzir | [Ver instruções](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/getting-started/) |
+| Avaliação da entrega | [Ver checklist](https://phraulino-space.github.io/tech-challenge-fiap/fase-1/avaliacao-entrega/) |
+
+### Principais resultados
+
+| Achado | Evidência |
+|---|---|
+| A base é majoritariamente detratora | 74,0% dos clientes são detratores |
+| O problema não está em perfil ou pedido | Idade, região, ticket, desconto e parcelas têm baixa associação com o score |
+| Atraso é o maior sinal operacional | `delivery_delay_days` tem correlação -0,60 com `nps_score` |
+| Cumprir o prazo importa mais que velocidade | `delivery_time_days` ≈ 0; atraso derruba a nota média do score |
+| O problema é sistêmico | Taxa de atraso varia de 88% a 91% entre regiões |
+| Recompra valida o impacto | Detratores tiveram 0,0% de recompra em 30 dias |
+
 O projeto segue a metodologia **CRISP-DM**:
 
 | Etapa | Fase CRISP-DM | Status |
@@ -56,12 +86,12 @@ O projeto segue a metodologia **CRISP-DM**:
 ├── data/
 │   └── desafio_nps_fase_1.csv       # Base de dados original do desafio
 ├── docs/                             # Documentação MkDocs
-├── models/                           # Modelos treinados e artefatos
+├── models/                           # Artefatos de modelos, quando houver
 ├── notebooks/                        # Jupyter Notebooks de análise
 ├── references/                       # Materiais de referência
 ├── reports/                          # Relatórios e visualizações geradas
 │   └── figures/
-├── tech_challenge_fiap/              # Código-fonte do projeto
+├── tech_challenge_fiap/              # Código-fonte e base para pipelines
 │   ├── config.py
 │   ├── dataset.py
 │   ├── features.py
@@ -69,7 +99,7 @@ O projeto segue a metodologia **CRISP-DM**:
 │   └── modeling/
 │       ├── train.py
 │       └── predict.py
-└── tests/                            # Testes automatizados
+└── tests/                            # Estrutura inicial de testes
 ```
 
 ## Base de Dados
@@ -110,7 +140,7 @@ make setup
 | `make data` | Executa o pipeline de dados |
 | `make lint` | Verifica o código com ruff |
 | `make format` | Formata o código com ruff |
-| `make test` | Executa os testes |
+| `make test` | Executa a suíte de testes (estrutura inicial) |
 | `make docs` | Serve a documentação em http://127.0.0.1:8000 |
 
 ### Notebooks
@@ -121,7 +151,11 @@ poetry run jupyter lab
 
 ## Documentação
 
-A documentação completa do projeto está em `docs/`, construída com MkDocs Material. Para visualizar localmente:
+A documentação completa está publicada em:
+
+[https://phraulino-space.github.io/tech-challenge-fiap/](https://phraulino-space.github.io/tech-challenge-fiap/)
+
+O código-fonte da documentação está em `docs/`, construída com MkDocs Material. Para visualizar localmente:
 
 ```bash
 make docs
